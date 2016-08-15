@@ -77,7 +77,7 @@
                                         <state key="normal" title="Demo"/>
                                         <connections>
                                             <action selector="demo:" destination="BYZ-38-t0r" eventType="touchUpInside" id="2R8-hx-2sJ"/>
-                                            <segue destination="AUG-x2-Njh" kind="show" identifier="startDemo" id="E5L-Ax-qBL"/>
+                                            <segue destination="AUG-x2-Njh" kind="show" identifier="LoggedIn" id="E5L-Ax-qBL"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -102,7 +102,6 @@
                         <outlet property="randomGenerateButton" destination="bCS-fP-y5U" id="DGA-Ev-vLk"/>
                         <outlet property="usernameField" destination="AfF-Io-2r2" id="9n2-RC-Z9d"/>
                         <outlet property="usernameLabel" destination="om7-wh-mCc" id="maQ-gG-uVx"/>
-                        <segue destination="3gX-ku-4kX" kind="show" identifier="LoginDirectedPage" id="PCO-UB-jgc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -122,10 +121,16 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" alignment="center" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="Sqz-ud-JUt">
-                                <rect key="frame" x="20" y="50" width="560" height="529"/>
+                                <rect key="frame" x="20" y="50" width="560" height="545"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="reu-4b-VP8">
-                                        <rect key="frame" x="259" y="0.0" width="43" height="27"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Hi" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oqe-IS-CPu">
+                                        <rect key="frame" x="275" y="0.0" width="11" height="14"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                        <color key="textColor" red="0.93600541353225708" green="0.10716981440782547" blue="0.032042399048805237" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="reu-4b-VP8">
+                                        <rect key="frame" x="259" y="17" width="43" height="27"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                         <state key="normal" title="Log out">
                                             <color key="titleColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -134,8 +139,8 @@
                                             <action selector="logOut:" destination="3gX-ku-4kX" eventType="touchUpInside" id="gFj-Ee-NV5"/>
                                         </connections>
                                     </button>
-                                    <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="300" placeholderIntrinsicHeight="400" image="example1" translatesAutoresizingMaskIntoConstraints="NO" id="gzQ-bd-5x0">
-                                        <rect key="frame" x="130" y="30" width="300" height="400"/>
+                                    <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" placeholderIntrinsicWidth="300" placeholderIntrinsicHeight="400" image="example1" translatesAutoresizingMaskIntoConstraints="NO" id="gzQ-bd-5x0">
+                                        <rect key="frame" x="130" y="47" width="300" height="400"/>
                                         <gestureRecognizers/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="gzQ-bd-5x0" secondAttribute="height" multiplier="3:4" id="c27-Ui-duh"/>
@@ -145,8 +150,8 @@
                                             <outletCollection property="gestureRecognizers" destination="NVp-eW-cvM" appends="YES" id="JjR-HF-Ifi"/>
                                         </connections>
                                     </imageView>
-                                    <slider contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" layoutMarginsFollowReadableWidth="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="70" minValue="25" maxValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="BPK-x7-Tgz">
-                                        <rect key="frame" x="-2" y="433" width="564" height="31"/>
+                                    <slider contentMode="scaleToFill" misplaced="YES" preservesSuperviewLayoutMargins="YES" layoutMarginsFollowReadableWidth="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="70" minValue="25" maxValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="BPK-x7-Tgz">
+                                        <rect key="frame" x="-2" y="450" width="564" height="31"/>
                                         <color key="tintColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <edgeInsets key="layoutMargins" top="8" left="8" bottom="8" right="8"/>
                                         <connections>
@@ -154,13 +159,13 @@
                                         </connections>
                                     </slider>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="70" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P6Z-Bz-c3k">
-                                        <rect key="frame" x="271" y="466" width="20" height="21"/>
+                                        <rect key="frame" x="271" y="483" width="20" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uZC-vW-cmL">
-                                        <rect key="frame" x="241" y="490" width="78" height="39"/>
+                                        <rect key="frame" x="241" y="506" width="78" height="39"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                         <state key="normal" title="Analyze">
                                             <color key="titleColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -189,6 +194,7 @@
                     </view>
                     <connections>
                         <outlet property="compressionLabel" destination="P6Z-Bz-c3k" id="154-gk-TfS"/>
+                        <outlet property="hiLabel" destination="oqe-IS-CPu" id="7ST-2M-L2J"/>
                         <outlet property="photoImageView" destination="gzQ-bd-5x0" id="lCx-sk-8Vq"/>
                         <outlet property="searchButton" destination="uZC-vW-cmL" id="bZC-gP-tsc"/>
                         <outlet property="slider" destination="BPK-x7-Tgz" id="ntu-D4-5ju"/>
@@ -372,7 +378,7 @@
                         <outlet property="profileTypeLabel" destination="SCL-Yi-y1C" id="wxT-De-nPM"/>
                         <outlet property="repasswordField" destination="117-R8-NPI" id="6bb-Dv-bmH"/>
                         <outlet property="usernameField" destination="U4X-q0-fGm" id="zz9-15-T2I"/>
-                        <segue destination="3gX-ku-4kX" kind="show" identifier="LoggedInPage" id="08g-Bc-Jki"/>
+                        <segue destination="AUG-x2-Njh" kind="show" identifier="LoggedInFromSignUp" id="NWr-JX-J3B"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XYV-Gk-ry4" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -485,6 +491,18 @@
                     <view key="view" contentMode="scaleToFill" id="yyq-Gb-wDE">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="G7f-pI-emc">
+                                <rect key="frame" x="20" y="20" width="67" height="30"/>
+                                <state key="normal" title="Log out">
+                                    <color key="titleColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="logOutButtonPressed:" destination="rFI-20-YBs" eventType="touchUpInside" id="ybh-OK-wMI"/>
+                                    <segue destination="BYZ-38-t0r" kind="show" identifier="LogOut" id="jBu-xV-NLW"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <tabBarItem key="tabBarItem" systemItem="history" id="sKy-7v-tho"/>
@@ -535,6 +553,7 @@
         <image name="example1" width="600" height="600"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="08g-Bc-Jki"/>
+        <segue reference="jBu-xV-NLW"/>
+        <segue reference="NWr-JX-J3B"/>
     </inferredMetricsTieBreakers>
 </document>

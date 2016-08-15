@@ -105,8 +105,14 @@ class FBNetworkingController: NetworkingController {
                 userRef.updateChildValues([ReferenceLabels.PostCount.rawValue : count+1])
             })
             
-            userRef.updateChildValues([ReferenceLabels.UserTags.rawValue : tags])
-            userRef.updateChildValues([ReferenceLabels.UserPosts.rawValue: uniqueID])
+            getAccountTags({ (oldTags) in
+                userRef.updateChildValues([ReferenceLabels.UserTags.rawValue : oldTags + tags])
+            })
+            
+            getAccountPosts({ (oldPosts) in
+                userRef.updateChildValues([ReferenceLabels.UserPosts.rawValue: oldPosts + [uniqueID]])
+            })
+            
 
         } else {
             print("No users are identified.")
@@ -117,7 +123,7 @@ class FBNetworkingController: NetworkingController {
     func getAccountTags(completion: [String] -> Void) {
         let ref = References.UserRef.child(getUID()!).child(ReferenceLabels.UserTags.rawValue)
         
-        _ = ref.observeEventType(FIRDataEventType.Value, withBlock: { (snapshot) in
+        ref.observeSingleEventOfType(.Value, withBlock: { (snapshot) in
             if let tags = snapshot.value as? [String] {
                 completion(tags)
             } else {
@@ -129,7 +135,7 @@ class FBNetworkingController: NetworkingController {
     func getAccountPosts(completion: [String] -> Void) {
         let ref = References.UserRef.child(getUID()!).child(ReferenceLabels.UserPosts.rawValue)
         
-        _ = ref.observeEventType(FIRDataEventType.Value, withBlock: { (snapshot) in
+        ref.observeSingleEventOfType(.Value, withBlock: { (snapshot) in
             if let photos = snapshot.value as? [String]{
                 completion(photos)
             } else {
@@ -159,11 +165,10 @@ class FBNetworkingController: NetworkingController {
         
         let ref = References.UserRef.child(getUID()!).child(ReferenceLabels.PostCount.rawValue)
         
-        _  = ref.observeEventType(FIRDataEventType.Value, withBlock: { (snapshot) in
-                let count = snapshot.value as! Int
-                callback(count)
-            }
-        )
+        ref.observeSingleEventOfType(.Value, withBlock:  { (snapshot) in
+            let count = snapshot.value as! Int
+            callback(count)
+        })
     }
     
     func getCurrentUser() -> FIRUser?{
@@ -174,13 +179,16 @@ class FBNetworkingController: NetworkingController {
     private func cloneUserDetails(fbUser: FIRUser!, username: String, password: String, profileType: String ){
         
         let ref = References.UserRef.child(fbUser!.uid)
-        ref.child(ReferenceLabels.Username.rawValue).setValue(username)
-        ref.child(ReferenceLabels.Password.rawValue).setValue(password)
-        ref.child(ReferenceLabels.PostCount.rawValue).setValue(0)
-        ref.child(ReferenceLabels.PhotoIDS.rawValue).setValue([])
-        ref.child(ReferenceLabels.UserTags.rawValue).setValue([])
-        ref.child(ReferenceLabels.UserPosts.rawValue).setValue([])
-        ref.child(ReferenceLabels.ProfileType.rawValue).setValue(profileType)
+        
+        let user = [ ReferenceLabels.Username.rawValue: username,
+                     ReferenceLabels.Password.rawValue: password,
+                     ReferenceLabels.PostCount.rawValue: 0,
+                     ReferenceLabels.PhotoIDS.rawValue: [],
+                     ReferenceLabels.UserTags.rawValue: [],
+                     ReferenceLabels.UserPosts.rawValue: [],
+                     ReferenceLabels.ProfileType.rawValue: profileType]
+        
+        ref.updateChildValues(user as [NSObject : AnyObject])
     }
 }
 
@@ -207,6 +215,94 @@ extension FBNetworkingController {
         case Likers = "likers"
     }
     
+}
+
+extension FBNetworkingController {
+    
+    func fakeSignUp(uid: String,email: String, username: String, password: String, profileType: String) {
+        self.fakeCloneUserDetails(uid, username: username, password: password, profileType: profileType)
+    }
+    
+    func fakeCloneUserDetails(uid: String, username: String, password: String, profileType: String ){
+        
+        let ref = References.UserRef.child(uid)
+        
+        let user = [ ReferenceLabels.Username.rawValue: username,
+                     ReferenceLabels.Password.rawValue: password,
+                     ReferenceLabels.PostCount.rawValue: 0,
+                     ReferenceLabels.PhotoIDS.rawValue: [],
+                     ReferenceLabels.UserTags.rawValue: [],
+                     ReferenceLabels.UserPosts.rawValue: [],
+                     ReferenceLabels.ProfileType.rawValue: profileType]
+        
+        ref.updateChildValues(user as [NSObject : AnyObject])
+    }
+
+
+    func fakeUpload(uid: String, imageid: String, tags: [String]){
+        self.fakeSaveTagsFor(uid, uniqueID: imageid, tags: tags)
+    }
+    
+    func fakeSaveTagsFor(fakeuid: String,uniqueID: String, tags: [String]) {
+        
+        let photoRef = References.PhotoRef.child(uniqueID)
+        
+        photoRef.child(ReferenceLabels.PostTags.rawValue).setValue(tags)
+        photoRef.child(ReferenceLabels.PostOwner.rawValue).setValue(fakeuid)
+        photoRef.child(ReferenceLabels.PostPrivacy.rawValue).setValue("Public")
+        photoRef.child(ReferenceLabels.Likers.rawValue).setValue([])
+        
+        let userRef = References.UserRef.child(fakeuid)
+        
+        fakeGetPhotoCount(fakeuid, callback: { (count) in
+            userRef.updateChildValues([ReferenceLabels.PostCount.rawValue : count+1])
+        })
+        
+        fakeGetAccountTags(fakeuid, completion: { (oldTags) in
+            userRef.updateChildValues([ReferenceLabels.UserTags.rawValue : oldTags + tags])
+        })
+        
+        fakeGetAccountPosts(fakeuid, completion: { (oldPosts) in
+            userRef.updateChildValues([ReferenceLabels.UserPosts.rawValue: oldPosts + [uniqueID]])
+        })    
+    }
+    
+    func fakeGetPhotoCount(uid: String, callback: (Int) -> Void) {
+        
+        let ref = References.UserRef.child(uid).child(ReferenceLabels.PostCount.rawValue)
+        
+        ref.observeSingleEventOfType(.Value, withBlock:  { (snapshot) in
+            let count = snapshot.value as! Int
+            callback(count)
+        })
+    }
+    
+    func fakeGetAccountTags(uid: String, completion: [String] -> Void) {
+        let ref = References.UserRef.child(uid).child(ReferenceLabels.UserTags.rawValue)
+        
+        ref.observeSingleEventOfType(.Value, withBlock: { (snapshot) in
+            if let tags = snapshot.value as? [String] {
+                completion(tags)
+            } else {
+                completion([])
+            }
+        })
+    }
+    
+    func fakeGetAccountPosts(uid: String, completion: [String] -> Void) {
+        let ref = References.UserRef.child(uid).child(ReferenceLabels.UserPosts.rawValue)
+        
+        ref.observeSingleEventOfType(.Value, withBlock: { (snapshot) in
+            if let photos = snapshot.value as? [String]{
+                completion(photos)
+            } else {
+                completion([])
+            }
+        })
+    }
+
+
+
 }
 
 

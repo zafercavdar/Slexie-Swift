@@ -1,14 +1,16 @@
 {
-  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "5FED826200E3E1B4B6E08B0D31D6B8439946A54A",
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "89DAE867CFBCBB0EBED0E3BCFF77FAFA32C2D434",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
 
   },
   "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "89DAE867CFBCBB0EBED0E3BCFF77FAFA32C2D434" : 0,
     "5FED826200E3E1B4B6E08B0D31D6B8439946A54A" : 0,
     "67620B5EFA902936DF04070AF595B76AB0333747" : 0
   },
   "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "CA905B93-2556-4D53-B49C-3E5DAA2047BA",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "89DAE867CFBCBB0EBED0E3BCFF77FAFA32C2D434" : "Slexie-Swift\/",
     "5FED826200E3E1B4B6E08B0D31D6B8439946A54A" : "Slexie\/",
     "67620B5EFA902936DF04070AF595B76AB0333747" : "Slexie\/Alamofire\/"
   },
@@ -25,6 +27,11 @@
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/Alamofire\/Alamofire.git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "67620B5EFA902936DF04070AF595B76AB0333747"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:zafercavdar\/Slexie-Swift.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "89DAE867CFBCBB0EBED0E3BCFF77FAFA32C2D434"
     }
   ]
 }

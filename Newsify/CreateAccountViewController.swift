@@ -90,7 +90,7 @@ class CreateAccountViewController: UIViewController, UITextFieldDelegate {
             if let error = error {
                 self.signUpFailedNotification(error.localizedDescription)
             } else {
-                self.performSegueWithIdentifier("LoggedInPage", sender: nil)
+                self.performSegueWithIdentifier("LoggedInFromSignUp", sender: nil)
             }
             
         }

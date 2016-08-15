@@ -25,10 +25,21 @@ class UploadViewController: UIViewController, UINavigationControllerDelegate {
     @IBOutlet weak var compressionLabel: UILabel!
     @IBOutlet weak var slider: UISlider!
     @IBOutlet weak var searchButton: UIButton!
+    @IBOutlet weak var hiLabel: UILabel!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         UploadViewController.chosenPhoto = photoImageView.image!
+        
+        if let email = networkingController.getCurrentUser()?.email {
+            
+            if let indexOfAt = indexOf(email, substring: "@"){
+                let distance = email.startIndex.advancedBy(indexOfAt)
+                let username = email.substringToIndex(distance)
+                hiLabel.text = "Hi \(username)"
+            }
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -95,6 +106,17 @@ class UploadViewController: UIViewController, UINavigationControllerDelegate {
         NSRunLoop.currentRunLoop().runMode(NSDefaultRunLoopMode, beforeDate: NSDate(timeIntervalSinceNow: 1))
     }
     
+    func indexOf(source: String, substring: String) -> Int? {
+        let maxIndex = source.characters.count - substring.characters.count
+        for index in 0...maxIndex {
+            let rangeSubstring = source.startIndex.advancedBy(index)..<source.startIndex.advancedBy(index + substring.characters.count)
+            if source.substringWithRange(rangeSubstring) == substring {
+                return index
+            }
+        }
+        return nil
+    }
+    
 }
 
 extension UploadViewController : UIImagePickerControllerDelegate {
@@ -126,3 +148,4 @@ extension UIImage {
         return result
     }
 }
+

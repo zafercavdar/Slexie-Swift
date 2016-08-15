@@ -20,6 +20,13 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction func generateRandomUsers(sender: UIButton) {
         
+        /*fbNetworkingController.signInWith(username: "zafer", password: "112233", enableNotification: false) { (error) in
+            let rgen = RandomBase()
+            
+            for _ in 0..<50 {
+                rgen.createUser()
+            }
+        }*/
     }
 
     override func viewDidLoad() {
@@ -36,7 +43,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         super.viewDidAppear(animated)
         
         if fbNetworkingController.getCurrentUser() != nil{
-            performSegueWithIdentifier("LoginDirectedPage", sender: nil)
+            performSegueWithIdentifier("LoggedIn", sender: nil)
         }
     }
     
@@ -78,7 +85,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             if let error = error {
                 self.signInFailedNotification(error.localizedDescription)
             } else {
-                self.performSegueWithIdentifier("LoginDirectedPage", sender: nil)
+                self.performSegueWithIdentifier("LoggedIn", sender: nil)
             }
         }
         

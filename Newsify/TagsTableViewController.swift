@@ -13,6 +13,7 @@ class TagsTableViewController: UITableViewController {
     
     var tags: [String] = []
     let networkingController = FBNetworkingController()
+    var pushed = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,11 +41,14 @@ class TagsTableViewController: UITableViewController {
     }
     
     @IBAction func uploadData(sender: UIBarButtonItem) {
-        let photo = UploadViewController.chosenPhoto
-        let rate = UploadViewController.compressionRate
-        let imageData = UIImageJPEGRepresentation(photo, rate)
-        networkingController.uploadPhoto(imageData!, tags: tags) { (error, photoID, url) in
-            
+        if (!pushed) {
+            pushed = true
+            let photo = UploadViewController.chosenPhoto
+            let rate = UploadViewController.compressionRate
+            let imageData = UIImageJPEGRepresentation(photo, rate)
+            networkingController.uploadPhoto(imageData!, tags: tags) { (error, photoID, url) in
+                self.pushed = false
+            }
         }
         
     }

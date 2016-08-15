@@ -7,39 +7,34 @@
 //
 
 import Foundation
-import FirebaseDatabase
 
 class RandomBase {
+    
+    let networkingController = FBNetworkingController()
 
     let wordBank: [String] = ["Njorth","hierarchising","transparietal","overspecializing","latest","Prajna","topeka","mashhad","antiradiating","pesky","Guerrilla","trouser","odour","noesis","huysmans","Wheel","connubiality","beelike","unprintable","agarita","Incogitable","chubbier","volga","noncoagulable","kernite","Unpredacious","penetrate","chairlift","lustrously","prepossession","Decigram","uredinia","diver","princeship","superglottic","Ratatouille","photochromy","wmo","cirrous","saut","Goodby","floy","thymbraeus","labialization","indicatively","Carbolize","skiograph","abortively","rockfishes","grayce","Farci","snuffiness","damaskeen","arri","auscultating","Sheers","quadrivia","redeployment","unbud","multiracial","Graphicly","semihard","tapetal","edibles","shield","Chyack","commend","palsylike","salivator","vulvitis","Milledgeville","athenaeus","glaucomatous","lifer","bawdily","Nothus","nova","unfrizzly","targum","virulently","Bravoing","decaliter","lubricant","besague","reheel","Dacryagogue","overclemency","untenderized","riel","unpurposed","Heartsickness","kulturkampf","leukemia","expeditated","punnet","Teresa","retest","magazinish","grandparent","idola"]
     
     let colorBank: [String] = ["white","black","blue","green","red","yellow","pink","purple","grey","violet"]
     let tonesBank: [String] = ["dark","light", ""]
 
-    /*func createUser() {
-        let userID = getRandomUserID()
+    func createUser() {
         let username = getRandomUsername()
         let password = getRandomPassword()
         let profileType = getRandomProfileType()
+        let uid = getRandomUserID()
+        let email = username + "@slexie.com"
+        let imageid = getRandomContentID()
         
-        FireBaseDatabaseOperations.writeFirebaseForRandomUser(["users",userID,"username"], data: username)
-        FireBaseDatabaseOperations.writeFirebaseForRandomUser(["users",userID,"password"], data: password)
-        FireBaseDatabaseOperations.writeFirebaseForRandomUser(["users",userID,"profile-type"], data: profileType)
-
+        networkingController.fakeSignUp(uid, email: email, username: username, password: password, profileType: profileType)
+        
         let numOfPhotos = getRandomIntBetween(5, 10)
         for _ in 0..<numOfPhotos {
-            let photoID = getRandomContentID()
-            let color = getRandomColor()
-            let compressionRate = getRandomCompressionRate()
             let tags = getRandomTags()
-            
-            FireBaseDatabaseOperations.writeFirebaseForRandomUser(["users",userID,"photo",photoID,"color"], data: color)
-            FireBaseDatabaseOperations.writeFirebaseForRandomUser(["users",userID,"photo",photoID,"compressionRate"], data: compressionRate)
-            FireBaseDatabaseOperations.writeFirebaseForRandomUser(["users",userID,"photo",photoID,"tags"], data: tags)
+            networkingController.fakeUpload(uid, imageid: imageid, tags: tags)
         }
         
         print("User generated.")
-    }*/
+    }
     
     
     
@@ -74,6 +69,14 @@ class RandomBase {
         return randomAlphaNumericString(8, isAlpha: false, isUpper: false, isLower: true)
     }
     
+    func getRandomContentID() -> String {
+        return randomAlphaNumericString(32, isAlpha: true, isUpper: false, isLower: true)
+    }
+    
+    func getRandomUserID() -> String{
+        return randomAlphaNumericString(28)
+    }
+    
     func getRandomPassword() -> String{
         return randomAlphaNumericString(10, isAlpha: true, isUpper: true, isLower: true)
     }
@@ -86,14 +89,7 @@ class RandomBase {
             return "Public"
         }
     }
-    
-    func getRandomUserID() -> String{
-        return randomAlphaNumericString(28)
-    }
-    
-    func getRandomContentID() -> String {
-        return randomAlphaNumericString(32, isAlpha: true, isUpper: false, isLower: true)
-    }
+
     
     func getRandomColor() -> String {
         let toneIndex = Int(arc4random_uniform(UInt32(tonesBank.count)))
