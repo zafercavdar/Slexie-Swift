@@ -1,1 +1,1 @@
-# Slexie-Swift
+Monitise MEA iOS Development Intership Pre-Project
