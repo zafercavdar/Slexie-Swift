@@ -92,7 +92,6 @@ class FBNetworkingController: NetworkingController {
         let uidNo = getUID()
         
         if let uid = uidNo as String!{
-            print("getUID says: \(uid)")
             let photoRef = References.PhotoRef.child(uniqueID)
             
             photoRef.child(ReferenceLabels.PostTags.rawValue).setValue(tags)
@@ -153,7 +152,6 @@ class FBNetworkingController: NetworkingController {
         
         var uniqueDic: [String: FeedPost] = [:]
         
-        
         let ref = References.PhotoRef
         _ = ref.observeSingleEventOfType(.Value, withBlock: { (snapshot) in
             
@@ -161,35 +159,48 @@ class FBNetworkingController: NetworkingController {
                 return
             }
             
-            for (id, propertyDic) in postDic {
+            let userRef = References.UserRef
+            _ = userRef.observeSingleEventOfType(.Value, withBlock: { (snapshot) in
                 
-                // Public check
-                guard let privacy = propertyDic[ReferenceLabels.PostPrivacy.rawValue] as? String where privacy == "Public" else {
-                    //print("photo \(id) is not public.")
-                    continue
+                guard let userDic = snapshot.value as? [String: AnyObject] else {
+                    return
                 }
                 
-                guard let photoTags = propertyDic[ReferenceLabels.PostTags.rawValue] as? [String] else {
-                    continue
-                }
-                
-                guard self.containsAny(photoTags,checkList: tags) else {
-                    continue
-                }
-                
-                if let owner = propertyDic[ReferenceLabels.PostOwner.rawValue] as? String {
+                for (id, propertyDic) in postDic {
+                    
+                    // Public check
+                    guard let privacy = propertyDic[ReferenceLabels.PostPrivacy.rawValue] as? String where privacy == "Public" else {
+                        //print("photo \(id) is not public.")
+                        continue
+                    }
+                    
+                    guard let photoTags = propertyDic[ReferenceLabels.PostTags.rawValue] as? [String] else {
+                        continue
+                    }
+                    
+                    
+                    guard self.containsAny(photoTags,checkList: tags) else {
+                        continue
+                    }
+                    
+                    guard let owner = propertyDic[ReferenceLabels.PostOwner.rawValue] as? String where owner != self.getUID() else {
+                        continue
+                    }
                     
                     let photo = UIImage(named: "defaultImage")
-                    let post = FeedPost(username: owner, photo: photo!, tags: tags)
+                    
+                    guard let atts = userDic[owner] as? [String: AnyObject], let username = atts[ReferenceLabels.Username.rawValue] as? String else {
+                        continue
+                    }
+                    
+                    let post = FeedPost(username: username, photo: photo!, tags: photoTags)
                     uniqueDic[id] = post
                     print("found in \(id)")
+
                 }
-                
-            }
-            
-            completion(uniqueDic)
+                completion(uniqueDic)
+            })
         })
-        
     }
     
     func signOut(callback: Void -> Void) {
@@ -204,14 +215,35 @@ class FBNetworkingController: NetworkingController {
     
     // MARK: Private methods
     
+    private func getUsername(with uid: String, completion callback: (username: String) -> Void){
+    
+        let ref = References.UserRef.child(uid).child(ReferenceLabels.Username.rawValue)
+        ref.observeSingleEventOfType(.Value,  withBlock: { (snapshot) in
+            let username = snapshot.value as! String
+            callback(username: username)
+        })
+    }
+    
     private func getPhotoCount(callback: (Int) -> Void) {
         
         let ref = References.UserRef.child(getUID()!).child(ReferenceLabels.PostCount.rawValue)
         
         ref.observeSingleEventOfType(.Value, withBlock:  { (snapshot) in
-            let count = snapshot.value as! Int
-            callback(count)
+            if let count = snapshot.value as? Int {
+                callback(count)
+            } else {
+                print("Error getting photo count")
+            }
         })
+    }
+    
+    private func delay(delay:Double, closure:()->()) {
+        dispatch_after(
+            dispatch_time(
+                DISPATCH_TIME_NOW,
+                Int64(delay * Double(NSEC_PER_SEC))
+            ),
+            dispatch_get_main_queue(), closure)
     }
     
     func getCurrentUser() -> FIRUser?{
@@ -256,7 +288,6 @@ class FBNetworkingController: NetworkingController {
 extension FBNetworkingController {
 
     enum References {
-        
         static let DatabaseRef = FIRDatabase.database().reference()
         static let UserRef = DatabaseRef.child("users")
         static let PhotoRef = DatabaseRef.child("photos")

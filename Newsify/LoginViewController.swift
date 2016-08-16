@@ -50,12 +50,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     // MARK: Actions
 
-    @IBAction func demo(sender: UIButton) {
-        fbNetworkingController.signInWith(username: "public", password: "112233", enableNotification: true) { (error) in
-            self.performSegueWithIdentifier("DemoPage", sender: nil)
-        }
-    }
-    
     @IBAction func loginButton(sender: UIButton) {
         
         usernameField.resignFirstResponder()

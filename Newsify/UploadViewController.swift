@@ -94,7 +94,7 @@ class UploadViewController: UIViewController, UINavigationControllerDelegate {
     
     @IBAction func logOut(sender: UIButton) {
         networkingController.signOut { (Void) in }
-        performSegueWithIdentifier("LogoutReturnToLogin", sender: nil)
+        self.dismissViewControllerAnimated(true, completion: nil)
     }
   
     

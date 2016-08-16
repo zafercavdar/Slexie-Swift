@@ -14,7 +14,7 @@ class FeedPostViewModel {
     var feedPosts: [FeedPost] = []
     let networkingController = FBNetworkingController()
         
-    func fetchFeedPosts() {
+    func fetchFeedPosts(completion callback: () -> Void) {
         
         var fetchedPosts: [FeedPost] = []
         var uniqueDic: [String: FeedPost] = [:]
@@ -37,6 +37,7 @@ class FeedPostViewModel {
                     self.feedPosts = fetchedPosts
                 }
                 
+                callback()
             })
         }
     }

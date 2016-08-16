@@ -101,7 +101,7 @@ class PhotoAnalyzeService {
                                 tagNames.append(tag)
                             }
                         }
-                        print("JSON Tags: \(tagNames)")
+                        print("LOG: Tags found.\n")
                         completion(tags: tagNames)
                         
                     }
@@ -134,7 +134,7 @@ class PhotoAnalyzeService {
                                 tagNames.append(tag)
                             }
                         }
-                        print("JSON Tags: \(tagNames)")
+                        print("LOG: Tags found.\n")
                         completion(tags: tagNames)
                         
                     }

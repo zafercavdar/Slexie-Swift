@@ -23,6 +23,9 @@ class ProfilePageViewController: UIViewController {
         self.performSegueWithIdentifier("LogOut", sender: nil)
     }
     
+    @IBAction func uploadButtonPressed(sender: UIButton) {
+        self.performSegueWithIdentifier("TakeSnap", sender: nil)
+    }
 
     /*
     // MARK: - Navigation

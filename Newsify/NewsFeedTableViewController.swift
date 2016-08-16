@@ -12,7 +12,9 @@ import Foundation
 class NewsFeedTableViewController: UITableViewController {
 
     var model = FeedPostViewModel()
-    let networkingController = FBNetworkingController()
+    let loadingView = LoadingView()
+    
+    @IBOutlet var feedPostsView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,10 +25,19 @@ class NewsFeedTableViewController: UITableViewController {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         
-        model.fetchFeedPosts()
+        loadingView.addToView(self.view, text: "Refreshing")
         
+        model.fetchFeedPosts { 
+            self.loadingView.removeFromView(self.view)
+            self.feedPostsView.reloadData()
+        }
     }
 
+    override func viewDidAppear(animated: Bool) {
+        let nav = self.navigationController?.navigationBar
+        nav?.barStyle = UIBarStyle.BlackOpaque
+        nav?.tintColor = UIColor.redColor()
+    }
     
 
     // MARK: - Table view data source
