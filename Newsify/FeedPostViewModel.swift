@@ -20,22 +20,24 @@ class FeedPostViewModel {
         var uniqueDic: [String: FeedPost] = [:]
         
         networkingController.getAccountTags { (tags) in
-            for tag in tags {
-                self.networkingController.getPhotosRelatedWith(tag, completion: { (resultDic) in
-                    print("searching for \(tag)")
-                    uniqueDic += resultDic
-                })
-            }
-            
-            for post in uniqueDic.values {
-                fetchedPosts.append(post)
-            }
-            
-            if fetchedPosts.isEmpty {
-                self.feedPosts = self.defaultPosts()
-            } else {
-                self.feedPosts = fetchedPosts
-            }
+            print("searching for \(tags)")
+            self.networkingController.getPhotosRelatedWith(tags, completion: { (resultDic) in
+                uniqueDic += resultDic
+                
+                for post in uniqueDic.values {
+                    print("fetched \(post.username)")
+                    fetchedPosts.append(post)
+                }
+                
+                if fetchedPosts.isEmpty {
+                    print("fetchedPosts are empty")
+                    self.feedPosts = self.defaultPosts()
+                } else {
+                    print("fetchedPosts are NOT empty")
+                    self.feedPosts = fetchedPosts
+                }
+                
+            })
         }
     }
 }

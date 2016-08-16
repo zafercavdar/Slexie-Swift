@@ -149,7 +149,7 @@ class FBNetworkingController: NetworkingController {
         })
     }
     
-    func getPhotosRelatedWith(tag: String, completion: [String: FeedPost] -> Void){
+    func getPhotosRelatedWith(tags: [String], completion: [String: FeedPost] -> Void){
         
         var uniqueDic: [String: FeedPost] = [:]
         
@@ -165,24 +165,24 @@ class FBNetworkingController: NetworkingController {
                 
                 // Public check
                 guard let privacy = propertyDic[ReferenceLabels.PostPrivacy.rawValue] as? String where privacy == "Public" else {
-                    print("photo \(id) is not public.")
+                    //print("photo \(id) is not public.")
                     continue
                 }
                 
-                guard let tags = propertyDic[ReferenceLabels.PostTags.rawValue] as? [String] else {
+                guard let photoTags = propertyDic[ReferenceLabels.PostTags.rawValue] as? [String] else {
                     continue
                 }
                 
-                guard tags.contains(tag) else {
+                guard self.containsAny(photoTags,checkList: tags) else {
                     continue
                 }
                 
                 if let owner = propertyDic[ReferenceLabels.PostOwner.rawValue] as? String {
                     
-                    let photo: UIImage = UIImage()
-                    let post = FeedPost(username: owner, photo: photo, tags: tags)
+                    let photo = UIImage(named: "defaultImage")
+                    let post = FeedPost(username: owner, photo: photo!, tags: tags)
                     uniqueDic[id] = post
-                    print("found \(tag) in \(id)")
+                    print("found in \(id)")
                 }
                 
             }
@@ -241,6 +241,16 @@ class FBNetworkingController: NetworkingController {
             callback(privacy: type)
         })
     }
+    
+    private func containsAny(storage: [String], checkList: [String]) -> Bool{
+        for element in checkList{
+            if storage.contains(element){
+                return true
+            }
+        }
+        
+        return false
+    }
 }
 
 extension FBNetworkingController {
@@ -269,6 +279,8 @@ extension FBNetworkingController {
     }
     
 }
+
+// MARK: Fake functions for random generator
 
 extension FBNetworkingController {
     
@@ -353,9 +365,21 @@ extension FBNetworkingController {
             }
         })
     }
-
-
-
+    
 }
+
+
+/*extension Array where Element: String{
+    
+    func containsAny(elements: Array<String>) -> Bool{
+        for element in elements{
+            if self.contains(element){
+                return true
+            }
+        }
+        
+        return false
+    }
+}*/
 
 
