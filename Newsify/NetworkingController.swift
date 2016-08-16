@@ -22,7 +22,7 @@ protocol NetworkingController {
     
     func getAccountTags(completion: [String] -> Void)
     
-    func getPhotosRelatedWith(tag: String, completion: [String: String] -> Void)
+    func getPhotosRelatedWith(tag: String, completion: [String: FeedPost] -> Void)
     
     func signOut(callback: Void->Void)
     

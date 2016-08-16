@@ -10,6 +10,7 @@ import Foundation
 import FirebaseAuth
 import FirebaseDatabase
 import FirebaseStorage
+import UIKit
 
 class FBNetworkingController: NetworkingController {
     
@@ -89,11 +90,6 @@ class FBNetworkingController: NetworkingController {
     
     private func saveTagsFor(photo uniqueID: String, tags: [String]) {
         let uidNo = getUID()
-        var profileType = ""
-        
-        getAccountPrivacy { (privacy) in
-            profileType = privacy
-        }
         
         if let uid = uidNo as String!{
             print("getUID says: \(uid)")
@@ -101,7 +97,11 @@ class FBNetworkingController: NetworkingController {
             
             photoRef.child(ReferenceLabels.PostTags.rawValue).setValue(tags)
             photoRef.child(ReferenceLabels.PostOwner.rawValue).setValue(uid)
-            photoRef.child(ReferenceLabels.PostPrivacy.rawValue).setValue(profileType)
+            
+            getAccountPrivacy { (privacy) in
+                photoRef.child(ReferenceLabels.PostPrivacy.rawValue).setValue(privacy)
+            }
+            
             photoRef.child(ReferenceLabels.Likers.rawValue).setValue([])
             
             let userRef = References.UserRef.child(uid)
@@ -149,9 +149,9 @@ class FBNetworkingController: NetworkingController {
         })
     }
     
-    func getPhotosRelatedWith(tag: String, completion: [String: String] -> Void){
+    func getPhotosRelatedWith(tag: String, completion: [String: FeedPost] -> Void){
         
-        var result: [String: String] = [:]
+        var uniqueDic: [String: FeedPost] = [:]
         
         
         let ref = References.PhotoRef
@@ -163,7 +163,9 @@ class FBNetworkingController: NetworkingController {
             
             for (id, propertyDic) in postDic {
                 
+                // Public check
                 guard let privacy = propertyDic[ReferenceLabels.PostPrivacy.rawValue] as? String where privacy == "Public" else {
+                    print("photo \(id) is not public.")
                     continue
                 }
                 
@@ -176,12 +178,16 @@ class FBNetworkingController: NetworkingController {
                 }
                 
                 if let owner = propertyDic[ReferenceLabels.PostOwner.rawValue] as? String {
-                    result[id] = owner
+                    
+                    let photo: UIImage = UIImage()
+                    let post = FeedPost(username: owner, photo: photo, tags: tags)
+                    uniqueDic[id] = post
+                    print("found \(tag) in \(id)")
                 }
                 
             }
             
-            completion(result)
+            completion(uniqueDic)
         })
         
     }

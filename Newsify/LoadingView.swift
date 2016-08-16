@@ -15,6 +15,8 @@ class LoadingView: UIView {
     var activityIndicator = UIActivityIndicatorView()
     
     func addToView(view: UIView, text: String){
+        
+        UIApplication.sharedApplication().networkActivityIndicatorVisible = true
         loadingView = UIView(frame: CGRect(x: view.frame.midX - 90, y: view.frame.midY - 25, width: 180, height: 50))
         loadingView.backgroundColor = UIColor.blackColor()
         loadingView.alpha = 0.8
@@ -41,5 +43,6 @@ class LoadingView: UIView {
     
     func removeFromView(view: UIView){
         loadingView.removeFromSuperview()
+        UIApplication.sharedApplication().networkActivityIndicatorVisible = false
     }
 }

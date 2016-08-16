@@ -1,16 +1,16 @@
 //
-//  FeedItem.swift
+//  FeedPost.swift
 //  Slexie
 //
-//  Created by Zafer Cavdar on 11/08/2016.
+//  Created by Zafer Cavdar on 16/08/2016.
 //  Copyright © 2016 Zafer Cavdar. All rights reserved.
 //
 
 import Foundation
 import UIKit
 
-class FeedItem {
-
+class FeedPost {
+    
     var username: String
     var photo: UIImage
     var tags: [String] = []
