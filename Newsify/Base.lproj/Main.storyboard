@@ -77,7 +77,7 @@
                                         <state key="normal" title="Demo"/>
                                         <connections>
                                             <action selector="demo:" destination="BYZ-38-t0r" eventType="touchUpInside" id="2R8-hx-2sJ"/>
-                                            <segue destination="AUG-x2-Njh" kind="show" identifier="LoggedIn" id="E5L-Ax-qBL"/>
+                                            <segue destination="3gX-ku-4kX" kind="show" identifier="DemoPage" id="HPM-PV-fzO"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -102,6 +102,7 @@
                         <outlet property="randomGenerateButton" destination="bCS-fP-y5U" id="DGA-Ev-vLk"/>
                         <outlet property="usernameField" destination="AfF-Io-2r2" id="9n2-RC-Z9d"/>
                         <outlet property="usernameLabel" destination="om7-wh-mCc" id="maQ-gG-uVx"/>
+                        <segue destination="AUG-x2-Njh" kind="show" identifier="LoggedIn" id="v1H-f1-fwr"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -385,7 +386,24 @@
             </objects>
             <point key="canvasLocation" x="-551" y="281"/>
         </scene>
-        <!--News Feed Table View Controller-->
+        <!--Item-->
+        <scene sceneID="p3a-wK-8MQ">
+            <objects>
+                <navigationController id="JyD-aO-e5S" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="ghw-Uk-hHI"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="ab7-NR-ciT">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="quT-6B-jcQ" kind="relationship" relationship="rootViewController" id="pV9-Rg-yus"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="EIG-Dr-g5R" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-47" y="-2399"/>
+        </scene>
+        <!--Newsfeed-->
         <scene sceneID="mYy-aK-Kzl">
             <objects>
                 <tableViewController id="quT-6B-jcQ" customClass="NewsFeedTableViewController" customModule="Slexie" customModuleProvider="target" sceneMemberID="viewController">
@@ -395,7 +413,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="NewsFeedItemCell" rowHeight="450" id="yre-oF-4ws" customClass="NewsFeedItemCell" customModule="Slexie" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="600" height="450"/>
+                                <rect key="frame" x="0.0" y="92" width="600" height="450"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="yre-oF-4ws" id="QQ6-F7-tDY">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="449.5"/>
@@ -446,6 +464,7 @@
                         </connections>
                     </tableView>
                     <tabBarItem key="tabBarItem" systemItem="recents" id="Nyw-Hm-IM9"/>
+                    <navigationItem key="navigationItem" title="Newsfeed" id="a3w-4X-DDO"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QRt-SQ-5bC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -521,14 +540,14 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
                     <connections>
-                        <segue destination="quT-6B-jcQ" kind="relationship" relationship="viewControllers" id="vEb-MI-kIp"/>
+                        <segue destination="JyD-aO-e5S" kind="relationship" relationship="viewControllers" id="r0a-Jk-XZf"/>
                         <segue destination="ATO-hG-gLW" kind="relationship" relationship="viewControllers" id="GR3-9R-juW"/>
                         <segue destination="rFI-20-YBs" kind="relationship" relationship="viewControllers" id="2Me-xe-Yzg"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TQp-Ml-ICW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-47" y="-1653"/>
+            <point key="canvasLocation" x="-3" y="-1659"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="H8p-xn-2eR">
@@ -553,7 +572,7 @@
         <image name="example1" width="600" height="600"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="v1H-f1-fwr"/>
         <segue reference="jBu-xV-NLW"/>
-        <segue reference="NWr-JX-J3B"/>
     </inferredMetricsTieBreakers>
 </document>

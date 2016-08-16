@@ -57,14 +57,13 @@ class UploadViewController: UIViewController, UINavigationControllerDelegate {
     @IBAction func searchButtonPressed(sender: UIButton) {
         
         let loadingView = LoadingView()
-        loadingView.addToView(self.view, text: "Uploading")
+        loadingView.addToView(self.view, text: "Analyzing")
         
         if let imageData = UIImageJPEGRepresentation(UploadViewController.chosenPhoto, UploadViewController.compressionRate) {
             imaggaService.uploadPhotoGetContentID(imageData, completion: { (id) in
                 
                 UploadViewController.contentID = id
                 
-                loadingView.changeText("Analyzing")
                 self.imaggaService.findRelatedTagsWith(contentID: id, completion: { (tags) in
                     UploadViewController.trustedTags = tags
                     loadingView.removeFromView(self.view)

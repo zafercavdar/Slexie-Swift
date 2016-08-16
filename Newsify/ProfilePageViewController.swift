@@ -17,7 +17,6 @@ class ProfilePageViewController: UIViewController {
 
     }
 
-
     
     @IBAction func logOutButtonPressed(sender: UIButton) {
         networkingController.signOut { (Void) in }

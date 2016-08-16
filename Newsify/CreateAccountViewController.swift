@@ -86,7 +86,6 @@ class CreateAccountViewController: UIViewController, UITextFieldDelegate {
         networkingController.signUp(email, username: username, password: password, profileType: profileType) { (error) in
             loadingView.removeFromView(self.view)
 
-            
             if let error = error {
                 self.signUpFailedNotification(error.localizedDescription)
             } else {

@@ -7,10 +7,18 @@
 //
 
 import UIKit
+import Foundation
+
+func += <K, V> (inout left: Dictionary <K,V> , right: Dictionary <K,V>) {
+    for (k, v) in right {
+        left[k] = v
+    }
+}
 
 class NewsFeedTableViewController: UITableViewController {
 
     var feedItems: [FeedItem] = []
+    let networkingController = FBNetworkingController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,12 +43,22 @@ class NewsFeedTableViewController: UITableViewController {
 
         feedItems = [feedItem,feedItem2]
         
+        var posts: [String: String] = [:]
+        
+        networkingController.getAccountTags { (tags) in
+            for tag in tags {
+                self.networkingController.getPhotosRelatedWith(tag, completion: { (photoToUser) in
+                    posts += photoToUser
+                })
+            }
+            print(posts)
+        }
+        
+        
+        
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
+    
 
     // MARK: - Table view data source
 
@@ -114,5 +132,4 @@ class NewsFeedTableViewController: UITableViewController {
         // Pass the selected object to the new view controller.
     }
     */
-
 }

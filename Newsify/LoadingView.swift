@@ -42,5 +42,4 @@ class LoadingView: UIView {
     func removeFromView(view: UIView){
         loadingView.removeFromSuperview()
     }
-
 }

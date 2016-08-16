@@ -19,6 +19,7 @@ class PhotoAnalyzeService {
     }
     
     let threshold = 25.00
+    let maxTagNumber = 10
 
     func findBackgroundColorWithContentID(contentID: String, completion: (color: String) -> Void) {
         //let imageURL = "http://imagga.com/static/images/categorization/car.jpg"
@@ -95,7 +96,7 @@ class PhotoAnalyzeService {
                         for i in 0...tags.count{
                             let tag = String(tags[i]["tag"].description)
                             let confidence = Double(tags[i]["confidence"].description)
-                            if confidence > self.threshold {
+                            if confidence > self.threshold && tagNames.count < self.maxTagNumber {
                                 possibleTags[tag] = confidence
                                 tagNames.append(tag)
                             }
@@ -128,7 +129,7 @@ class PhotoAnalyzeService {
                         for i in 0...tags.count{
                             let tag = String(tags[i]["tag"].description)
                             let confidence = Double(tags[i]["confidence"].description)
-                            if confidence > self.threshold {
+                            if confidence > self.threshold && tagNames.count < self.maxTagNumber{
                                 possibleTags[tag] = confidence
                                 tagNames.append(tag)
                             }

@@ -51,14 +51,14 @@ class FBNetworkingController: NetworkingController {
             
             if let e = error {
                 print("Sign up failed.", e.localizedDescription)
+                completionHandler(error: error)
             }else{
                 print("Signed up with uid", user!.uid)
                 self.cloneUserDetails(user!, username: username, password: password, profileType: profileType)
                 self.signInWith(username: username, password: password, enableNotification: false, completionHandler: { (Void) in
+                    completionHandler(error: error)
                 })
             }
-            
-            completionHandler(error: error)
         })
 
     }
@@ -89,6 +89,11 @@ class FBNetworkingController: NetworkingController {
     
     private func saveTagsFor(photo uniqueID: String, tags: [String]) {
         let uidNo = getUID()
+        var profileType = ""
+        
+        getAccountPrivacy { (privacy) in
+            profileType = privacy
+        }
         
         if let uid = uidNo as String!{
             print("getUID says: \(uid)")
@@ -96,7 +101,7 @@ class FBNetworkingController: NetworkingController {
             
             photoRef.child(ReferenceLabels.PostTags.rawValue).setValue(tags)
             photoRef.child(ReferenceLabels.PostOwner.rawValue).setValue(uid)
-            photoRef.child(ReferenceLabels.PostPrivacy.rawValue).setValue("Public")
+            photoRef.child(ReferenceLabels.PostPrivacy.rawValue).setValue(profileType)
             photoRef.child(ReferenceLabels.Likers.rawValue).setValue([])
             
             let userRef = References.UserRef.child(uid)
@@ -146,6 +151,38 @@ class FBNetworkingController: NetworkingController {
     
     func getPhotosRelatedWith(tag: String, completion: [String: String] -> Void){
         
+        var result: [String: String] = [:]
+        
+        
+        let ref = References.PhotoRef
+        _ = ref.observeSingleEventOfType(.Value, withBlock: { (snapshot) in
+            
+            guard let postDic = snapshot.value as? [String: AnyObject] else {
+                return
+            }
+            
+            for (id, propertyDic) in postDic {
+                
+                guard let privacy = propertyDic[ReferenceLabels.PostPrivacy.rawValue] as? String where privacy == "Public" else {
+                    continue
+                }
+                
+                guard let tags = propertyDic[ReferenceLabels.PostTags.rawValue] as? [String] else {
+                    continue
+                }
+                
+                guard tags.contains(tag) else {
+                    continue
+                }
+                
+                if let owner = propertyDic[ReferenceLabels.PostOwner.rawValue] as? String {
+                    result[id] = owner
+                }
+                
+            }
+            
+            completion(result)
+        })
         
     }
     
@@ -190,14 +227,24 @@ class FBNetworkingController: NetworkingController {
         
         ref.updateChildValues(user as [NSObject : AnyObject])
     }
+    
+    private func getAccountPrivacy(callback: (privacy: String) -> Void){
+        let ref = References.UserRef.child(getUID()!).child(ReferenceLabels.ProfileType.rawValue)
+        ref.observeSingleEventOfType(.Value , withBlock: { (snapshot) in
+            let type = snapshot.value as! String
+            callback(privacy: type)
+        })
+    }
 }
 
 extension FBNetworkingController {
 
     enum References {
-        static let MainRef = FIRDatabase.database().reference()
-        static let UserRef = MainRef.child("users")
-        static let PhotoRef = MainRef.child("photos")
+        
+        static let DatabaseRef = FIRDatabase.database().reference()
+        static let UserRef = DatabaseRef.child("users")
+        static let PhotoRef = DatabaseRef.child("photos")
+        static let StorageRef = FIRStorage.storage().reference()
     }
     
     enum ReferenceLabels: String {
