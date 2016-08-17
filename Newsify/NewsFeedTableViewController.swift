@@ -31,19 +31,37 @@ class NewsFeedTableViewController: UITableViewController {
             self.loadingView.removeFromView(self.view)
             self.feedPostsView.reloadData()
         }
-    }
-
-    override func viewDidAppear(animated: Bool) {
-        let nav = self.navigationController?.navigationBar
-        nav?.barStyle = UIBarStyle.BlackOpaque
-        nav?.tintColor = UIColor.redColor()
+        
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(refresh(_:)), forControlEvents: .ValueChanged)
+        tableView.addSubview(refreshControl)
     }
     
+    override func viewWillAppear(animated: Bool) {
+        let nav = self.navigationController?.navigationBar
+        
+        nav?.barTintColor = UIColor.coreColor()
+        nav?.barStyle = UIBarStyle.BlackOpaque
+        //nav?.tintColor = UIColor.whiteColor()
+        
+        super.viewWillAppear(animated)
+    }
+    
+    func refresh(refreshControl: UIRefreshControl) {
+        model.fetchFeedPosts { 
+            self.feedPostsView.reloadData()
+            refreshControl.endRefreshing()
+        }
+    }
 
     // MARK: - Table view data source
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 1
+        if model.feedPosts.count > 0 {
+            return 1
+        } else {
+            return 0
+        }
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -112,4 +130,12 @@ class NewsFeedTableViewController: UITableViewController {
         // Pass the selected object to the new view controller.
     }
     */
+}
+
+extension UIColor {
+    
+    static func coreColor() -> UIColor {
+        return UIColor(red: 255.0 / 255.0, green: 59.0 / 255.0 , blue: 48.0 / 255.0, alpha: 1)
+    }
+    
 }

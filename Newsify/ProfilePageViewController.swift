@@ -16,6 +16,18 @@ class ProfilePageViewController: UIViewController {
         super.viewDidLoad()
 
     }
+    
+    override func viewWillAppear(animated: Bool) {
+        let nav = self.navigationController?.navigationBar
+        
+        nav?.barTintColor = UIColor.coreColor()
+        nav?.barStyle = UIBarStyle.BlackOpaque
+        //nav?.tintColor = UIColor.whiteColor()
+        
+        
+        super.viewWillAppear(animated)
+    }
+
 
     
     @IBAction func logOutButtonPressed(sender: UIButton) {

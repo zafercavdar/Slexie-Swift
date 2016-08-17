@@ -17,6 +17,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var usernameField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
     @IBOutlet weak var randomGenerateButton: UIButton!
+    @IBOutlet weak var loginButton: UIButton!
     
     @IBAction func generateRandomUsers(sender: UIButton) {
         
@@ -30,13 +31,20 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     }
 
     override func viewDidLoad() {
-        super.viewDidLoad()
 
+        super.viewDidLoad()
+        
         usernameField.delegate = self
         passwordField.delegate = self
         
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        loginButton.setTitleColor(UIColor.coreColor(), forState: UIControlState.Normal)
         randomGenerateButton.enabled = false
-        
+
+        super.viewWillAppear(animated)
+
     }
     
     override func viewDidAppear(animated: Bool) {

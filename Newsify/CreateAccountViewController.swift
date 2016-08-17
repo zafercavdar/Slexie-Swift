@@ -15,6 +15,7 @@ class CreateAccountViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var repasswordField: UITextField!
     @IBOutlet weak var accountTypeControl: UISwitch!
     @IBOutlet weak var profileTypeLabel: UILabel!
+    @IBOutlet weak var signUpButton: UIButton!
     
     var fields: [UITextField] = []
     
@@ -30,7 +31,16 @@ class CreateAccountViewController: UIViewController, UITextFieldDelegate {
         for field in fields{
             field.delegate = self
         }
+        
     }
+    
+    override func viewWillAppear(animated: Bool) {
+        signUpButton.setTitleColor(UIColor.coreColor(), forState: UIControlState.Normal)
+        
+        super.viewWillAppear(animated)
+        
+    }
+
     
     
     @IBAction func switchStateChanged(sender: UISwitch) {
