@@ -24,17 +24,19 @@ class NewsFeedTableViewController: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+
         
         loadingView.addToView(self.view, text: "Refreshing")
+        
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(refresh(_:)), forControlEvents: .ValueChanged)
+        tableView.addSubview(refreshControl)
         
         model.fetchFeedPosts { 
             self.loadingView.removeFromView(self.view)
             self.feedPostsView.reloadData()
         }
         
-        let refreshControl = UIRefreshControl()
-        refreshControl.addTarget(self, action: #selector(refresh(_:)), forControlEvents: .ValueChanged)
-        tableView.addSubview(refreshControl)
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -43,7 +45,7 @@ class NewsFeedTableViewController: UITableViewController {
         nav?.barTintColor = UIColor.coreColor()
         nav?.barStyle = UIBarStyle.BlackOpaque
         //nav?.tintColor = UIColor.whiteColor()
-        
+       
         super.viewWillAppear(animated)
     }
     

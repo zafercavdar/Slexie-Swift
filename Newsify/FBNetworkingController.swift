@@ -125,7 +125,12 @@ class FBNetworkingController: NetworkingController {
     }
     
     func getAccountTags(completion: [String] -> Void) {
-        let ref = References.UserRef.child(getUID()!).child(ReferenceLabels.UserTags.rawValue)
+        
+        guard let uid = getUID() else {
+            return
+        }
+        
+        let ref = References.UserRef.child(uid).child(ReferenceLabels.UserTags.rawValue)
         
         ref.observeSingleEventOfType(.Value, withBlock: { (snapshot) in
             if let tags = snapshot.value as? [String] {
@@ -137,7 +142,12 @@ class FBNetworkingController: NetworkingController {
     }
     
     func getAccountPosts(completion: [String] -> Void) {
-        let ref = References.UserRef.child(getUID()!).child(ReferenceLabels.UserPosts.rawValue)
+        
+        guard let uid = getUID() else {
+            return
+        }
+        
+        let ref = References.UserRef.child(uid).child(ReferenceLabels.UserPosts.rawValue)
         
         ref.observeSingleEventOfType(.Value, withBlock: { (snapshot) in
             if let photos = snapshot.value as? [String]{
@@ -148,9 +158,42 @@ class FBNetworkingController: NetworkingController {
         })
     }
     
-    func getPhotosRelatedWith(tags: [String], completion: [String: FeedPost] -> Void){
+    func downloadPhoto(with photoID: String, completion callback: (UIImage?, NSError?) -> Void){
+        let photoRef = References.PhotoStorageRef.child("\(photoID).png")
         
-        var uniqueDic: [String: FeedPost] = [:]
+        let fileManager = NSFileManager.defaultManager()
+        let localMainURL = fileManager.URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).last
+        let localURLString = (localMainURL?.absoluteString)! + "images/\(photoID).png"
+        let localURL = NSURL(string: localURLString)
+        print(localURL)
+
+        //let localURL: NSURL! = NSURL(string: "file:///Documents/images/\(photoID).png")
+        
+        _ = photoRef.writeToFile(localURL!) { (URL, error) -> Void in
+            if (error != nil) {
+                print("ERROR: \(error)\nEnd of Error\n")
+                callback(nil, error)
+            } else {
+                
+                let checkValidation = NSFileManager.defaultManager()
+                
+                if (checkValidation.isReadableFileAtPath((URL?.absoluteString)!)) {
+                    print("OLEY: file is readable")
+                }
+                
+                guard let data = NSData(contentsOfURL: URL!), let image = UIImage(data: data) else {
+                    print("error while converting local url to data")
+                    return
+                }
+                
+                callback(image, error)
+            }
+        }
+    }
+    
+    func getPhotosRelatedWith(tags: [String], completion: [FeedPost] -> Void){
+        
+        var posts: [FeedPost] = []
         
         let ref = References.PhotoRef
         _ = ref.observeSingleEventOfType(.Value, withBlock: { (snapshot) in
@@ -187,18 +230,16 @@ class FBNetworkingController: NetworkingController {
                         continue
                     }
                     
-                    let photo = UIImage(named: "defaultImage")
-                    
                     guard let atts = userDic[owner] as? [String: AnyObject], let username = atts[ReferenceLabels.Username.rawValue] as? String else {
                         continue
                     }
                     
-                    let post = FeedPost(username: username, photo: photo!, tags: photoTags)
-                    uniqueDic[id] = post
+                    let post = FeedPost(username: username, id: id, tags: photoTags)
+                    posts.append(post)
                     print("found in \(id)")
 
                 }
-                completion(uniqueDic)
+                completion(posts)
             })
         })
     }
@@ -226,7 +267,11 @@ class FBNetworkingController: NetworkingController {
     
     private func getPhotoCount(callback: (Int) -> Void) {
         
-        let ref = References.UserRef.child(getUID()!).child(ReferenceLabels.PostCount.rawValue)
+        guard let uid = getUID() else {
+            return
+        }
+        
+        let ref = References.UserRef.child(uid).child(ReferenceLabels.PostCount.rawValue)
         
         ref.observeSingleEventOfType(.Value, withBlock:  { (snapshot) in
             if let count = snapshot.value as? Int {
@@ -235,15 +280,6 @@ class FBNetworkingController: NetworkingController {
                 print("Error getting photo count")
             }
         })
-    }
-    
-    private func delay(delay:Double, closure:()->()) {
-        dispatch_after(
-            dispatch_time(
-                DISPATCH_TIME_NOW,
-                Int64(delay * Double(NSEC_PER_SEC))
-            ),
-            dispatch_get_main_queue(), closure)
     }
     
     func getCurrentUser() -> FIRUser?{
@@ -292,6 +328,7 @@ extension FBNetworkingController {
         static let UserRef = DatabaseRef.child("users")
         static let PhotoRef = DatabaseRef.child("photos")
         static let StorageRef = FIRStorage.storage().reference()
+        static let PhotoStorageRef = References.StorageRef.child("images")
     }
     
     enum ReferenceLabels: String {
@@ -398,7 +435,6 @@ extension FBNetworkingController {
     }
     
 }
-
 
 /*extension Array where Element: String{
     

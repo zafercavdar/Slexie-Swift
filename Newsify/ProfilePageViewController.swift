@@ -12,6 +12,18 @@ class ProfilePageViewController: UIViewController {
 
     let networkingController = FBNetworkingController()
     
+    @IBAction func logOut(sender: UIBarButtonItem) {
+        networkingController.signOut { (Void) in
+            self.performSegueWithIdentifier("LogOut", sender: nil)
+        }
+    }
+    
+    @IBAction func upload(sender: UIBarButtonItem) {
+        self.performSegueWithIdentifier("TakeSnap", sender: nil)
+    }
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -22,23 +34,12 @@ class ProfilePageViewController: UIViewController {
         
         nav?.barTintColor = UIColor.coreColor()
         nav?.barStyle = UIBarStyle.BlackOpaque
-        //nav?.tintColor = UIColor.whiteColor()
+        nav?.tintColor = UIColor.whiteColor()
         
         
         super.viewWillAppear(animated)
     }
-
-
     
-    @IBAction func logOutButtonPressed(sender: UIButton) {
-        networkingController.signOut { (Void) in }
-        self.performSegueWithIdentifier("LogOut", sender: nil)
-    }
-    
-    @IBAction func uploadButtonPressed(sender: UIButton) {
-        self.performSegueWithIdentifier("TakeSnap", sender: nil)
-    }
-
     /*
     // MARK: - Navigation
 

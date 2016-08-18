@@ -19,11 +19,19 @@ class SearchPageTableViewController: UITableViewController {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    
+    override func viewWillAppear(animated: Bool) {
+        let nav = self.navigationController?.navigationBar
+        
+        nav?.barTintColor = UIColor.coreColor()
+        nav?.barStyle = UIBarStyle.BlackOpaque
+        //nav?.tintColor = UIColor.whiteColor()
+        
+        super.viewWillAppear(animated)
     }
+
+
+    
 
     // MARK: - Table view data source
 

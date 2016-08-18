@@ -12,12 +12,17 @@ import UIKit
 class FeedPost {
     
     var username: String
-    var photo: UIImage
+    var id: String
     var tags: [String] = []
+    var photo = UIImage(named: "greyDefault")
     
-    init(username: String, photo: UIImage, tags: [String]) {
+    init(username: String, id: String, tags: [String]) {
         self.username = username
-        self.photo = photo
+        self.id = id
         self.tags = tags
+    }
+    
+    func setPhoto(photo: UIImage) {
+        self.photo = photo
     }
 }
