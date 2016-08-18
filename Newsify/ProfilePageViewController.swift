@@ -8,25 +8,20 @@
 
 import UIKit
 
-class ProfilePageViewController: UIViewController {
+class ProfilePageViewController: UITableViewController {
 
     let networkingController = FBNetworkingController()
+    let model = ProfilePostViewModel()
     
-    @IBAction func logOut(sender: UIBarButtonItem) {
-        networkingController.signOut { (Void) in
-            self.performSegueWithIdentifier("LogOut", sender: nil)
-        }
-    }
-    
-    @IBAction func upload(sender: UIBarButtonItem) {
-        self.performSegueWithIdentifier("TakeSnap", sender: nil)
-    }
-    
-    
+    @IBOutlet var profilePostsView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        model.fetchProfilePosts { 
+            self.profilePostsView.reloadData()
+        }
+        
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -38,6 +33,49 @@ class ProfilePageViewController: UIViewController {
         
         
         super.viewWillAppear(animated)
+    }
+    
+    // MARK: Button actions
+    
+    @IBAction func logOutPressed(sender: UIBarButtonItem) {
+        
+        networkingController.signOut { (Void) in
+            self.performSegueWithIdentifier("LogOut", sender: nil)
+        }
+    }
+    
+    @IBAction func uploadPressed(sender: UIBarButtonItem) {
+        
+        self.performSegueWithIdentifier("TakeSnap", sender: nil)
+    }
+
+    
+    // MARK: tableviewcontroller methods
+    
+    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return model.profilePosts.count
+    }
+    
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let identifier = "ProfilePostTableViewCell"
+        let profileItem = model.profilePosts[indexPath.row]
+        let cell = tableView.dequeueReusableCellWithIdentifier(identifier, forIndexPath: indexPath) as! ProfilePostTableViewCell
+        
+        
+        cell.profilePostView.image = profileItem.photo
+        
+        var tagText = ""
+        for tag in profileItem.tags{
+            tagText += "#\(tag) "
+        }
+        
+        cell.profilePostTags.text = tagText
+        
+        return cell
     }
     
     /*

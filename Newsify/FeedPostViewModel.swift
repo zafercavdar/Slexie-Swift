@@ -59,11 +59,12 @@ extension FeedPostViewModel {
         let defaultImage2 = UIImage(named: "example2")
         let defaultUsername2 = "michael"
         let defaultTags2 = ["friends","fun", "together"]
+        
         let feedItem = FeedPost(username: defaultUsername, id: "no-id", tags: defaultTags)
         let feedItem2 = FeedPost(username: defaultUsername2, id: "no-id", tags: defaultTags2)
         
         feedItem.setPhoto(defaultImage!)
-        feedItem.setPhoto(defaultImage2!)
+        feedItem2.setPhoto(defaultImage2!)
         
         return [feedItem,feedItem2]
     }

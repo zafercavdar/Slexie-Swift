@@ -21,6 +21,9 @@
 		B38E85BC1D59B44600CAE73B /* TagsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B38E85BB1D59B44600CAE73B /* TagsTableViewController.swift */; };
 		B38E85C01D59C28C00CAE73B /* TagsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B38E85BF1D59C28C00CAE73B /* TagsTableViewCell.swift */; };
 		B3ACD3741D54D3E6004BEF24 /* CreateAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3ACD3731D54D3E6004BEF24 /* CreateAccountViewController.swift */; };
+		B3B527BF1D65AD2A00E31C37 /* ProfilePostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B527BE1D65AD2A00E31C37 /* ProfilePostTableViewCell.swift */; };
+		B3B527C11D65AF2100E31C37 /* ProfilePostsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B527C01D65AF2100E31C37 /* ProfilePostsViewModel.swift */; };
+		B3B527C31D65AF8B00E31C37 /* ProfilePost.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B527C21D65AF8B00E31C37 /* ProfilePost.swift */; };
 		B3ED70F11D5C6ADF001159A6 /* ProfilePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3ED70F01D5C6ADF001159A6 /* ProfilePageViewController.swift */; };
 		B3ED70F31D5C87E9001159A6 /* NewsFeedTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3ED70F21D5C87E9001159A6 /* NewsFeedTableViewController.swift */; };
 		B3ED70F51D5C87FD001159A6 /* SearchPageTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3ED70F41D5C87FD001159A6 /* SearchPageTableViewController.swift */; };
@@ -85,6 +88,9 @@
 		B38E85BF1D59C28C00CAE73B /* TagsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagsTableViewCell.swift; sourceTree = "<group>"; };
 		B398C8BC1D586A360014F647 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
 		B3ACD3731D54D3E6004BEF24 /* CreateAccountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateAccountViewController.swift; sourceTree = "<group>"; };
+		B3B527BE1D65AD2A00E31C37 /* ProfilePostTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfilePostTableViewCell.swift; sourceTree = "<group>"; };
+		B3B527C01D65AF2100E31C37 /* ProfilePostsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfilePostsViewModel.swift; sourceTree = "<group>"; };
+		B3B527C21D65AF8B00E31C37 /* ProfilePost.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfilePost.swift; sourceTree = "<group>"; };
 		B3ED70F01D5C6ADF001159A6 /* ProfilePageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfilePageViewController.swift; sourceTree = "<group>"; };
 		B3ED70F21D5C87E9001159A6 /* NewsFeedTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsFeedTableViewController.swift; sourceTree = "<group>"; };
 		B3ED70F41D5C87FD001159A6 /* SearchPageTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchPageTableViewController.swift; sourceTree = "<group>"; };
@@ -201,16 +207,19 @@
 				B3F455AF1D54A1BD005EA708 /* LoginViewController.swift */,
 				B3ACD3731D54D3E6004BEF24 /* CreateAccountViewController.swift */,
 				B354788F1D57778600889F9A /* UploadViewController.swift */,
+				B3ED70F41D5C87FD001159A6 /* SearchPageTableViewController.swift */,
 				B38E85BB1D59B44600CAE73B /* TagsTableViewController.swift */,
 				B38E85BF1D59C28C00CAE73B /* TagsTableViewCell.swift */,
 				B3F455B91D54A1BD005EA708 /* Info.plist */,
 				B3ED71001D5CC655001159A6 /* GoogleService-Info.plist */,
 				B3ED70F21D5C87E9001159A6 /* NewsFeedTableViewController.swift */,
 				B361FCCA1D63234800B4F8AA /* FeedPostViewModel.swift */,
-				B361FCCC1D63295800B4F8AA /* FeedPost.swift */,
-				B3ED70F41D5C87FD001159A6 /* SearchPageTableViewController.swift */,
-				B3ED70F01D5C6ADF001159A6 /* ProfilePageViewController.swift */,
 				B3ED70F81D5C8AC6001159A6 /* NewsFeedItemCell.swift */,
+				B361FCCC1D63295800B4F8AA /* FeedPost.swift */,
+				B3ED70F01D5C6ADF001159A6 /* ProfilePageViewController.swift */,
+				B3B527C01D65AF2100E31C37 /* ProfilePostsViewModel.swift */,
+				B3B527BE1D65AD2A00E31C37 /* ProfilePostTableViewCell.swift */,
+				B3B527C21D65AF8B00E31C37 /* ProfilePost.swift */,
 				B36E72161D5B846700F626D0 /* RandomBase.swift */,
 				B398C8BC1D586A360014F647 /* SwiftyJSON.swift */,
 			);
@@ -500,6 +509,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B3B527BF1D65AD2A00E31C37 /* ProfilePostTableViewCell.swift in Sources */,
 				B30EE7011D61D9C60009B36F /* SwiftyJSON.swift in Sources */,
 				B32828B41D5DE2660022F85E /* UniqueIDGenerator.swift in Sources */,
 				B35478901D57778600889F9A /* UploadViewController.swift in Sources */,
@@ -517,8 +527,10 @@
 				B361FCCB1D63234800B4F8AA /* FeedPostViewModel.swift in Sources */,
 				B3ED70F31D5C87E9001159A6 /* NewsFeedTableViewController.swift in Sources */,
 				B3ED70F51D5C87FD001159A6 /* SearchPageTableViewController.swift in Sources */,
+				B3B527C31D65AF8B00E31C37 /* ProfilePost.swift in Sources */,
 				B3F455AE1D54A1BD005EA708 /* AppDelegate.swift in Sources */,
 				B3ED70FB1D5CB34A001159A6 /* NetworkingController.swift in Sources */,
+				B3B527C11D65AF2100E31C37 /* ProfilePostsViewModel.swift in Sources */,
 				B38E85C01D59C28C00CAE73B /* TagsTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
