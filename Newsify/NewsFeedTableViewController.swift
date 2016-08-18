@@ -14,6 +14,10 @@ class NewsFeedTableViewController: UITableViewController {
     var model = FeedPostViewModel()
     let loadingView = LoadingView()
     
+    private struct Identifier {
+        static let NewsFeedCell = "TagsTableViewCell"
+    }
+    
     @IBOutlet var feedPostsView: UITableView!
     
     override func viewDidLoad() {
@@ -38,7 +42,6 @@ class NewsFeedTableViewController: UITableViewController {
         let nav = self.navigationController?.navigationBar
         nav?.barTintColor = UIColor.coreColor()
         nav?.barStyle = UIBarStyle.BlackOpaque
-        //nav?.tintColor = UIColor.whiteColor()
        
     }
     
@@ -65,9 +68,8 @@ class NewsFeedTableViewController: UITableViewController {
 
     // Presentation needs to be added.
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let identifier = "NewsFeedItemCell"
         let feedItem = model.feedPosts[indexPath.row]
-        let cell = tableView.dequeueReusableCellWithIdentifier(identifier, forIndexPath: indexPath) as! NewsFeedItemCell
+        let cell = tableView.dequeueReusableCellWithIdentifier(Identifier.NewsFeedCell, forIndexPath: indexPath) as! NewsFeedItemCell
         
         cell.usernameLabel.text = feedItem.username
         cell.photoView.image = feedItem.photo

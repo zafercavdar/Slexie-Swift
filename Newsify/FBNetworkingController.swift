@@ -16,12 +16,39 @@ class FBNetworkingController: NetworkingController {
     
     let appURL = "hackify-a48e3.firebaseio.com"
     
+    private struct ConsString {
+        static let domain = "@slexie.com"
+    }
+    
+    private struct References {
+        static let DatabaseRef = FIRDatabase.database().reference()
+        static let UserRef = DatabaseRef.child("users")
+        static let PhotoRef = DatabaseRef.child("photos")
+        static let StorageRef = FIRStorage.storage().reference()
+        static let PhotoStorageRef = References.StorageRef.child("images")
+    }
+    
+    private enum ReferenceLabels: String {
+        case Username = "username"
+        case Password = "password"
+        case PostCount = "postCount"
+        case PhotoIDS = "photoIDs"
+        case UserTags = "alltags"
+        case UserPosts = "all-photos"
+        case ProfileType = "profile-type"
+        
+        case PostOwner = "owner"
+        case PostTags = "tags"
+        case PostPrivacy = "privacy"
+        case Likers = "likers"
+    }
+
     
     // MARK: NetworkingController Methods
     
     func signInWith(username username: String, password: String, enableNotification: Bool, completionHandler: (error: NSError?) -> Void){
         
-        let email = username + "@slexie.com"
+        let email = username + ConsString.domain
 
         signInWith(email: email, password: password, enableNotification: enableNotification) { (error) in
             completionHandler(error: error)
@@ -326,33 +353,6 @@ class FBNetworkingController: NetworkingController {
         
         return false
     }
-}
-
-extension FBNetworkingController {
-
-    private struct References {
-        static let DatabaseRef = FIRDatabase.database().reference()
-        static let UserRef = DatabaseRef.child("users")
-        static let PhotoRef = DatabaseRef.child("photos")
-        static let StorageRef = FIRStorage.storage().reference()
-        static let PhotoStorageRef = References.StorageRef.child("images")
-    }
-    
-    private enum ReferenceLabels: String {
-        case Username = "username"
-        case Password = "password"
-        case PostCount = "postCount"
-        case PhotoIDS = "photoIDs"
-        case UserTags = "alltags"
-        case UserPosts = "all-photos"
-        case ProfileType = "profile-type"
-        
-        case PostOwner = "owner"
-        case PostTags = "tags"
-        case PostPrivacy = "privacy"
-        case Likers = "likers"
-    }
-    
 }
 
 // MARK: Fake functions for random generator

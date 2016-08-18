@@ -21,6 +21,10 @@ class ProfilePageViewController: UITableViewController {
         case LogOut = "LogOut"
         case Upload = "Upload"
     }
+    
+    private struct Identifier {
+        static let ProfilePostCell = "ProfilePostTableViewCell"
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -83,9 +87,9 @@ class ProfilePageViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let identifier = "ProfilePostTableViewCell"
+        
         let profileItem = model.profilePosts[indexPath.row]
-        let cell = tableView.dequeueReusableCellWithIdentifier(identifier, forIndexPath: indexPath) as! ProfilePostTableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier(Identifier.ProfilePostCell, forIndexPath: indexPath) as! ProfilePostTableViewCell
         
         
         cell.profilePostView.image = profileItem.photo

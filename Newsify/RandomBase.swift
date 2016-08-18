@@ -33,7 +33,7 @@ class RandomBase {
             networkingController.fakeUpload(uid, imageid: imageid, tags: tags)
         }
         
-        print("User generated.")
+        print("LOG: User generated.")
     }
     
     

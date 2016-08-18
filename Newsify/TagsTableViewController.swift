@@ -23,6 +23,10 @@ class TagsTableViewController: UITableViewController {
         case Upload = "Upload"
         case Cancel = "Cancel"
     }
+    
+    private struct Identifier {
+        static let TagsTableCell = "TagsTableViewCell"
+    }
 
 
     override func viewDidLoad() {
@@ -68,9 +72,8 @@ class TagsTableViewController: UITableViewController {
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        let cellIdentifier = "TagsTableViewCell"
         let tag = model.tags[indexPath.row]
-        let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! TagsTableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier(Identifier.TagsTableCell, forIndexPath: indexPath) as! TagsTableViewCell
         cell.tagsLabel.text = tag
         
         return cell

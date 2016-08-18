@@ -19,6 +19,10 @@ class PhotoAnalyzeService {
         static let authenticationToken = "Basic YWNjX2Q1NjRkY2RhMTdlNDMyZDpmNzU3M2M3OTU4MjI2Nzc2YWIxZTIyYzA1NDI2MDRlZA=="
     }
     
+    private struct ConsString {
+        static let contentType = "application/json"
+    }
+    
     private let threshold = 25.00
     private let maxTagNumber = 10
 
@@ -30,7 +34,7 @@ class PhotoAnalyzeService {
         var colorString = ""
         
         Alamofire.request(.GET, requestURL).authenticate(user: API.key, password: API.secret)
-            .validate(contentType: ["application/json"]).responseJSON { response in
+            .validate(contentType: [ConsString.contentType]).responseJSON { response in
                 switch response.result {
                 case .Success:
                     if let value = response.result.value {
@@ -82,7 +86,7 @@ class PhotoAnalyzeService {
         var tagNames: [String] = []
         
         Alamofire.request(.GET, requestURL).authenticate(user: API.key, password: API.secret)
-            .validate(contentType: ["application/json"]).responseJSON { [weak self] response in
+            .validate(contentType: [ConsString.contentType]).responseJSON { [weak self] response in
                 
                 guard let strongSelf = self else { return }
                 
@@ -118,7 +122,7 @@ class PhotoAnalyzeService {
         var tagNames: [String] = []
         
         Alamofire.request(.GET, requestURL).authenticate(user: API.key, password: API.secret)
-            .validate(contentType: ["application/json"]).responseJSON { [weak self] response in
+            .validate(contentType: [ConsString.contentType]).responseJSON { [weak self] response in
                 
                 guard let strongSelf = self else { return }
                 

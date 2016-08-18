@@ -102,25 +102,7 @@ class UploadViewController: UIViewController, UINavigationControllerDelegate {
         imagePickerController.delegate = self
         presentViewController(imagePickerController, animated: true, completion: nil)
     }
-    
-    // MARK: Helper Methods
-    
-    func indexOf(source: String, substring: String) -> Int? {
-        let maxIndex = source.characters.count - substring.characters.count
-        for index in 0...maxIndex {
-            let rangeSubstring = source.startIndex.advancedBy(index)..<source.startIndex.advancedBy(index + substring.characters.count)
-            if source.substringWithRange(rangeSubstring) == substring {
-                return index
-            }
-        }
-        return nil
-    }
-    
-    func wait()
-    {
-        NSRunLoop.currentRunLoop().runMode(NSDefaultRunLoopMode, beforeDate: NSDate(timeIntervalSinceNow: 1))
-    }
-    
+
 }
 
 extension UploadViewController : UIImagePickerControllerDelegate {
