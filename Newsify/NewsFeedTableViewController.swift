@@ -63,7 +63,7 @@ class NewsFeedTableViewController: UITableViewController {
         return model.feedPosts.count
     }
 
-    // presentation
+    // Presentation needs to be added.
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let identifier = "NewsFeedItemCell"
         let feedItem = model.feedPosts[indexPath.row]

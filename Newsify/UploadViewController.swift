@@ -104,7 +104,6 @@ class UploadViewController: UIViewController, UINavigationControllerDelegate {
     }
     
     // MARK: Helper Methods
-    // Will not be used anymore
     
     func indexOf(source: String, substring: String) -> Int? {
         let maxIndex = source.characters.count - substring.characters.count

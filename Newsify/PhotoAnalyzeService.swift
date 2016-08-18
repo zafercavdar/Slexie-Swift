@@ -22,10 +22,8 @@ class PhotoAnalyzeService {
     private let threshold = 25.00
     private let maxTagNumber = 10
 
-    // TO-DO: 2xx-3xx handle, alamofire farklı class
     // Object mapper, slackten bak
     func findBackgroundColorWithContentID(contentID: String, completion: (color: String) -> Void) {
-        //let imageURL = "http://imagga.com/static/images/categorization/car.jpg"
         //let requestURL = "\(APIEndPoint)/v1/colors?url=\(imageURL)"
         let requestURL = "\(API.endPoint)/v1/colors?content=\(contentID)"
         
@@ -51,12 +49,9 @@ class PhotoAnalyzeService {
     func uploadPhotoGetContentID(imageData: NSData, completion: (id:String) -> Void){
         let uploadURL = "\(API.endPoint)/v1/content"
         
-        // Begin upload
         Alamofire.upload(.POST, uploadURL,headers: ["Authorization": API.authenticationToken],
                          multipartFormData: { multipartFormData in
-                        
-                            // import image to request
-                         
+                            
                             multipartFormData.appendBodyPart(data: imageData, name: "file", fileName: "myImage.png", mimeType: "image/png")
                         
             },

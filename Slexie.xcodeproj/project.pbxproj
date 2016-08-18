@@ -12,6 +12,7 @@
 		B32828AA1D5DAFAD0022F85E /* AlertExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32828A91D5DAFAD0022F85E /* AlertExtension.swift */; };
 		B32828B41D5DE2660022F85E /* UniqueIDGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32828B31D5DE2660022F85E /* UniqueIDGenerator.swift */; };
 		B32828BD1D5E02DE0022F85E /* PhotoAnalyzeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32828BC1D5E02DE0022F85E /* PhotoAnalyzeService.swift */; };
+		B33E936A1D664EB30011019B /* DebugOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B33E93691D664EB30011019B /* DebugOptions.swift */; };
 		B35478901D57778600889F9A /* UploadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B354788F1D57778600889F9A /* UploadViewController.swift */; };
 		B361FCCB1D63234800B4F8AA /* FeedPostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B361FCCA1D63234800B4F8AA /* FeedPostViewModel.swift */; };
 		B361FCCD1D63295800B4F8AA /* FeedPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = B361FCCC1D63295800B4F8AA /* FeedPost.swift */; };
@@ -88,6 +89,7 @@
 		B32828A91D5DAFAD0022F85E /* AlertExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertExtension.swift; sourceTree = "<group>"; };
 		B32828B31D5DE2660022F85E /* UniqueIDGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UniqueIDGenerator.swift; sourceTree = "<group>"; };
 		B32828BC1D5E02DE0022F85E /* PhotoAnalyzeService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoAnalyzeService.swift; sourceTree = "<group>"; };
+		B33E93691D664EB30011019B /* DebugOptions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DebugOptions.swift; sourceTree = "<group>"; };
 		B354788F1D57778600889F9A /* UploadViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadViewController.swift; sourceTree = "<group>"; };
 		B361FCCA1D63234800B4F8AA /* FeedPostViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedPostViewModel.swift; sourceTree = "<group>"; };
 		B361FCCC1D63295800B4F8AA /* FeedPost.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedPost.swift; sourceTree = "<group>"; };
@@ -236,6 +238,7 @@
 				B3BA49C31D65FAC700106930 /* Operator Overloads.swift */,
 				B3BA49C51D65FAEE00106930 /* ColorExtension.swift */,
 				B3BA49C91D66003500106930 /* ImageExtension.swift */,
+				B33E93691D664EB30011019B /* DebugOptions.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -601,6 +604,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B3B527BF1D65AD2A00E31C37 /* ProfilePostTableViewCell.swift in Sources */,
+				B33E936A1D664EB30011019B /* DebugOptions.swift in Sources */,
 				B3BA49CA1D66003500106930 /* ImageExtension.swift in Sources */,
 				B3BA49BA1D65EE2B00106930 /* DateExtension.swift in Sources */,
 				B3BA49CE1D66086200106930 /* TagsTableRouter.swift in Sources */,
@@ -779,6 +783,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = Newsify/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -DDEBUG";
 				PRODUCT_BUNDLE_IDENTIFIER = monitise.Newsify;
 				PRODUCT_NAME = Slexie;
 			};
