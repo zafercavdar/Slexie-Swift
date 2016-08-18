@@ -11,16 +11,18 @@ import Alamofire
 
 class PhotoAnalyzeService {
     
-    enum API{
+    private struct API{
         static let key = "acc_d564dcda17e432d"
         static let secret = "f7573c7958226776ab1e22c0542604ed"
         static let endPoint = "https://api.imagga.com"
         static let authenticationToken = "Basic YWNjX2Q1NjRkY2RhMTdlNDMyZDpmNzU3M2M3OTU4MjI2Nzc2YWIxZTIyYzA1NDI2MDRlZA=="
     }
     
-    let threshold = 25.00
-    let maxTagNumber = 10
+    private let threshold = 25.00
+    private let maxTagNumber = 10
 
+    // TO-DO: 2xx-3xx handle, alamofire farklı class
+    // Object mapper, slackten bak
     func findBackgroundColorWithContentID(contentID: String, completion: (color: String) -> Void) {
         //let imageURL = "http://imagga.com/static/images/categorization/car.jpg"
         //let requestURL = "\(APIEndPoint)/v1/colors?url=\(imageURL)"
@@ -46,7 +48,7 @@ class PhotoAnalyzeService {
     }
     
     func uploadPhotoGetContentID(imageData: NSData, completion: (id:String) -> Void){
-        let uploadURL = "https://api.imagga.com/v1/content"
+        let uploadURL = "\(API.endPoint)/v1/content"
         
         // Begin upload
         Alamofire.upload(.POST, uploadURL,headers: ["Authorization": API.authenticationToken],
@@ -64,7 +66,6 @@ class PhotoAnalyzeService {
                                 upload.responseJSON { response in
                                     if let value = response.result.value{
                                         let json = JSON(value)
-                                        //print(json)
                                         let statusString = String(json["status"].description)
                                         if statusString == "success"{
                                             let id = String(json["uploaded"][0]["id"].description)
@@ -85,7 +86,10 @@ class PhotoAnalyzeService {
         var tagNames: [String] = []
         
         Alamofire.request(.GET, requestURL).authenticate(user: API.key, password: API.secret)
-            .validate(contentType: ["application/json"]).responseJSON { response in
+            .validate(contentType: ["application/json"]).responseJSON { [weak self] response in
+                
+                guard let strongSelf = self else { return }
+                
                 switch response.result {
                 case .Success:
                     if let value = response.result.value {
@@ -96,7 +100,7 @@ class PhotoAnalyzeService {
                         for i in 0...tags.count{
                             let tag = String(tags[i]["tag"].description)
                             let confidence = Double(tags[i]["confidence"].description)
-                            if confidence > self.threshold && tagNames.count < self.maxTagNumber {
+                            if confidence > strongSelf.threshold && tagNames.count < strongSelf.maxTagNumber {
                                 possibleTags[tag] = confidence
                                 tagNames.append(tag)
                             }
@@ -118,7 +122,10 @@ class PhotoAnalyzeService {
         var tagNames: [String] = []
         
         Alamofire.request(.GET, requestURL).authenticate(user: API.key, password: API.secret)
-            .validate(contentType: ["application/json"]).responseJSON { response in
+            .validate(contentType: ["application/json"]).responseJSON { [weak self] response in
+                
+                guard let strongSelf = self else { return }
+                
                 switch response.result {
                 case .Success:
                     if let value = response.result.value {
@@ -129,7 +136,7 @@ class PhotoAnalyzeService {
                         for i in 0...tags.count{
                             let tag = String(tags[i]["tag"].description)
                             let confidence = Double(tags[i]["confidence"].description)
-                            if confidence > self.threshold && tagNames.count < self.maxTagNumber{
+                            if confidence > strongSelf.threshold && tagNames.count < strongSelf.maxTagNumber{
                                 possibleTags[tag] = confidence
                                 tagNames.append(tag)
                             }

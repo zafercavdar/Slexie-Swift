@@ -48,15 +48,17 @@ class FBNetworkingController: NetworkingController {
     
     func signUp(email: String, username: String, password: String, profileType: String, completionHandler: (error: NSError?) -> Void) {
         
-        FIRAuth.auth()?.createUserWithEmail(email, password: password, completion: { (user, error) in
+        FIRAuth.auth()?.createUserWithEmail(email, password: password, completion: { [weak self] (user, error) in
+            
+            guard let strongSelf = self else { return }
             
             if let e = error {
                 print("Sign up failed.", e.localizedDescription)
                 completionHandler(error: error)
             }else{
                 print("Signed up with uid", user!.uid)
-                self.cloneUserDetails(user!, username: username, password: password, profileType: profileType)
-                self.signInWith(username: username, password: password, enableNotification: false, completionHandler: { (Void) in
+                strongSelf.cloneUserDetails(user!, username: username, password: password, profileType: profileType)
+                strongSelf.signInWith(username: username, password: password, enableNotification: false, completionHandler: { (Void) in
                     completionHandler(error: error)
                 })
             }
@@ -71,7 +73,9 @@ class FBNetworkingController: NetworkingController {
         if let userid = getCurrentUser()?.uid {
             let photoID = uniqueIDGenerator.generatePhotoID(userid)
             let photoRef = storageRef.child("images/\(photoID).png")
-            _  = photoRef.putData(image, metadata: nil) { metadata, error in
+            _  = photoRef.putData(image, metadata: nil) { [weak self] metadata, error in
+            
+                guard let strongSelf = self else { return }
                 
                 var downloadURL: String = ""
                 
@@ -80,7 +84,7 @@ class FBNetworkingController: NetworkingController {
                 } else {
                     downloadURL = (metadata!.downloadURL()?.absoluteURL.absoluteString)!
                     print("DOWNLOAD URL: \n\(downloadURL)\n")
-                    self.saveTagsFor(photo: photoID, tags: tags)
+                    strongSelf.saveTagsFor(photo: photoID, tags: tags)
                 }
                 
                 callback(error: error,photoID: photoID, url: downloadURL)
@@ -158,6 +162,28 @@ class FBNetworkingController: NetworkingController {
         })
     }
     
+    func getProfilePosts(completion callback: [ProfilePost] -> Void) {
+    
+        var profilePosts: [ProfilePost] = []
+        
+        getAccountPosts { (postIDs) in
+            let photoRef = References.PhotoRef
+            photoRef.observeSingleEventOfType(.Value, withBlock: { (snapshot) in
+                if let photos = snapshot.value as? [String: AnyObject] {
+                    for postID in postIDs {
+                        let tags = (photos[postID] as! [String: AnyObject])[ReferenceLabels.PostTags.rawValue] as! [String]
+                        let post = ProfilePost(id: postID, tags: tags)
+                        profilePosts.append(post)
+                    }
+                    
+                    callback(profilePosts)
+                } else {
+                    callback([])
+                }
+            })
+        }
+    }
+    
     func downloadPhoto(with photoID: String, completion callback: (UIImage?, NSError?) -> Void){
         let photoRef = References.PhotoStorageRef.child("\(photoID).png")
         
@@ -166,8 +192,6 @@ class FBNetworkingController: NetworkingController {
         let localURLString = (localMainURL?.absoluteString)! + "images/\(photoID).png"
         let localURL = NSURL(string: localURLString)
         print(localURL)
-
-        //let localURL: NSURL! = NSURL(string: "file:///Documents/images/\(photoID).png")
         
         _ = photoRef.writeToFile(localURL!) { (URL, error) -> Void in
             if (error != nil) {
@@ -203,17 +227,18 @@ class FBNetworkingController: NetworkingController {
             }
             
             let userRef = References.UserRef
-            _ = userRef.observeSingleEventOfType(.Value, withBlock: { (snapshot) in
+            _ = userRef.observeSingleEventOfType(.Value, withBlock: { [weak self] (snapshot) in
                 
                 guard let userDic = snapshot.value as? [String: AnyObject] else {
                     return
                 }
                 
+                guard let strongSelf = self else { return }
+                
                 for (id, propertyDic) in postDic {
                     
                     // Public check
                     guard let privacy = propertyDic[ReferenceLabels.PostPrivacy.rawValue] as? String where privacy == "Public" else {
-                        //print("photo \(id) is not public.")
                         continue
                     }
                     
@@ -222,11 +247,11 @@ class FBNetworkingController: NetworkingController {
                     }
                     
                     
-                    guard self.containsAny(photoTags,checkList: tags) else {
+                    guard strongSelf.containsAny(photoTags,checkList: tags) else {
                         continue
                     }
                     
-                    guard let owner = propertyDic[ReferenceLabels.PostOwner.rawValue] as? String where owner != self.getUID() else {
+                    guard let owner = propertyDic[ReferenceLabels.PostOwner.rawValue] as? String where owner != strongSelf.getUID() else {
                         continue
                     }
                     
@@ -323,7 +348,7 @@ class FBNetworkingController: NetworkingController {
 
 extension FBNetworkingController {
 
-    enum References {
+    private struct References {
         static let DatabaseRef = FIRDatabase.database().reference()
         static let UserRef = DatabaseRef.child("users")
         static let PhotoRef = DatabaseRef.child("photos")
@@ -331,7 +356,7 @@ extension FBNetworkingController {
         static let PhotoStorageRef = References.StorageRef.child("images")
     }
     
-    enum ReferenceLabels: String {
+    private enum ReferenceLabels: String {
         case Username = "username"
         case Password = "password"
         case PostCount = "postCount"
@@ -433,20 +458,6 @@ extension FBNetworkingController {
             }
         })
     }
-    
 }
-
-/*extension Array where Element: String{
-    
-    func containsAny(elements: Array<String>) -> Bool{
-        for element in elements{
-            if self.contains(element){
-                return true
-            }
-        }
-        
-        return false
-    }
-}*/
 
 

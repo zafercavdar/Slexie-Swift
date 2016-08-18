@@ -10,13 +10,25 @@ import UIKit
 
 class ProfilePageViewController: UITableViewController {
 
+    @IBOutlet var profilePostsView: UITableView!
+    
     let networkingController = FBNetworkingController()
     let model = ProfilePostViewModel()
     
-    @IBOutlet var profilePostsView: UITableView!
+    let router = ProfileRouter()
     
+    enum RouteID: String {
+        case LogOut = "LogOut"
+        case Upload = "Upload"
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(refresh(_:)), forControlEvents: .ValueChanged)
+        tableView.addSubview(refreshControl)
+
         
         model.fetchProfilePosts { 
             self.profilePostsView.reloadData()
@@ -25,6 +37,9 @@ class ProfilePageViewController: UITableViewController {
     }
     
     override func viewWillAppear(animated: Bool) {
+        
+        super.viewWillAppear(animated)
+
         let nav = self.navigationController?.navigationBar
         
         nav?.barTintColor = UIColor.coreColor()
@@ -32,21 +47,28 @@ class ProfilePageViewController: UITableViewController {
         nav?.tintColor = UIColor.whiteColor()
         
         
-        super.viewWillAppear(animated)
     }
+    
+    func refresh(refreshControl: UIRefreshControl) {
+        model.fetchProfilePosts {
+            self.profilePostsView.reloadData()
+            refreshControl.endRefreshing()
+        }
+    }
+
     
     // MARK: Button actions
     
     @IBAction func logOutPressed(sender: UIBarButtonItem) {
         
-        networkingController.signOut { (Void) in
-            self.performSegueWithIdentifier("LogOut", sender: nil)
+        networkingController.signOut { [weak self] (Void) in
+            guard let strongSelf = self else { return }
+            strongSelf.router.routeTo(RouteID.LogOut.rawValue, VC: strongSelf)
         }
     }
     
     @IBAction func uploadPressed(sender: UIBarButtonItem) {
-        
-        self.performSegueWithIdentifier("TakeSnap", sender: nil)
+        self.router.routeTo(RouteID.Upload.rawValue, VC: self)
     }
 
     
@@ -78,14 +100,4 @@ class ProfilePageViewController: UITableViewController {
         return cell
     }
     
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

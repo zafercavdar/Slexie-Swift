@@ -11,6 +11,12 @@ import UIKit
 class LoginViewController: UIViewController, UITextFieldDelegate {
     
     let fbNetworkingController = FBNetworkingController()
+    let router = LoginRouter()
+    
+    enum RouteID: String {
+        case NewsFeed = "Newsfeed"
+        case CreateAccount = "CreateAccount"
+    }
     
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var passwordLabel: UILabel!
@@ -19,17 +25,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var randomGenerateButton: UIButton!
     @IBOutlet weak var loginButton: UIButton!
     
-    @IBAction func generateRandomUsers(sender: UIButton) {
-        
-        /*fbNetworkingController.signInWith(username: "zafer", password: "112233", enableNotification: false) { (error) in
-            let rgen = RandomBase()
-            
-            for _ in 0..<50 {
-                rgen.createUser()
-            }
-        }*/
-    }
-
     override func viewDidLoad() {
 
         super.viewDidLoad()
@@ -38,6 +33,11 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         passwordField.delegate = self
         
     }
+    
+    @IBAction func signUpButton(sender: UIButton) {
+        router.routeTo(RouteID.CreateAccount.rawValue, VC: self)
+    }
+    
     
     override func viewWillAppear(animated: Bool) {
         loginButton.setTitleColor(UIColor.coreColor(), forState: UIControlState.Normal)
@@ -51,7 +51,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         super.viewDidAppear(animated)
         
         if fbNetworkingController.getCurrentUser() != nil{
-            performSegueWithIdentifier("LoggedIn", sender: nil)
+            router.routeTo(RouteID.NewsFeed.rawValue, VC: self)
         }
     }
     
@@ -77,6 +77,18 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         
     }
     
+    @IBAction func generateRandomUsers(sender: UIButton) {
+        
+        fbNetworkingController.signInWith(username: "zafer", password: "112233", enableNotification: false) { (error) in
+         let rgen = RandomBase()
+         
+            for _ in 0..<50 {
+                rgen.createUser()
+            }
+        }
+    }
+
+    
     // MARK: Helper methods
     
     func loginWithUsername(username: String, _ password: String){
@@ -84,14 +96,18 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         let loadingView = LoadingView()
         loadingView.addToView(self.view, text: "Signing in")
         
-        fbNetworkingController.signInWith(username: username, password: password, enableNotification: true) { (error) in
-            loadingView.removeFromView(self.view)
+        fbNetworkingController.signInWith(username: username, password: password, enableNotification: true) { [weak self](error) in
+            
+            guard let strongSelf = self else { return }
+
+            loadingView.removeFromView(strongSelf.view)
             if let error = error {
-                self.signInFailedNotification(error.localizedDescription)
+                strongSelf.signInFailedNotification(error.localizedDescription)
             } else {
-                self.performSegueWithIdentifier("LoggedIn", sender: nil)
+                strongSelf.router.routeTo(RouteID.NewsFeed.rawValue, VC: strongSelf)
             }
         }
+        
         
     }
     

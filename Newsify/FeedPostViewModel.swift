@@ -16,26 +16,27 @@ class FeedPostViewModel {
         
     func fetchFeedPosts(completion callback: () -> Void) {
         
-        var fetchedPosts: [FeedPost] = []
-        
         networkingController.getAccountTags { (tags) in
             print("searching for \(tags)")
-            self.networkingController.getPhotosRelatedWith(tags, completion: { (posts) in
+            self.networkingController.getPhotosRelatedWith(tags, completion: { [weak self] (posts) in
+                
+                guard let strongSelf = self else { return }
                 
                 for post in posts {
                     print("fetched \(post.username)")
-                    fetchedPosts.append(post)
                 }
                 
-                if fetchedPosts.isEmpty {
+                if posts.isEmpty {
                     print("fetchedPosts are empty")
-                    self.feedPosts = self.defaultPosts()
+                    strongSelf.feedPosts = strongSelf.defaultPosts()
+                    callback()
                 } else {
                     print("fetchedPosts are NOT empty")
-                    self.feedPosts = fetchedPosts
+                    strongSelf.feedPosts = posts.reverse()
                     
-                    for post in self.feedPosts {
-                        self.networkingController.downloadPhoto(with: post.id, completion: { (image, error) in
+                    
+                    for post in strongSelf.feedPosts {
+                        strongSelf.networkingController.downloadPhoto(with: post.id, completion: { (image, error) in
                             guard error != nil else {
                                 post.setPhoto(image!)
                                 callback()
@@ -53,11 +54,11 @@ extension FeedPostViewModel {
     
     func defaultPosts() -> [FeedPost]{
         let defaultImage = UIImage(named: "example1")
-        let defaultUsername = "jane"
+        let defaultUsername = "default-id"
         let defaultTags = ["food","spoon", "wood"]
         
         let defaultImage2 = UIImage(named: "example2")
-        let defaultUsername2 = "michael"
+        let defaultUsername2 = "default-id-2"
         let defaultTags2 = ["friends","fun", "together"]
         
         let feedItem = FeedPost(username: defaultUsername, id: "no-id", tags: defaultTags)
@@ -67,11 +68,5 @@ extension FeedPostViewModel {
         feedItem2.setPhoto(defaultImage2!)
         
         return [feedItem,feedItem2]
-    }
-}
-
-func += <K, V> (inout left: Dictionary <K,V> , right: Dictionary <K,V>) {
-    for (k, v) in right {
-        left[k] = v
     }
 }

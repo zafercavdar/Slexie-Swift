@@ -20,6 +20,13 @@ class UploadViewController: UIViewController, UINavigationControllerDelegate {
     
     let networkingController = FBNetworkingController()
     let imaggaService = PhotoAnalyzeService()
+    let router = UploadViewRouter()
+    
+    enum RouteID: String {
+        case ShowTags = "ShowTags"
+        case Dismiss = "Dismiss"
+    }
+    
     
     @IBOutlet weak var photoImageView: UIImageView!
     @IBOutlet weak var compressionLabel: UILabel!
@@ -41,10 +48,6 @@ class UploadViewController: UIViewController, UINavigationControllerDelegate {
             }
         }
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-    }
     
     // MARK: Actions
     
@@ -54,21 +57,29 @@ class UploadViewController: UIViewController, UINavigationControllerDelegate {
         
     }
     
+    @IBAction func returnToProfile(sender: UIButton) {
+        self.router.routeTo(RouteID.Dismiss.rawValue, VC: self)
+    }
+    
+    
     @IBAction func searchButtonPressed(sender: UIButton) {
         
         let loadingView = LoadingView()
         loadingView.addToView(self.view, text: "Analyzing")
         
         if let imageData = UIImageJPEGRepresentation(UploadViewController.chosenPhoto, UploadViewController.compressionRate) {
-            imaggaService.uploadPhotoGetContentID(imageData, completion: { (id) in
+            imaggaService.uploadPhotoGetContentID(imageData, completion: { [weak self] (id) in
                 
                 UploadViewController.contentID = id
+                guard let strongSelf = self else { return }
                 
-                self.imaggaService.findRelatedTagsWith(contentID: id, completion: { (tags) in
+                strongSelf.imaggaService.findRelatedTagsWith(contentID: id, completion: { [weak self] (tags) in
                     UploadViewController.trustedTags = tags
-                    loadingView.removeFromView(self.view)
-                    self.performSegueWithIdentifier("ShowTags", sender: nil)
-
+                    
+                    guard let sself = self else {return}
+                    
+                    loadingView.removeFromView(sself.view)
+                    sself.router.routeTo(RouteID.ShowTags.rawValue, VC: sself)
                 })
                 
             })
@@ -92,18 +103,8 @@ class UploadViewController: UIViewController, UINavigationControllerDelegate {
         presentViewController(imagePickerController, animated: true, completion: nil)
     }
     
-    @IBAction func logOut(sender: UIButton) {
-        networkingController.signOut { (Void) in }
-        self.dismissViewControllerAnimated(true, completion: nil)
-    }
-  
-    
     // MARK: Helper Methods
     // Will not be used anymore
-    func wait()
-    {
-        NSRunLoop.currentRunLoop().runMode(NSDefaultRunLoopMode, beforeDate: NSDate(timeIntervalSinceNow: 1))
-    }
     
     func indexOf(source: String, substring: String) -> Int? {
         let maxIndex = source.characters.count - substring.characters.count
@@ -114,6 +115,11 @@ class UploadViewController: UIViewController, UINavigationControllerDelegate {
             }
         }
         return nil
+    }
+    
+    func wait()
+    {
+        NSRunLoop.currentRunLoop().runMode(NSDefaultRunLoopMode, beforeDate: NSDate(timeIntervalSinceNow: 1))
     }
     
 }
@@ -130,21 +136,4 @@ extension UploadViewController : UIImagePickerControllerDelegate {
         UploadViewController.chosenPhoto = selectedImage
         dismissViewControllerAnimated(true, completion: nil)
     }
-
 }
-
-
-extension UIImage {
-    func resizeWithPercentage(percentage: CGFloat) -> UIImage?{
-        let imageView = UIImageView(frame: CGRect(origin: .zero, size: CGSize(width: size.width * percentage, height: size.height * percentage)))
-        imageView.contentMode = .ScaleAspectFit
-        imageView.image = self
-        UIGraphicsBeginImageContextWithOptions(imageView.bounds.size, false, scale)
-        guard let context = UIGraphicsGetCurrentContext() else { return nil }
-        imageView.layer.renderInContext(context)
-        guard let result = UIGraphicsGetImageFromCurrentImageContext() else { return nil }
-        UIGraphicsEndImageContext()
-        return result
-    }
-}
-

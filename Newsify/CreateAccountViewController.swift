@@ -20,6 +20,12 @@ class CreateAccountViewController: UIViewController, UITextFieldDelegate {
     var fields: [UITextField] = []
     
     let networkingController = FBNetworkingController()
+    let router = SignUpRouter()
+    
+    enum RouteID: String {
+        case LoggedIn = "LoggedIn"
+        case Cancel = "Cancel"
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,9 +41,8 @@ class CreateAccountViewController: UIViewController, UITextFieldDelegate {
     }
     
     override func viewWillAppear(animated: Bool) {
-        signUpButton.setTitleColor(UIColor.coreColor(), forState: UIControlState.Normal)
-        
         super.viewWillAppear(animated)
+        signUpButton.setTitleColor(UIColor.coreColor(), forState: UIControlState.Normal)
         
     }
 
@@ -53,7 +58,7 @@ class CreateAccountViewController: UIViewController, UITextFieldDelegate {
     
     
     @IBAction func cancel(sender: UIButton) {
-        dismissViewControllerAnimated(true, completion: {})
+        self.router.routeTo(RouteID.Cancel.rawValue, VC: self)
     }
     
     
@@ -93,13 +98,16 @@ class CreateAccountViewController: UIViewController, UITextFieldDelegate {
         loadingView.addToView(self.view, text: "Signing up")
         
         
-        networkingController.signUp(email, username: username, password: password, profileType: profileType) { (error) in
-            loadingView.removeFromView(self.view)
+        networkingController.signUp(email, username: username, password: password, profileType: profileType) { [weak self](error) in
+            
+            guard let strongSelf = self else { return }
+            
+            loadingView.removeFromView(strongSelf.view)
 
             if let error = error {
-                self.signUpFailedNotification(error.localizedDescription)
+                strongSelf.signUpFailedNotification(error.localizedDescription)
             } else {
-                self.performSegueWithIdentifier("LoggedInFromSignUp", sender: nil)
+                strongSelf.router.routeTo(RouteID.LoggedIn.rawValue, VC: strongSelf)
             }
             
         }

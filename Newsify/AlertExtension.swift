@@ -26,16 +26,14 @@ extension UIViewController {
         showAlertView("Caution!", message: "Both passwords should be same ...", duration: 3)
     }
     
-    func showAlertView(title: String?, message: String?, duration: Int) {
+    private func showAlertView(title: String?, message: String?, duration: Int) {
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .Alert)
         let okAction = UIAlertAction(title: "OK", style: .Cancel, handler: nil)
         alertController.addAction(okAction)
         self.presentViewController(alertController, animated: true, completion: nil)
         
-        
         /*let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(Double(duration) * Double(NSEC_PER_SEC)))
          dispatch_after(delayTime, dispatch_get_main_queue()) {
-         print("Bye. Lovvy")
          alertController.dismissViewControllerAnimated(true, completion: nil)
          }*/
     }

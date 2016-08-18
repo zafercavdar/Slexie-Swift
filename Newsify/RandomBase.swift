@@ -10,12 +10,12 @@ import Foundation
 
 class RandomBase {
     
-    let networkingController = FBNetworkingController()
+    private let networkingController = FBNetworkingController()
 
-    let wordBank: [String] = ["Njorth","hierarchising","transparietal","overspecializing","latest","Prajna","topeka","mashhad","antiradiating","pesky","Guerrilla","trouser","odour","noesis","huysmans","Wheel","connubiality","beelike","unprintable","agarita","Incogitable","chubbier","volga","noncoagulable","kernite","Unpredacious","penetrate","chairlift","lustrously","prepossession","Decigram","uredinia","diver","princeship","superglottic","Ratatouille","photochromy","wmo","cirrous","saut","Goodby","floy","thymbraeus","labialization","indicatively","Carbolize","skiograph","abortively","rockfishes","grayce","Farci","snuffiness","damaskeen","arri","auscultating","Sheers","quadrivia","redeployment","unbud","multiracial","Graphicly","semihard","tapetal","edibles","shield","Chyack","commend","palsylike","salivator","vulvitis","Milledgeville","athenaeus","glaucomatous","lifer","bawdily","Nothus","nova","unfrizzly","targum","virulently","Bravoing","decaliter","lubricant","besague","reheel","Dacryagogue","overclemency","untenderized","riel","unpurposed","Heartsickness","kulturkampf","leukemia","expeditated","punnet","Teresa","retest","magazinish","grandparent","idola"]
+    private let wordBank: [String] = ["Njorth","hierarchising","transparietal","overspecializing","latest","Prajna","topeka","mashhad","antiradiating","pesky","Guerrilla","trouser","odour","noesis","huysmans","Wheel","connubiality","beelike","unprintable","agarita","Incogitable","chubbier","volga","noncoagulable","kernite","Unpredacious","penetrate","chairlift","lustrously","prepossession","Decigram","uredinia","diver","princeship","superglottic","Ratatouille","photochromy","wmo","cirrous","saut","Goodby","floy","thymbraeus","labialization","indicatively","Carbolize","skiograph","abortively","rockfishes","grayce","Farci","snuffiness","damaskeen","arri","auscultating","Sheers","quadrivia","redeployment","unbud","multiracial","Graphicly","semihard","tapetal","edibles","shield","Chyack","commend","palsylike","salivator","vulvitis","Milledgeville","athenaeus","glaucomatous","lifer","bawdily","Nothus","nova","unfrizzly","targum","virulently","Bravoing","decaliter","lubricant","besague","reheel","Dacryagogue","overclemency","untenderized","riel","unpurposed","Heartsickness","kulturkampf","leukemia","expeditated","punnet","Teresa","retest","magazinish","grandparent","idola"]
     
-    let colorBank: [String] = ["white","black","blue","green","red","yellow","pink","purple","grey","violet"]
-    let tonesBank: [String] = ["dark","light", ""]
+    private let colorBank: [String] = ["white","black","blue","green","red","yellow","pink","purple","grey","violet"]
+    private let tonesBank: [String] = ["dark","light", ""]
 
     func createUser() {
         let username = getRandomUsername()
@@ -38,7 +38,7 @@ class RandomBase {
     
     
     
-    func randomAlphaNumericString(length: Int, isAlpha: Bool = true, isUpper: Bool = true, isLower: Bool = true) -> String {
+    private func randomAlphaNumericString(length: Int, isAlpha: Bool = true, isUpper: Bool = true, isLower: Bool = true) -> String {
         
         var allowedChars = ""
         
@@ -65,23 +65,23 @@ class RandomBase {
         return randomString
     }
     
-    func getRandomUsername() -> String{
+    private func getRandomUsername() -> String{
         return randomAlphaNumericString(8, isAlpha: false, isUpper: false, isLower: true)
     }
     
-    func getRandomContentID() -> String {
+    private func getRandomContentID() -> String {
         return randomAlphaNumericString(32, isAlpha: true, isUpper: false, isLower: true)
     }
     
-    func getRandomUserID() -> String{
+    private func getRandomUserID() -> String{
         return randomAlphaNumericString(28)
     }
     
-    func getRandomPassword() -> String{
+    private func getRandomPassword() -> String{
         return randomAlphaNumericString(10, isAlpha: true, isUpper: true, isLower: true)
     }
     
-    func getRandomProfileType() -> String {
+    private func getRandomProfileType() -> String {
         let randomNum = Int(arc4random_uniform(10))
         if randomNum > 7 {
             return "Private"
@@ -91,7 +91,7 @@ class RandomBase {
     }
 
     
-    func getRandomColor() -> String {
+    private func getRandomColor() -> String {
         let toneIndex = Int(arc4random_uniform(UInt32(tonesBank.count)))
         let colorIndex = Int(arc4random_uniform(UInt32(colorBank.count)))
         if tonesBank[toneIndex] != "" {
@@ -101,17 +101,17 @@ class RandomBase {
         }
     }
     
-    func getRandomCompressionRate() -> Float {
+    private func getRandomCompressionRate() -> Float {
         let result = Float(arc4random_uniform(50)) / 100.00
         return result + 0.50
     }
     
-    func getRandomIntBetween(min: Int, _ max: Int) -> Int{
+    private func getRandomIntBetween(min: Int, _ max: Int) -> Int{
         let range = UInt32(max-min)
         return Int(arc4random_uniform(range)) + min
     }
     
-    func getRandomTags() -> [String] {
+    private func getRandomTags() -> [String] {
         let numOfTags = getRandomIntBetween(4, 9    )
         var resultTags: [String] = []
         for _ in 0..<numOfTags{

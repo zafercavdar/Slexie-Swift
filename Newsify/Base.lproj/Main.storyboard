@@ -69,7 +69,7 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                         <state key="normal" title="Don't you have an account? Create one."/>
                                         <connections>
-                                            <segue destination="44s-fW-cok" kind="presentation" id="VtX-Dr-TAB"/>
+                                            <action selector="signUpButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="4FI-3X-gEr"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -96,6 +96,7 @@
                         <outlet property="usernameField" destination="AfF-Io-2r2" id="9n2-RC-Z9d"/>
                         <outlet property="usernameLabel" destination="om7-wh-mCc" id="maQ-gG-uVx"/>
                         <segue destination="AUG-x2-Njh" kind="show" identifier="LoggedIn" id="v1H-f1-fwr"/>
+                        <segue destination="44s-fW-cok" kind="presentation" identifier="CreateAccountSegue" id="3oz-Up-XZv"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -130,7 +131,7 @@
                                             <color key="titleColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
                                         <connections>
-                                            <action selector="logOut:" destination="3gX-ku-4kX" eventType="touchUpInside" id="gFj-Ee-NV5"/>
+                                            <action selector="returnToProfile:" destination="3gX-ku-4kX" eventType="touchUpInside" id="PU4-WS-pwo"/>
                                         </connections>
                                     </button>
                                     <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" placeholderIntrinsicWidth="300" placeholderIntrinsicHeight="400" image="example1" translatesAutoresizingMaskIntoConstraints="NO" id="gzQ-bd-5x0">
@@ -559,7 +560,7 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Tags" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wbb-bI-l23">
                                                     <rect key="frame" x="280" y="360" width="25" height="14"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -650,6 +651,6 @@
         <image name="greyDefault" width="500" height="500"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="v1H-f1-fwr"/>
+        <segue reference="NWr-JX-J3B"/>
     </inferredMetricsTieBreakers>
 </document>

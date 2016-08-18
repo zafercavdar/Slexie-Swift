@@ -10,7 +10,7 @@
 		5BCF6FCAA453CC4F39EA819A /* Pods_SlexieTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F53886D474BB28C9050FB897 /* Pods_SlexieTests.framework */; };
 		AF4864961ED9390D82C2D5EB /* Pods_SlexieUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5898AC7FC31D89A1646EB192 /* Pods_SlexieUITests.framework */; };
 		B30EE7011D61D9C60009B36F /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = B398C8BC1D586A360014F647 /* SwiftyJSON.swift */; };
-		B32828AA1D5DAFAD0022F85E /* NotificationExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32828A91D5DAFAD0022F85E /* NotificationExtension.swift */; };
+		B32828AA1D5DAFAD0022F85E /* AlertExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32828A91D5DAFAD0022F85E /* AlertExtension.swift */; };
 		B32828B41D5DE2660022F85E /* UniqueIDGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32828B31D5DE2660022F85E /* UniqueIDGenerator.swift */; };
 		B32828BD1D5E02DE0022F85E /* PhotoAnalyzeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32828BC1D5E02DE0022F85E /* PhotoAnalyzeService.swift */; };
 		B35478901D57778600889F9A /* UploadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B354788F1D57778600889F9A /* UploadViewController.swift */; };
@@ -24,6 +24,16 @@
 		B3B527BF1D65AD2A00E31C37 /* ProfilePostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B527BE1D65AD2A00E31C37 /* ProfilePostTableViewCell.swift */; };
 		B3B527C11D65AF2100E31C37 /* ProfilePostsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B527C01D65AF2100E31C37 /* ProfilePostsViewModel.swift */; };
 		B3B527C31D65AF8B00E31C37 /* ProfilePost.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B527C21D65AF8B00E31C37 /* ProfilePost.swift */; };
+		B3BA49BA1D65EE2B00106930 /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3BA49B91D65EE2B00106930 /* DateExtension.swift */; };
+		B3BA49BD1D65F35700106930 /* LoginRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3BA49BC1D65F35700106930 /* LoginRouter.swift */; };
+		B3BA49BF1D65F8FA00106930 /* SignUpRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3BA49BE1D65F8FA00106930 /* SignUpRouter.swift */; };
+		B3BA49C21D65F97200106930 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3BA49C11D65F97200106930 /* Router.swift */; };
+		B3BA49C41D65FAC700106930 /* Operator Overloads.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3BA49C31D65FAC700106930 /* Operator Overloads.swift */; };
+		B3BA49C61D65FAEE00106930 /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3BA49C51D65FAEE00106930 /* ColorExtension.swift */; };
+		B3BA49C81D65FC5E00106930 /* ProfileRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3BA49C71D65FC5E00106930 /* ProfileRouter.swift */; };
+		B3BA49CA1D66003500106930 /* ImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3BA49C91D66003500106930 /* ImageExtension.swift */; };
+		B3BA49CC1D66053900106930 /* UploadViewRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3BA49CB1D66053900106930 /* UploadViewRouter.swift */; };
+		B3BA49CE1D66086200106930 /* TagsTableRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3BA49CD1D66086200106930 /* TagsTableRouter.swift */; };
 		B3ED70F11D5C6ADF001159A6 /* ProfilePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3ED70F01D5C6ADF001159A6 /* ProfilePageViewController.swift */; };
 		B3ED70F31D5C87E9001159A6 /* NewsFeedTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3ED70F21D5C87E9001159A6 /* NewsFeedTableViewController.swift */; };
 		B3ED70F51D5C87FD001159A6 /* SearchPageTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3ED70F41D5C87FD001159A6 /* SearchPageTableViewController.swift */; };
@@ -76,7 +86,7 @@
 		5898AC7FC31D89A1646EB192 /* Pods_SlexieUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SlexieUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5D9BFA48A5833B74F901FA1F /* Pods-SlexieTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SlexieTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SlexieTests/Pods-SlexieTests.release.xcconfig"; sourceTree = "<group>"; };
 		9ED37C1860EE525B7CBE41CE /* Pods_Slexie.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Slexie.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		B32828A91D5DAFAD0022F85E /* NotificationExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationExtension.swift; sourceTree = "<group>"; };
+		B32828A91D5DAFAD0022F85E /* AlertExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertExtension.swift; sourceTree = "<group>"; };
 		B32828B31D5DE2660022F85E /* UniqueIDGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UniqueIDGenerator.swift; sourceTree = "<group>"; };
 		B32828BC1D5E02DE0022F85E /* PhotoAnalyzeService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoAnalyzeService.swift; sourceTree = "<group>"; };
 		B354788F1D57778600889F9A /* UploadViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadViewController.swift; sourceTree = "<group>"; };
@@ -91,6 +101,16 @@
 		B3B527BE1D65AD2A00E31C37 /* ProfilePostTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfilePostTableViewCell.swift; sourceTree = "<group>"; };
 		B3B527C01D65AF2100E31C37 /* ProfilePostsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfilePostsViewModel.swift; sourceTree = "<group>"; };
 		B3B527C21D65AF8B00E31C37 /* ProfilePost.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfilePost.swift; sourceTree = "<group>"; };
+		B3BA49B91D65EE2B00106930 /* DateExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
+		B3BA49BC1D65F35700106930 /* LoginRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginRouter.swift; sourceTree = "<group>"; };
+		B3BA49BE1D65F8FA00106930 /* SignUpRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpRouter.swift; sourceTree = "<group>"; };
+		B3BA49C11D65F97200106930 /* Router.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
+		B3BA49C31D65FAC700106930 /* Operator Overloads.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Operator Overloads.swift"; sourceTree = "<group>"; };
+		B3BA49C51D65FAEE00106930 /* ColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
+		B3BA49C71D65FC5E00106930 /* ProfileRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileRouter.swift; sourceTree = "<group>"; };
+		B3BA49C91D66003500106930 /* ImageExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageExtension.swift; sourceTree = "<group>"; };
+		B3BA49CB1D66053900106930 /* UploadViewRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadViewRouter.swift; sourceTree = "<group>"; };
+		B3BA49CD1D66086200106930 /* TagsTableRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagsTableRouter.swift; sourceTree = "<group>"; };
 		B3ED70F01D5C6ADF001159A6 /* ProfilePageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfilePageViewController.swift; sourceTree = "<group>"; };
 		B3ED70F21D5C87E9001159A6 /* NewsFeedTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsFeedTableViewController.swift; sourceTree = "<group>"; };
 		B3ED70F41D5C87FD001159A6 /* SearchPageTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchPageTableViewController.swift; sourceTree = "<group>"; };
@@ -169,6 +189,90 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		B3BA49B31D65EC8700106930 /* Data Models */ = {
+			isa = PBXGroup;
+			children = (
+				B361FCCC1D63295800B4F8AA /* FeedPost.swift */,
+				B3B527C21D65AF8B00E31C37 /* ProfilePost.swift */,
+			);
+			name = "Data Models";
+			sourceTree = "<group>";
+		};
+		B3BA49B41D65ECC400106930 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				B3BA49B81D65ED4D00106930 /* TableViewCells */,
+				B36E72141D5B78A700F626D0 /* LoadingView.swift */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		B3BA49B51D65ECDB00106930 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				B3F455AF1D54A1BD005EA708 /* LoginViewController.swift */,
+				B3ACD3731D54D3E6004BEF24 /* CreateAccountViewController.swift */,
+				B38E85BB1D59B44600CAE73B /* TagsTableViewController.swift */,
+				B3ED70F21D5C87E9001159A6 /* NewsFeedTableViewController.swift */,
+				B3ED70F41D5C87FD001159A6 /* SearchPageTableViewController.swift */,
+				B3ED70F01D5C6ADF001159A6 /* ProfilePageViewController.swift */,
+				B354788F1D57778600889F9A /* UploadViewController.swift */,
+			);
+			name = "View Controllers";
+			sourceTree = "<group>";
+		};
+		B3BA49B61D65ECE600106930 /* View Models */ = {
+			isa = PBXGroup;
+			children = (
+				B361FCCA1D63234800B4F8AA /* FeedPostViewModel.swift */,
+				B3B527C01D65AF2100E31C37 /* ProfilePostsViewModel.swift */,
+			);
+			name = "View Models";
+			sourceTree = "<group>";
+		};
+		B3BA49B71D65ECF500106930 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				B32828A91D5DAFAD0022F85E /* AlertExtension.swift */,
+				B3BA49B91D65EE2B00106930 /* DateExtension.swift */,
+				B3BA49C31D65FAC700106930 /* Operator Overloads.swift */,
+				B3BA49C51D65FAEE00106930 /* ColorExtension.swift */,
+				B3BA49C91D66003500106930 /* ImageExtension.swift */,
+			);
+			name = Extensions;
+			sourceTree = "<group>";
+		};
+		B3BA49B81D65ED4D00106930 /* TableViewCells */ = {
+			isa = PBXGroup;
+			children = (
+				B3ED70F81D5C8AC6001159A6 /* NewsFeedItemCell.swift */,
+				B3B527BE1D65AD2A00E31C37 /* ProfilePostTableViewCell.swift */,
+				B38E85BF1D59C28C00CAE73B /* TagsTableViewCell.swift */,
+			);
+			name = TableViewCells;
+			sourceTree = "<group>";
+		};
+		B3BA49BB1D65EF6D00106930 /* Routers */ = {
+			isa = PBXGroup;
+			children = (
+				B3BA49CD1D66086200106930 /* TagsTableRouter.swift */,
+				B3BA49BC1D65F35700106930 /* LoginRouter.swift */,
+				B3BA49BE1D65F8FA00106930 /* SignUpRouter.swift */,
+				B3BA49C71D65FC5E00106930 /* ProfileRouter.swift */,
+				B3BA49CB1D66053900106930 /* UploadViewRouter.swift */,
+			);
+			name = Routers;
+			sourceTree = "<group>";
+		};
+		B3BA49C01D65F95F00106930 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				B3BA49C11D65F97200106930 /* Router.swift */,
+				B3ED70FA1D5CB34A001159A6 /* NetworkingController.swift */,
+			);
+			name = Protocols;
+			sourceTree = "<group>";
+		};
 		B3F455A11D54A1BD005EA708 = {
 			isa = PBXGroup;
 			children = (
@@ -194,34 +298,24 @@
 		B3F455AC1D54A1BD005EA708 /* Newsify */ = {
 			isa = PBXGroup;
 			children = (
+				B3BA49C01D65F95F00106930 /* Protocols */,
+				B3BA49BB1D65EF6D00106930 /* Routers */,
+				B3BA49B31D65EC8700106930 /* Data Models */,
+				B3BA49B61D65ECE600106930 /* View Models */,
+				B3BA49B51D65ECDB00106930 /* View Controllers */,
+				B3BA49B71D65ECF500106930 /* Extensions */,
+				B3BA49B41D65ECC400106930 /* Views */,
 				B3F455B61D54A1BD005EA708 /* LaunchScreen.storyboard */,
 				B3F455B11D54A1BD005EA708 /* Main.storyboard */,
-				B3F455B41D54A1BD005EA708 /* Assets.xcassets */,
 				B3F455AD1D54A1BD005EA708 /* AppDelegate.swift */,
-				B36E72141D5B78A700F626D0 /* LoadingView.swift */,
-				B3ED70FA1D5CB34A001159A6 /* NetworkingController.swift */,
 				B3ED70FC1D5CB3C6001159A6 /* FBNetworkingController.swift */,
 				B32828BC1D5E02DE0022F85E /* PhotoAnalyzeService.swift */,
-				B32828A91D5DAFAD0022F85E /* NotificationExtension.swift */,
 				B32828B31D5DE2660022F85E /* UniqueIDGenerator.swift */,
-				B3F455AF1D54A1BD005EA708 /* LoginViewController.swift */,
-				B3ACD3731D54D3E6004BEF24 /* CreateAccountViewController.swift */,
-				B354788F1D57778600889F9A /* UploadViewController.swift */,
-				B3ED70F41D5C87FD001159A6 /* SearchPageTableViewController.swift */,
-				B38E85BB1D59B44600CAE73B /* TagsTableViewController.swift */,
-				B38E85BF1D59C28C00CAE73B /* TagsTableViewCell.swift */,
-				B3F455B91D54A1BD005EA708 /* Info.plist */,
-				B3ED71001D5CC655001159A6 /* GoogleService-Info.plist */,
-				B3ED70F21D5C87E9001159A6 /* NewsFeedTableViewController.swift */,
-				B361FCCA1D63234800B4F8AA /* FeedPostViewModel.swift */,
-				B3ED70F81D5C8AC6001159A6 /* NewsFeedItemCell.swift */,
-				B361FCCC1D63295800B4F8AA /* FeedPost.swift */,
-				B3ED70F01D5C6ADF001159A6 /* ProfilePageViewController.swift */,
-				B3B527C01D65AF2100E31C37 /* ProfilePostsViewModel.swift */,
-				B3B527BE1D65AD2A00E31C37 /* ProfilePostTableViewCell.swift */,
-				B3B527C21D65AF8B00E31C37 /* ProfilePost.swift */,
 				B36E72161D5B846700F626D0 /* RandomBase.swift */,
 				B398C8BC1D586A360014F647 /* SwiftyJSON.swift */,
+				B3F455B41D54A1BD005EA708 /* Assets.xcassets */,
+				B3F455B91D54A1BD005EA708 /* Info.plist */,
+				B3ED71001D5CC655001159A6 /* GoogleService-Info.plist */,
 			);
 			path = Newsify;
 			sourceTree = "<group>";
@@ -510,23 +604,33 @@
 			buildActionMask = 2147483647;
 			files = (
 				B3B527BF1D65AD2A00E31C37 /* ProfilePostTableViewCell.swift in Sources */,
+				B3BA49CA1D66003500106930 /* ImageExtension.swift in Sources */,
+				B3BA49BA1D65EE2B00106930 /* DateExtension.swift in Sources */,
+				B3BA49CE1D66086200106930 /* TagsTableRouter.swift in Sources */,
 				B30EE7011D61D9C60009B36F /* SwiftyJSON.swift in Sources */,
+				B3BA49BD1D65F35700106930 /* LoginRouter.swift in Sources */,
+				B3BA49C21D65F97200106930 /* Router.swift in Sources */,
 				B32828B41D5DE2660022F85E /* UniqueIDGenerator.swift in Sources */,
 				B35478901D57778600889F9A /* UploadViewController.swift in Sources */,
 				B361FCCD1D63295800B4F8AA /* FeedPost.swift in Sources */,
 				B3ED70F91D5C8AC6001159A6 /* NewsFeedItemCell.swift in Sources */,
+				B3BA49BF1D65F8FA00106930 /* SignUpRouter.swift in Sources */,
+				B3BA49C41D65FAC700106930 /* Operator Overloads.swift in Sources */,
+				B3BA49C61D65FAEE00106930 /* ColorExtension.swift in Sources */,
 				B32828BD1D5E02DE0022F85E /* PhotoAnalyzeService.swift in Sources */,
 				B3ACD3741D54D3E6004BEF24 /* CreateAccountViewController.swift in Sources */,
 				B3ED70FD1D5CB3C6001159A6 /* FBNetworkingController.swift in Sources */,
 				B36E72171D5B846700F626D0 /* RandomBase.swift in Sources */,
 				B36E72151D5B78A700F626D0 /* LoadingView.swift in Sources */,
+				B3BA49CC1D66053900106930 /* UploadViewRouter.swift in Sources */,
 				B3ED70F11D5C6ADF001159A6 /* ProfilePageViewController.swift in Sources */,
 				B3F455B01D54A1BD005EA708 /* LoginViewController.swift in Sources */,
 				B38E85BC1D59B44600CAE73B /* TagsTableViewController.swift in Sources */,
-				B32828AA1D5DAFAD0022F85E /* NotificationExtension.swift in Sources */,
+				B32828AA1D5DAFAD0022F85E /* AlertExtension.swift in Sources */,
 				B361FCCB1D63234800B4F8AA /* FeedPostViewModel.swift in Sources */,
 				B3ED70F31D5C87E9001159A6 /* NewsFeedTableViewController.swift in Sources */,
 				B3ED70F51D5C87FD001159A6 /* SearchPageTableViewController.swift in Sources */,
+				B3BA49C81D65FC5E00106930 /* ProfileRouter.swift in Sources */,
 				B3B527C31D65AF8B00E31C37 /* ProfilePost.swift in Sources */,
 				B3F455AE1D54A1BD005EA708 /* AppDelegate.swift in Sources */,
 				B3ED70FB1D5CB34A001159A6 /* NetworkingController.swift in Sources */,

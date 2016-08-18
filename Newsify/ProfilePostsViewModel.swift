@@ -16,13 +16,26 @@ class ProfilePostViewModel {
     
     func fetchProfilePosts(completion callback: () -> Void) {
         
-        var fetchedPosts: [FeedPost] = []
-    
-        if fetchedPosts.isEmpty{
-            profilePosts = defaultPosts()
+        networkingController.getProfilePosts { [weak self] (fetchedPosts) in
+            
+            guard let strongSelf = self else { return }
+            
+            if fetchedPosts.isEmpty {
+                strongSelf.profilePosts = strongSelf.defaultPosts()
+            } else {
+                strongSelf.profilePosts = fetchedPosts.reverse()
+                
+                for post in strongSelf.profilePosts {
+                    strongSelf.networkingController.downloadPhoto(with: post.id, completion: { (image, error) in
+                        guard error != nil else {
+                            post.setPhoto(image!)
+                            callback()
+                            return
+                        }
+                    })
+                }
+            }
         }
-        
-        callback()
     }
 }
 
