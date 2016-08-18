@@ -17,21 +17,16 @@ class FeedPostViewModel {
     func fetchFeedPosts(completion callback: () -> Void) {
         
         networkingController.getAccountTags { (tags) in
-            print("searching for \(tags)")
             self.networkingController.getPhotosRelatedWith(tags, completion: { [weak self] (posts) in
                 
                 guard let strongSelf = self else { return }
                 
-                for post in posts {
-                    print("fetched \(post.username)")
-                }
-                
                 if posts.isEmpty {
-                    print("fetchedPosts are empty")
+                    print("Fetched Posts are empty")
                     strongSelf.feedPosts = strongSelf.defaultPosts()
                     callback()
                 } else {
-                    print("fetchedPosts are NOT empty")
+                    print("Fetched Posts are NOT empty")
                     strongSelf.feedPosts = posts.reverse()
                     
                     

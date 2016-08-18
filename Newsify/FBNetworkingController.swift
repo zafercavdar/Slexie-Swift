@@ -30,13 +30,10 @@ class FBNetworkingController: NetworkingController {
     
     func signInWith(email email: String, password: String, enableNotification: Bool, completionHandler: (error: NSError?) -> Void){
         
-        signOut { (Void) in
-        }
+        signOut {}
         
         FIRAuth.auth()?.signInWithEmail(email, password: password, completion: { (user, error) in
-            if let error = error{
-                print("Sign in failed.", error.localizedDescription)
-            } else{
+            if error == nil{
                 print("Signed in with uid", user!.uid)
             }
             
@@ -52,8 +49,7 @@ class FBNetworkingController: NetworkingController {
             
             guard let strongSelf = self else { return }
             
-            if let e = error {
-                print("Sign up failed.", e.localizedDescription)
+            if error != nil {
                 completionHandler(error: error)
             }else{
                 print("Signed up with uid", user!.uid)
@@ -80,7 +76,7 @@ class FBNetworkingController: NetworkingController {
                 var downloadURL: String = ""
                 
                 if error != nil {
-                    print("Problem while uploading, error: \(error!.localizedDescription)")
+                    print("ERROR while uploading, error: \(error!.localizedDescription)")
                 } else {
                     downloadURL = (metadata!.downloadURL()?.absoluteURL.absoluteString)!
                     print("DOWNLOAD URL: \n\(downloadURL)\n")
@@ -122,10 +118,7 @@ class FBNetworkingController: NetworkingController {
             })
             
 
-        } else {
-            print("No users are identified.")
         }
-
     }
     
     func getAccountTags(completion: [String] -> Void) {
@@ -191,22 +184,13 @@ class FBNetworkingController: NetworkingController {
         let localMainURL = fileManager.URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).last
         let localURLString = (localMainURL?.absoluteString)! + "images/\(photoID).png"
         let localURL = NSURL(string: localURLString)
-        print(localURL)
         
         _ = photoRef.writeToFile(localURL!) { (URL, error) -> Void in
             if (error != nil) {
                 print("ERROR: \(error)\nEnd of Error\n")
                 callback(nil, error)
             } else {
-                
-                let checkValidation = NSFileManager.defaultManager()
-                
-                if (checkValidation.isReadableFileAtPath((URL?.absoluteString)!)) {
-                    print("OLEY: file is readable")
-                }
-                
                 guard let data = NSData(contentsOfURL: URL!), let image = UIImage(data: data) else {
-                    print("error while converting local url to data")
                     return
                 }
                 
@@ -261,7 +245,7 @@ class FBNetworkingController: NetworkingController {
                     
                     let post = FeedPost(username: username, id: id, tags: photoTags)
                     posts.append(post)
-                    print("found in \(id)")
+                    print("TAG FOUND IN Photo: \(id)")
 
                 }
                 completion(posts)
@@ -301,8 +285,6 @@ class FBNetworkingController: NetworkingController {
         ref.observeSingleEventOfType(.Value, withBlock:  { (snapshot) in
             if let count = snapshot.value as? Int {
                 callback(count)
-            } else {
-                print("Error getting photo count")
             }
         })
     }
