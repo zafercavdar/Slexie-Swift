@@ -134,7 +134,7 @@
                                             <action selector="returnToProfile:" destination="3gX-ku-4kX" eventType="touchUpInside" id="PU4-WS-pwo"/>
                                         </connections>
                                     </button>
-                                    <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" placeholderIntrinsicWidth="300" placeholderIntrinsicHeight="400" image="example1" translatesAutoresizingMaskIntoConstraints="NO" id="gzQ-bd-5x0">
+                                    <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" placeholderIntrinsicWidth="300" placeholderIntrinsicHeight="400" image="greyDefault" translatesAutoresizingMaskIntoConstraints="NO" id="gzQ-bd-5x0">
                                         <rect key="frame" x="130" y="47" width="300" height="400"/>
                                         <gestureRecognizers/>
                                         <constraints>
@@ -647,7 +647,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="example1" width="600" height="600"/>
         <image name="greyDefault" width="500" height="500"/>
     </resources>
     <inferredMetricsTieBreakers>
