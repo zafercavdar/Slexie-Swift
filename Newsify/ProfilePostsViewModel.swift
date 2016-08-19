@@ -41,7 +41,7 @@ class ProfilePostViewModel {
 
 extension ProfilePostViewModel {
     
-    func defaultPosts() -> [ProfilePost]{
+    private func defaultPosts() -> [ProfilePost]{
         let defaultImage = UIImage(named: "greyDefault")
         let defaultTags = ["grey","grey", "grey"]
         

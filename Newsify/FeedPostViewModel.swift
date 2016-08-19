@@ -47,7 +47,7 @@ class FeedPostViewModel {
 
 extension FeedPostViewModel {
     
-    func defaultPosts() -> [FeedPost]{
+    private func defaultPosts() -> [FeedPost]{
         let defaultImage = UIImage(named: "example1")
         let defaultUsername = "default-id"
         let defaultTags = ["food","spoon", "wood"]

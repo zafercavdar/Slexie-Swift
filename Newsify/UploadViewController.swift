@@ -18,9 +18,9 @@ class UploadViewController: UIViewController, UINavigationControllerDelegate {
     static var trustedTags: [String] = []
     static var trustedBackColor = "null"
     
-    let networkingController = FBNetworkingController()
-    let imaggaService = PhotoAnalyzeService()
-    let router = UploadViewRouter()
+    private let networkingController = FBNetworkingController()
+    private let imaggaService = PhotoAnalyzeService()
+    private let router = UploadViewRouter()
     
     enum RouteID: String {
         case ShowTags = "ShowTags"
@@ -107,11 +107,11 @@ class UploadViewController: UIViewController, UINavigationControllerDelegate {
 
 extension UploadViewController : UIImagePickerControllerDelegate {
     
-    func imagePickerControllerDidCancel(picker: UIImagePickerController) {
+    private func imagePickerControllerDidCancel(picker: UIImagePickerController) {
         dismissViewControllerAnimated(true, completion: nil)
     }
     
-    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
+    private func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
         let selectedImage = info[UIImagePickerControllerOriginalImage] as! UIImage
         photoImageView.image = selectedImage
         UploadViewController.chosenPhoto = selectedImage

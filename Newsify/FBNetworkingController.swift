@@ -289,6 +289,10 @@ class FBNetworkingController: NetworkingController {
         return getCurrentUser()?.uid
     }
     
+    func getCurrentUser() -> FIRUser?{
+        return FIRAuth.auth()?.currentUser
+    }
+    
     
     // MARK: Private methods
     
@@ -315,11 +319,6 @@ class FBNetworkingController: NetworkingController {
             }
         })
     }
-    
-    func getCurrentUser() -> FIRUser?{
-        return FIRAuth.auth()?.currentUser
-    }
-    
     
     private func cloneUserDetails(fbUser: FIRUser!, username: String, password: String, profileType: String ){
         
@@ -363,7 +362,7 @@ extension FBNetworkingController {
         self.fakeCloneUserDetails(uid, username: username, password: password, profileType: profileType)
     }
     
-    func fakeCloneUserDetails(uid: String, username: String, password: String, profileType: String ){
+    private func fakeCloneUserDetails(uid: String, username: String, password: String, profileType: String ){
         
         let ref = References.UserRef.child(uid)
         
@@ -383,7 +382,7 @@ extension FBNetworkingController {
         self.fakeSaveTagsFor(uid, uniqueID: imageid, tags: tags)
     }
     
-    func fakeSaveTagsFor(fakeuid: String,uniqueID: String, tags: [String]) {
+    private func fakeSaveTagsFor(fakeuid: String,uniqueID: String, tags: [String]) {
         
         let photoRef = References.PhotoRef.child(uniqueID)
         
@@ -407,7 +406,7 @@ extension FBNetworkingController {
         })    
     }
     
-    func fakeGetPhotoCount(uid: String, callback: (Int) -> Void) {
+    private func fakeGetPhotoCount(uid: String, callback: (Int) -> Void) {
         
         let ref = References.UserRef.child(uid).child(ReferenceLabels.PostCount.rawValue)
         
@@ -417,7 +416,7 @@ extension FBNetworkingController {
         })
     }
     
-    func fakeGetAccountTags(uid: String, completion: [String] -> Void) {
+    private func fakeGetAccountTags(uid: String, completion: [String] -> Void) {
         let ref = References.UserRef.child(uid).child(ReferenceLabels.UserTags.rawValue)
         
         ref.observeSingleEventOfType(.Value, withBlock: { (snapshot) in
@@ -429,7 +428,7 @@ extension FBNetworkingController {
         })
     }
     
-    func fakeGetAccountPosts(uid: String, completion: [String] -> Void) {
+    private func fakeGetAccountPosts(uid: String, completion: [String] -> Void) {
         let ref = References.UserRef.child(uid).child(ReferenceLabels.UserPosts.rawValue)
         
         ref.observeSingleEventOfType(.Value, withBlock: { (snapshot) in

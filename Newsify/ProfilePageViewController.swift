@@ -12,11 +12,10 @@ class ProfilePageViewController: UITableViewController {
 
     @IBOutlet var profilePostsView: UITableView!
     
-    let networkingController = FBNetworkingController()
-    let model = ProfilePostViewModel()
-    let loadingView = LoadingView()
-    
-    let router = ProfileRouter()
+    private let networkingController = FBNetworkingController()
+    private let model = ProfilePostViewModel()
+    private let loadingView = LoadingView()
+    private let router = ProfileRouter()
     
     enum RouteID: String {
         case LogOut = "LogOut"

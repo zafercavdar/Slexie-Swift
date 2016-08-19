@@ -17,10 +17,10 @@ class CreateAccountViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var profileTypeLabel: UILabel!
     @IBOutlet weak var signUpButton: UIButton!
     
-    var fields: [UITextField] = []
+    private var fields: [UITextField] = []
     
-    let networkingController = FBNetworkingController()
-    let router = SignUpRouter()
+    private let networkingController = FBNetworkingController()
+    private let router = SignUpRouter()
     
     enum RouteID: String {
         case LoggedIn = "LoggedIn"
@@ -86,13 +86,13 @@ class CreateAccountViewController: UIViewController, UITextFieldDelegate {
     
     // MARK: Helper Methods
     
-    func resignAllFirstResponder(){
+    private func resignAllFirstResponder(){
         for field in fields{
             field.resignFirstResponder()
         }
     }
     
-    func signUpWithUsernamePassword(email: String, _ password: String, _ username: String, _ profileType: String){
+    private func signUpWithUsernamePassword(email: String, _ password: String, _ username: String, _ profileType: String){
         
         let loadingView = LoadingView()
         loadingView.addToView(self.view, text: "Signing up")
@@ -115,7 +115,7 @@ class CreateAccountViewController: UIViewController, UITextFieldDelegate {
 
     // MARK: UITextFieldDelegate
     
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
+    private func textFieldShouldReturn(textField: UITextField) -> Bool {
         resignAllFirstResponder()
         return true
     }

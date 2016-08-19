@@ -10,8 +10,8 @@ import UIKit
 
 class LoginViewController: UIViewController, UITextFieldDelegate {
     
-    let fbNetworkingController = FBNetworkingController()
-    let router = LoginRouter()
+    private let fbNetworkingController = FBNetworkingController()
+    private let router = LoginRouter()
     
     enum RouteID: String {
         case NewsFeed = "Newsfeed"
@@ -40,10 +40,10 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     
     override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
         loginButton.setTitleColor(UIColor.coreColor(), forState: UIControlState.Normal)
         randomGenerateButton.enabled = false
-
-        super.viewWillAppear(animated)
 
     }
     
@@ -91,7 +91,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     // MARK: Helper methods
     
-    func loginWithUsername(username: String, _ password: String){
+    private func loginWithUsername(username: String, _ password: String){
         
         let loadingView = LoadingView()
         loadingView.addToView(self.view, text: "Signing in")
@@ -112,7 +112,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     }
     
     // MARK: UITextFieldDelegate
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
+    private func textFieldShouldReturn(textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
     }

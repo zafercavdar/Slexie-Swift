@@ -11,8 +11,8 @@ import Foundation
 
 class NewsFeedTableViewController: UITableViewController {
 
-    var model = FeedPostViewModel()
-    let loadingView = LoadingView()
+    private var model = FeedPostViewModel()
+    private let loadingView = LoadingView()
     
     private struct Identifier {
         static let NewsFeedCell = "NewsFeedItemCell"

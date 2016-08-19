@@ -15,9 +15,9 @@ class TagsTableViewController: UITableViewController {
         var tags: [String] = []
     }
 
-    let model = TagModel()
-    let networkingController = FBNetworkingController()
-    let router = TagsTableRouter()
+    private let model = TagModel()
+    private let networkingController = FBNetworkingController()
+    private let router = TagsTableRouter()
     
     private struct Identifier {
         static let TagsTableCell = "TagsTableViewCell"
