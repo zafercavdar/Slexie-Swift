@@ -26,6 +26,15 @@ extension UIViewController {
         showAlertView("Caution!", message: "Both passwords should be same ...", duration: 3)
     }
     
+    func cameraNotAvailable(){
+        showAlertView("Error!", message: "Camera is not avaiable in this device.", duration: 3)
+    }
+    
+    func photoLibraryNotAvailable() {
+        showAlertView("Error!", message: "Photo Library is not avaiable in this device.", duration: 3)
+
+    }
+    
     private func showAlertView(title: String?, message: String?, duration: Int) {
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .Alert)
         let okAction = UIAlertAction(title: "OK", style: .Cancel, handler: nil)

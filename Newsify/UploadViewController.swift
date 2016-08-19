@@ -89,29 +89,41 @@ class UploadViewController: UIViewController, UINavigationControllerDelegate {
     @IBAction func fromLibrary(sender: UISwipeGestureRecognizer) {
         
         let imagePickerController = UIImagePickerController()
-        imagePickerController.sourceType = .PhotoLibrary
-        imagePickerController.delegate = self
-        presentViewController(imagePickerController, animated: true, completion: nil)
+        
+        
+        if UIImagePickerController.isSourceTypeAvailable(.PhotoLibrary) {
+            imagePickerController.sourceType = .PhotoLibrary
+            imagePickerController.delegate = self
+            presentViewController(imagePickerController, animated: true, completion: nil)
+        } else {
+            photoLibraryNotAvailable()
+        }
+        
         
     }
     
     @IBAction func fromCamera(sender: UISwipeGestureRecognizer) {
         
         let imagePickerController = UIImagePickerController()
-        imagePickerController.sourceType = .Camera
-        imagePickerController.delegate = self
-        presentViewController(imagePickerController, animated: true, completion: nil)
-    }
+        
+        if UIImagePickerController.isSourceTypeAvailable(.Camera) {
+            imagePickerController.sourceType = .Camera
+            imagePickerController.delegate = self
+            presentViewController(imagePickerController, animated: true, completion: nil)
 
+        } else {
+            cameraNotAvailable()
+        }
+    }
 }
 
 extension UploadViewController : UIImagePickerControllerDelegate {
     
-    private func imagePickerControllerDidCancel(picker: UIImagePickerController) {
+    func imagePickerControllerDidCancel(picker: UIImagePickerController) {
         dismissViewControllerAnimated(true, completion: nil)
     }
     
-    private func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
         let selectedImage = info[UIImagePickerControllerOriginalImage] as! UIImage
         photoImageView.image = selectedImage
         UploadViewController.chosenPhoto = selectedImage
