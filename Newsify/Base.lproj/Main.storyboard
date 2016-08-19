@@ -116,7 +116,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" alignment="center" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="Sqz-ud-JUt">
-                                <rect key="frame" x="20" y="50" width="560" height="545"/>
+                                <rect key="frame" x="20" y="50" width="560" height="495"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Hi" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oqe-IS-CPu">
                                         <rect key="frame" x="275" y="0.0" width="11" height="14"/>
@@ -135,11 +135,11 @@
                                             <segue destination="HUN-EP-BQN" kind="unwind" unwindAction="unwindToProfile:" id="4e9-o5-Wac"/>
                                         </connections>
                                     </button>
-                                    <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" placeholderIntrinsicWidth="300" placeholderIntrinsicHeight="400" image="greyDefault" translatesAutoresizingMaskIntoConstraints="NO" id="gzQ-bd-5x0">
-                                        <rect key="frame" x="130" y="47" width="300" height="400"/>
+                                    <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" placeholderIntrinsicWidth="350" placeholderIntrinsicHeight="350" image="greyDefault" translatesAutoresizingMaskIntoConstraints="NO" id="gzQ-bd-5x0">
+                                        <rect key="frame" x="105" y="47" width="350" height="350"/>
                                         <gestureRecognizers/>
                                         <constraints>
-                                            <constraint firstAttribute="width" secondItem="gzQ-bd-5x0" secondAttribute="height" multiplier="3:4" id="c27-Ui-duh"/>
+                                            <constraint firstAttribute="width" secondItem="gzQ-bd-5x0" secondAttribute="height" multiplier="1:1" id="w9L-ko-laM"/>
                                         </constraints>
                                         <connections>
                                             <outletCollection property="gestureRecognizers" destination="tWg-zY-IC8" appends="YES" id="CFb-Mu-kmE"/>
@@ -147,7 +147,7 @@
                                         </connections>
                                     </imageView>
                                     <slider contentMode="scaleToFill" misplaced="YES" preservesSuperviewLayoutMargins="YES" layoutMarginsFollowReadableWidth="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="70" minValue="25" maxValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="BPK-x7-Tgz">
-                                        <rect key="frame" x="-2" y="450" width="564" height="31"/>
+                                        <rect key="frame" x="-2" y="400" width="564" height="31"/>
                                         <color key="tintColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <edgeInsets key="layoutMargins" top="8" left="8" bottom="8" right="8"/>
                                         <connections>
@@ -155,13 +155,13 @@
                                         </connections>
                                     </slider>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="70" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P6Z-Bz-c3k">
-                                        <rect key="frame" x="271" y="483" width="20" height="21"/>
+                                        <rect key="frame" x="271" y="433" width="20" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uZC-vW-cmL">
-                                        <rect key="frame" x="241" y="506" width="78" height="39"/>
+                                        <rect key="frame" x="241" y="456" width="78" height="39"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                         <state key="normal" title="Analyze">
                                             <color key="titleColor" red="1" green="0.39953459890356313" blue="0.35418284821424562" alpha="1" colorSpace="calibratedRGB"/>

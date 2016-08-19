@@ -108,6 +108,7 @@ class UploadViewController: UIViewController, UINavigationControllerDelegate {
         
         if UIImagePickerController.isSourceTypeAvailable(.Camera) {
             imagePickerController.sourceType = .Camera
+            imagePickerController.allowsEditing = true
             imagePickerController.delegate = self
             presentViewController(imagePickerController, animated: true, completion: nil)
 
@@ -124,7 +125,7 @@ extension UploadViewController : UIImagePickerControllerDelegate {
     }
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
-        let selectedImage = info[UIImagePickerControllerOriginalImage] as! UIImage
+        let selectedImage = info[UIImagePickerControllerEditedImage] as! UIImage
         photoImageView.image = selectedImage
         UploadViewController.chosenPhoto = selectedImage
         dismissViewControllerAnimated(true, completion: nil)

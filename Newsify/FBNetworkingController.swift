@@ -212,16 +212,30 @@ class FBNetworkingController: NetworkingController {
         let localURLString = (localMainURL?.absoluteString)! + "images/\(photoID).png"
         let localURL = NSURL(string: localURLString)
         
-        _ = photoRef.writeToFile(localURL!) { (URL, error) -> Void in
-            if (error != nil) {
-                print("ERROR: \(error)\nEnd of Error\n")
-                callback(nil, error)
-            } else {
-                guard let data = NSData(contentsOfURL: URL!), let image = UIImage(data: data) else {
-                    return
+        let path = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as String
+        let pURL = NSURL(fileURLWithPath: path)
+        let filePath = pURL.URLByAppendingPathComponent("images/\(photoID).png").path!
+
+        
+        if fileManager.fileExistsAtPath(filePath){
+            
+            print("LOG: Found \(photoID) in local directory.")
+            guard let data = NSData(contentsOfURL: localURL!), let image = UIImage(data: data) else { return }
+            callback(image, nil)
+            
+        } else {
+            _ = photoRef.writeToFile(localURL!) { (URL, error) -> Void in
+                if (error != nil) {
+                    print("ERROR: \(error)\nEnd of Error\n")
+                    callback(nil, error)
+                } else {
+                    print("LOG: Downloaded \(photoID) from database.")
+                    guard let data = NSData(contentsOfURL: URL!), let image = UIImage(data: data) else {
+                        return
+                    }
+                    
+                    callback(image, error)
                 }
-                
-                callback(image, error)
             }
         }
     }
