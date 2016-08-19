@@ -132,6 +132,7 @@
                                         </state>
                                         <connections>
                                             <action selector="returnToProfile:" destination="3gX-ku-4kX" eventType="touchUpInside" id="PU4-WS-pwo"/>
+                                            <segue destination="HUN-EP-BQN" kind="unwind" unwindAction="unwindToProfile:" id="4e9-o5-Wac"/>
                                         </connections>
                                     </button>
                                     <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" placeholderIntrinsicWidth="300" placeholderIntrinsicHeight="400" image="greyDefault" translatesAutoresizingMaskIntoConstraints="NO" id="gzQ-bd-5x0">
@@ -198,6 +199,7 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3nJ-PH-Ro4" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="HUN-EP-BQN" userLabel="Exit" sceneMemberID="exit"/>
                 <swipeGestureRecognizer direction="right" id="tWg-zY-IC8">
                     <connections>
                         <action selector="fromLibrary:" destination="3gX-ku-4kX" id="chB-Tv-R8R"/>

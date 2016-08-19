@@ -15,7 +15,7 @@ class NewsFeedTableViewController: UITableViewController {
     let loadingView = LoadingView()
     
     private struct Identifier {
-        static let NewsFeedCell = "TagsTableViewCell"
+        static let NewsFeedCell = "NewsFeedItemCell"
     }
     
     @IBOutlet var feedPostsView: UITableView!

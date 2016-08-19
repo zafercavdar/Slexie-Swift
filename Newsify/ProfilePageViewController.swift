@@ -14,6 +14,7 @@ class ProfilePageViewController: UITableViewController {
     
     let networkingController = FBNetworkingController()
     let model = ProfilePostViewModel()
+    let loadingView = LoadingView()
     
     let router = ProfileRouter()
     
@@ -34,9 +35,7 @@ class ProfilePageViewController: UITableViewController {
         tableView.addSubview(refreshControl)
 
         
-        model.fetchProfilePosts { 
-            self.profilePostsView.reloadData()
-        }
+        reload()
         
     }
     
@@ -59,6 +58,18 @@ class ProfilePageViewController: UITableViewController {
             refreshControl.endRefreshing()
         }
     }
+    
+    private func reload() {
+        loadingView.addToView(self.view, text: "Refreshing")
+        
+        model.fetchProfilePosts { [weak self] in
+            
+            guard let strongSelf = self else {return}
+            
+            strongSelf.profilePostsView.reloadData()
+            strongSelf.loadingView.removeFromView(strongSelf.view)
+        }
+    }
 
     
     // MARK: Button actions
@@ -73,6 +84,10 @@ class ProfilePageViewController: UITableViewController {
     
     @IBAction func uploadPressed(sender: UIBarButtonItem) {
         self.router.routeTo(RouteID.Upload.rawValue, VC: self)
+    }
+    
+    @IBAction func unwindToProfile(sender: UIStoryboardSegue) {
+        reload()
     }
 
     

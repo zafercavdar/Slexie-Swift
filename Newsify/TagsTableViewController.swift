@@ -19,16 +19,15 @@ class TagsTableViewController: UITableViewController {
     let networkingController = FBNetworkingController()
     let router = TagsTableRouter()
     
+    private struct Identifier {
+        static let TagsTableCell = "TagsTableViewCell"
+    }
+    
     enum RouteID: String {
         case Upload = "Upload"
         case Cancel = "Cancel"
     }
     
-    private struct Identifier {
-        static let TagsTableCell = "TagsTableViewCell"
-    }
-
-
     override func viewDidLoad() {
         super.viewDidLoad()
 
