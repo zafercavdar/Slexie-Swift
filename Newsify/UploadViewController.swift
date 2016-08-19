@@ -19,7 +19,7 @@ class UploadViewController: UIViewController, UINavigationControllerDelegate {
     static var trustedBackColor = "null"
     
     private let networkingController = FBNetworkingController()
-    private let imaggaService = PhotoAnalyzeService()
+    private let imaggaService = ImaggaService()
     private let router = UploadViewRouter()
     
     enum RouteID: String {
@@ -125,9 +125,18 @@ extension UploadViewController : UIImagePickerControllerDelegate {
     }
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
-        let selectedImage = info[UIImagePickerControllerEditedImage] as! UIImage
+        
+        var selectedImage = UIImage()
+        
+        if picker.sourceType == .Camera {
+            selectedImage = info[UIImagePickerControllerEditedImage] as! UIImage
+        } else if picker.sourceType == .PhotoLibrary {
+            selectedImage = info[UIImagePickerControllerOriginalImage] as! UIImage
+        }
+        
         photoImageView.image = selectedImage
         UploadViewController.chosenPhoto = selectedImage
         dismissViewControllerAnimated(true, completion: nil)
+        
     }
 }

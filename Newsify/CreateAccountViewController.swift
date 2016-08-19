@@ -115,7 +115,7 @@ class CreateAccountViewController: UIViewController, UITextFieldDelegate {
 
     // MARK: UITextFieldDelegate
     
-    private func textFieldShouldReturn(textField: UITextField) -> Bool {
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
         resignAllFirstResponder()
         return true
     }

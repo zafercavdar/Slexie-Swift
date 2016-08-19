@@ -17,10 +17,17 @@
 		B35478901D57778600889F9A /* UploadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B354788F1D57778600889F9A /* UploadViewController.swift */; };
 		B361FCCB1D63234800B4F8AA /* FeedPostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B361FCCA1D63234800B4F8AA /* FeedPostViewModel.swift */; };
 		B361FCCD1D63295800B4F8AA /* FeedPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = B361FCCC1D63295800B4F8AA /* FeedPost.swift */; };
+		B36AF2011D671BB400F2B87E /* Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36AF2001D671BB400F2B87E /* Tag.swift */; };
+		B36AF2051D671D8A00F2B87E /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36AF2041D671D8A00F2B87E /* Request.swift */; };
+		B36AF2071D671F9B00F2B87E /* ContentIDRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36AF2061D671F9B00F2B87E /* ContentIDRequest.swift */; };
+		B36AF2091D6725BA00F2B87E /* TagRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36AF2081D6725BA00F2B87E /* TagRequest.swift */; };
+		B36AF20B1D6728E600F2B87E /* ContentIDResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36AF20A1D6728E600F2B87E /* ContentIDResponse.swift */; };
 		B36E72151D5B78A700F626D0 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36E72141D5B78A700F626D0 /* LoadingView.swift */; };
 		B36E72171D5B846700F626D0 /* RandomBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36E72161D5B846700F626D0 /* RandomBase.swift */; };
+		B37DB5C81D66F94A00ADB79B /* ImaggaService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B37DB5C71D66F94A00ADB79B /* ImaggaService.swift */; };
 		B38E85BC1D59B44600CAE73B /* TagsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B38E85BB1D59B44600CAE73B /* TagsTableViewController.swift */; };
 		B38E85C01D59C28C00CAE73B /* TagsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B38E85BF1D59C28C00CAE73B /* TagsTableViewCell.swift */; };
+		B39BBA961D67179300A2C9E4 /* TagResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39BBA951D67179300A2C9E4 /* TagResponse.swift */; };
 		B3ACD3741D54D3E6004BEF24 /* CreateAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3ACD3731D54D3E6004BEF24 /* CreateAccountViewController.swift */; };
 		B3B527BF1D65AD2A00E31C37 /* ProfilePostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B527BE1D65AD2A00E31C37 /* ProfilePostTableViewCell.swift */; };
 		B3B527C11D65AF2100E31C37 /* ProfilePostsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B527C01D65AF2100E31C37 /* ProfilePostsViewModel.swift */; };
@@ -94,10 +101,17 @@
 		B354788F1D57778600889F9A /* UploadViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadViewController.swift; sourceTree = "<group>"; };
 		B361FCCA1D63234800B4F8AA /* FeedPostViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedPostViewModel.swift; sourceTree = "<group>"; };
 		B361FCCC1D63295800B4F8AA /* FeedPost.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedPost.swift; sourceTree = "<group>"; };
+		B36AF2001D671BB400F2B87E /* Tag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tag.swift; sourceTree = "<group>"; };
+		B36AF2041D671D8A00F2B87E /* Request.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
+		B36AF2061D671F9B00F2B87E /* ContentIDRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentIDRequest.swift; sourceTree = "<group>"; };
+		B36AF2081D6725BA00F2B87E /* TagRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagRequest.swift; sourceTree = "<group>"; };
+		B36AF20A1D6728E600F2B87E /* ContentIDResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentIDResponse.swift; sourceTree = "<group>"; };
 		B36E72141D5B78A700F626D0 /* LoadingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		B36E72161D5B846700F626D0 /* RandomBase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RandomBase.swift; sourceTree = "<group>"; };
+		B37DB5C71D66F94A00ADB79B /* ImaggaService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImaggaService.swift; sourceTree = "<group>"; };
 		B38E85BB1D59B44600CAE73B /* TagsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagsTableViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		B38E85BF1D59C28C00CAE73B /* TagsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagsTableViewCell.swift; sourceTree = "<group>"; };
+		B39BBA951D67179300A2C9E4 /* TagResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagResponse.swift; sourceTree = "<group>"; };
 		B3ACD3731D54D3E6004BEF24 /* CreateAccountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateAccountViewController.swift; sourceTree = "<group>"; };
 		B3B527BE1D65AD2A00E31C37 /* ProfilePostTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfilePostTableViewCell.swift; sourceTree = "<group>"; };
 		B3B527C01D65AF2100E31C37 /* ProfilePostsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfilePostsViewModel.swift; sourceTree = "<group>"; };
@@ -189,6 +203,26 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		B36AF2031D671D7200F2B87E /* Requests */ = {
+			isa = PBXGroup;
+			children = (
+				B36AF2041D671D8A00F2B87E /* Request.swift */,
+				B36AF2061D671F9B00F2B87E /* ContentIDRequest.swift */,
+				B36AF2081D6725BA00F2B87E /* TagRequest.swift */,
+			);
+			name = Requests;
+			sourceTree = "<group>";
+		};
+		B37DB5C91D67032D00ADB79B /* HTTP Responses */ = {
+			isa = PBXGroup;
+			children = (
+				B39BBA951D67179300A2C9E4 /* TagResponse.swift */,
+				B36AF2001D671BB400F2B87E /* Tag.swift */,
+				B36AF20A1D6728E600F2B87E /* ContentIDResponse.swift */,
+			);
+			name = "HTTP Responses";
+			sourceTree = "<group>";
+		};
 		B3BA49B31D65EC8700106930 /* Data Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -270,6 +304,7 @@
 			children = (
 				B3BA49C11D65F97200106930 /* Router.swift */,
 				B3ED70FA1D5CB34A001159A6 /* NetworkingController.swift */,
+				B32828BC1D5E02DE0022F85E /* PhotoAnalyzeService.swift */,
 			);
 			name = Protocols;
 			sourceTree = "<group>";
@@ -299,6 +334,8 @@
 		B3F455AC1D54A1BD005EA708 /* Newsify */ = {
 			isa = PBXGroup;
 			children = (
+				B36AF2031D671D7200F2B87E /* Requests */,
+				B37DB5C91D67032D00ADB79B /* HTTP Responses */,
 				B3BA49C01D65F95F00106930 /* Protocols */,
 				B3BA49BB1D65EF6D00106930 /* Routers */,
 				B3BA49B31D65EC8700106930 /* Data Models */,
@@ -310,7 +347,7 @@
 				B3F455B11D54A1BD005EA708 /* Main.storyboard */,
 				B3F455AD1D54A1BD005EA708 /* AppDelegate.swift */,
 				B3ED70FC1D5CB3C6001159A6 /* FBNetworkingController.swift */,
-				B32828BC1D5E02DE0022F85E /* PhotoAnalyzeService.swift */,
+				B37DB5C71D66F94A00ADB79B /* ImaggaService.swift */,
 				B32828B31D5DE2660022F85E /* UniqueIDGenerator.swift */,
 				B36E72161D5B846700F626D0 /* RandomBase.swift */,
 				B3F455B41D54A1BD005EA708 /* Assets.xcassets */,
@@ -607,26 +644,33 @@
 				B33E936A1D664EB30011019B /* DebugOptions.swift in Sources */,
 				B3BA49CA1D66003500106930 /* ImageExtension.swift in Sources */,
 				B3BA49BA1D65EE2B00106930 /* DateExtension.swift in Sources */,
+				B36AF2091D6725BA00F2B87E /* TagRequest.swift in Sources */,
 				B3BA49CE1D66086200106930 /* TagsTableRouter.swift in Sources */,
 				B3BA49BD1D65F35700106930 /* LoginRouter.swift in Sources */,
 				B3BA49C21D65F97200106930 /* Router.swift in Sources */,
 				B32828B41D5DE2660022F85E /* UniqueIDGenerator.swift in Sources */,
+				B36AF20B1D6728E600F2B87E /* ContentIDResponse.swift in Sources */,
 				B35478901D57778600889F9A /* UploadViewController.swift in Sources */,
 				B361FCCD1D63295800B4F8AA /* FeedPost.swift in Sources */,
 				B3ED70F91D5C8AC6001159A6 /* NewsFeedItemCell.swift in Sources */,
+				B39BBA961D67179300A2C9E4 /* TagResponse.swift in Sources */,
 				B33E936C1D665C570011019B /* Global Functions.swift in Sources */,
 				B3BA49BF1D65F8FA00106930 /* SignUpRouter.swift in Sources */,
 				B3BA49C61D65FAEE00106930 /* ColorExtension.swift in Sources */,
 				B32828BD1D5E02DE0022F85E /* PhotoAnalyzeService.swift in Sources */,
+				B37DB5C81D66F94A00ADB79B /* ImaggaService.swift in Sources */,
 				B3ACD3741D54D3E6004BEF24 /* CreateAccountViewController.swift in Sources */,
 				B3ED70FD1D5CB3C6001159A6 /* FBNetworkingController.swift in Sources */,
 				B36E72171D5B846700F626D0 /* RandomBase.swift in Sources */,
 				B36E72151D5B78A700F626D0 /* LoadingView.swift in Sources */,
 				B3BA49CC1D66053900106930 /* UploadViewRouter.swift in Sources */,
 				B3ED70F11D5C6ADF001159A6 /* ProfilePageViewController.swift in Sources */,
+				B36AF2051D671D8A00F2B87E /* Request.swift in Sources */,
 				B3F455B01D54A1BD005EA708 /* LoginViewController.swift in Sources */,
+				B36AF2011D671BB400F2B87E /* Tag.swift in Sources */,
 				B38E85BC1D59B44600CAE73B /* TagsTableViewController.swift in Sources */,
 				B32828AA1D5DAFAD0022F85E /* AlertExtension.swift in Sources */,
+				B36AF2071D671F9B00F2B87E /* ContentIDRequest.swift in Sources */,
 				B361FCCB1D63234800B4F8AA /* FeedPostViewModel.swift in Sources */,
 				B3ED70F31D5C87E9001159A6 /* NewsFeedTableViewController.swift in Sources */,
 				B3ED70F51D5C87FD001159A6 /* SearchPageTableViewController.swift in Sources */,
