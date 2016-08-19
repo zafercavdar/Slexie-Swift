@@ -17,9 +17,9 @@ class ProfilePageViewController: UITableViewController {
     private let loadingView = LoadingView()
     private let router = ProfileRouter()
     
-    enum RouteID: String {
-        case LogOut = "LogOut"
-        case Upload = "Upload"
+    struct RouteID {
+        static let LogOut = "LogOut"
+        static let Upload = "Upload"
     }
     
     private struct Identifier {
@@ -77,12 +77,12 @@ class ProfilePageViewController: UITableViewController {
         
         networkingController.signOut { [weak self] (Void) in
             guard let strongSelf = self else { return }
-            strongSelf.router.routeTo(RouteID.LogOut.rawValue, VC: strongSelf)
+            strongSelf.router.routeTo(RouteID.LogOut, VC: strongSelf)
         }
     }
     
     @IBAction func uploadPressed(sender: UIBarButtonItem) {
-        self.router.routeTo(RouteID.Upload.rawValue, VC: self)
+        self.router.routeTo(RouteID.Upload, VC: self)
     }
     
     @IBAction func unwindToProfile(sender: UIStoryboardSegue) {

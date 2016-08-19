@@ -23,9 +23,9 @@ class TagsTableViewController: UITableViewController {
         static let TagsTableCell = "TagsTableViewCell"
     }
     
-    enum RouteID: String {
-        case Upload = "Upload"
-        case Cancel = "Cancel"
+    struct RouteID {
+        static let Upload = "Upload"
+        static let Cancel = "Cancel"
     }
     
     override func viewDidLoad() {
@@ -38,7 +38,7 @@ class TagsTableViewController: UITableViewController {
     // MARK: Actions
     
     @IBAction func backButton(sender: UIBarButtonItem) {
-        self.router.routeTo(RouteID.Cancel.rawValue, VC: self)
+        self.router.routeTo(RouteID.Cancel, VC: self)
     }
     
     @IBAction func uploadData(sender: UIBarButtonItem) {
@@ -54,7 +54,7 @@ class TagsTableViewController: UITableViewController {
             guard let strongSelf = self else { return }
             
             loadingView.removeFromView(strongSelf.view)
-            strongSelf.router.routeTo(RouteID.Upload.rawValue, VC: strongSelf)
+            strongSelf.router.routeTo(RouteID.Upload, VC: strongSelf)
         }
     }
 

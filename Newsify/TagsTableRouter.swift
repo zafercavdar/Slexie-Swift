@@ -17,7 +17,7 @@ class TagsTableRouter: Router {
         case "Cancel":
             VC.dismissViewControllerAnimated(true, completion: nil)
         case "Upload":
-            VC.dismissViewControllerAnimated(true, completion: nil)
+            VC.performSegueWithIdentifier("ReturnToProfile", sender: nil)
         default:
             break
         }

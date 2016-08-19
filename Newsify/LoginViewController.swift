@@ -13,9 +13,9 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     private let fbNetworkingController = FBNetworkingController()
     private let router = LoginRouter()
     
-    enum RouteID: String {
-        case NewsFeed = "Newsfeed"
-        case CreateAccount = "CreateAccount"
+    struct RouteID {
+        static let NewsFeed = "Newsfeed"
+        static let CreateAccount = "CreateAccount"
     }
     
     @IBOutlet weak var usernameLabel: UILabel!
@@ -35,7 +35,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func signUpButton(sender: UIButton) {
-        router.routeTo(RouteID.CreateAccount.rawValue, VC: self)
+        router.routeTo(RouteID.CreateAccount, VC: self)
     }
     
     
@@ -51,7 +51,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         super.viewDidAppear(animated)
         
         if fbNetworkingController.getCurrentUser() != nil{
-            router.routeTo(RouteID.NewsFeed.rawValue, VC: self)
+            router.routeTo(RouteID.NewsFeed, VC: self)
         }
     }
     
@@ -104,7 +104,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             if let error = error {
                 strongSelf.signInFailedNotification(error.localizedDescription)
             } else {
-                strongSelf.router.routeTo(RouteID.NewsFeed.rawValue, VC: strongSelf)
+                strongSelf.router.routeTo(RouteID.NewsFeed, VC: strongSelf)
             }
         }
         

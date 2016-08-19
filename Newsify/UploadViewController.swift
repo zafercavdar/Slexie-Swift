@@ -22,9 +22,9 @@ class UploadViewController: UIViewController, UINavigationControllerDelegate {
     private let imaggaService = ImaggaService()
     private let router = UploadViewRouter()
     
-    enum RouteID: String {
-        case ShowTags = "ShowTags"
-        case Dismiss = "Dismiss"
+    struct RouteID {
+        static let ShowTags = "ShowTags"
+        static let Dismiss = "Dismiss"
     }
     
     
@@ -58,7 +58,7 @@ class UploadViewController: UIViewController, UINavigationControllerDelegate {
     }
     
     @IBAction func returnToProfile(sender: UIButton) {
-        self.router.routeTo(RouteID.Dismiss.rawValue, VC: self)
+        self.router.routeTo(RouteID.Dismiss, VC: self)
     }
     
     
@@ -79,7 +79,7 @@ class UploadViewController: UIViewController, UINavigationControllerDelegate {
                     guard let sself = self else {return}
                     
                     loadingView.removeFromView(sself.view)
-                    sself.router.routeTo(RouteID.ShowTags.rawValue, VC: sself)
+                    sself.router.routeTo(RouteID.ShowTags, VC: sself)
                 })
                 
             })

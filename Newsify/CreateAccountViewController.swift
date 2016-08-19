@@ -22,9 +22,9 @@ class CreateAccountViewController: UIViewController, UITextFieldDelegate {
     private let networkingController = FBNetworkingController()
     private let router = SignUpRouter()
     
-    enum RouteID: String {
-        case LoggedIn = "LoggedIn"
-        case Cancel = "Cancel"
+    struct RouteID {
+        static let LoggedIn = "LoggedIn"
+        static let Cancel = "Cancel"
     }
     
     override func viewDidLoad() {
@@ -58,7 +58,7 @@ class CreateAccountViewController: UIViewController, UITextFieldDelegate {
     
     
     @IBAction func cancel(sender: UIButton) {
-        self.router.routeTo(RouteID.Cancel.rawValue, VC: self)
+        self.router.routeTo(RouteID.Cancel, VC: self)
     }
     
     
@@ -107,7 +107,7 @@ class CreateAccountViewController: UIViewController, UITextFieldDelegate {
             if let error = error {
                 strongSelf.signUpFailedNotification(error.localizedDescription)
             } else {
-                strongSelf.router.routeTo(RouteID.LoggedIn.rawValue, VC: strongSelf)
+                strongSelf.router.routeTo(RouteID.LoggedIn, VC: strongSelf)
             }
             
         }

@@ -213,6 +213,24 @@
 			name = Requests;
 			sourceTree = "<group>";
 		};
+		B36AF20C1D6739B100F2B87E /* PhotoAnalyze */ = {
+			isa = PBXGroup;
+			children = (
+				B32828BC1D5E02DE0022F85E /* PhotoAnalyzeService.swift */,
+				B37DB5C71D66F94A00ADB79B /* ImaggaService.swift */,
+			);
+			name = PhotoAnalyze;
+			sourceTree = "<group>";
+		};
+		B36AF20D1D6739E000F2B87E /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				B3ED70FA1D5CB34A001159A6 /* NetworkingController.swift */,
+				B3ED70FC1D5CB3C6001159A6 /* FBNetworkingController.swift */,
+			);
+			name = Networking;
+			sourceTree = "<group>";
+		};
 		B37DB5C91D67032D00ADB79B /* HTTP Responses */ = {
 			isa = PBXGroup;
 			children = (
@@ -290,6 +308,7 @@
 		B3BA49BB1D65EF6D00106930 /* Routers */ = {
 			isa = PBXGroup;
 			children = (
+				B3BA49C11D65F97200106930 /* Router.swift */,
 				B3BA49CD1D66086200106930 /* TagsTableRouter.swift */,
 				B3BA49BC1D65F35700106930 /* LoginRouter.swift */,
 				B3BA49BE1D65F8FA00106930 /* SignUpRouter.swift */,
@@ -297,16 +316,6 @@
 				B3BA49CB1D66053900106930 /* UploadViewRouter.swift */,
 			);
 			name = Routers;
-			sourceTree = "<group>";
-		};
-		B3BA49C01D65F95F00106930 /* Protocols */ = {
-			isa = PBXGroup;
-			children = (
-				B3BA49C11D65F97200106930 /* Router.swift */,
-				B3ED70FA1D5CB34A001159A6 /* NetworkingController.swift */,
-				B32828BC1D5E02DE0022F85E /* PhotoAnalyzeService.swift */,
-			);
-			name = Protocols;
 			sourceTree = "<group>";
 		};
 		B3F455A11D54A1BD005EA708 = {
@@ -334,9 +343,10 @@
 		B3F455AC1D54A1BD005EA708 /* Newsify */ = {
 			isa = PBXGroup;
 			children = (
+				B36AF20D1D6739E000F2B87E /* Networking */,
+				B36AF20C1D6739B100F2B87E /* PhotoAnalyze */,
 				B36AF2031D671D7200F2B87E /* Requests */,
 				B37DB5C91D67032D00ADB79B /* HTTP Responses */,
-				B3BA49C01D65F95F00106930 /* Protocols */,
 				B3BA49BB1D65EF6D00106930 /* Routers */,
 				B3BA49B31D65EC8700106930 /* Data Models */,
 				B3BA49B61D65ECE600106930 /* View Models */,
@@ -346,8 +356,6 @@
 				B3F455B61D54A1BD005EA708 /* LaunchScreen.storyboard */,
 				B3F455B11D54A1BD005EA708 /* Main.storyboard */,
 				B3F455AD1D54A1BD005EA708 /* AppDelegate.swift */,
-				B3ED70FC1D5CB3C6001159A6 /* FBNetworkingController.swift */,
-				B37DB5C71D66F94A00ADB79B /* ImaggaService.swift */,
 				B32828B31D5DE2660022F85E /* UniqueIDGenerator.swift */,
 				B36E72161D5B846700F626D0 /* RandomBase.swift */,
 				B3F455B41D54A1BD005EA708 /* Assets.xcassets */,

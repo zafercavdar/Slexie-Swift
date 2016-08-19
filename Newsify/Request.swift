@@ -10,7 +10,7 @@ import Foundation
 import ObjectMapper
 
 protocol Request {
-
+    
     func request(requestType: RequestType<NSData>, requestURL: String, username: String, password: String, authToken: String, completion callback: (error: ErrorType?, response: Mappable?) -> Void)
 }
 

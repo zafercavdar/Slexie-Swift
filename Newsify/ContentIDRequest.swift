@@ -13,6 +13,8 @@ import AlamofireObjectMapper
 
 class ContentIDRequest: Request {
     
+    
+    
     func request(requestType: RequestType<NSData>, requestURL: String, username: String, password: String, authToken: String,completion callback: (error: ErrorType?, response: Mappable?) -> Void) {
         
         switch requestType {
@@ -29,7 +31,7 @@ class ContentIDRequest: Request {
                              encodingCompletion: { encodingResult in
                                 switch encodingResult {
                                 case .Success(let upload, _, _):
-                                    upload.responseObject { (response: Response<ContentIDResponse,NSError>) in
+                                    upload.responseObject { (response: Alamofire.Response<ContentIDResponse,NSError>) in
                                         if let contentIDResponse = response.result.value{
                                             callback(error: nil, response: contentIDResponse)
                                         } else {
