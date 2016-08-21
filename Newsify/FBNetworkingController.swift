@@ -110,7 +110,7 @@ class FBNetworkingController: NetworkingController {
                     strongSelf.saveTagsFor(photo: photoID, tags: tags)
                 }
                 
-                callback(error: error,photoID: photoID, url: downloadURL)
+                callback(error: error, photoID: photoID, url: downloadURL)
             }
         }
     }
@@ -219,7 +219,7 @@ class FBNetworkingController: NetworkingController {
         
         if fileManager.fileExistsAtPath(filePath){
             
-            print("LOG: Found \(photoID) in local directory.")
+            //print("LOG: Found \(photoID) in local directory.")
             guard let data = NSData(contentsOfURL: localURL!), let image = UIImage(data: data) else { return }
             callback(image, nil)
             
@@ -229,7 +229,7 @@ class FBNetworkingController: NetworkingController {
                     print("ERROR: \(error)\nEnd of Error\n")
                     callback(nil, error)
                 } else {
-                    print("LOG: Downloaded \(photoID) from database.")
+                    //print("LOG: Downloaded \(photoID) from database.")
                     guard let data = NSData(contentsOfURL: URL!), let image = UIImage(data: data) else {
                         return
                     }
@@ -286,7 +286,7 @@ class FBNetworkingController: NetworkingController {
                     
                     let post = FeedPost(username: username, id: id, tags: photoTags)
                     posts.append(post)
-                    print("TAG FOUND IN Photo: \(id)")
+                    //print("TAG FOUND IN Photo: \(id)")
 
                 }
                 completion(posts)

@@ -262,13 +262,14 @@
                         <barButtonItem key="rightBarButtonItem" title="Upload" id="Sst-CI-loB">
                             <connections>
                                 <action selector="uploadData:" destination="Vp1-C0-1wC" id="Kqb-qe-lc3"/>
-                                <segue destination="O3k-4q-AFr" kind="unwind" identifier="ReturnToProfile" unwindAction="unwindToProfile:" id="mkm-5h-qZ7"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <segue destination="ROT-uo-k3j" kind="show" identifier="ReturnToProfile" id="rr5-Hp-JCu"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wXf-Nw-CWJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <exit id="O3k-4q-AFr" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="-1582" y="733"/>
         </scene>
@@ -545,14 +546,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ProfilePostTableViewCell" rowHeight="400" id="mXw-zA-DHu" customClass="ProfilePostTableViewCell" customModule="Slexie" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ProfilePostTableViewCell" rowHeight="400" id="mXw-zA-DHu" customClass="ProfilePostTableViewCell" customModule="Slexie" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="92" width="600" height="400"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="mXw-zA-DHu" id="Ur5-gr-QAj">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="399.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="IAj-2k-jnC">
+                                        <stackView opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="IAj-2k-jnC">
                                             <rect key="frame" x="8" y="8" width="584" height="374"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="350" placeholderIntrinsicHeight="350" image="greyDefault" translatesAutoresizingMaskIntoConstraints="NO" id="tOr-dc-gKU">
@@ -654,6 +655,7 @@
         <image name="greyDefault" width="500" height="500"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="rr5-Hp-JCu"/>
         <segue reference="NWr-JX-J3B"/>
     </inferredMetricsTieBreakers>
 </document>

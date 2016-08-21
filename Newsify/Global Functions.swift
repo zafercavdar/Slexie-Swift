@@ -19,9 +19,9 @@ func indexOf(source: String, substring: String) -> Int? {
     return nil
 }
 
-func wait()
+func wait(seconds: NSTimeInterval)
 {
-    NSRunLoop.currentRunLoop().runMode(NSDefaultRunLoopMode, beforeDate: NSDate(timeIntervalSinceNow: 1))
+    NSRunLoop.currentRunLoop().runMode(NSDefaultRunLoopMode, beforeDate: NSDate(timeIntervalSinceNow: seconds))
 }
 
 func += <K, V> (inout left: Dictionary <K,V> , right: Dictionary <K,V>) {

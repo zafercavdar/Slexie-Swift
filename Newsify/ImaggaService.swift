@@ -24,7 +24,7 @@ class ImaggaService: PhotoAnalyzeService {
     }
     
     private let threshold = 25.00
-    private let maxTagNumber = 10
+    private let maxTagNumber = 6
     
     func findBackgroundColorWithContentID(contentID: String, completion: (color: String) -> Void) {
         //let requestURL = "\(APIEndPoint)/v1/colors?url=\(imageURL)"

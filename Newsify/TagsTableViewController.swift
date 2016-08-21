@@ -42,22 +42,26 @@ class TagsTableViewController: UITableViewController {
     }
     
     @IBAction func uploadData(sender: UIBarButtonItem) {
-        
         let loadingView = LoadingView()
         loadingView.addToView(self.view, text: "Uploading")
         
         let photo = UploadViewController.chosenPhoto
         let rate = UploadViewController.compressionRate
         let imageData = UIImageJPEGRepresentation(photo, rate)
+        
         networkingController.uploadPhoto(imageData!, tags: model.tags) { [weak self] (error, photoID, url) in
             
             guard let strongSelf = self else { return }
             
-            loadingView.removeFromView(strongSelf.view)
-            strongSelf.router.routeTo(RouteID.Upload, VC: strongSelf)
+            if error == nil {
+                loadingView.removeFromView(strongSelf.view)
+                print("Uploaded.")
+                wait(NSTimeInterval(2))
+                strongSelf.router.routeTo(RouteID.Upload, VC: strongSelf)
+            }
         }
-    }
 
+    }
     
     // MARK: - Table view data source
 
