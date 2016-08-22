@@ -7,11 +7,14 @@
 //
 
 import Foundation
-import ObjectMapper
 
-protocol Request {
+struct Request {
     
-    func request(requestType: RequestType<NSData>, requestURL: String, username: String, password: String, authToken: String, completion callback: (error: ErrorType?, response: Mappable?) -> Void)
+    var requestType: RequestType<NSData>
+    var requestURL: String
+    var username: String
+    var password: String
+    var authToken: String
 }
 
 enum RequestType<Value: NSData> {

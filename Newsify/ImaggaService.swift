@@ -53,8 +53,10 @@ class ImaggaService: PhotoAnalyzeService {
     func uploadPhotoGetContentID(imageData: NSData, completion: (id:String) -> Void){
         let requestURL = "\(API.endPoint)/v1/content"
         
-        let contentIDRequest = ContentIDRequest()
-        contentIDRequest.request(RequestType.POST(imageData), requestURL: requestURL, username: API.key, password: API.secret, authToken: API.authenticationToken) { (error, response) in
+        let requester = ContentIDRequester()
+        let request = Request(requestType: .POST(imageData), requestURL: requestURL, username: API.key, password: API.secret, authToken: API.authenticationToken)
+        
+        requester.makeRequest(request) { (error, response) in
             
             guard error == nil, let response = response, let idresponse = (response as? ContentIDResponse), let id = idresponse.id else {
                 return
@@ -66,9 +68,10 @@ class ImaggaService: PhotoAnalyzeService {
     func findRelatedTagsWith(contentID contentID: String, completion: (tags: [String]) -> Void){
         let requestURL = "\(API.endPoint)/v1/tagging?content=\(contentID)"
         
-        let tagRequest = TagRequest()
-        tagRequest.request(RequestType.GET(), requestURL: requestURL, username: API.key
-            , password: API.secret, authToken: API.authenticationToken) { [weak self] (error, response) in
+        let requester = TagRequester()
+        let request = Request(requestType: .GET(), requestURL: requestURL, username: API.key, password: API.secret, authToken: API.authenticationToken)
+        
+        requester.makeRequest(request) { [weak self] (error, response) in
                 
                 guard let strongSelf = self else { return }
                 
@@ -98,9 +101,10 @@ class ImaggaService: PhotoAnalyzeService {
     func findRelatedTagsWith(url url: String, completion: (tags: [String]) -> Void){
         let requestURL = "\(API.endPoint)/v1/tagging?url=\(url)"
         
-        let tagRequest = TagRequest()
-        tagRequest.request(RequestType.GET(), requestURL: requestURL, username: API.key
-        , password: API.secret, authToken: API.authenticationToken) { [weak self] (error, response) in
+        let requester = TagRequester()
+        let request = Request(requestType: .GET(), requestURL: requestURL, username: API.key, password: API.secret, authToken: API.authenticationToken)
+        
+        requester.makeRequest(request) { [weak self] (error, response) in
             
             guard let strongSelf = self else { return }
             
@@ -122,7 +126,6 @@ class ImaggaService: PhotoAnalyzeService {
                     break
                 }
             }
-            
             completion(tags: tagNames)
         }
     }

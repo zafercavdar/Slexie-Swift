@@ -11,17 +11,15 @@ import Alamofire
 import ObjectMapper
 import AlamofireObjectMapper
 
-class ContentIDRequest: Request {
+class ContentIDRequester: Requester {
     
-    
-    
-    func request(requestType: RequestType<NSData>, requestURL: String, username: String, password: String, authToken: String,completion callback: (error: ErrorType?, response: Mappable?) -> Void) {
+    func makeRequest(request: Request, completion callback: (error: ErrorType?, response: Mappable?) -> Void) {
         
-        switch requestType {
+        switch request.requestType {
         case .GET():
             print("ContentIDRequest is a type of POST request.")
         case .POST(let imageData):
-            Alamofire.upload(.POST, requestURL,headers: ["Authorization": authToken],
+            Alamofire.upload(.POST, request.requestURL,headers: ["Authorization": request.authToken],
                              multipartFormData: { multipartFormData in
                                 
                                 multipartFormData.appendBodyPart(data: imageData, name: "file", fileName: "myImage.png", mimeType: "image/png")

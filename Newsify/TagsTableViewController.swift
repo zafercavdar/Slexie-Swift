@@ -56,11 +56,15 @@ class TagsTableViewController: UITableViewController {
             if error == nil {
                 loadingView.removeFromView(strongSelf.view)
                 print("Uploaded.")
-                wait(NSTimeInterval(2))
-                strongSelf.router.routeTo(RouteID.Upload, VC: strongSelf)
+                _ = NSTimer.scheduledTimerWithTimeInterval(2, target: strongSelf, selector: #selector(strongSelf.callRouter), userInfo: nil, repeats: false)
+                
             }
         }
 
+    }
+    
+    func callRouter(){
+        self.router.routeTo(RouteID.Upload, VC: self)
     }
     
     // MARK: - Table view data source

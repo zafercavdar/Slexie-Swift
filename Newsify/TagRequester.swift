@@ -10,15 +10,15 @@ import Foundation
 import ObjectMapper
 import Alamofire
 
-class TagRequest: Request {
+class TagRequester: Requester {
     
     let contentType = "application/json"
 
-    func request(requestType: RequestType<NSData>, requestURL: String, username: String, password: String, authToken: String, completion callback: (error: ErrorType?, response: Mappable?) -> Void){
+    func makeRequest(request: Request, completion callback: (error: ErrorType?, response: Mappable?) -> Void){
     
-        switch requestType {
+        switch request.requestType {
         case .GET():
-            Alamofire.request(.GET, requestURL).authenticate(user: username, password: password)
+            Alamofire.request(.GET, request.requestURL).authenticate(user: request.username, password: request.password)
                 .validate(contentType: [contentType]).responseObject { (response: Response<TagResponse, NSError>) in
                     
                     switch response.result {
