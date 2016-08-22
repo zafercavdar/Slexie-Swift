@@ -11,9 +11,26 @@ import UIKit
 
 class ProfilePostViewModel {
     
-    var profilePosts: [ProfilePost] = []
-    let networkingController = FirebaseController()
+    struct State{
+        var profilePosts: [ProfilePost] = []
+        
+        enum Change{
+            case none
+            case posts(CollectionChange)
+        }
+        
+        mutating func reloadPosts(profilePosts: [ProfilePost]) -> Change{
+            self.profilePosts = profilePosts.reverse()
+            return Change.posts(.reload)
+        }
+    }
+
     
+    private let networkingController = FirebaseController()
+    private(set) var state = State()
+    var stateChangeHandler: ((State.Change) -> Void)?
+
+        
     func fetchProfilePosts(completion callback: () -> Void) {
         
         networkingController.getProfilePosts { [weak self] (fetchedPosts) in
@@ -21,14 +38,16 @@ class ProfilePostViewModel {
             guard let strongSelf = self else { return }
             
             if fetchedPosts.isEmpty {
-                strongSelf.profilePosts = strongSelf.defaultPosts()
+                strongSelf.emit(strongSelf.state.reloadPosts(strongSelf.defaultPosts()))
+                callback()
             } else {
-                strongSelf.profilePosts = fetchedPosts.reverse()
+                strongSelf.emit(strongSelf.state.reloadPosts(fetchedPosts))
                 
-                for post in strongSelf.profilePosts {
+                for post in strongSelf.state.profilePosts {
                     strongSelf.networkingController.downloadPhoto(with: post.id, completion: { (image, error) in
                         guard error != nil else {
                             post.setPhoto(image!)
+                            strongSelf.emit(State.Change.posts(.reload))
                             callback()
                             return
                         }
@@ -39,7 +58,7 @@ class ProfilePostViewModel {
     }
 }
 
-extension ProfilePostViewModel {
+private extension ProfilePostViewModel {
     
     private func defaultPosts() -> [ProfilePost]{
         let defaultImage = UIImage(named: "greyDefault")
@@ -52,5 +71,9 @@ extension ProfilePostViewModel {
         profileItem2.setPhoto(defaultImage!)
         
         return [profileItem, profileItem2]
+    }
+    
+    private func emit(change: State.Change){
+        stateChangeHandler?(change)
     }
 }

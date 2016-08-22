@@ -9,10 +9,30 @@
 import Foundation
 import UIKit
 
-class FeedPostViewModel {
+enum CollectionChange {
+    case reload
+}
 
-    var feedPosts: [FeedPost] = []
-    let networkingController = FirebaseController()
+class FeedPostViewModel {
+    
+    struct State{
+        var feedPosts: [FeedPost] = []
+        
+        enum Change{
+            case none
+            case posts(CollectionChange)
+        }
+        
+        mutating func reloadPosts(feedPosts: [FeedPost]) -> Change{
+            self.feedPosts = feedPosts.reverse()
+            return Change.posts(.reload)
+        }
+    }
+    
+    private let networkingController = FirebaseController()
+    private(set) var state = State()
+    var stateChangeHandler: ((State.Change) -> Void)?
+    
         
     func fetchFeedPosts(completion callback: () -> Void) {
         
@@ -22,18 +42,16 @@ class FeedPostViewModel {
                 guard let strongSelf = self else { return }
                 
                 if posts.isEmpty {
-                    print("Fetched Posts are empty")
-                    strongSelf.feedPosts = strongSelf.defaultPosts()
+                    strongSelf.emit(strongSelf.state.reloadPosts(strongSelf.defaultPosts()))
                     callback()
                 } else {
-                    print("Fetched Posts are NOT empty")
-                    strongSelf.feedPosts = posts.reverse()
+                    strongSelf.emit(strongSelf.state.reloadPosts(posts))
                     
-                    
-                    for post in strongSelf.feedPosts {
+                    for post in strongSelf.state.feedPosts {
                         strongSelf.networkingController.downloadPhoto(with: post.id, completion: { (image, error) in
                             guard error != nil else {
                                 post.setPhoto(image!)
+                                strongSelf.emit(State.Change.posts(.reload))
                                 callback()
                                 return
                             }
@@ -43,9 +61,10 @@ class FeedPostViewModel {
             })
         }
     }
+    
 }
 
-extension FeedPostViewModel {
+private extension FeedPostViewModel {
     
     private func defaultPosts() -> [FeedPost]{
         let defaultImage = UIImage(named: "example1")
@@ -64,4 +83,9 @@ extension FeedPostViewModel {
         
         return [feedItem,feedItem2]
     }
+    
+    private func emit(change: State.Change){
+        stateChangeHandler?(change)
+    }
+    
 }

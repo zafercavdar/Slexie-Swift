@@ -8,14 +8,39 @@
 
 import UIKit
 
+struct ProfilePostsPresentation {
+    
+    struct ProfilePostPresentation {
+        var image: UIImage
+        var tagList: String
+    }
+    
+    var profilePosts: [ProfilePostPresentation] = []
+    
+    mutating func update(withState state: ProfilePostViewModel.State){
+        
+        profilePosts = state.profilePosts.map({ (profilePost) -> ProfilePostPresentation in
+            let image = profilePost.photo
+            var tagText = ""
+            for tag in profilePost.tags{
+                tagText += "#\(tag) "
+            }
+            let tagList = tagText
+            return ProfilePostPresentation(image: image!, tagList: tagList)
+        })
+    }
+}
+
 class ProfilePageViewController: UITableViewController {
 
     @IBOutlet var profilePostsView: UITableView!
     
     private let networkingController = FirebaseController()
     private let model = ProfilePostViewModel()
-    private let loadingView = LoadingView()
     private let router = ProfileRouter()
+    private var presentation = ProfilePostsPresentation()
+    
+    private let loadingView = LoadingView()
     
     struct RouteID {
         static let LogOut = "LogOut"
@@ -33,11 +58,34 @@ class ProfilePageViewController: UITableViewController {
         refreshControl.addTarget(self, action: #selector(refresh(_:)), forControlEvents: .ValueChanged)
         tableView.addSubview(refreshControl)
 
+        self.applyState(model.state)
+        
+        self.model.stateChangeHandler = { [weak self] change in
+            self?.applyStateChange(change)
+        }
         
         reload()
         
     }
     
+    func applyState(state: ProfilePostViewModel.State) {
+        presentation.update(withState: state)
+        self.tableView.reloadData()
+    }
+    
+    func applyStateChange(change: ProfilePostViewModel.State.Change) {
+        switch change {
+        case .posts(let collectionChange):
+            presentation.update(withState: model.state)
+            switch collectionChange {
+            case .reload:
+                self.tableView.reloadData()
+            }
+        case .none:
+            break
+        }
+    }
+
     override func viewWillAppear(animated: Bool) {
         
         super.viewWillAppear(animated)
@@ -47,13 +95,10 @@ class ProfilePageViewController: UITableViewController {
         nav?.barTintColor = UIColor.coreColor()
         nav?.barStyle = UIBarStyle.BlackOpaque
         nav?.tintColor = UIColor.whiteColor()
-        
-        
     }
     
     func refresh(refreshControl: UIRefreshControl) {
         model.fetchProfilePosts {
-            self.profilePostsView.reloadData()
             refreshControl.endRefreshing()
         }
     }
@@ -64,8 +109,6 @@ class ProfilePageViewController: UITableViewController {
         model.fetchProfilePosts { [weak self] in
             
             guard let strongSelf = self else {return}
-            
-            strongSelf.profilePostsView.reloadData()
             strongSelf.loadingView.removeFromView(strongSelf.view)
         }
     }
@@ -97,23 +140,17 @@ class ProfilePageViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return model.profilePosts.count
+        return model.state.profilePosts.count
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        let profileItem = model.profilePosts[indexPath.row]
+        let postPresentation = presentation.profilePosts[indexPath.row]
         let cell = tableView.dequeueReusableCellWithIdentifier(Identifier.ProfilePostCell, forIndexPath: indexPath) as! ProfilePostTableViewCell
         
         
-        cell.profilePostView.image = profileItem.photo
-        
-        var tagText = ""
-        for tag in profileItem.tags{
-            tagText += "#\(tag) "
-        }
-        
-        cell.profilePostTags.text = tagText
+        cell.profilePostView.image = postPresentation.image
+        cell.profilePostTags.text = postPresentation.tagList
         
         return cell
     }

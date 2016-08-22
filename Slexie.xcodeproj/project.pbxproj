@@ -211,9 +211,9 @@
 			isa = PBXGroup;
 			children = (
 				B36AF2041D671D8A00F2B87E /* Request.swift */,
+				B35487881D6AD42F00F84C2D /* Requester.swift */,
 				B36AF2061D671F9B00F2B87E /* ContentIDRequester.swift */,
 				B36AF2081D6725BA00F2B87E /* TagRequester.swift */,
-				B35487881D6AD42F00F84C2D /* Requester.swift */,
 			);
 			name = Requests;
 			sourceTree = "<group>";

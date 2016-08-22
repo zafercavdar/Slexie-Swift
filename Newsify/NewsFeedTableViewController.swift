@@ -9,14 +9,41 @@
 import UIKit
 import Foundation
 
+
+struct FeedPostsPresentation {
+    
+    struct FeedPostPresentation {
+        var owner: String
+        var image: UIImage
+        var tagList: String
+    }
+    
+    var feedPosts: [FeedPostPresentation] = []
+    
+    mutating func update(withState state: FeedPostViewModel.State){
+        
+        feedPosts = state.feedPosts.map({ (feedPost) -> FeedPostPresentation in
+            let owner = feedPost.username
+            let image = feedPost.photo
+            var tagText = ""
+            for tag in feedPost.tags{
+                tagText += "#\(tag) "
+            }
+            let tagList = tagText
+            return FeedPostPresentation(owner: owner, image: image!, tagList: tagList)
+        })
+    }
+}
+
 class NewsFeedTableViewController: UITableViewController {
 
-    private var model = FeedPostViewModel()
-    private let loadingView = LoadingView()
-    
     private struct Identifier {
         static let NewsFeedCell = "NewsFeedItemCell"
     }
+    
+    private var model = FeedPostViewModel()
+    private let loadingView = LoadingView()
+    private var presentation = FeedPostsPresentation()
     
     @IBOutlet var feedPostsView: UITableView!
     
@@ -29,11 +56,34 @@ class NewsFeedTableViewController: UITableViewController {
         refreshControl.addTarget(self, action: #selector(refresh(_:)), forControlEvents: .ValueChanged)
         tableView.addSubview(refreshControl)
         
-        model.fetchFeedPosts { 
-            self.loadingView.removeFromView(self.view)
-            self.feedPostsView.reloadData()
+        self.applyState(model.state)
+        
+        model.stateChangeHandler = { [weak self] change in
+            self?.applyStateChange(change)
         }
         
+        model.fetchFeedPosts { 
+            self.loadingView.removeFromView(self.view)
+        }
+        
+    }
+    
+    func applyState(state: FeedPostViewModel.State) {
+        presentation.update(withState: state)
+        self.tableView.reloadData()
+    }
+    
+    func applyStateChange(change: FeedPostViewModel.State.Change) {
+        switch change {
+        case .posts(let collectionChange):
+            presentation.update(withState: model.state)
+            switch collectionChange {
+            case .reload:
+                self.tableView.reloadData()
+            }
+        case .none:
+            break
+        }
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -47,7 +97,6 @@ class NewsFeedTableViewController: UITableViewController {
     
     func refresh(refreshControl: UIRefreshControl) {
         model.fetchFeedPosts { 
-            self.feedPostsView.reloadData()
             refreshControl.endRefreshing()
         }
     }
@@ -55,7 +104,7 @@ class NewsFeedTableViewController: UITableViewController {
     // MARK: - Table view data source
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        if model.feedPosts.count > 0 {
+        if presentation.feedPosts.count > 0 {
             return 1
         } else {
             return 0
@@ -63,23 +112,17 @@ class NewsFeedTableViewController: UITableViewController {
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return model.feedPosts.count
+        return presentation.feedPosts.count
     }
 
     // Presentation needs to be added.
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let feedItem = model.feedPosts[indexPath.row]
+        let feedPresentation = presentation.feedPosts[indexPath.row]
         let cell = tableView.dequeueReusableCellWithIdentifier(Identifier.NewsFeedCell, forIndexPath: indexPath) as! NewsFeedItemCell
         
-        cell.usernameLabel.text = feedItem.username
-        cell.photoView.image = feedItem.photo
-        
-        var tagText = ""
-        for tag in feedItem.tags{
-            tagText += "#\(tag) "
-        }
-        
-        cell.tagsLabel.text = tagText
+        cell.usernameLabel.text = feedPresentation.owner
+        cell.photoView.image = feedPresentation.image
+        cell.tagsLabel.text = feedPresentation.tagList
         
         return cell
     }
