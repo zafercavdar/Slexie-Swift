@@ -79,22 +79,8 @@ class ImaggaService: PhotoAnalyzeService {
                     completion(tags: [])
                     return
                 }
-                
-                var tagNames: [String] = []
-                
-                print("count ",tags.count)
-
-                for i in 0..<tags.count{
-                    let tag = tags[i].tag
-                    let confidence = tags[i].confidence
-                    if confidence > strongSelf.threshold && tagNames.count < strongSelf.maxTagNumber {
-                        tagNames.append(tag!)
-                    } else if tagNames.count < strongSelf.maxTagNumber {
-                        break
-                    }
-                }
-                
-                completion(tags: tagNames)
+            
+                completion(tags: strongSelf.getHighlyTrustedTags(tags))
         }
     }
     
@@ -113,20 +99,24 @@ class ImaggaService: PhotoAnalyzeService {
                 return
             }
             
-            var tagNames: [String] = []
-            
-            print("count ",tags.count)
-            
-            for i in 0..<tags.count{
-                let tag = tags[i].tag
-                let confidence = tags[i].confidence
-                if confidence > strongSelf.threshold && tagNames.count < strongSelf.maxTagNumber {
-                    tagNames.append(tag!)
-                } else if tagNames.count < strongSelf.maxTagNumber {
-                    break
-                }
-            }
-            completion(tags: tagNames)
+            completion(tags: strongSelf.getHighlyTrustedTags(tags))
         }
+    }
+    
+    private func getHighlyTrustedTags(tags: [Tag]) -> [String]{
+        var tagNames: [String] = []
+        
+        for i in 0..<tags.count{
+            let tag = tags[i].tag
+            let confidence = tags[i].confidence
+            if confidence > self.threshold && tagNames.count < self.maxTagNumber {
+                tagNames.append(tag!)
+            } else if tagNames.count < self.maxTagNumber {
+                break
+            }
+        }
+        
+        return tagNames
+
     }
 }
