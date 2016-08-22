@@ -35,7 +35,38 @@ extension NSDate {
     }
     
     func uniqueTime() -> String {
-        return "\(self.hour)\(self.minute)\(self.seconds)S\(self.day)\(self.month)\(self.year)"
+        let month = self.month
+        let day = self.day
+        let hour = self.hour
+        let minute = self.minute
+        let second = self.seconds
+        var sMonth = "\(month)"
+        var sDay = "\(day)"
+        var sHour = "\(hour)"
+        var sMinute = "\(minute)"
+        var sSeconds = "\(second)"
+        
+        if month < 10 {
+            sMonth = "0\(month)"
+        }
+        
+        if day < 10 {
+            sDay = "0\(day)"
+        }
+        
+        if hour < 10 {
+            sHour = "0\(hour)"
+        }
+        
+        if minute < 10 {
+            sMinute = "0\(minute)"
+        }
+        
+        if second < 10 {
+            sSeconds = "0\(second)"
+        }
+        
+        return "\(self.year)\(sMonth)\(sDay)S\(sHour)\(sMinute)\(sSeconds)"
     }
     
 }
