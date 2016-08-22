@@ -12,5 +12,4 @@ protocol PhotoAnalyzeService {
     
     func findRelatedTagsWith(contentID contentID: String, completion: (tags: [String]) -> Void)
     func findRelatedTagsWith(url url: String, completion: (tags: [String]) -> Void)
-    
 }

@@ -266,7 +266,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <segue destination="ROT-uo-k3j" kind="show" identifier="ReturnToProfile" id="rr5-Hp-JCu"/>
+                        <segue destination="AUG-x2-Njh" kind="presentation" identifier="ReturnToProfile" id="mFE-cK-vSK"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wXf-Nw-CWJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -617,6 +617,7 @@
         <scene sceneID="7yg-Oj-Q8Y">
             <objects>
                 <tabBarController id="AUG-x2-Njh" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="TdN-nb-R2c"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="64u-Hr-wUX">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -655,7 +656,6 @@
         <image name="greyDefault" width="500" height="500"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="rr5-Hp-JCu"/>
-        <segue reference="NWr-JX-J3B"/>
+        <segue reference="mFE-cK-vSK"/>
     </inferredMetricsTieBreakers>
 </document>

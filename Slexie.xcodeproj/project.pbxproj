@@ -249,6 +249,15 @@
 			name = "HTTP Responses";
 			sourceTree = "<group>";
 		};
+		B386234F1D6B35E0007B8A5E /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				B36E72161D5B846700F626D0 /* RandomBase.swift */,
+				B32828B31D5DE2660022F85E /* UniqueIDGenerator.swift */,
+			);
+			name = Helpers;
+			sourceTree = "<group>";
+		};
 		B3BA49B31D65EC8700106930 /* Data Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -365,8 +374,7 @@
 				B3F455B61D54A1BD005EA708 /* LaunchScreen.storyboard */,
 				B3F455B11D54A1BD005EA708 /* Main.storyboard */,
 				B3F455AD1D54A1BD005EA708 /* AppDelegate.swift */,
-				B32828B31D5DE2660022F85E /* UniqueIDGenerator.swift */,
-				B36E72161D5B846700F626D0 /* RandomBase.swift */,
+				B386234F1D6B35E0007B8A5E /* Helpers */,
 				B3F455B41D54A1BD005EA708 /* Assets.xcassets */,
 				B3F455B91D54A1BD005EA708 /* Info.plist */,
 				B3ED71001D5CC655001159A6 /* GoogleService-Info.plist */,
