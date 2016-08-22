@@ -18,7 +18,7 @@ class UploadViewController: UIViewController, UINavigationControllerDelegate {
     static var trustedTags: [String] = []
     static var trustedBackColor = "null"
     
-    private let networkingController = FBNetworkingController()
+    private let networkingController = FirebaseController()
     private let imaggaService = ImaggaService()
     private let router = UploadViewRouter()
     

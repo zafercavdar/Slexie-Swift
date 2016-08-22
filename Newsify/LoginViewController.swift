@@ -10,7 +10,7 @@ import UIKit
 
 class LoginViewController: UIViewController, UITextFieldDelegate {
     
-    private let fbNetworkingController = FBNetworkingController()
+    private let fbNetworkingController = FirebaseController()
     private let router = LoginRouter()
     
     struct RouteID {

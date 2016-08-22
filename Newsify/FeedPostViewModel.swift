@@ -12,7 +12,7 @@ import UIKit
 class FeedPostViewModel {
 
     var feedPosts: [FeedPost] = []
-    let networkingController = FBNetworkingController()
+    let networkingController = FirebaseController()
         
     func fetchFeedPosts(completion callback: () -> Void) {
         

@@ -26,30 +26,6 @@ class ImaggaService: PhotoAnalyzeService {
     private let threshold = 25.00
     private let maxTagNumber = 6
     
-    func findBackgroundColorWithContentID(contentID: String, completion: (color: String) -> Void) {
-        //let requestURL = "\(APIEndPoint)/v1/colors?url=\(imageURL)"
-        let requestURL = "\(API.endPoint)/v1/colors?content=\(contentID)"
-        
-        var colorString = ""
-        
-        Alamofire.request(.GET, requestURL).authenticate(user: API.key, password: API.secret)
-            .validate(contentType: [ConsString.contentType]).responseJSON { response in
-                switch response.result {
-                case .Success:
-                    
-                    if let value = response.result.value {
-                        let json = JSON(value)
-                        let color = json["results"][0]["info"]["background_colors"][0]["closest_palette_color_parent"]
-                        colorString = String(color.description)
-                        print("JSON Background Color: \(colorString)")
-                        completion(color: colorString)
-                    }
-                case .Failure(let error):
-                    print("FAILED while finding background color \(error)")
-                }
-        }
-    }
-    
     func uploadPhotoGetContentID(imageData: NSData, completion: (id:String) -> Void){
         let requestURL = "\(API.endPoint)/v1/content"
         
@@ -119,4 +95,29 @@ class ImaggaService: PhotoAnalyzeService {
         return tagNames
 
     }
+    
+    /*func findBackgroundColorWithContentID(contentID: String, completion: (color: String) -> Void) {
+        //let requestURL = "\(APIEndPoint)/v1/colors?url=\(imageURL)"
+        let requestURL = "\(API.endPoint)/v1/colors?content=\(contentID)"
+        
+        var colorString = ""
+        
+        Alamofire.request(.GET, requestURL).authenticate(user: API.key, password: API.secret)
+            .validate(contentType: [ConsString.contentType]).responseJSON { response in
+                switch response.result {
+                case .Success:
+                    
+                    if let value = response.result.value {
+                        let json = JSON(value)
+                        let color = json["results"][0]["info"]["background_colors"][0]["closest_palette_color_parent"]
+                        colorString = String(color.description)
+                        print("JSON Background Color: \(colorString)")
+                        completion(color: colorString)
+                    }
+                case .Failure(let error):
+                    print("FAILED while finding background color \(error)")
+                }
+        }
+    }*/
+
 }

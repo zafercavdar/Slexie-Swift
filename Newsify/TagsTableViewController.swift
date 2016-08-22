@@ -16,7 +16,7 @@ class TagsTableViewController: UITableViewController {
     }
 
     private let model = TagModel()
-    private let networkingController = FBNetworkingController()
+    private let networkingController = FirebaseController()
     private let router = TagsTableRouter()
     
     private struct Identifier {

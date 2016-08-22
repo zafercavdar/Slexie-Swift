@@ -12,7 +12,7 @@ import UIKit
 class ProfilePostViewModel {
     
     var profilePosts: [ProfilePost] = []
-    let networkingController = FBNetworkingController()
+    let networkingController = FirebaseController()
     
     func fetchProfilePosts(completion callback: () -> Void) {
         

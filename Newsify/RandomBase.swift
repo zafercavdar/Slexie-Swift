@@ -10,7 +10,7 @@ import Foundation
 
 class RandomBase {
     
-    private let networkingController = FBNetworkingController()
+    private let networkingController = FirebaseController()
 
     private let wordBank: [String] = ["Njorth","hierarchising","transparietal","overspecializing","latest","Prajna","topeka","mashhad","antiradiating","pesky","Guerrilla","trouser","odour","noesis","huysmans","Wheel","connubiality","beelike","unprintable","agarita","Incogitable","chubbier","volga","noncoagulable","kernite","Unpredacious","penetrate","chairlift","lustrously","prepossession","Decigram","uredinia","diver","princeship","superglottic","Ratatouille","photochromy","wmo","cirrous","saut","Goodby","floy","thymbraeus","labialization","indicatively","Carbolize","skiograph","abortively","rockfishes","grayce","Farci","snuffiness","damaskeen","arri","auscultating","Sheers","quadrivia","redeployment","unbud","multiracial","Graphicly","semihard","tapetal","edibles","shield","Chyack","commend","palsylike","salivator","vulvitis","Milledgeville","athenaeus","glaucomatous","lifer","bawdily","Nothus","nova","unfrizzly","targum","virulently","Bravoing","decaliter","lubricant","besague","reheel","Dacryagogue","overclemency","untenderized","riel","unpurposed","Heartsickness","kulturkampf","leukemia","expeditated","punnet","Teresa","retest","magazinish","grandparent","idola"]
     

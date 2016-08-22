@@ -16,6 +16,7 @@
 		B33E936C1D665C570011019B /* Global Functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B33E936B1D665C570011019B /* Global Functions.swift */; };
 		B35478901D57778600889F9A /* UploadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B354788F1D57778600889F9A /* UploadViewController.swift */; };
 		B35487891D6AD42F00F84C2D /* Requester.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35487881D6AD42F00F84C2D /* Requester.swift */; };
+		B354878B1D6AE49600F84C2D /* AuthenticationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B354878A1D6AE49600F84C2D /* AuthenticationController.swift */; };
 		B361FCCB1D63234800B4F8AA /* FeedPostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B361FCCA1D63234800B4F8AA /* FeedPostViewModel.swift */; };
 		B361FCCD1D63295800B4F8AA /* FeedPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = B361FCCC1D63295800B4F8AA /* FeedPost.swift */; };
 		B36AF2011D671BB400F2B87E /* Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36AF2001D671BB400F2B87E /* Tag.swift */; };
@@ -47,7 +48,7 @@
 		B3ED70F51D5C87FD001159A6 /* SearchPageTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3ED70F41D5C87FD001159A6 /* SearchPageTableViewController.swift */; };
 		B3ED70F91D5C8AC6001159A6 /* NewsFeedItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3ED70F81D5C8AC6001159A6 /* NewsFeedItemCell.swift */; };
 		B3ED70FB1D5CB34A001159A6 /* NetworkingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3ED70FA1D5CB34A001159A6 /* NetworkingController.swift */; };
-		B3ED70FD1D5CB3C6001159A6 /* FBNetworkingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3ED70FC1D5CB3C6001159A6 /* FBNetworkingController.swift */; };
+		B3ED70FD1D5CB3C6001159A6 /* FirebaseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3ED70FC1D5CB3C6001159A6 /* FirebaseController.swift */; };
 		B3ED71011D5CC655001159A6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B3ED71001D5CC655001159A6 /* GoogleService-Info.plist */; };
 		B3F455AE1D54A1BD005EA708 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F455AD1D54A1BD005EA708 /* AppDelegate.swift */; };
 		B3F455B01D54A1BD005EA708 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F455AF1D54A1BD005EA708 /* LoginViewController.swift */; };
@@ -101,6 +102,7 @@
 		B33E936B1D665C570011019B /* Global Functions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Global Functions.swift"; sourceTree = "<group>"; };
 		B354788F1D57778600889F9A /* UploadViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadViewController.swift; sourceTree = "<group>"; };
 		B35487881D6AD42F00F84C2D /* Requester.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Requester.swift; sourceTree = "<group>"; };
+		B354878A1D6AE49600F84C2D /* AuthenticationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationController.swift; sourceTree = "<group>"; };
 		B361FCCA1D63234800B4F8AA /* FeedPostViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedPostViewModel.swift; sourceTree = "<group>"; };
 		B361FCCC1D63295800B4F8AA /* FeedPost.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedPost.swift; sourceTree = "<group>"; };
 		B36AF2001D671BB400F2B87E /* Tag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tag.swift; sourceTree = "<group>"; };
@@ -132,7 +134,7 @@
 		B3ED70F41D5C87FD001159A6 /* SearchPageTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchPageTableViewController.swift; sourceTree = "<group>"; };
 		B3ED70F81D5C8AC6001159A6 /* NewsFeedItemCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsFeedItemCell.swift; sourceTree = "<group>"; };
 		B3ED70FA1D5CB34A001159A6 /* NetworkingController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkingController.swift; sourceTree = "<group>"; };
-		B3ED70FC1D5CB3C6001159A6 /* FBNetworkingController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FBNetworkingController.swift; sourceTree = "<group>"; };
+		B3ED70FC1D5CB3C6001159A6 /* FirebaseController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseController.swift; sourceTree = "<group>"; };
 		B3ED71001D5CC655001159A6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B3F455AA1D54A1BD005EA708 /* Slexie.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Slexie.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B3F455AD1D54A1BD005EA708 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -229,7 +231,8 @@
 			isa = PBXGroup;
 			children = (
 				B3ED70FA1D5CB34A001159A6 /* NetworkingController.swift */,
-				B3ED70FC1D5CB3C6001159A6 /* FBNetworkingController.swift */,
+				B354878A1D6AE49600F84C2D /* AuthenticationController.swift */,
+				B3ED70FC1D5CB3C6001159A6 /* FirebaseController.swift */,
 			);
 			name = Networking;
 			sourceTree = "<group>";
@@ -672,7 +675,8 @@
 				B32828BD1D5E02DE0022F85E /* PhotoAnalyzeService.swift in Sources */,
 				B37DB5C81D66F94A00ADB79B /* ImaggaService.swift in Sources */,
 				B3ACD3741D54D3E6004BEF24 /* CreateAccountViewController.swift in Sources */,
-				B3ED70FD1D5CB3C6001159A6 /* FBNetworkingController.swift in Sources */,
+				B354878B1D6AE49600F84C2D /* AuthenticationController.swift in Sources */,
+				B3ED70FD1D5CB3C6001159A6 /* FirebaseController.swift in Sources */,
 				B36E72171D5B846700F626D0 /* RandomBase.swift in Sources */,
 				B36E72151D5B78A700F626D0 /* LoadingView.swift in Sources */,
 				B3BA49CC1D66053900106930 /* UploadViewRouter.swift in Sources */,

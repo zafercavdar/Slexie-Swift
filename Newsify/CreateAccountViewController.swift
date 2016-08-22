@@ -19,7 +19,7 @@ class CreateAccountViewController: UIViewController, UITextFieldDelegate {
     
     private var fields: [UITextField] = []
     
-    private let networkingController = FBNetworkingController()
+    private let networkingController = FirebaseController()
     private let router = SignUpRouter()
     
     struct RouteID {

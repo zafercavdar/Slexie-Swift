@@ -7,25 +7,18 @@
 //
 
 import Foundation
+import UIKit
 
 protocol NetworkingController {
     
-    func signInWith(username username: String, password: String, enableNotification: Bool, completionHandler: (error: NSError?) -> Void)
-    
-    func signInWith(email email: String, password: String, enableNotification: Bool, completionHandler: (error: NSError?) -> Void)
-    
-    func signUp(email: String, username: String, password: String, profileType: String, completionHandler: (error: NSError?) -> Void)
-    
     func uploadPhoto(image: NSData, tags: [String], callback: (error: NSError?, photoID: String, url: String) -> Void)
     
-    //func saveTagsFor(photo contentID: String, tags: [String])
-    
+    func downloadPhoto(with photoID: String, completion callback: (UIImage?, NSError?) -> Void)
+        
     func getAccountTags(completion: [String] -> Void)
     
     func getPhotosRelatedWith(tags: [String], completion: [FeedPost] -> Void)
     
-    func signOut(callback: Void->Void)
+    func getProfilePosts(completion callback: [ProfilePost] -> Void)
     
-    func getUID() -> String?
-
 }

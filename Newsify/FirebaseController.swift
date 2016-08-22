@@ -12,7 +12,7 @@ import FirebaseDatabase
 import FirebaseStorage
 import UIKit
 
-class FBNetworkingController: NetworkingController {
+class FirebaseController: NetworkingController, AuthenticationController {
     
     let appURL = "hackify-a48e3.firebaseio.com"
     
@@ -44,7 +44,7 @@ class FBNetworkingController: NetworkingController {
     }
 
     
-    // MARK: NetworkingController Methods
+    // MARK: AuthenticationController Methods
     
     func signInWith(username username: String, password: String, enableNotification: Bool, completionHandler: (error: NSError?) -> Void){
         
@@ -89,6 +89,22 @@ class FBNetworkingController: NetworkingController {
 
     }
     
+    func signOut(callback: Void -> Void) {
+        try! FIRAuth.auth()!.signOut()
+        callback()
+    }
+    
+    func getUID() -> String? {
+        return getCurrentUser()?.uid
+    }
+    
+    func getCurrentUser() -> FIRUser?{
+        return FIRAuth.auth()?.currentUser
+    }
+
+
+    // MARK: NetworkingController Methods
+    
     func uploadPhoto(image: NSData, tags: [String], callback: (error: NSError?, photoID: String, url: String) -> Void){
         let storageRef = FIRStorage.storage().reference()
         let uniqueIDGenerator = UniqueIDGenerator()
@@ -115,39 +131,6 @@ class FBNetworkingController: NetworkingController {
         }
     }
     
-    private func saveTagsFor(photo uniqueID: String, tags: [String]) {
-        let uidNo = getUID()
-        
-        if let uid = uidNo as String!{
-            let photoRef = References.PhotoRef.child(uniqueID)
-            
-            photoRef.child(ReferenceLabels.PostTags.rawValue).setValue(tags)
-            photoRef.child(ReferenceLabels.PostOwner.rawValue).setValue(uid)
-            
-            getAccountPrivacy { (privacy) in
-                photoRef.child(ReferenceLabels.PostPrivacy.rawValue).setValue(privacy)
-            }
-            
-            photoRef.child(ReferenceLabels.Likers.rawValue).setValue([])
-            
-            let userRef = References.UserRef.child(uid)
-            
-            getPhotoCount({ (count) in
-                userRef.updateChildValues([ReferenceLabels.PostCount.rawValue : count+1])
-            })
-            
-            getAccountTags({ (oldTags) in
-                userRef.updateChildValues([ReferenceLabels.UserTags.rawValue : oldTags + tags])
-            })
-            
-            getAccountPosts({ (oldPosts) in
-                userRef.updateChildValues([ReferenceLabels.UserPosts.rawValue: oldPosts + [uniqueID]])
-            })
-            
-
-        }
-    }
-    
     func getAccountTags(completion: [String] -> Void) {
         
         guard let uid = getUID() else {
@@ -163,81 +146,6 @@ class FBNetworkingController: NetworkingController {
                 completion([])
             }
         })
-    }
-    
-    func getAccountPosts(completion: [String] -> Void) {
-        
-        guard let uid = getUID() else {
-            return
-        }
-        
-        let ref = References.UserRef.child(uid).child(ReferenceLabels.UserPosts.rawValue)
-        
-        ref.observeSingleEventOfType(.Value, withBlock: { (snapshot) in
-            if let photos = snapshot.value as? [String]{
-                completion(photos)
-            } else {
-                completion([])
-            }
-        })
-    }
-    
-    func getProfilePosts(completion callback: [ProfilePost] -> Void) {
-    
-        var profilePosts: [ProfilePost] = []
-        
-        getAccountPosts { (postIDs) in
-            let photoRef = References.PhotoRef
-            photoRef.observeSingleEventOfType(.Value, withBlock: { (snapshot) in
-                if let photos = snapshot.value as? [String: AnyObject] {
-                    for postID in postIDs {
-                        let tags = (photos[postID] as! [String: AnyObject])[ReferenceLabels.PostTags.rawValue] as! [String]
-                        let post = ProfilePost(id: postID, tags: tags)
-                        profilePosts.append(post)
-                    }
-                    
-                    callback(profilePosts)
-                } else {
-                    callback([])
-                }
-            })
-        }
-    }
-    
-    func downloadPhoto(with photoID: String, completion callback: (UIImage?, NSError?) -> Void){
-        let photoRef = References.PhotoStorageRef.child("\(photoID).png")
-        
-        let fileManager = NSFileManager.defaultManager()
-        let localMainURL = fileManager.URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).last
-        let localURLString = (localMainURL?.absoluteString)! + "images/\(photoID).png"
-        let localURL = NSURL(string: localURLString)
-        
-        let path = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as String
-        let pURL = NSURL(fileURLWithPath: path)
-        let filePath = pURL.URLByAppendingPathComponent("images/\(photoID).png").path!
-
-        
-        if fileManager.fileExistsAtPath(filePath){
-            
-            //print("LOG: Found \(photoID) in local directory.")
-            guard let data = NSData(contentsOfURL: localURL!), let image = UIImage(data: data) else { return }
-            callback(image, nil)
-            
-        } else {
-            _ = photoRef.writeToFile(localURL!) { (URL, error) -> Void in
-                if (error != nil) {
-                    print("ERROR: \(error)\nEnd of Error\n")
-                    callback(nil, error)
-                } else {
-                    //print("LOG: Downloaded \(photoID) from database.")
-                    guard let data = NSData(contentsOfURL: URL!), let image = UIImage(data: data) else {
-                        return
-                    }
-                    
-                    callback(image, error)
-                }
-            }
-        }
     }
     
     func getPhotosRelatedWith(tags: [String], completion: [FeedPost] -> Void){
@@ -272,7 +180,7 @@ class FBNetworkingController: NetworkingController {
                     }
                     
                     
-                    guard strongSelf.containsAny(photoTags,checkList: tags) else {
+                    guard containsAny(photoTags,checkList: tags) else {
                         continue
                     }
                     
@@ -287,28 +195,124 @@ class FBNetworkingController: NetworkingController {
                     let post = FeedPost(username: username, id: id, tags: photoTags)
                     posts.append(post)
                     //print("TAG FOUND IN Photo: \(id)")
-
+                    
                 }
                 completion(posts)
-            })
+                })
         })
     }
     
-    func signOut(callback: Void -> Void) {
-        try! FIRAuth.auth()!.signOut()
-        callback()
+    func getProfilePosts(completion callback: [ProfilePost] -> Void) {
+        
+        var profilePosts: [ProfilePost] = []
+        
+        getAccountPosts { (postIDs) in
+            let photoRef = References.PhotoRef
+            photoRef.observeSingleEventOfType(.Value, withBlock: { (snapshot) in
+                if let photos = snapshot.value as? [String: AnyObject] {
+                    for postID in postIDs {
+                        let tags = (photos[postID] as! [String: AnyObject])[ReferenceLabels.PostTags.rawValue] as! [String]
+                        let post = ProfilePost(id: postID, tags: tags)
+                        profilePosts.append(post)
+                    }
+                    
+                    callback(profilePosts)
+                } else {
+                    callback([])
+                }
+            })
+        }
     }
     
-    func getUID() -> String? {
-        return getCurrentUser()?.uid
+    func downloadPhoto(with photoID: String, completion callback: (UIImage?, NSError?) -> Void){
+        let photoRef = References.PhotoStorageRef.child("\(photoID).png")
+        
+        let fileManager = NSFileManager.defaultManager()
+        let localMainURL = fileManager.URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).last
+        let localURLString = (localMainURL?.absoluteString)! + "images/\(photoID).png"
+        let localURL = NSURL(string: localURLString)
+        
+        let path = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as String
+        let pURL = NSURL(fileURLWithPath: path)
+        let filePath = pURL.URLByAppendingPathComponent("images/\(photoID).png").path!
+        
+        
+        if fileManager.fileExistsAtPath(filePath){
+            
+            //print("LOG: Found \(photoID) in local directory.")
+            guard let data = NSData(contentsOfURL: localURL!), let image = UIImage(data: data) else { return }
+            callback(image, nil)
+            
+        } else {
+            _ = photoRef.writeToFile(localURL!) { (URL, error) -> Void in
+                if (error != nil) {
+                    print("ERROR: \(error)\nEnd of Error\n")
+                    callback(nil, error)
+                } else {
+                    //print("LOG: Downloaded \(photoID) from database.")
+                    guard let data = NSData(contentsOfURL: URL!), let image = UIImage(data: data) else {
+                        return
+                    }
+                    
+                    callback(image, error)
+                }
+            }
+        }
     }
-    
-    func getCurrentUser() -> FIRUser?{
-        return FIRAuth.auth()?.currentUser
-    }
-    
-    
+
     // MARK: Private methods
+
+    
+    private func saveTagsFor(photo uniqueID: String, tags: [String]) {
+        let uidNo = getUID()
+        
+        if let uid = uidNo as String!{
+            let photoRef = References.PhotoRef.child(uniqueID)
+            
+            photoRef.child(ReferenceLabels.PostTags.rawValue).setValue(tags)
+            photoRef.child(ReferenceLabels.PostOwner.rawValue).setValue(uid)
+            
+            getAccountPrivacy { (privacy) in
+                photoRef.child(ReferenceLabels.PostPrivacy.rawValue).setValue(privacy)
+            }
+            
+            photoRef.child(ReferenceLabels.Likers.rawValue).setValue([])
+            
+            let userRef = References.UserRef.child(uid)
+            
+            getPhotoCount({ (count) in
+                userRef.updateChildValues([ReferenceLabels.PostCount.rawValue : count+1])
+            })
+            
+            getAccountTags({ (oldTags) in
+                userRef.updateChildValues([ReferenceLabels.UserTags.rawValue : oldTags + tags])
+            })
+            
+            getAccountPosts({ (oldPosts) in
+                userRef.updateChildValues([ReferenceLabels.UserPosts.rawValue: oldPosts + [uniqueID]])
+            })
+            
+
+        }
+    }
+    
+    
+    private func getAccountPosts(completion: [String] -> Void) {
+        
+        guard let uid = getUID() else {
+            return
+        }
+        
+        let ref = References.UserRef.child(uid).child(ReferenceLabels.UserPosts.rawValue)
+        
+        ref.observeSingleEventOfType(.Value, withBlock: { (snapshot) in
+            if let photos = snapshot.value as? [String]{
+                completion(photos)
+            } else {
+                completion([])
+            }
+        })
+    }
     
     private func getUsername(with uid: String, completion callback: (username: String) -> Void){
     
@@ -334,6 +338,14 @@ class FBNetworkingController: NetworkingController {
         })
     }
     
+    private func getAccountPrivacy(callback: (privacy: String) -> Void){
+        let ref = References.UserRef.child(getUID()!).child(ReferenceLabels.ProfileType.rawValue)
+        ref.observeSingleEventOfType(.Value , withBlock: { (snapshot) in
+            let type = snapshot.value as! String
+            callback(privacy: type)
+        })
+    }
+    
     private func cloneUserDetails(fbUser: FIRUser!, username: String, password: String, profileType: String ){
         
         let ref = References.UserRef.child(fbUser!.uid)
@@ -348,29 +360,11 @@ class FBNetworkingController: NetworkingController {
         
         ref.updateChildValues(user as [NSObject : AnyObject])
     }
-    
-    private func getAccountPrivacy(callback: (privacy: String) -> Void){
-        let ref = References.UserRef.child(getUID()!).child(ReferenceLabels.ProfileType.rawValue)
-        ref.observeSingleEventOfType(.Value , withBlock: { (snapshot) in
-            let type = snapshot.value as! String
-            callback(privacy: type)
-        })
-    }
-    
-    private func containsAny(storage: [String], checkList: [String]) -> Bool{
-        for element in checkList{
-            if storage.contains(element){
-                return true
-            }
-        }
-        
-        return false
-    }
 }
 
 // MARK: Fake functions for random generator
 
-extension FBNetworkingController {
+extension FirebaseController {
     
     func fakeSignUp(uid: String,email: String, username: String, password: String, profileType: String) {
         self.fakeCloneUserDetails(uid, username: username, password: password, profileType: profileType)

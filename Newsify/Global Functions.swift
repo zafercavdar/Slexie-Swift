@@ -29,3 +29,13 @@ func += <K, V> (inout left: Dictionary <K,V> , right: Dictionary <K,V>) {
         left[k] = v
     }
 }
+
+func containsAny(storage: [String], checkList: [String]) -> Bool{
+    for element in checkList{
+        if storage.contains(element){
+            return true
+        }
+    }
+    
+    return false
+}

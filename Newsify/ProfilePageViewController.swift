@@ -12,7 +12,7 @@ class ProfilePageViewController: UITableViewController {
 
     @IBOutlet var profilePostsView: UITableView!
     
-    private let networkingController = FBNetworkingController()
+    private let networkingController = FirebaseController()
     private let model = ProfilePostViewModel()
     private let loadingView = LoadingView()
     private let router = ProfileRouter()

@@ -10,7 +10,6 @@ import Foundation
 
 protocol PhotoAnalyzeService {
     
-    func findBackgroundColorWithContentID(contentID: String, completion: (color: String) -> Void)
     func findRelatedTagsWith(contentID contentID: String, completion: (tags: [String]) -> Void)
     func findRelatedTagsWith(url url: String, completion: (tags: [String]) -> Void)
     
