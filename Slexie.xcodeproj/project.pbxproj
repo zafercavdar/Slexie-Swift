@@ -17,7 +17,7 @@
 		B35487891D6AD42F00F84C2D /* Requesters.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35487881D6AD42F00F84C2D /* Requesters.swift */; };
 		B361FCCB1D63234800B4F8AA /* FeedPostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B361FCCA1D63234800B4F8AA /* FeedPostViewModel.swift */; };
 		B361FCCD1D63295800B4F8AA /* FeedPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = B361FCCC1D63295800B4F8AA /* FeedPost.swift */; };
-		B36AF2051D671D8A00F2B87E /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36AF2041D671D8A00F2B87E /* Request.swift */; };
+		B36AF2051D671D8A00F2B87E /* Requests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36AF2041D671D8A00F2B87E /* Requests.swift */; };
 		B36AF20B1D6728E600F2B87E /* ContentIDResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36AF20A1D6728E600F2B87E /* ContentIDResponse.swift */; };
 		B36E72151D5B78A700F626D0 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36E72141D5B78A700F626D0 /* LoadingView.swift */; };
 		B36E72171D5B846700F626D0 /* RandomBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36E72161D5B846700F626D0 /* RandomBase.swift */; };
@@ -98,7 +98,7 @@
 		B35487881D6AD42F00F84C2D /* Requesters.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Requesters.swift; sourceTree = "<group>"; };
 		B361FCCA1D63234800B4F8AA /* FeedPostViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedPostViewModel.swift; sourceTree = "<group>"; };
 		B361FCCC1D63295800B4F8AA /* FeedPost.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedPost.swift; sourceTree = "<group>"; };
-		B36AF2041D671D8A00F2B87E /* Request.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
+		B36AF2041D671D8A00F2B87E /* Requests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Requests.swift; sourceTree = "<group>"; };
 		B36AF20A1D6728E600F2B87E /* ContentIDResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentIDResponse.swift; sourceTree = "<group>"; };
 		B36E72141D5B78A700F626D0 /* LoadingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		B36E72161D5B846700F626D0 /* RandomBase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RandomBase.swift; sourceTree = "<group>"; };
@@ -197,13 +197,13 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
-		B36AF2031D671D7200F2B87E /* Requests */ = {
+		B36AF2031D671D7200F2B87E /* HTTP Request */ = {
 			isa = PBXGroup;
 			children = (
-				B36AF2041D671D8A00F2B87E /* Request.swift */,
+				B36AF2041D671D8A00F2B87E /* Requests.swift */,
 				B35487881D6AD42F00F84C2D /* Requesters.swift */,
 			);
-			name = Requests;
+			name = "HTTP Request";
 			sourceTree = "<group>";
 		};
 		B36AF20D1D6739E000F2B87E /* Networking */ = {
@@ -337,7 +337,7 @@
 			isa = PBXGroup;
 			children = (
 				B36AF20D1D6739E000F2B87E /* Networking */,
-				B36AF2031D671D7200F2B87E /* Requests */,
+				B36AF2031D671D7200F2B87E /* HTTP Request */,
 				B37DB5C91D67032D00ADB79B /* HTTP Responses */,
 				B3BA49BB1D65EF6D00106930 /* Routers */,
 				B3BA49B31D65EC8700106930 /* Data Models */,
@@ -664,7 +664,7 @@
 				B36E72151D5B78A700F626D0 /* LoadingView.swift in Sources */,
 				B3BA49CC1D66053900106930 /* UploadViewRouter.swift in Sources */,
 				B3ED70F11D5C6ADF001159A6 /* ProfilePageViewController.swift in Sources */,
-				B36AF2051D671D8A00F2B87E /* Request.swift in Sources */,
+				B36AF2051D671D8A00F2B87E /* Requests.swift in Sources */,
 				B3F455B01D54A1BD005EA708 /* LoginViewController.swift in Sources */,
 				B38E85BC1D59B44600CAE73B /* TagsTableViewController.swift in Sources */,
 				B32828AA1D5DAFAD0022F85E /* AlertExtension.swift in Sources */,
