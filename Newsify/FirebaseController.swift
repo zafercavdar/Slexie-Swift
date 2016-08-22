@@ -12,6 +12,32 @@ import FirebaseDatabase
 import FirebaseStorage
 import UIKit
 
+protocol NetworkingController {
+    
+    func uploadPhoto(image: NSData, tags: [String], callback: (error: NSError?, photoID: String, url: String) -> Void)
+    func downloadPhoto(with photoID: String, completion callback: (UIImage?, NSError?) -> Void)
+    func getAccountTags(completion: [String] -> Void)
+    func getPhotosRelatedWith(tags: [String], completion: [FeedPost] -> Void)
+    func getProfilePosts(completion callback: [ProfilePost] -> Void)
+}
+
+protocol LoginController {
+    func signInWith(username username: String, password: String, enableNotification: Bool, completionHandler: (error: NSError?) -> Void)
+    func signInWith(email email: String, password: String, enableNotification: Bool, completionHandler: (error: NSError?) -> Void)
+}
+
+protocol LogOutController {
+    func signOut(callback: Void->Void)
+}
+
+protocol SignUpController {
+    func signUp(email: String, username: String, password: String, profileType: String, completionHandler: (error: NSError?) -> Void)
+}
+
+protocol AuthenticationController: SignUpController, LogOutController, LoginController {
+    func getUID() -> String?
+}
+
 class FirebaseController: NetworkingController, AuthenticationController {
     
     let appURL = "hackify-a48e3.firebaseio.com"

@@ -26,3 +26,18 @@ class TagResponse: Mappable{
         tags       <- map["results.0.tags"]
     }
 }
+
+class Tag: Mappable{
+    
+    var confidence: Double?
+    var tag: String?
+    
+    required init?(_ map: Map){
+        
+    }
+    
+    func mapping(map: Map) {
+        confidence <- map["confidence"]
+        tag   <- map["tag"]
+    }
+}

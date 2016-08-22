@@ -10,7 +10,13 @@ import Foundation
 import Alamofire
 import SwiftyJSON
 
-class ImaggaService: PhotoAnalyzeService {
+protocol TagService {
+    
+    func findRelatedTagsWith(contentID contentID: String, completion: (tags: [String]) -> Void)
+    func findRelatedTagsWith(url url: String, completion: (tags: [String]) -> Void)
+}
+
+class ImaggaService: TagService {
 
     private struct API{
         static let key = "acc_d564dcda17e432d"
@@ -30,7 +36,7 @@ class ImaggaService: PhotoAnalyzeService {
         let requestURL = "\(API.endPoint)/v1/content"
         
         let requester = ContentIDRequester()
-        let request = Request(requestType: .POST(imageData), requestURL: requestURL, username: API.key, password: API.secret, authToken: API.authenticationToken)
+        let request = IDRequest(requestType: .POST(imageData), requestURL: requestURL, authToken: API.authenticationToken)
         
         requester.makeRequest(request) { (error, response) in
             
@@ -45,7 +51,7 @@ class ImaggaService: PhotoAnalyzeService {
         let requestURL = "\(API.endPoint)/v1/tagging?content=\(contentID)"
         
         let requester = TagRequester()
-        let request = Request(requestType: .GET(), requestURL: requestURL, username: API.key, password: API.secret, authToken: API.authenticationToken)
+        let request = TagsRequest(requestType: .GET(), requestURL: requestURL, username: API.key, password: API.secret)
         
         requester.makeRequest(request) { [weak self] (error, response) in
                 
@@ -64,7 +70,7 @@ class ImaggaService: PhotoAnalyzeService {
         let requestURL = "\(API.endPoint)/v1/tagging?url=\(url)"
         
         let requester = TagRequester()
-        let request = Request(requestType: .GET(), requestURL: requestURL, username: API.key, password: API.secret, authToken: API.authenticationToken)
+        let request = TagsRequest(requestType: .GET(), requestURL: requestURL, username: API.key, password: API.secret)
         
         requester.makeRequest(request) { [weak self] (error, response) in
             
