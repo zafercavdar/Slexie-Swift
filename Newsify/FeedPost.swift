@@ -7,22 +7,13 @@
 //
 
 import Foundation
-import UIKit
 
-class FeedPost {
+class FeedPost: Post {
     
     var username: String
-    var id: String
-    var tags: [String] = []
-    var photo = UIImage(named: "greyDefault")
     
     init(username: String, id: String, tags: [String]) {
         self.username = username
-        self.id = id
-        self.tags = tags
-    }
-    
-    func setPhoto(photo: UIImage) {
-        self.photo = photo
+        super.init(id: id, tags: tags)
     }
 }

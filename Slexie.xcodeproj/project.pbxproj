@@ -27,6 +27,7 @@
 		B36E72151D5B78A700F626D0 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36E72141D5B78A700F626D0 /* LoadingView.swift */; };
 		B36E72171D5B846700F626D0 /* RandomBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36E72161D5B846700F626D0 /* RandomBase.swift */; };
 		B37DB5C81D66F94A00ADB79B /* ImaggaService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B37DB5C71D66F94A00ADB79B /* ImaggaService.swift */; };
+		B386234E1D6B27D0007B8A5E /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = B386234D1D6B27D0007B8A5E /* Post.swift */; };
 		B38E85BC1D59B44600CAE73B /* TagsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B38E85BB1D59B44600CAE73B /* TagsTableViewController.swift */; };
 		B38E85C01D59C28C00CAE73B /* TagsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B38E85BF1D59C28C00CAE73B /* TagsTableViewCell.swift */; };
 		B39BBA961D67179300A2C9E4 /* TagResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39BBA951D67179300A2C9E4 /* TagResponse.swift */; };
@@ -113,6 +114,7 @@
 		B36E72141D5B78A700F626D0 /* LoadingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		B36E72161D5B846700F626D0 /* RandomBase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RandomBase.swift; sourceTree = "<group>"; };
 		B37DB5C71D66F94A00ADB79B /* ImaggaService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImaggaService.swift; sourceTree = "<group>"; };
+		B386234D1D6B27D0007B8A5E /* Post.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		B38E85BB1D59B44600CAE73B /* TagsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagsTableViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		B38E85BF1D59C28C00CAE73B /* TagsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagsTableViewCell.swift; sourceTree = "<group>"; };
 		B39BBA951D67179300A2C9E4 /* TagResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagResponse.swift; sourceTree = "<group>"; };
@@ -252,6 +254,7 @@
 			children = (
 				B361FCCC1D63295800B4F8AA /* FeedPost.swift */,
 				B3B527C21D65AF8B00E31C37 /* ProfilePost.swift */,
+				B386234D1D6B27D0007B8A5E /* Post.swift */,
 			);
 			name = "Data Models";
 			sourceTree = "<group>";
@@ -660,6 +663,7 @@
 				B3BA49BA1D65EE2B00106930 /* DateExtension.swift in Sources */,
 				B36AF2091D6725BA00F2B87E /* TagRequester.swift in Sources */,
 				B3BA49CE1D66086200106930 /* TagsTableRouter.swift in Sources */,
+				B386234E1D6B27D0007B8A5E /* Post.swift in Sources */,
 				B3BA49BD1D65F35700106930 /* LoginRouter.swift in Sources */,
 				B3BA49C21D65F97200106930 /* Router.swift in Sources */,
 				B32828B41D5DE2660022F85E /* UniqueIDGenerator.swift in Sources */,

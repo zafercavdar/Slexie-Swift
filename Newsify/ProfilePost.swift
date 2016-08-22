@@ -7,21 +7,11 @@
 //
 
 import Foundation
-import UIKit
 
-class ProfilePost {
-    
-    var id: String
-    var tags: [String] = []
-    var photo = UIImage(named: "greyDefault")
-    
-    init(id: String, tags: [String]) {
-        self.id = id
-        self.tags = tags
-    }
-    
-    func setPhoto(photo: UIImage) {
-        self.photo = photo
+class ProfilePost: Post {
+
+    override init(id: String, tags: [String]) {
+        super.init(id: id, tags: tags)
     }
 }
 
