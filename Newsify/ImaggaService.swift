@@ -29,11 +29,28 @@ class ImaggaService: TagService {
         static let contentType = "application/json"
     }
     
+    internal enum RequestURLS {
+        case GetID
+        case GetTagsWithURL(String)
+        case GetTagsWithID(String)
+        
+        internal var url: String {
+            switch self {
+            case .GetID:
+                return "\(API.endPoint)/v1/content"
+            case .GetTagsWithID(let id):
+                return "\(API.endPoint)/v1/tagging?content=\(id)"
+            case .GetTagsWithURL(let link):
+                return "\(API.endPoint)/v1/tagging?url=\(link)"
+            }
+        }
+    }
+    
     private let threshold = 25.00
     private let maxTagNumber = 6
     
     func uploadPhotoGetContentID(imageData: NSData, completion: (id:String) -> Void){
-        let requestURL = "\(API.endPoint)/v1/content"
+        let requestURL = RequestURLS.GetID.url
         
         let requester = ContentIDRequester()
         let request = IDRequest(requestType: .POST(imageData), requestURL: requestURL, authToken: API.authenticationToken)
@@ -48,7 +65,7 @@ class ImaggaService: TagService {
     }
     
     func findRelatedTagsWith(contentID contentID: String, completion: (tags: [String]) -> Void){
-        let requestURL = "\(API.endPoint)/v1/tagging?content=\(contentID)"
+        let requestURL = RequestURLS.GetTagsWithID(contentID).url
         
         let requester = TagRequester()
         let request = TagsRequest(requestType: .GET(), requestURL: requestURL, username: API.key, password: API.secret)
@@ -67,7 +84,7 @@ class ImaggaService: TagService {
     }
     
     func findRelatedTagsWith(url url: String, completion: (tags: [String]) -> Void){
-        let requestURL = "\(API.endPoint)/v1/tagging?url=\(url)"
+        let requestURL = RequestURLS.GetTagsWithURL(url).url
         
         let requester = TagRequester()
         let request = TagsRequest(requestType: .GET(), requestURL: requestURL, username: API.key, password: API.secret)
