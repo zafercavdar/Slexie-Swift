@@ -39,3 +39,20 @@ func containsAny(storage: [String], checkList: [String]) -> Bool{
     
     return false
 }
+
+func currentUsername() -> String?{
+    
+    let networkingController = FirebaseController()
+
+    if let email = networkingController.getCurrentUser()?.email {
+        
+        if let indexOfAt = indexOf(email, substring: "@"){
+            let distance = email.startIndex.advancedBy(indexOfAt)
+            let username = email.substringToIndex(distance)
+            return username
+        }
+        
+        return nil
+    }
+    return nil
+}

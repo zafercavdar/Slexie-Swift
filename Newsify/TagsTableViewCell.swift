@@ -10,7 +10,7 @@ import UIKit
 
 class TagsTableViewCell: UITableViewCell {
     
-    @IBOutlet weak var tagsLabel: UILabel!
+    @IBOutlet weak var tagLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()

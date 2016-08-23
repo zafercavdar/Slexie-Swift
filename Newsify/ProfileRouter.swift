@@ -16,8 +16,6 @@ class ProfileRouter: Router {
         switch routeID {
         case "LogOut":
             VC.performSegueWithIdentifier("LogOut", sender: nil)
-        case "Upload":
-            VC.performSegueWithIdentifier("TakeSnap", sender: nil)
         default:
             break
         }

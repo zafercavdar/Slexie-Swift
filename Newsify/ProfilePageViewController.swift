@@ -44,7 +44,6 @@ class ProfilePageViewController: UITableViewController {
     
     struct RouteID {
         static let LogOut = "LogOut"
-        static let Upload = "Upload"
     }
     
     private struct Identifier {
@@ -122,10 +121,6 @@ class ProfilePageViewController: UITableViewController {
             guard let strongSelf = self else { return }
             strongSelf.router.routeTo(RouteID.LogOut, VC: strongSelf)
         }
-    }
-    
-    @IBAction func uploadPressed(sender: UIBarButtonItem) {
-        self.router.routeTo(RouteID.Upload, VC: self)
     }
     
     @IBAction func unwindToProfile(sender: UIStoryboardSegue) {

@@ -115,7 +115,6 @@ class NewsFeedTableViewController: UITableViewController {
         return presentation.feedPosts.count
     }
 
-    // Presentation needs to be added.
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let feedPresentation = presentation.feedPosts[indexPath.row]
         let cell = tableView.dequeueReusableCellWithIdentifier(Identifier.NewsFeedCell, forIndexPath: indexPath) as! NewsFeedItemCell
