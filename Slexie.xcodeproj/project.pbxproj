@@ -23,6 +23,7 @@
 		B36E72171D5B846700F626D0 /* RandomBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36E72161D5B846700F626D0 /* RandomBase.swift */; };
 		B37DB5C81D66F94A00ADB79B /* ImaggaService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B37DB5C71D66F94A00ADB79B /* ImaggaService.swift */; };
 		B386234E1D6B27D0007B8A5E /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = B386234D1D6B27D0007B8A5E /* Post.swift */; };
+		B38623511D6C332B007B8A5E /* NotificationsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B38623501D6C332B007B8A5E /* NotificationsTableViewController.swift */; };
 		B38E85BC1D59B44600CAE73B /* TagsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B38E85BB1D59B44600CAE73B /* TagsTableViewController.swift */; };
 		B38E85C01D59C28C00CAE73B /* TagsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B38E85BF1D59C28C00CAE73B /* TagsTableViewCell.swift */; };
 		B39BBA961D67179300A2C9E4 /* TagResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39BBA951D67179300A2C9E4 /* TagResponse.swift */; };
@@ -104,6 +105,7 @@
 		B36E72161D5B846700F626D0 /* RandomBase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RandomBase.swift; sourceTree = "<group>"; };
 		B37DB5C71D66F94A00ADB79B /* ImaggaService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImaggaService.swift; sourceTree = "<group>"; };
 		B386234D1D6B27D0007B8A5E /* Post.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
+		B38623501D6C332B007B8A5E /* NotificationsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationsTableViewController.swift; sourceTree = "<group>"; };
 		B38E85BB1D59B44600CAE73B /* TagsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagsTableViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		B38E85BF1D59C28C00CAE73B /* TagsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagsTableViewCell.swift; sourceTree = "<group>"; };
 		B39BBA951D67179300A2C9E4 /* TagResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagResponse.swift; sourceTree = "<group>"; };
@@ -255,6 +257,7 @@
 		B3BA49B51D65ECDB00106930 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				B38623501D6C332B007B8A5E /* NotificationsTableViewController.swift */,
 				B3F455AF1D54A1BD005EA708 /* LoginViewController.swift */,
 				B3ACD3731D54D3E6004BEF24 /* CreateAccountViewController.swift */,
 				B38E85BB1D59B44600CAE73B /* TagsTableViewController.swift */,
@@ -661,6 +664,7 @@
 				B3ACD3741D54D3E6004BEF24 /* CreateAccountViewController.swift in Sources */,
 				B3ED70FD1D5CB3C6001159A6 /* FirebaseController.swift in Sources */,
 				B36E72171D5B846700F626D0 /* RandomBase.swift in Sources */,
+				B38623511D6C332B007B8A5E /* NotificationsTableViewController.swift in Sources */,
 				B36E72151D5B78A700F626D0 /* LoadingView.swift in Sources */,
 				B3BA49CC1D66053900106930 /* UploadViewRouter.swift in Sources */,
 				B3ED70F11D5C6ADF001159A6 /* ProfilePageViewController.swift in Sources */,
