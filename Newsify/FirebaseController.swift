@@ -265,17 +265,14 @@ class FirebaseController: NetworkingController, AuthenticationController {
         
         if fileManager.fileExistsAtPath(filePath){
             
-            //print("LOG: Found \(photoID) in local directory.")
             guard let data = NSData(contentsOfURL: localURL!), let image = UIImage(data: data) else { return }
             callback(image, nil)
             
         } else {
             _ = photoRef.writeToFile(localURL!) { (URL, error) -> Void in
                 if (error != nil) {
-                    print("ERROR: \(error)\nEnd of Error\n")
                     callback(nil, error)
                 } else {
-                    //print("LOG: Downloaded \(photoID) from database.")
                     guard let data = NSData(contentsOfURL: URL!), let image = UIImage(data: data) else {
                         return
                     }
