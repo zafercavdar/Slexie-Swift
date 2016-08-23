@@ -20,7 +20,7 @@ class ContentIDRequester: Requester {
     
     func makeRequest(request: Request, completion callback: (error: ErrorType?, response: Mappable?) -> Void) {
         
-        guard let request = request as? ContentIDRequest else {
+        guard let request = request as? IDRequest else {
             return
         }
         
@@ -59,13 +59,13 @@ class TagRequester: Requester {
     
     func makeRequest(request: Request, completion callback: (error: ErrorType?, response: Mappable?) -> Void){
         
-        guard let request = request as? TagRequest else {
+        guard let request = request as? TagsRequest else {
             return
         }
         
         switch request.requestType {
         case .GET():
-            Alamofire.request(.GET, request.requestURL).authenticate(user: request.username, password: request.password)
+            Alamofire.request(.GET, request.requestURL).authenticate(user: request.key, password: request.secret)
                 .validate(contentType: [contentType]).responseObject { (response: Response<TagResponse, NSError>) in
                     
                     switch response.result {
