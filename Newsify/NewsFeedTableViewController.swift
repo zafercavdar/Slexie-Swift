@@ -35,7 +35,7 @@ struct FeedPostsPresentation {
     }
 }
 
-class NewsFeedTableViewController: UITableViewController {
+class NewsFeedTableViewController: UITableViewController{
 
     private struct Identifier {
         static let NewsFeedCell = "NewsFeedItemCell"
@@ -47,9 +47,11 @@ class NewsFeedTableViewController: UITableViewController {
     
     @IBOutlet var feedPostsView: UITableView!
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        
         loadingView.addToView(self.view, text: "Refreshing")
         
         let refreshControl = UIRefreshControl()
@@ -92,7 +94,14 @@ class NewsFeedTableViewController: UITableViewController {
         let nav = self.navigationController?.navigationBar
         nav?.barTintColor = UIColor.coreColor()
         nav?.barStyle = UIBarStyle.BlackOpaque
-       
+        
+        //tableView.setContentOffset(CGPointZero, animated:true)
+        
+    }
+    
+    override func scrollViewWillEndDragging(scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+        
+        NSLog("\(velocity.y)")
     }
     
     func refresh(refreshControl: UIRefreshControl) {

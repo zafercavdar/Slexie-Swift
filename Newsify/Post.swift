@@ -24,5 +24,4 @@ class Post {
         self.photo = photo
     }
 
-    
 }

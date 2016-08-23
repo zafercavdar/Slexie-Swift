@@ -192,8 +192,6 @@ class FirebaseController: NetworkingController, AuthenticationController {
                     return
                 }
                 
-                guard let strongSelf = self else { return }
-                
                 for (id, propertyDic) in postDic {
                     
                     // Public check
@@ -210,7 +208,7 @@ class FirebaseController: NetworkingController, AuthenticationController {
                         continue
                     }
                     
-                    guard let owner = propertyDic[ReferenceLabels.PostOwner.rawValue] as? String where owner != strongSelf.getUID() else {
+                    guard let owner = propertyDic[ReferenceLabels.PostOwner.rawValue] as? String /* where owner != strongSelf.getUID() */ else {
                         continue
                     }
                     
