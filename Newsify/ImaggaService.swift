@@ -68,7 +68,7 @@ class ImaggaService: TagService {
         let requestURL = RequestURLS.GetTagsWithID(contentID).url
         
         let requester = TagRequester()
-        let request = TagsRequest(requestType: .GET(), requestURL: requestURL, username: API.key, password: API.secret)
+        let request = TagsRequest(requestType: .GET(), requestURL: requestURL, key: API.key, secret: API.secret)
         
         requester.makeRequest(request) { [weak self] (error, response) in
                 
@@ -87,7 +87,7 @@ class ImaggaService: TagService {
         let requestURL = RequestURLS.GetTagsWithURL(url).url
         
         let requester = TagRequester()
-        let request = TagsRequest(requestType: .GET(), requestURL: requestURL, username: API.key, password: API.secret)
+        let request = TagsRequest(requestType: .GET(), requestURL: requestURL, key: API.key, secret: API.secret)
         
         requester.makeRequest(request) { [weak self] (error, response) in
             

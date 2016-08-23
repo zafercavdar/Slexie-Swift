@@ -18,25 +18,25 @@ protocol Request {
     var requestURL: String {get set}
 }
 
-protocol ContentIDRequest: Request {
+protocol RequestWithToken: Request {
     var authToken: String {get set}
 }
 
-protocol TagRequest: Request {
-    var username: String {get set}
-    var password: String {get set}
+protocol RequestWithKey: Request {
+    var key: String {get set}
+    var secret: String {get set}
 }
 
-struct IDRequest: ContentIDRequest {
+struct IDRequest: RequestWithToken {
 
     var requestType: RequestType<NSData>
     var requestURL: String
     var authToken: String
 }
 
-struct TagsRequest: TagRequest{
+struct TagsRequest: RequestWithKey{
     var requestType: RequestType<NSData>
     var requestURL: String
-    var username: String
-    var password: String
+    var key: String
+    var secret: String
 }
