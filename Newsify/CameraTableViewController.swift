@@ -8,14 +8,19 @@
 
 import UIKit
 
-class CameraTableViewController: UITableViewController, UINavigationControllerDelegate {
+struct ImagePresentation {
     
-    struct Image {
-        var contentID: String = ""
-        var image: UIImage = UIImage()
-        let compressionRate = CGFloat(0.5)
-        var trustedTags: [String] = []
+    var imageData = NSData()
+    var tags: [String] = []
+    
+    mutating func update(withState state: CameraViewModel.State){
+        imageData = state.post.imageData
+        tags = state.post.trustedTags
     }
+}
+
+class CameraTableViewController: UITableViewController, UINavigationControllerDelegate {
+
     
     private struct Identifier {
         static let TagsTableCell = "TagsTableViewCell"
@@ -23,18 +28,26 @@ class CameraTableViewController: UITableViewController, UINavigationControllerDe
     
     struct RouteID {
         static let Upload = "Upload"
+        static let toFeed = "toFeed"
+        static let Dismiss = "Dismiss"
     }
     
-    var post = Image()
     
-    private let imaggaService = ImaggaService()
     private let networkingController = FirebaseController()
     private let router = CameraRouter()
     private let loadingView = LoadingView()
+    private let model = CameraViewModel()
+    private var presentation = ImagePresentation()
 
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.applyState(model.state)
+        
+        model.stateChangeHandler = { [weak self] change in
+            self?.applyStateChange(change)
+        }
         
         callCameraController()
     }
@@ -52,6 +65,24 @@ class CameraTableViewController: UITableViewController, UINavigationControllerDe
         nav?.barStyle = UIBarStyle.BlackOpaque
     }
     
+    func applyState(state: CameraViewModel.State) {
+        presentation.update(withState: state)
+        self.tableView.reloadData()
+    }
+    
+    func applyStateChange(change: CameraViewModel.State.Change) {
+        switch change {
+        case .tags(let collectionChange):
+            presentation.update(withState: model.state)
+            switch collectionChange {
+            case .reload:
+                self.tableView.reloadData()
+            }
+        case .none:
+            break
+        }
+    }
+    
     private func callCameraController() {
         let imagePickerController = UIImagePickerController()
         
@@ -67,37 +98,14 @@ class CameraTableViewController: UITableViewController, UINavigationControllerDe
 
     }
     
-    private func analyzeImage() {
-        loadingView.addToView(self.view, text: "Analyzing")
-        
-        if let imageData = UIImageJPEGRepresentation(post.image, post.compressionRate) {
-            imaggaService.uploadPhotoGetContentID(imageData, completion: { [weak self] (id) in
-                
-                guard let strongSelf = self else { return }
-                
-                strongSelf.post.contentID = id
-                
-                strongSelf.imaggaService.findRelatedTagsWith(contentID: id, completion: { [weak self] (tags) in
-                    
-                    guard let sself = self else {return}
-                    sself.post.trustedTags = tags
-                    sself.loadingView.removeFromView(sself.view)
-                    sself.tableView.reloadData()
-                    })
-                
-                })
-        }
-    }
-    
     private func uploadData() {
         
         loadingView.addToView(self.view, text: "Uploading")
         
-        let photo = post.image
-        let rate =  post.compressionRate
-        let imageData = UIImageJPEGRepresentation(photo, rate)
+        let imageData = presentation.imageData
+        let tags = presentation.tags
         
-        networkingController.uploadPhoto(imageData!, tags: post.trustedTags) { [weak self] (error, photoID, url) in
+        networkingController.uploadPhoto(imageData, tags: tags) { [weak self] (error, photoID, url) in
             
             guard let strongSelf = self else { return }
             
@@ -128,13 +136,14 @@ class CameraTableViewController: UITableViewController, UINavigationControllerDe
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return post.trustedTags.count
+        return presentation.tags.count
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        let tag = post.trustedTags[indexPath.row]
+        let tag = presentation.tags[indexPath.row]
         let cell = tableView.dequeueReusableCellWithIdentifier(Identifier.TagsTableCell, forIndexPath: indexPath) as! TagsTableViewCell
+        
         cell.tagLabel.text = tag
         
         return cell
@@ -146,7 +155,7 @@ class CameraTableViewController: UITableViewController, UINavigationControllerDe
     
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
-            post.trustedTags.removeAtIndex(indexPath.row)
+            presentation.tags.removeAtIndex(indexPath.row)
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
         }
     }
@@ -155,22 +164,30 @@ class CameraTableViewController: UITableViewController, UINavigationControllerDe
 extension CameraTableViewController : UIImagePickerControllerDelegate {
     
     func imagePickerControllerDidCancel(picker: UIImagePickerController) {
-        dismissViewControllerAnimated(true, completion: nil)
+        model.resetImage()
+        
+        self.router.routeTo(RouteID.Dismiss, VC: self)
+        self.router.routeTo(RouteID.toFeed, VC: self)
     }
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
         
-        var selectedImage = UIImage()
+        var takenPhoto = UIImage()
         
         if picker.sourceType == .Camera {
-            selectedImage = info[UIImagePickerControllerEditedImage] as! UIImage
+            takenPhoto = info[UIImagePickerControllerEditedImage] as! UIImage
         } else if picker.sourceType == .PhotoLibrary {
-            selectedImage = info[UIImagePickerControllerOriginalImage] as! UIImage
+            takenPhoto = info[UIImagePickerControllerOriginalImage] as! UIImage
         }
         
-        post.image = selectedImage
-        dismissViewControllerAnimated(true, completion: nil)
-        analyzeImage()
+        self.router.routeTo(RouteID.Dismiss, VC: self)
+        
+        loadingView.addToView(self.view, text: "Analyzing")
+        
+        model.fetchImageTags(takenPhoto) { [weak self] in
+            guard let strongSelf = self else { return }
+            strongSelf.loadingView.removeFromView(strongSelf.view)
+        }
     }
 }
 

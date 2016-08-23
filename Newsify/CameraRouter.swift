@@ -17,6 +17,10 @@ class CameraRouter: Router {
         switch routeID {
         case "Upload":
             VC.tabBarController?.selectedIndex = 4
+        case "toFeed":
+            VC.tabBarController?.selectedIndex = 0
+        case "Dismiss":
+            VC.dismissViewControllerAnimated(true, completion: nil)
         default:
             break
         }

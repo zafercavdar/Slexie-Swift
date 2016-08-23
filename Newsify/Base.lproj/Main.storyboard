@@ -445,6 +445,13 @@
                                 <action selector="logOutPressed:" destination="ROT-uo-k3j" id="fZc-XQ-VBS"/>
                             </connections>
                         </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" image="Settings" id="tJg-gh-teT">
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="color" keyPath="tintColor">
+                                    <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="profilePostsView" destination="gdQ-VH-d2O" id="tZg-rq-Rhl"/>
@@ -611,6 +618,7 @@
         <image name="Newsfeed" width="50" height="50"/>
         <image name="Notifications" width="50" height="50"/>
         <image name="Profile" width="50" height="50"/>
+        <image name="Settings" width="44" height="44"/>
         <image name="greyDefault" width="500" height="500"/>
     </resources>
     <inferredMetricsTieBreakers>

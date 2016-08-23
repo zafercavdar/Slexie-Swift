@@ -25,6 +25,7 @@
 		B38623511D6C332B007B8A5E /* NotificationsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B38623501D6C332B007B8A5E /* NotificationsTableViewController.swift */; };
 		B38623531D6C40A0007B8A5E /* CameraTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B38623521D6C40A0007B8A5E /* CameraTableViewController.swift */; };
 		B38623551D6C6634007B8A5E /* CameraRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B38623541D6C6634007B8A5E /* CameraRouter.swift */; };
+		B38623571D6C6E48007B8A5E /* CameraViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B38623561D6C6E48007B8A5E /* CameraViewModel.swift */; };
 		B38E85C01D59C28C00CAE73B /* TagsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B38E85BF1D59C28C00CAE73B /* TagsTableViewCell.swift */; };
 		B39BBA961D67179300A2C9E4 /* TagResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39BBA951D67179300A2C9E4 /* TagResponse.swift */; };
 		B3ACD3741D54D3E6004BEF24 /* CreateAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3ACD3731D54D3E6004BEF24 /* CreateAccountViewController.swift */; };
@@ -105,6 +106,7 @@
 		B38623501D6C332B007B8A5E /* NotificationsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationsTableViewController.swift; sourceTree = "<group>"; };
 		B38623521D6C40A0007B8A5E /* CameraTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraTableViewController.swift; sourceTree = "<group>"; };
 		B38623541D6C6634007B8A5E /* CameraRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraRouter.swift; sourceTree = "<group>"; };
+		B38623561D6C6E48007B8A5E /* CameraViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraViewModel.swift; sourceTree = "<group>"; };
 		B38E85BF1D59C28C00CAE73B /* TagsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagsTableViewCell.swift; sourceTree = "<group>"; };
 		B39BBA951D67179300A2C9E4 /* TagResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagResponse.swift; sourceTree = "<group>"; };
 		B3ACD3731D54D3E6004BEF24 /* CreateAccountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateAccountViewController.swift; sourceTree = "<group>"; };
@@ -269,6 +271,7 @@
 			children = (
 				B361FCCA1D63234800B4F8AA /* FeedPostViewModel.swift */,
 				B3B527C01D65AF2100E31C37 /* ProfilePostsViewModel.swift */,
+				B38623561D6C6E48007B8A5E /* CameraViewModel.swift */,
 			);
 			name = "View Models";
 			sourceTree = "<group>";
@@ -649,6 +652,7 @@
 				B361FCCD1D63295800B4F8AA /* FeedPost.swift in Sources */,
 				B3ED70F91D5C8AC6001159A6 /* NewsFeedItemCell.swift in Sources */,
 				B39BBA961D67179300A2C9E4 /* TagResponse.swift in Sources */,
+				B38623571D6C6E48007B8A5E /* CameraViewModel.swift in Sources */,
 				B33E936C1D665C570011019B /* Global Functions.swift in Sources */,
 				B3BA49BF1D65F8FA00106930 /* SignUpRouter.swift in Sources */,
 				B38623531D6C40A0007B8A5E /* CameraTableViewController.swift in Sources */,
