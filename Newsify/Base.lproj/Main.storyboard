@@ -242,7 +242,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="NewsFeedItemCell" rowHeight="450" id="yre-oF-4ws" customClass="NewsFeedItemCell" customModule="Slexie" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="NewsFeedItemCell" rowHeight="450" id="yre-oF-4ws" customClass="NewsFeedItemCell" customModule="Slexie" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="92" width="600" height="450"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="yre-oF-4ws" id="QQ6-F7-tDY">
@@ -258,7 +258,7 @@
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="350" placeholderIntrinsicHeight="350" image="greyDefault" translatesAutoresizingMaskIntoConstraints="NO" id="SYK-Dq-CX8">
+                                                <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="350" placeholderIntrinsicHeight="350" image="greyDefault" translatesAutoresizingMaskIntoConstraints="NO" id="SYK-Dq-CX8">
                                                     <rect key="frame" x="117" y="31" width="350" height="350"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="SYK-Dq-CX8" secondAttribute="height" multiplier="1:1" id="40p-Uq-9MU"/>
@@ -318,7 +318,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SearchFeedItemCell" rowHeight="450" id="XNt-Af-w0i" customClass="SearchFeedItemCell" customModule="Slexie" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SearchFeedItemCell" rowHeight="450" id="XNt-Af-w0i" customClass="SearchFeedItemCell" customModule="Slexie" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="92" width="600" height="450"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="XNt-Af-w0i" id="Zfy-pi-4bJ">
@@ -334,8 +334,9 @@
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" placeholderIntrinsicWidth="350" placeholderIntrinsicHeight="350" image="greyDefault" translatesAutoresizingMaskIntoConstraints="NO" id="Lyy-KJ-u2H">
+                                                <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" placeholderIntrinsicWidth="350" placeholderIntrinsicHeight="350" image="greyDefault" translatesAutoresizingMaskIntoConstraints="NO" id="Lyy-KJ-u2H">
                                                     <rect key="frame" x="113" y="27" width="351" height="350"/>
+                                                    <gestureRecognizers/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="Lyy-KJ-u2H" secondAttribute="height" multiplier="351:350" id="a7I-WH-C45"/>
                                                     </constraints>
@@ -422,17 +423,17 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ProfilePostTableViewCell" rowHeight="400" id="mXw-zA-DHu" customClass="ProfilePostTableViewCell" customModule="Slexie" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ProfilePostTableViewCell" rowHeight="400" id="mXw-zA-DHu" customClass="ProfilePostTableViewCell" customModule="Slexie" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="92" width="600" height="400"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="mXw-zA-DHu" id="Ur5-gr-QAj">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="399.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <stackView opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="IAj-2k-jnC">
+                                        <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="IAj-2k-jnC">
                                             <rect key="frame" x="8" y="8" width="584" height="374"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="350" placeholderIntrinsicHeight="350" image="greyDefault" translatesAutoresizingMaskIntoConstraints="NO" id="tOr-dc-gKU">
+                                                <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="350" placeholderIntrinsicHeight="350" image="greyDefault" translatesAutoresizingMaskIntoConstraints="NO" id="tOr-dc-gKU">
                                                     <rect key="frame" x="117" y="0.0" width="350" height="350"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="tOr-dc-gKU" secondAttribute="height" multiplier="1:1" id="fPx-Zl-BXK"/>

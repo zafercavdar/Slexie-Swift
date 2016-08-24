@@ -11,6 +11,7 @@ import UIKit
 struct FeedPostsPresentation {
     
     struct FeedPostPresentation {
+        var id: String
         var owner: String
         var image: UIImage
         var tagList: String
@@ -21,6 +22,7 @@ struct FeedPostsPresentation {
     mutating func update(withState state: FeedPostViewModel.State){
         
         feedPosts = state.feedPosts.map({ (feedPost) -> FeedPostPresentation in
+            let id = feedPost.id
             let owner = feedPost.username
             let image = feedPost.photo
             var tagText = ""
@@ -28,7 +30,7 @@ struct FeedPostsPresentation {
                 tagText += "#\(tag) "
             }
             let tagList = tagText
-            return FeedPostPresentation(owner: owner, image: image!, tagList: tagList)
+            return FeedPostPresentation(id: id, owner: owner, image: image!, tagList: tagList)
         })
     }
 }
@@ -126,10 +128,24 @@ class NewsFeedTableViewController: UITableViewController{
         let feedPresentation = presentation.feedPosts[indexPath.row]
         let cell = tableView.dequeueReusableCellWithIdentifier(Identifier.NewsFeedCell, forIndexPath: indexPath) as! NewsFeedItemCell
         
+        cell.id = feedPresentation.id
         cell.usernameLabel.text = feedPresentation.owner
         cell.photoView.image = feedPresentation.image
         cell.tagsLabel.text = feedPresentation.tagList
         
+        cell.tapRecognizer.addTarget(self, action: #selector(photoTapped(_:)))
+        cell.tapRecognizer.numberOfTapsRequired = 2
+        cell.tapRecognizer.numberOfTouchesRequired = 1
+        cell.tapRecognizer.tappedCellID = cell.id
+        cell.photoView.gestureRecognizers = []
+        cell.photoView.gestureRecognizers!.append(cell.tapRecognizer)
+        cell.selectionStyle = UITableViewCellSelectionStyle.None
+        
         return cell
+    }
+    
+    func photoTapped(sender: AdvancedGestureRecognizer){
+        let id = sender.tappedCellID
+        print(id)
     }
 }

@@ -11,6 +11,7 @@ import UIKit
 struct ProfilePostsPresentation {
     
     struct ProfilePostPresentation {
+        var imageID: String
         var image: UIImage
         var tagList: String
     }
@@ -20,13 +21,14 @@ struct ProfilePostsPresentation {
     mutating func update(withState state: ProfilePostViewModel.State){
         
         profilePosts = state.profilePosts.map({ (profilePost) -> ProfilePostPresentation in
+            let id = profilePost.id
             let image = profilePost.photo
             var tagText = ""
             for tag in profilePost.tags{
                 tagText += "#\(tag) "
             }
             let tagList = tagText
-            return ProfilePostPresentation(image: image!, tagList: tagList)
+            return ProfilePostPresentation(imageID: id, image: image!, tagList: tagList)
         })
     }
 }
@@ -146,8 +148,22 @@ class ProfilePageViewController: UITableViewController {
         
         cell.profilePostView.image = postPresentation.image
         cell.profilePostTags.text = postPresentation.tagList
+        cell.id = postPresentation.imageID
+        
+        cell.tapRecognizer.addTarget(self, action: #selector(photoTapped(_:)))
+        cell.tapRecognizer.numberOfTapsRequired = 2
+        cell.tapRecognizer.numberOfTouchesRequired = 1
+        cell.tapRecognizer.tappedCellID = cell.id
+        cell.profilePostView.gestureRecognizers = []
+        cell.profilePostView.gestureRecognizers!.append(cell.tapRecognizer)
+        cell.selectionStyle = UITableViewCellSelectionStyle.None
         
         return cell
+    }
+    
+    func photoTapped(sender: AdvancedGestureRecognizer){
+        let id = sender.tappedCellID
+        print(id)
     }
     
 }

@@ -12,11 +12,11 @@ import UIKit
 class SearchFeedItemCell: UITableViewCell {
     
     @IBOutlet weak var usernameLabel: UILabel!
-    
     @IBOutlet weak var photoView: UIImageView!
-    
     @IBOutlet weak var tagsLabel: UILabel!
+    var id: String = ""
     
+    let tapRecognizer: AdvancedGestureRecognizer = AdvancedGestureRecognizer()
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -24,7 +24,6 @@ class SearchFeedItemCell: UITableViewCell {
     
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-        
     }
     
 }

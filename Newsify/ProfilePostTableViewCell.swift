@@ -14,6 +14,10 @@ class ProfilePostTableViewCell: UITableViewCell {
     @IBOutlet weak var profilePostView: UIImageView!
     @IBOutlet weak var profilePostTags: UILabel!
     
+    var id = ""
+    
+    let tapRecognizer: AdvancedGestureRecognizer = AdvancedGestureRecognizer()
+    
     override func awakeFromNib() {
         super.awakeFromNib()
     }

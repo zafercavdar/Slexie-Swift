@@ -11,10 +11,11 @@ import UIKit
 class NewsFeedItemCell: UITableViewCell {
 
     @IBOutlet weak var usernameLabel: UILabel!
-    
     @IBOutlet weak var photoView: UIImageView!
-    
     @IBOutlet weak var tagsLabel: UILabel!
+    
+    var id = ""
+    let tapRecognizer = AdvancedGestureRecognizer()
     
     
     override func awakeFromNib() {

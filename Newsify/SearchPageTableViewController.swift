@@ -8,9 +8,14 @@
 
 import UIKit
 
+class AdvancedGestureRecognizer: UITapGestureRecognizer {
+    var tappedCellID: String = ""
+}
+
 struct SearchPostsPresentation {
     
     struct SearchPostPresentation {
+        var id: String
         var owner: String
         var image: UIImage
         var tagList: String
@@ -28,7 +33,8 @@ struct SearchPostsPresentation {
                 tagText += "#\(tag) "
             }
             let tagList = tagText
-            return SearchPostPresentation(owner: owner, image: image!, tagList: tagList)
+            let id = searchPost.id
+            return SearchPostPresentation(id: id, owner: owner, image: image!, tagList: tagList)
         })
     }
 }
@@ -121,7 +127,7 @@ class SearchPageTableViewController: UITableViewController, UISearchResultsUpdat
         model.fetchSearchPosts(searchString!) { }
     }
     
-
+    
     // MARK: - Table view data source
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -138,11 +144,24 @@ class SearchPageTableViewController: UITableViewController, UISearchResultsUpdat
         let feedPresentation = presentation.searchPosts[indexPath.row]
         let cell = tableView.dequeueReusableCellWithIdentifier(Identifier.SearchFeedCell, forIndexPath: indexPath) as! SearchFeedItemCell
         
+        cell.id = feedPresentation.id
         cell.usernameLabel.text = feedPresentation.owner
         cell.photoView.image = feedPresentation.image
         cell.tagsLabel.text = feedPresentation.tagList
         
+        cell.tapRecognizer.addTarget(self, action: #selector(photoTapped(_:)))
+        cell.tapRecognizer.numberOfTapsRequired = 2
+        cell.tapRecognizer.numberOfTouchesRequired = 1
+        cell.tapRecognizer.tappedCellID = cell.id
+        cell.photoView.gestureRecognizers = []
+        cell.photoView.gestureRecognizers!.append(cell.tapRecognizer)
+        cell.selectionStyle = UITableViewCellSelectionStyle.None
+        
         return cell
     }
     
+    func photoTapped(sender: AdvancedGestureRecognizer){
+        let id = sender.tappedCellID
+        print(id)
+    }
 }
