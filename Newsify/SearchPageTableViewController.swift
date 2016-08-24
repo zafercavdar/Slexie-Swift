@@ -35,7 +35,7 @@ struct SearchPostsPresentation {
 
 
 
-class SearchPageTableViewController: UITableViewController, UISearchResultsUpdating, UISearchBarDelegate {
+class SearchPageTableViewController: UITableViewController, UISearchResultsUpdating {
     
     private struct Identifier {
         static let SearchFeedCell = "SearchFeedItemCell"
@@ -46,24 +46,23 @@ class SearchPageTableViewController: UITableViewController, UISearchResultsUpdat
     private var presentation = SearchPostsPresentation()
 
 
-    var searchController = UISearchController()
-    var shouldShowSearchResults: Bool = false
+    var searchController = UISearchController(searchResultsController: nil)
     
     func configureSearchController() {
-        searchController = UISearchController(searchResultsController: nil)
         searchController.searchResultsUpdater = self
+        searchController.hidesNavigationBarDuringPresentation = true
         searchController.dimsBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "Search ..."
-        searchController.searchBar.delegate = self
+        //searchController.searchBar.delegate = self
         searchController.searchBar.sizeToFit()
-        
         tableView.tableHeaderView = searchController.searchBar
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.definesPresentationContext = true
         configureSearchController()
-        model.cleanSearchPosts()
 
         self.applyState(model.state)
         
@@ -74,14 +73,11 @@ class SearchPageTableViewController: UITableViewController, UISearchResultsUpdat
     }
     
     override func viewWillAppear(animated: Bool) {
-        //super.viewWillAppear(animated)
+        super.viewWillAppear(animated)
         let nav = self.navigationController?.navigationBar
         
         nav?.barTintColor = UIColor.coreColor()
         nav?.barStyle = UIBarStyle.BlackOpaque
-
-        configureSearchController()
-        model.cleanSearchPosts()
         
     }
     
@@ -108,30 +104,21 @@ class SearchPageTableViewController: UITableViewController, UISearchResultsUpdat
     // MARK: Search Bar actions
     
     func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
-        shouldShowSearchResults = true
-        model.cleanSearchPosts()
+        //model.cleanSearchPosts()
     }
     
     
     func searchBarCancelButtonClicked(searchBar: UISearchBar) {
-        shouldShowSearchResults = false
         model.cleanSearchPosts()
     }
     
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {
-        if !shouldShowSearchResults {
-            shouldShowSearchResults = true
-            tableView.reloadData()
-        }
-        
-        searchController.searchBar.resignFirstResponder()
+        searchBar.resignFirstResponder()
     }
     
     func updateSearchResultsForSearchController(searchController: UISearchController) {
         let searchString = searchController.searchBar.text?.lowercaseString
-            
-        model.fetchSearchPosts(searchString!) {
-        }
+        model.fetchSearchPosts(searchString!) { }
     }
     
 
