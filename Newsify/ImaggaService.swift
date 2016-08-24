@@ -6,9 +6,7 @@
 //  Copyright © 2016 Zafer Cavdar. All rights reserved.
 //
 
-import Foundation
 import Alamofire
-import SwiftyJSON
 
 protocol TagService {
     

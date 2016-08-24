@@ -6,8 +6,6 @@
 //  Copyright © 2016 Zafer Cavdar. All rights reserved.
 //
 
-import Foundation
-
 class FeedPost: Post {
     
     var username: String

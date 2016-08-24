@@ -19,8 +19,7 @@ func indexOf(source: String, substring: String) -> Int? {
     return nil
 }
 
-func wait(seconds: NSTimeInterval)
-{
+func wait(seconds: NSTimeInterval){
     NSRunLoop.currentRunLoop().runMode(NSDefaultRunLoopMode, beforeDate: NSDate(timeIntervalSinceNow: seconds))
 }
 

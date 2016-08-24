@@ -6,8 +6,6 @@
 //  Copyright © 2016 Zafer Cavdar. All rights reserved.
 //
 
-import Foundation
-
 func print(items: Any..., separator: String = " ", terminator: String = "\n") {
     
     #if DEBUG
