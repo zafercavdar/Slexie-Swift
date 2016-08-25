@@ -192,8 +192,6 @@ class FirebaseController: NetworkingController, AuthenticationController {
             let userRef = References.UserRef
             userRef.observeSingleEventOfType(.Value, withBlock: { [weak self] (snapshot) in
                 
-                guard let strongSelf = self else { return }
-                
                 guard let userDic = snapshot.value as? [String: AnyObject] else {
                     return
                 }
@@ -214,7 +212,11 @@ class FirebaseController: NetworkingController, AuthenticationController {
                         continue
                     }
                     
-                    guard let owner = propertyDic[ReferenceLabels.PostOwner.rawValue] as? String /* where owner != strongSelf.getUID() */ else {
+                    guard let owner = propertyDic[ReferenceLabels.PostOwner.rawValue] as? String/* where owner != strongSelf.getUID() */ else {
+                        continue
+                    }
+                    
+                    guard let likers = propertyDic[ReferenceLabels.Likers.rawValue] as? [String] else {
                         continue
                     }
                     
@@ -222,9 +224,8 @@ class FirebaseController: NetworkingController, AuthenticationController {
                         continue
                     }
                     
-                    let post = FeedPost(username: username, id: id, tags: photoTags)
+                    let post = FeedPost(username: username, id: id, tags: photoTags, likeCount: likers.count)
                     posts.append(post)
-                    //print("TAG FOUND IN Photo: \(id)")
                     
                 }
                 completion(posts)
@@ -238,14 +239,17 @@ class FirebaseController: NetworkingController, AuthenticationController {
         
         getAccountPosts { (postIDs) in
             let photoRef = References.PhotoRef
-            photoRef.observeSingleEventOfType(.Value, withBlock: { (snapshot) in
+            photoRef.observeSingleEventOfType(.Value, withBlock: {(snapshot) in
+                                
                 if let photos = snapshot.value as? [String: AnyObject] {
                     for postID in postIDs {
                         let tags = (photos[postID] as! [String: AnyObject])[ReferenceLabels.PostTags.rawValue] as! [String]
-                        let post = ProfilePost(id: postID, tags: tags)
+                        let likeCount = ((photos[postID] as! [String: AnyObject])[ReferenceLabels.Likers.rawValue] as! [String]).count
+                        
+                        let post = ProfilePost(id: postID, tags: tags, likeCount: likeCount)
                         profilePosts.append(post)
+                        
                     }
-                    
                     callback(profilePosts)
                 } else {
                     callback([])

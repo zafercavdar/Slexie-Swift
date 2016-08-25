@@ -63,8 +63,8 @@ private extension ProfilePostViewModel {
         let defaultImage = UIImage(named: "greyDefault")
         let defaultTags = ["grey","grey", "grey"]
         
-        let profileItem = ProfilePost(id: "no-id", tags: defaultTags)
-        let profileItem2 = ProfilePost(id: "no-id", tags: defaultTags)
+        let profileItem = ProfilePost(id: "no-id", tags: defaultTags, likeCount: 54)
+        let profileItem2 = ProfilePost(id: "no-id", tags: defaultTags, likeCount: 11)
         
         profileItem.setPhoto(defaultImage!)
         profileItem2.setPhoto(defaultImage!)

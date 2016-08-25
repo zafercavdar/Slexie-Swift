@@ -8,8 +8,8 @@
 
 class ProfilePost: Post {
 
-    override init(id: String, tags: [String]) {
-        super.init(id: id, tags: tags)
+    override init(id: String, tags: [String], likeCount: Int) {
+        super.init(id: id, tags: tags, likeCount: likeCount)
     }
 }
 

@@ -13,10 +13,12 @@ class Post {
     var id: String
     var tags: [String] = []
     var photo = UIImage(named: "greyDefault")
+    var likeCount = 0
     
-    init(id: String, tags: [String]) {
+    init(id: String, tags: [String], likeCount: Int) {
         self.id = id
         self.tags = tags
+        self.likeCount = likeCount
     }
     
     func setPhoto(photo: UIImage) {

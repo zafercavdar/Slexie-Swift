@@ -73,8 +73,8 @@ private extension FeedPostViewModel {
         let defaultUsername2 = "default-id-2"
         let defaultTags2 = ["friends","fun", "together"]
         
-        let feedItem = FeedPost(username: defaultUsername, id: "no-id", tags: defaultTags)
-        let feedItem2 = FeedPost(username: defaultUsername2, id: "no-id", tags: defaultTags2)
+        let feedItem = FeedPost(username: defaultUsername, id: "no-id", tags: defaultTags, likeCount: 11)
+        let feedItem2 = FeedPost(username: defaultUsername2, id: "no-id", tags: defaultTags2, likeCount: 13)
         
         feedItem.setPhoto(defaultImage!)
         feedItem2.setPhoto(defaultImage2!)
