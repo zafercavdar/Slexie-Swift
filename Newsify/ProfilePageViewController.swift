@@ -14,6 +14,7 @@ struct ProfilePostsPresentation {
         var imageID: String
         var image: UIImage
         var tagList: String
+        var likeCount: Int
     }
     
     var profilePosts: [ProfilePostPresentation] = []
@@ -28,7 +29,8 @@ struct ProfilePostsPresentation {
                 tagText += "#\(tag) "
             }
             let tagList = tagText
-            return ProfilePostPresentation(imageID: id, image: image!, tagList: tagList)
+            let likeCount = profilePost.likeCount
+            return ProfilePostPresentation(imageID: id, image: image!, tagList: tagList, likeCount: likeCount)
         })
     }
 }

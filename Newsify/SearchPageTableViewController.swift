@@ -19,6 +19,7 @@ struct SearchPostsPresentation {
         var owner: String
         var image: UIImage
         var tagList: String
+        var likeCount: Int
     }
     
     var searchPosts: [SearchPostPresentation] = []
@@ -34,7 +35,8 @@ struct SearchPostsPresentation {
             }
             let tagList = tagText
             let id = searchPost.id
-            return SearchPostPresentation(id: id, owner: owner, image: image!, tagList: tagList)
+            let likeCount = searchPost.likeCount
+            return SearchPostPresentation(id: id, owner: owner, image: image!, tagList: tagList, likeCount: likeCount)
         })
     }
 }

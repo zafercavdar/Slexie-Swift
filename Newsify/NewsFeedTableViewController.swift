@@ -15,6 +15,7 @@ struct FeedPostsPresentation {
         var owner: String
         var image: UIImage
         var tagList: String
+        var likeCount: Int
     }
     
     var feedPosts: [FeedPostPresentation] = []
@@ -30,7 +31,8 @@ struct FeedPostsPresentation {
                 tagText += "#\(tag) "
             }
             let tagList = tagText
-            return FeedPostPresentation(id: id, owner: owner, image: image!, tagList: tagList)
+            let likeCount = feedPost.likeCount
+            return FeedPostPresentation(id: id, owner: owner, image: image!, tagList: tagList, likeCount: likeCount)
         })
     }
 }
