@@ -9,17 +9,24 @@
 import Foundation
 import UIKit
 
-class SearchFeedItemCell: UITableViewCell {
+class SearchFeedItemCell: UITableViewCell, Likeable{
     
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var photoView: UIImageView!
     @IBOutlet weak var tagsLabel: UILabel!
     var id: String = ""
     
-    let tapRecognizer: AdvancedGestureRecognizer = AdvancedGestureRecognizer()
+    var tapRecognizer: AdvancedGestureRecognizer = AdvancedGestureRecognizer()
+    var likedView: UIImageView!
+
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        
+        likedView = generateLikedView(photoView)
+        photoView.addSubview(likedView)
+
+        
     }
     
     override func setSelected(selected: Bool, animated: Bool) {

@@ -153,17 +153,42 @@ class ProfilePageViewController: UITableViewController {
         cell.tapRecognizer.addTarget(self, action: #selector(photoTapped(_:)))
         cell.tapRecognizer.numberOfTapsRequired = 2
         cell.tapRecognizer.numberOfTouchesRequired = 1
-        cell.tapRecognizer.tappedCellID = cell.id
         cell.profilePostView.gestureRecognizers = []
         cell.profilePostView.gestureRecognizers!.append(cell.tapRecognizer)
+        cell.tapRecognizer.tappedCell = cell
+        
         cell.selectionStyle = UITableViewCellSelectionStyle.None
         
         return cell
     }
     
     func photoTapped(sender: AdvancedGestureRecognizer){
-        let id = sender.tappedCellID
-        print(id)
+        let cell = (sender.tappedCell as! ProfilePostTableViewCell)
+        let id = cell.id
+        
+        model.likePhoto(id) { _ in }
+
+        UIView.animateWithDuration(3.0, delay: 0.5, options: UIViewAnimationOptions.AllowAnimatedContent, animations: {
+            
+            cell.likedView.alpha = 1
+            
+            }, completion: {
+                (value:Bool) in
+                
+                cell.likedView.hidden = false
+        })
+        
+        
+        UIView.animateWithDuration(1.0, delay: 0.5, options: UIViewAnimationOptions.AllowAnimatedContent, animations: {
+            
+            cell.likedView.alpha = 0
+            
+            }, completion: {
+                (value:Bool) in
+                
+                cell.likedView.hidden = true
+        })
     }
+
     
 }

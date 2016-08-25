@@ -8,22 +8,29 @@
 
 import UIKit
 
-class NewsFeedItemCell: UITableViewCell {
+class NewsFeedItemCell: UITableViewCell, Likeable{
 
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var photoView: UIImageView!
     @IBOutlet weak var tagsLabel: UILabel!
     
+    var likedView: UIImageView!
+    var tapRecognizer = AdvancedGestureRecognizer()
+    
     var id = ""
-    let tapRecognizer = AdvancedGestureRecognizer()
     
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        
+        likedView = generateLikedView(photoView)
+        photoView.addSubview(likedView)
+        
     }
 
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
-
+    
+    
 }

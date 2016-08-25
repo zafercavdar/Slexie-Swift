@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ProfilePostViewModel {
+class ProfilePostViewModel: HaveNetworkingController, TapExtendable{
     
     struct State{
         var profilePosts: [ProfilePost] = []
@@ -25,7 +25,7 @@ class ProfilePostViewModel {
     }
 
     
-    private let networkingController = FirebaseController()
+    var networkingController = FirebaseController()
     private(set) var state = State()
     var stateChangeHandler: ((State.Change) -> Void)?
 

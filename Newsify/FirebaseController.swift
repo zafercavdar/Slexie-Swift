@@ -11,6 +11,11 @@ import FirebaseDatabase
 import FirebaseStorage
 import UIKit
 
+enum CallbackResult {
+    case Success
+    case Failed
+}
+
 protocol NetworkingController {
     
     func uploadPhoto(image: NSData, tags: [String], callback: (error: NSError?, photoID: String, url: String) -> Void)
@@ -185,7 +190,9 @@ class FirebaseController: NetworkingController, AuthenticationController {
             }
             
             let userRef = References.UserRef
-            _ = userRef.observeSingleEventOfType(.Value, withBlock: { [weak self] (snapshot) in
+            userRef.observeSingleEventOfType(.Value, withBlock: { [weak self] (snapshot) in
+                
+                guard let strongSelf = self else { return }
                 
                 guard let userDic = snapshot.value as? [String: AnyObject] else {
                     return
@@ -279,8 +286,38 @@ class FirebaseController: NetworkingController, AuthenticationController {
             }
         }
     }
+    
+    func photoLiked(imageid: String, callback: (CallbackResult) -> Void){
+
+        let uidNo = getUID()
+        
+        if let uid = uidNo as String!{
+            let photoRef = References.PhotoRef.child(imageid)
+            
+            getLikers(photo: imageid, completion: { (likerList) in
+                let array = likerList + [uid]
+                let uniqueList = Array(Set(array))
+                let dic = [ReferenceLabels.Likers.rawValue : uniqueList]
+                print(uniqueList)
+                photoRef.updateChildValues(dic)
+                callback(.Success)
+            })
+        }
+        
+    }
 
     // MARK: Private methods
+    
+    private func getLikers(photo uniqueID: String, completion callback: [String] -> Void) {
+        let photoRef = References.PhotoRef.child(uniqueID).child(ReferenceLabels.Likers.rawValue)
+        
+        photoRef.observeSingleEventOfType(.Value, withBlock:  { (snapshot) in
+            if let likers = snapshot.value as? [String] {
+                callback(likers)
+            } else { callback([]) }
+            
+        })
+    }
 
     
     private func saveTagsFor(photo uniqueID: String, tags: [String]) {

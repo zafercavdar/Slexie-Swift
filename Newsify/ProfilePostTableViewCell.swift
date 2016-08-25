@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ProfilePostTableViewCell: UITableViewCell {
+class ProfilePostTableViewCell: UITableViewCell, Likeable {
 
     
     @IBOutlet weak var profilePostView: UIImageView!
@@ -16,10 +16,17 @@ class ProfilePostTableViewCell: UITableViewCell {
     
     var id = ""
     
-    let tapRecognizer: AdvancedGestureRecognizer = AdvancedGestureRecognizer()
+    var tapRecognizer: AdvancedGestureRecognizer = AdvancedGestureRecognizer()
+    var likedView: UIImageView!
+
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        
+        likedView = generateLikedView(profilePostView)
+        profilePostView.addSubview(likedView)
+        
+        
     }
 
     override func setSelected(selected: Bool, animated: Bool) {

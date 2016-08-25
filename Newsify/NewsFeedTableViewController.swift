@@ -136,16 +136,42 @@ class NewsFeedTableViewController: UITableViewController{
         cell.tapRecognizer.addTarget(self, action: #selector(photoTapped(_:)))
         cell.tapRecognizer.numberOfTapsRequired = 2
         cell.tapRecognizer.numberOfTouchesRequired = 1
-        cell.tapRecognizer.tappedCellID = cell.id
         cell.photoView.gestureRecognizers = []
         cell.photoView.gestureRecognizers!.append(cell.tapRecognizer)
+        cell.tapRecognizer.tappedCell = cell
+        
         cell.selectionStyle = UITableViewCellSelectionStyle.None
         
         return cell
     }
     
     func photoTapped(sender: AdvancedGestureRecognizer){
-        let id = sender.tappedCellID
+        let cell = (sender.tappedCell as! NewsFeedItemCell)
+        let id = cell.id
         print(id)
+        
+        model.likePhoto(id) { _ in }
+        
+        UIView.animateWithDuration(3.0, delay: 0.5, options: [], animations: {
+            
+            cell.likedView.alpha = 1
+            
+            }, completion: {
+                (value:Bool) in
+                
+                cell.likedView.hidden = false
+        })
+        
+        
+        UIView.animateWithDuration(1.0, delay: 0.5, options: [], animations: {
+            
+            cell.likedView.alpha = 0
+            
+            }, completion: {
+                (value:Bool) in
+                
+                cell.likedView.hidden = true
+        })
     }
+
 }

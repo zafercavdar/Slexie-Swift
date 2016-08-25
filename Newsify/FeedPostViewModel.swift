@@ -12,7 +12,7 @@ enum CollectionChange {
     case reload
 }
 
-class FeedPostViewModel {
+class FeedPostViewModel: HaveNetworkingController, TapExtendable{
     
     struct State{
         var feedPosts: [FeedPost] = []
@@ -28,7 +28,7 @@ class FeedPostViewModel {
         }
     }
     
-    private let networkingController = FirebaseController()
+    var networkingController = FirebaseController()
     private(set) var state = State()
     var stateChangeHandler: ((State.Change) -> Void)?
     
@@ -60,7 +60,6 @@ class FeedPostViewModel {
             })
         }
     }
-    
 }
 
 private extension FeedPostViewModel {

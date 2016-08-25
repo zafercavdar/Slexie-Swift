@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SearchPostViewModel {
+class SearchPostViewModel: HaveNetworkingController, TapExtendable {
     
     struct State{
         var searchPosts: [FeedPost] = []
@@ -24,7 +24,7 @@ class SearchPostViewModel {
         }
     }
     
-    private let networkingController = FirebaseController()
+    var networkingController = FirebaseController()
     private(set) var state = State()
     var stateChangeHandler: ((State.Change) -> Void)?
     
