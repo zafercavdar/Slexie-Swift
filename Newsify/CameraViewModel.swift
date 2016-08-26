@@ -62,6 +62,11 @@ class CameraViewModel {
         }
     }
     
+    func addTagByUser(tag: String){
+        state.post.trustedTags += [tag]
+        self.emit(State.Change.tags(CollectionChange.reload))
+    }
+    
     func resetImage(){
         self.state.post.trustedTags = []
         self.state.post.contentID = ""

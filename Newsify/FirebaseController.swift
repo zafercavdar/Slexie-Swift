@@ -243,10 +243,23 @@ class FirebaseController: NetworkingController, AuthenticationController {
                                 
                 if let photos = snapshot.value as? [String: AnyObject] {
                     for postID in postIDs {
-                        let tags = (photos[postID] as! [String: AnyObject])[ReferenceLabels.PostTags.rawValue] as! [String]
-                        let likeCount = ((photos[postID] as! [String: AnyObject])[ReferenceLabels.Likers.rawValue] as! [String]).count
                         
-                        let post = ProfilePost(id: postID, tags: tags, likeCount: likeCount)
+                        var tags: [String]?
+                        
+                        tags = ((photos[postID] as! [String: AnyObject])[ReferenceLabels.PostTags.rawValue] as? [String])
+                        
+                        if tags == nil {
+                            tags = []
+                        }
+                        
+                        var likeCount: Int
+                        let likers = ((photos[postID] as! [String: AnyObject])[ReferenceLabels.Likers.rawValue] as? [String])
+                        
+                        if likers == nil {
+                            likeCount = 0
+                        } else { likeCount = likers!.count }
+                        
+                        let post = ProfilePost(id: postID, tags: tags!, likeCount: likeCount)
                         profilePosts.append(post)
                         
                     }

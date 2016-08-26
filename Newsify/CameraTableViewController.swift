@@ -12,11 +12,16 @@ struct ImagePresentation {
     
     var imageData = NSData()
     var tags: [String] = []
+    private var manuelTagsRemained = 5
     
     mutating func update(withState state: CameraViewModel.State){
         imageData = state.post.imageData
         tags = state.post.trustedTags
+        if manuelTagsRemained != 0 {
+            tags.append("+")
+        }
     }
+    
 }
 
 class CameraTableViewController: UITableViewController, UINavigationControllerDelegate {
@@ -38,7 +43,6 @@ class CameraTableViewController: UITableViewController, UINavigationControllerDe
     private let loadingView = LoadingView()
     private let model = CameraViewModel()
     private var presentation = ImagePresentation()
-
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -103,7 +107,13 @@ class CameraTableViewController: UITableViewController, UINavigationControllerDe
         loadingView.addToView(self.view, text: "Uploading")
         
         let imageData = presentation.imageData
-        let tags = presentation.tags
+        var tags = presentation.tags
+        
+        if presentation.manuelTagsRemained != 0 {
+            let count = presentation.tags.count
+            tags = Array(presentation.tags[0..<count-1])
+        }
+        
         
         networkingController.uploadPhoto(imageData, tags: tags) { [weak self] (error, photoID, url) in
             
@@ -145,6 +155,7 @@ class CameraTableViewController: UITableViewController, UINavigationControllerDe
         let cell = tableView.dequeueReusableCellWithIdentifier(Identifier.TagsTableCell, forIndexPath: indexPath) as! TagsTableViewCell
         
         cell.tagLabel.text = tag
+        cell.selectionStyle = UITableViewCellSelectionStyle.None
         
         return cell
     }
@@ -159,6 +170,41 @@ class CameraTableViewController: UITableViewController, UINavigationControllerDe
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
         }
     }
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let index = indexPath.row
+        if index == presentation.tags.count - 1  && presentation.manuelTagsRemained != 0{
+            
+            let alert = UIAlertController(
+                title: "Add a tag",
+                message: "You can add \(presentation.manuelTagsRemained) more tags",
+                preferredStyle: .Alert
+            )
+            
+            alert.addTextFieldWithConfigurationHandler { (field) in
+                field.placeholder = "Name"
+            }
+            
+            let addAction = UIAlertAction(title: "Add", style: .Default) { [weak self] (action) in
+                
+                guard let strongSelf = self,
+                    fields = alert.textFields,
+                    name = fields[0].text
+                    else { return }
+                
+                strongSelf.presentation.manuelTagsRemained -= 1
+                strongSelf.model.addTagByUser(name)
+            }
+            
+            let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
+            
+            alert.addAction(addAction)
+            alert.addAction(cancelAction)
+            
+            presentViewController(alert, animated: true, completion: nil)
+        }
+    }
+
 }
 
 extension CameraTableViewController : UIImagePickerControllerDelegate {

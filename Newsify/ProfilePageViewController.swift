@@ -24,11 +24,10 @@ struct ProfilePostsPresentation {
         profilePosts = state.profilePosts.map({ (profilePost) -> ProfilePostPresentation in
             let id = profilePost.id
             let image = profilePost.photo
-            var tagText = ""
+            var tagList = ""
             for tag in profilePost.tags{
-                tagText += "#\(tag) "
+                tagList += "#\(tag) "
             }
-            let tagList = tagText
             let likeCount = profilePost.likeCount
             return ProfilePostPresentation(imageID: id, image: image!, tagList: tagList, likeCount: likeCount)
         })
