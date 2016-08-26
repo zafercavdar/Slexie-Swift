@@ -112,7 +112,7 @@ class CameraTableViewController: UITableViewController, UINavigationControllerDe
     
     private func uploadData() {
         
-        loadingView.addToView(self.view, text: "Uploading")
+        loadingView.addToView(self.view, text: preferredLanguage.Uploading)
         
         let imageData = presentation.imageData
         let tags = presentation.tags + presentation.userTags
@@ -259,3 +259,16 @@ extension CameraTableViewController : UIImagePickerControllerDelegate {
     }
 }
 
+extension Language {
+    
+    var Uploading: String {
+        switch self {
+        case .Turkish:
+            return "Yükleniyor"
+        case .English:
+            return "Uploading"
+        case .Russian:
+            return "Выгрузка"
+        }
+    }
+}
