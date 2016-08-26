@@ -12,14 +12,18 @@ struct ImagePresentation {
     
     var imageData = NSData()
     var tags: [String] = []
+    var userTags: [String] = []
+
     private var manuelTagsRemained = 5
     
     mutating func update(withState state: CameraViewModel.State){
         imageData = state.post.imageData
         tags = state.post.trustedTags
-        if manuelTagsRemained != 0 {
-            tags.append("+")
-        }
+        userTags = state.post.userTags
+    }
+    
+    func totalTagCount() -> Int{
+        return tags.count + userTags.count
     }
     
 }
@@ -107,13 +111,7 @@ class CameraTableViewController: UITableViewController, UINavigationControllerDe
         loadingView.addToView(self.view, text: "Uploading")
         
         let imageData = presentation.imageData
-        var tags = presentation.tags
-        
-        if presentation.manuelTagsRemained != 0 {
-            let count = presentation.tags.count
-            tags = Array(presentation.tags[0..<count-1])
-        }
-        
+        let tags = presentation.tags + presentation.userTags
         
         networkingController.uploadPhoto(imageData, tags: tags) { [weak self] (error, photoID, url) in
             
@@ -146,15 +144,25 @@ class CameraTableViewController: UITableViewController, UINavigationControllerDe
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return presentation.tags.count
+        return presentation.totalTagCount()
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        let tag = presentation.tags[indexPath.row]
+        let row = indexPath.row
+        var tag: String
+        
         let cell = tableView.dequeueReusableCellWithIdentifier(Identifier.TagsTableCell, forIndexPath: indexPath) as! TagsTableViewCell
         
-        cell.tagLabel.text = tag
+        if row >= presentation.tags.count {
+            tag = presentation.userTags[row - presentation.tags.count]
+            cell.tagLabel.textColor = UIColor.blueColor()
+        } else {
+            tag = presentation.tags[indexPath.row]
+            cell.tagLabel.textColor = UIColor.blackColor()
+        }
+        
+        cell.tagLabel.text = "#\(tag)"
         cell.selectionStyle = UITableViewCellSelectionStyle.None
         
         return cell
@@ -166,18 +174,28 @@ class CameraTableViewController: UITableViewController, UINavigationControllerDe
     
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
-            presentation.tags.removeAtIndex(indexPath.row)
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+            
+            let row = indexPath.row
+            if row >= presentation.tags.count {
+                model.removeTagByUser(at: row - presentation.tags.count)
+                presentation.manuelTagsRemained += 1
+            } else {
+                model.removeAutoTag(at: row)
+            }
+            
+            //tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
         }
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let index = indexPath.row
-        if index == presentation.tags.count - 1  && presentation.manuelTagsRemained != 0{
+    @IBAction func addTag(sender: UIBarButtonItem) {
+        addManuelTag()
+    }
+    func addManuelTag(){
+        if presentation.manuelTagsRemained != 0{
             
             let alert = UIAlertController(
                 title: "Add a tag",
-                message: "You can add \(presentation.manuelTagsRemained) more tags",
+                message: "You can add \(self.presentation.manuelTagsRemained) more tags",
                 preferredStyle: .Alert
             )
             
@@ -193,7 +211,7 @@ class CameraTableViewController: UITableViewController, UINavigationControllerDe
                     else { return }
                 
                 strongSelf.presentation.manuelTagsRemained -= 1
-                strongSelf.model.addTagByUser(name)
+                strongSelf.model.addTagByUser(name.lowercaseString)
             }
             
             let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
@@ -201,10 +219,10 @@ class CameraTableViewController: UITableViewController, UINavigationControllerDe
             alert.addAction(addAction)
             alert.addAction(cancelAction)
             
-            presentViewController(alert, animated: true, completion: nil)
+            self.presentViewController(alert, animated: true, completion: nil)
         }
-    }
 
+    }
 }
 
 extension CameraTableViewController : UIImagePickerControllerDelegate {

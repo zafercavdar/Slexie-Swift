@@ -607,7 +607,14 @@
                     </tableView>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Tags" id="l72-Zr-6Xz">
+                        <barButtonItem key="leftBarButtonItem" systemItem="add" id="Y3u-bO-G5B">
+                            <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <action selector="addTag:" destination="Egf-gr-7O3" id="ORa-3J-tAg"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="fastForward" id="tbR-fM-rDI">
+                            <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="color" keyPath="tintColor">
                                     <color key="value" white="0.0" alpha="1" colorSpace="calibratedWhite"/>

@@ -15,6 +15,7 @@ class CameraViewModel {
         var imageData = NSData()
         let compressionRate = CGFloat(0.5)
         var trustedTags: [String] = []
+        var userTags: [String] = []
     }
 
     struct State {
@@ -63,12 +64,23 @@ class CameraViewModel {
     }
     
     func addTagByUser(tag: String){
-        state.post.trustedTags += [tag]
+        state.post.userTags += [tag]
+        self.emit(State.Change.tags(CollectionChange.reload))
+    }
+    
+    func removeTagByUser(at index: Int) {
+        state.post.userTags.removeAtIndex(index)
+        self.emit(State.Change.tags(CollectionChange.reload))
+    }
+    
+    func removeAutoTag(at index: Int){
+        state.post.trustedTags.removeAtIndex(index)
         self.emit(State.Change.tags(CollectionChange.reload))
     }
     
     func resetImage(){
         self.state.post.trustedTags = []
+        self.state.post.userTags = []
         self.state.post.contentID = ""
         self.state.post.imageData = NSData()
         self.emit(State.Change.tags(.reload))
