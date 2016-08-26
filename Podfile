@@ -13,6 +13,7 @@ target 'Slexie' do
   pod 'SwiftyJSON'
   pod 'ObjectMapper', '~> 1.3'
   pod 'AlamofireObjectMapper', '~> 3.0'
+  pod 'DOFavoriteButton'
 
 
   target 'SlexieTests' do

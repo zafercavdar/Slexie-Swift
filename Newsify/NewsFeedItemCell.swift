@@ -27,9 +27,8 @@ class NewsFeedItemCell: UITableViewCell, Likeable{
         
         likedView = generateLikedView(photoView)
         photoView.addSubview(likedView)
-        
     }
-
+    
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
