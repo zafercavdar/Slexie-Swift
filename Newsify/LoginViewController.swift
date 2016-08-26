@@ -22,12 +22,24 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var passwordLabel: UILabel!
     @IBOutlet weak var usernameField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
-    @IBOutlet weak var randomGenerateButton: UIButton!
     @IBOutlet weak var loginButton: UIButton!
+    @IBOutlet weak var signUpRedirect: UIButton!
     
     override func viewDidLoad() {
 
         super.viewDidLoad()
+        
+        self.view.backgroundColor = UIColor.coreColor()
+        
+        loginButton.setTitle(preferredLanguage.LoginButton, forState: .Normal)
+        signUpRedirect.setTitle(preferredLanguage.SignUpRedirect, forState: .Normal)
+        usernameLabel.text = preferredLanguage.LoginScreenUsernameLabel
+        passwordLabel.text = preferredLanguage.LoginScreenPasswordLabel
+        
+        
+        loginButton.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+        usernameLabel.textColor = UIColor.whiteColor()
+        passwordLabel.textColor = UIColor.whiteColor()
         
         usernameField.delegate = self
         passwordField.delegate = self
@@ -42,9 +54,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-        loginButton.setTitleColor(UIColor.coreColor(), forState: UIControlState.Normal)
-        randomGenerateButton.enabled = false
-
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -77,24 +86,12 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         
     }
     
-    @IBAction func generateRandomUsers(sender: UIButton) {
-        
-        fbNetworkingController.signInWith(username: "zafer", password: "112233", enableNotification: false) { (error) in
-         let rgen = RandomBase()
-         
-            for _ in 0..<50 {
-                rgen.createUser()
-            }
-        }
-    }
-
-    
     // MARK: Helper methods
     
     private func loginWithUsername(username: String, _ password: String){
         
         let loadingView = LoadingView()
-        loadingView.addToView(self.view, text: "Signing in")
+        loadingView.addToView(self.view, text: preferredLanguage.SigningInInfo)
         
         fbNetworkingController.signInWith(username: username, password: password, enableNotification: true) { [weak self](error) in
             
@@ -113,7 +110,13 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     // MARK: UITextFieldDelegate
     func textFieldShouldReturn(textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
+        
+        if textField == usernameField {
+            passwordField.becomeFirstResponder()
+        } else if textField == passwordField {
+            textField.resignFirstResponder()
+        }
+        
         return true
     }
     

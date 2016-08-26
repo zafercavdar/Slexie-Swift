@@ -10,12 +10,18 @@ import UIKit
 
 class CreateAccountViewController: UIViewController, UITextFieldDelegate {
 
+    
+    @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var usernameField: UITextField!
+    @IBOutlet weak var passwordLabel: UILabel!
     @IBOutlet weak var passwordField: UITextField!
+    @IBOutlet weak var repasswordLabel: UILabel!
     @IBOutlet weak var repasswordField: UITextField!
     @IBOutlet weak var accountTypeControl: UISwitch!
     @IBOutlet weak var profileTypeLabel: UILabel!
     @IBOutlet weak var signUpButton: UIButton!
+    
+    @IBOutlet weak var cancel: UIButton!
     
     private var fields: [UITextField] = []
     
@@ -38,21 +44,28 @@ class CreateAccountViewController: UIViewController, UITextFieldDelegate {
             field.delegate = self
         }
         
-    }
-    
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        signUpButton.setTitleColor(UIColor.coreColor(), forState: UIControlState.Normal)
+        self.view.backgroundColor = UIColor.coreColor()
+        usernameLabel.text = preferredLanguage.SignUpScreenUsernameLabel
+        usernameLabel.textColor = UIColor.whiteColor()
+        passwordLabel.text = preferredLanguage.SignUpScreenPasswordLabel
+        passwordLabel.textColor = UIColor.whiteColor()
+        repasswordLabel.text = preferredLanguage.SignUpScreenPasswordReTypeLabel
+        repasswordLabel.textColor = UIColor.whiteColor()
+        signUpButton.setTitle(preferredLanguage.SignUpScreenSignUpButton, forState: .Normal)
+        signUpButton.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+        cancel.setTitle(preferredLanguage.Cancel, forState: .Normal)
+        cancel.setTitleColor(UIColor.whiteColor(), forState: .Normal)
+        
+        profileTypeLabel.textColor = UIColor.whiteColor()
+        profileTypeLabel.text = preferredLanguage.YourProfile + preferredLanguage.Public
         
     }
-
-    
     
     @IBAction func switchStateChanged(sender: UISwitch) {
         if sender.on {
-            profileTypeLabel.text = "Your profile: Public"
+            profileTypeLabel.text = preferredLanguage.YourProfile + preferredLanguage.Public
         } else {
-            profileTypeLabel.text = "Your profile: Private"
+            profileTypeLabel.text = preferredLanguage.YourProfile + preferredLanguage.Private
         }
     }
     
@@ -95,7 +108,7 @@ class CreateAccountViewController: UIViewController, UITextFieldDelegate {
     private func signUpWithUsernamePassword(email: String, _ password: String, _ username: String, _ profileType: String){
         
         let loadingView = LoadingView()
-        loadingView.addToView(self.view, text: "Signing up")
+        loadingView.addToView(self.view, text: preferredLanguage.SigningUpInfo)
         
         
         networkingController.signUp(email, username: username, password: password, profileType: profileType) { [weak self](error) in

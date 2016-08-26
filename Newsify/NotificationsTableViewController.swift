@@ -12,6 +12,9 @@ class NotificationsTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.navigationItem.title = preferredLanguage.NavBarNotifications
+
 
     }
     

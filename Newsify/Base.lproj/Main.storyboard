@@ -20,33 +20,36 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" alignment="center" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="U0Q-V9-gqQ">
-                                <rect key="frame" x="20" y="20" width="560" height="270"/>
+                                <rect key="frame" x="20" y="20" width="560" height="470"/>
                                 <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="280" placeholderIntrinsicHeight="231" image="APPLOGO" translatesAutoresizingMaskIntoConstraints="NO" id="q5o-ow-WcW">
+                                        <rect key="frame" x="140" y="0.0" width="280" height="231"/>
+                                    </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="om7-wh-mCc">
-                                        <rect key="frame" x="241" y="0.0" width="79" height="21"/>
+                                        <rect key="frame" x="241" y="243" width="79" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.028070781379938126" green="0.0038275276310741901" blue="0.0036432337947189808" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" placeholderIntrinsicWidth="560" placeholderIntrinsicHeight="30" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="your username" textAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="AfF-Io-2r2">
-                                        <rect key="frame" x="0.0" y="33" width="560" height="30"/>
+                                        <rect key="frame" x="0.0" y="276" width="560" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
                                     </textField>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Password" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wY3-Fm-iZ2">
-                                        <rect key="frame" x="243" y="75" width="74" height="21"/>
+                                        <rect key="frame" x="243" y="318" width="74" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.067026004195213318" green="0.055413044989109039" blue="0.017889039590954781" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" placeholderIntrinsicWidth="560" placeholderIntrinsicHeight="30" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="your password" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8gO-Kb-QYA">
-                                        <rect key="frame" x="0.0" y="107" width="560" height="30"/>
+                                        <rect key="frame" x="0.0" y="350" width="560" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" secureTextEntry="YES"/>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OFK-o9-B9V">
-                                        <rect key="frame" x="252" y="149" width="57" height="40"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="23"/>
+                                        <rect key="frame" x="251" y="392" width="58" height="39"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="23"/>
                                         <state key="normal" title="Login">
                                             <color key="titleColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
@@ -54,18 +57,8 @@
                                             <action selector="loginButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="de5-ua-kGF"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bCS-fP-y5U">
-                                        <rect key="frame" x="196" y="201" width="168" height="30"/>
-                                        <accessibility key="accessibilityConfiguration">
-                                            <bool key="isElement" value="NO"/>
-                                        </accessibility>
-                                        <state key="normal" title="Generate Random Users"/>
-                                        <connections>
-                                            <action selector="generateRandomUsers:" destination="BYZ-38-t0r" eventType="touchUpInside" id="JsE-9m-ljV"/>
-                                        </connections>
-                                    </button>
                                     <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b1O-FD-D6K">
-                                        <rect key="frame" x="168" y="243" width="225" height="27"/>
+                                        <rect key="frame" x="168" y="443" width="225" height="27"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                         <state key="normal" title="Don't you have an account? Create one."/>
                                         <connections>
@@ -73,6 +66,8 @@
                                         </connections>
                                     </button>
                                 </subviews>
+                                <color key="backgroundColor" red="0.97965273998294689" green="1" blue="0.97671556029929585" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="tintColor" red="0.97359757789040569" green="0.98945553752161142" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstItem="8gO-Kb-QYA" firstAttribute="leading" secondItem="U0Q-V9-gqQ" secondAttribute="leading" id="4Nj-p6-mro"/>
                                     <constraint firstAttribute="trailing" secondItem="8gO-Kb-QYA" secondAttribute="trailing" id="6ne-Ob-7EZ"/>
@@ -92,7 +87,7 @@
                         <outlet property="loginButton" destination="OFK-o9-B9V" id="mh2-P3-wQi"/>
                         <outlet property="passwordField" destination="8gO-Kb-QYA" id="Eye-xf-MLK"/>
                         <outlet property="passwordLabel" destination="wY3-Fm-iZ2" id="Oy8-py-bpI"/>
-                        <outlet property="randomGenerateButton" destination="bCS-fP-y5U" id="DGA-Ev-vLk"/>
+                        <outlet property="signUpRedirect" destination="b1O-FD-D6K" id="Vec-pq-6cW"/>
                         <outlet property="usernameField" destination="AfF-Io-2r2" id="9n2-RC-Z9d"/>
                         <outlet property="usernameLabel" destination="om7-wh-mCc" id="maQ-gG-uVx"/>
                         <segue destination="AUG-x2-Njh" kind="show" identifier="LoggedIn" id="v1H-f1-fwr"/>
@@ -204,11 +199,15 @@
                     </view>
                     <connections>
                         <outlet property="accountTypeControl" destination="xO8-yx-08H" id="dfG-Is-53C"/>
+                        <outlet property="cancel" destination="7Kb-rp-P3h" id="DPf-Qi-etO"/>
                         <outlet property="passwordField" destination="gX3-bp-6kc" id="B6f-1b-VjJ"/>
+                        <outlet property="passwordLabel" destination="qQ3-50-eFm" id="J4p-bP-2MK"/>
                         <outlet property="profileTypeLabel" destination="SCL-Yi-y1C" id="wxT-De-nPM"/>
                         <outlet property="repasswordField" destination="117-R8-NPI" id="6bb-Dv-bmH"/>
+                        <outlet property="repasswordLabel" destination="CR7-kI-zr7" id="WTg-hg-vq0"/>
                         <outlet property="signUpButton" destination="TQ5-Nz-YNT" id="jM3-ax-Xpc"/>
                         <outlet property="usernameField" destination="U4X-q0-fGm" id="zz9-15-T2I"/>
+                        <outlet property="usernameLabel" destination="82k-kP-S72" id="oVA-IO-8sR"/>
                         <segue destination="AUG-x2-Njh" kind="show" identifier="LoggedInFromSignUp" id="NWr-JX-J3B"/>
                     </connections>
                 </viewController>
@@ -401,7 +400,7 @@
                             <outlet property="delegate" destination="ATO-hG-gLW" id="7fk-5d-4hN"/>
                         </connections>
                     </tableView>
-                    <tabBarItem key="tabBarItem" systemItem="search" id="h71-q5-Ik3">
+                    <tabBarItem key="tabBarItem" title="Search" image="Search" id="h71-q5-Ik3">
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="color" keyPath="tintColor">
                                 <color key="value" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
@@ -540,6 +539,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="logout" destination="QED-Hd-Xsp" id="Pmk-qq-Acc"/>
                         <outlet property="profilePostsView" destination="gdQ-VH-d2O" id="tZg-rq-Rhl"/>
                         <segue destination="BYZ-38-t0r" kind="presentation" identifier="LogOut" id="aOw-T5-xUS"/>
                     </connections>
@@ -561,8 +561,8 @@
                     <connections>
                         <segue destination="JyD-aO-e5S" kind="relationship" relationship="viewControllers" id="r0a-Jk-XZf"/>
                         <segue destination="XG9-0o-AnY" kind="relationship" relationship="viewControllers" id="fdQ-Vh-Igi"/>
-                        <segue destination="UF2-X7-6Kr" kind="relationship" relationship="viewControllers" id="9KB-fG-Vcs"/>
-                        <segue destination="8MG-qG-qQ8" kind="relationship" relationship="viewControllers" id="UOR-Ok-biD"/>
+                        <segue destination="T9L-Sr-qdg" kind="relationship" relationship="viewControllers" id="huE-ND-A4n"/>
+                        <segue destination="xqT-y5-rIw" kind="relationship" relationship="viewControllers" id="Opv-ab-RNi"/>
                         <segue destination="3lg-gO-9tu" kind="relationship" relationship="viewControllers" id="Qh2-CI-fF4"/>
                     </connections>
                 </tabBarController>
@@ -593,34 +593,29 @@
                             <outlet property="delegate" destination="oVk-7w-AFw" id="ywq-4E-Yud"/>
                         </connections>
                     </tableView>
+                    <tabBarItem key="tabBarItem" title="Notifications" image="Notifications" id="9yM-2x-je5"/>
                     <navigationItem key="navigationItem" title="Notifications" id="Qri-dD-Jjg"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="b1j-Tw-8yy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="291" y="522"/>
         </scene>
-        <!--Notifications-->
-        <scene sceneID="hXX-uD-EIy">
+        <!--Item-->
+        <scene sceneID="1xD-B5-PBX">
             <objects>
-                <navigationController id="8MG-qG-qQ8" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Notifications" image="Notifications" id="6oH-Fh-zCY">
-                        <userDefinedRuntimeAttributes>
-                            <userDefinedRuntimeAttribute type="color" keyPath="tintColor">
-                                <color key="value" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                            </userDefinedRuntimeAttribute>
-                        </userDefinedRuntimeAttributes>
-                    </tabBarItem>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="rll-h8-3fi">
+                <navigationController id="T9L-Sr-qdg" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="s8J-nN-Rdq"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="1yj-1D-cYa">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="oVk-7w-AFw" kind="relationship" relationship="rootViewController" id="igw-l9-dMV"/>
+                        <segue destination="Egf-gr-7O3" kind="relationship" relationship="rootViewController" id="f63-K6-mzV"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="6Wf-Ry-1Ma" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cN1-Eu-qwh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="291" y="-204"/>
+            <point key="canvasLocation" x="940" y="-178"/>
         </scene>
         <!--Tags-->
         <scene sceneID="tPo-MD-idI">
@@ -656,66 +651,58 @@
                             <outlet property="delegate" destination="Egf-gr-7O3" id="ZcO-Cb-b5M"/>
                         </connections>
                     </tableView>
+                    <tabBarItem key="tabBarItem" title="Camera" image="Camera" id="0cA-CG-ddI"/>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Tags" id="l72-Zr-6Xz">
                         <barButtonItem key="leftBarButtonItem" systemItem="add" id="Y3u-bO-G5B">
-                            <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
                                 <action selector="addTag:" destination="Egf-gr-7O3" id="ORa-3J-tAg"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="fastForward" id="tbR-fM-rDI">
-                            <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                            <userDefinedRuntimeAttributes>
-                                <userDefinedRuntimeAttribute type="color" keyPath="tintColor">
-                                    <color key="value" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                </userDefinedRuntimeAttribute>
-                            </userDefinedRuntimeAttributes>
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
                                 <action selector="uploadPressed:" destination="Egf-gr-7O3" id="IHn-BF-uPQ"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
-                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yul-yJ-wZv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="940" y="516"/>
         </scene>
-        <!--Camera-->
-        <scene sceneID="onZ-uK-iWY">
+        <!--Item-->
+        <scene sceneID="76L-sl-oEY">
             <objects>
-                <navigationController id="UF2-X7-6Kr" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Camera" image="Camera" id="xqw-cl-kZu">
-                        <userDefinedRuntimeAttributes>
-                            <userDefinedRuntimeAttribute type="color" keyPath="tintColor">
-                                <color key="value" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                            </userDefinedRuntimeAttribute>
-                        </userDefinedRuntimeAttributes>
-                    </tabBarItem>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="8Iy-Iv-p20">
+                <navigationController id="xqT-y5-rIw" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="osB-UB-GOa"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="shE-ja-F0U">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="Egf-gr-7O3" kind="relationship" relationship="rootViewController" id="QLy-cJ-jpK"/>
+                        <segue destination="oVk-7w-AFw" kind="relationship" relationship="rootViewController" id="Bwb-Jo-8kA"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="XxB-40-143" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="XI3-rA-3WO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="940" y="-204"/>
+            <point key="canvasLocation" x="291" y="-178"/>
         </scene>
     </scenes>
     <resources>
+        <image name="APPLOGO" width="902" height="462"/>
         <image name="Camera" width="50" height="50"/>
         <image name="Empty Heart" width="100" height="100"/>
         <image name="Newsfeed" width="50" height="50"/>
         <image name="Notifications" width="50" height="50"/>
         <image name="Profile" width="50" height="50"/>
+        <image name="Search" width="44" height="44"/>
         <image name="Settings" width="44" height="44"/>
         <image name="greyDefault" width="500" height="500"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="v1H-f1-fwr"/>
+        <segue reference="NWr-JX-J3B"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -73,6 +73,8 @@ class SearchPageTableViewController: UITableViewController, UISearchResultsUpdat
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.navigationItem.title = preferredLanguage.NavBarSearch
+        
         self.definesPresentationContext = true
         configureSearchController()
 
@@ -85,7 +87,7 @@ class SearchPageTableViewController: UITableViewController, UISearchResultsUpdat
     }
     
     override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
+        //super.viewWillAppear(animated)
         let nav = self.navigationController?.navigationBar
         
         nav?.barTintColor = UIColor.coreColor()

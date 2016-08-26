@@ -41,6 +41,8 @@ struct ProfilePostsPresentation {
 class ProfilePageViewController: UITableViewController {
 
     @IBOutlet var profilePostsView: UITableView!
+    @IBOutlet weak var logout: UIBarButtonItem!
+    
     
     private let networkingController = FirebaseController()
     private let model = ProfilePostViewModel()
@@ -59,6 +61,10 @@ class ProfilePageViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        logout.title = preferredLanguage.NavBarLogOut
+        
+        self.navigationItem.title = preferredLanguage.NavBarProfile
         
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(refresh(_:)), forControlEvents: .ValueChanged)
@@ -110,7 +116,7 @@ class ProfilePageViewController: UITableViewController {
     }
     
     private func reload() {
-        loadingView.addToView(self.view, text: "Refreshing")
+        loadingView.addToView(self.view, text: preferredLanguage.RefreshingInfo)
         
         model.fetchProfilePosts { [weak self] in
             

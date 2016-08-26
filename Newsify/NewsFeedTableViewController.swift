@@ -57,8 +57,15 @@ class NewsFeedTableViewController: UITableViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
-        loadingView.addToView(self.view, text: "Refreshing")
+        self.tabBarItem.title = preferredLanguage.TabBarHome
+        self.navigationItem.title = preferredLanguage.NavBarNewsfeed
+        self.tabBarController?.tabBar.items![1].title = preferredLanguage.TabBarSearch
+        self.tabBarController?.tabBar.items![2].title = preferredLanguage.TabBarCamera
+        self.tabBarController?.tabBar.items![3].title = preferredLanguage.TabBarNotifications
+        self.tabBarController?.tabBar.items![4].title = preferredLanguage.TabBarProfile
+
+
+        loadingView.addToView(self.view, text: preferredLanguage.RefreshingInfo)
         
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(refresh(_:)), forControlEvents: .ValueChanged)
@@ -100,9 +107,7 @@ class NewsFeedTableViewController: UITableViewController{
         let nav = self.navigationController?.navigationBar
         nav?.barTintColor = UIColor.coreColor()
         nav?.barStyle = UIBarStyle.BlackOpaque
-        
-        //tableView.setContentOffset(CGPointZero, animated:true)
-        
+                
     }
     
     override func scrollViewWillEndDragging(scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {

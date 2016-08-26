@@ -51,6 +51,9 @@ class CameraTableViewController: UITableViewController, UINavigationControllerDe
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.navigationItem.title = preferredLanguage.NavBarTags
+
+        
         self.applyState(model.state)
         
         model.stateChangeHandler = { [weak self] change in
@@ -71,6 +74,7 @@ class CameraTableViewController: UITableViewController, UINavigationControllerDe
         let nav = self.navigationController?.navigationBar
         nav?.barTintColor = UIColor.coreColor()
         nav?.barStyle = UIBarStyle.BlackOpaque
+
     }
     
     func applyState(state: CameraViewModel.State) {

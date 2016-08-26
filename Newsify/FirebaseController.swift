@@ -379,7 +379,7 @@ class FirebaseController: NetworkingController, AuthenticationController {
             })
             
             getAccountTags({ (oldTags) in
-                let set = Set(oldTags + tags)
+                let set = Array(Set(oldTags + tags))
                 userRef.updateChildValues([ReferenceLabels.UserTags.rawValue : set])
             })
             
