@@ -10,8 +10,8 @@ class FeedPost: Post {
     
     var username: String
     
-    init(username: String, id: String, tags: [String], likeCount: Int) {
+    init(username: String, id: String, tags: [String], likers: [String], likeCount: Int, isAlreadyLiked: Bool) {
         self.username = username
-        super.init(id: id, tags: tags, likeCount: likeCount)
+        super.init(id: id, tags: tags, likers: likers, likeCount: likeCount, isAlreadyLiked: isAlreadyLiked)
     }
 }

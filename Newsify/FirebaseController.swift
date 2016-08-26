@@ -224,7 +224,9 @@ class FirebaseController: NetworkingController, AuthenticationController {
                         continue
                     }
                     
-                    let post = FeedPost(username: username, id: id, tags: photoTags, likeCount: likers.count)
+                    let liked = likers.contains((self?.getUID())!)
+                    
+                    let post = FeedPost(username: username, id: id, tags: photoTags, likers: likers, likeCount: likers.count, isAlreadyLiked: liked)
                     posts.append(post)
                     
                 }
@@ -253,13 +255,19 @@ class FirebaseController: NetworkingController, AuthenticationController {
                         }
                         
                         var likeCount: Int
-                        let likers = ((photos[postID] as! [String: AnyObject])[ReferenceLabels.Likers.rawValue] as? [String])
+                        var liked: Bool
+                        var likers = ((photos[postID] as! [String: AnyObject])[ReferenceLabels.Likers.rawValue] as? [String])
                         
                         if likers == nil {
+                            likers = []
                             likeCount = 0
-                        } else { likeCount = likers!.count }
+                            liked = false
+                        } else {
+                            likeCount = likers!.count
+                            liked = (likers?.contains(self.getUID()!))!
+                        }
                         
-                        let post = ProfilePost(id: postID, tags: tags!, likeCount: likeCount)
+                        let post = ProfilePost(id: postID, tags: tags!, likers: likers!, likeCount: likeCount, isAlreadyLiked: liked)
                         profilePosts.append(post)
                         
                     }
@@ -322,6 +330,18 @@ class FirebaseController: NetworkingController, AuthenticationController {
         }
         
     }
+    
+    func isAlreadyLiked(imageid: String, callback: (alredyLiked: Bool) -> Void){
+        
+        let uidNo = getUID()
+        
+        if let uid = uidNo as String!{
+            getLikers(photo: imageid, completion: { (likerList) in
+                callback(alredyLiked: likerList.contains(uid))
+            })
+        }
+
+    }
 
     // MARK: Private methods
     
@@ -359,14 +379,13 @@ class FirebaseController: NetworkingController, AuthenticationController {
             })
             
             getAccountTags({ (oldTags) in
-                userRef.updateChildValues([ReferenceLabels.UserTags.rawValue : oldTags + tags])
+                let set = Set(oldTags + tags)
+                userRef.updateChildValues([ReferenceLabels.UserTags.rawValue : set])
             })
             
             getAccountPosts({ (oldPosts) in
                 userRef.updateChildValues([ReferenceLabels.UserPosts.rawValue: oldPosts + [uniqueID]])
             })
-            
-
         }
     }
     

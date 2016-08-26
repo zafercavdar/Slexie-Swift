@@ -12,7 +12,7 @@ enum CollectionChange {
     case reload
 }
 
-class FeedPostViewModel: HaveNetworkingController, TapExtendable{
+class FeedPostViewModel: HaveNetworkingController{
     
     struct State{
         var feedPosts: [FeedPost] = []
@@ -60,6 +60,12 @@ class FeedPostViewModel: HaveNetworkingController, TapExtendable{
             })
         }
     }
+    
+    func likePhoto(id: String){
+        networkingController.photoLiked(id) { (result) in
+            
+        }
+    }
 }
 
 private extension FeedPostViewModel {
@@ -73,8 +79,8 @@ private extension FeedPostViewModel {
         let defaultUsername2 = "default-id-2"
         let defaultTags2 = ["friends","fun", "together"]
         
-        let feedItem = FeedPost(username: defaultUsername, id: "no-id", tags: defaultTags, likeCount: 11)
-        let feedItem2 = FeedPost(username: defaultUsername2, id: "no-id", tags: defaultTags2, likeCount: 13)
+        let feedItem = FeedPost(username: defaultUsername, id: "no-id", tags: defaultTags, likers: [], likeCount: 11, isAlreadyLiked: false)
+        let feedItem2 = FeedPost(username: defaultUsername2, id: "no-id", tags: defaultTags2, likers: [], likeCount: 13, isAlreadyLiked: true)
         
         feedItem.setPhoto(defaultImage!)
         feedItem2.setPhoto(defaultImage2!)

@@ -15,7 +15,9 @@ struct FeedPostsPresentation {
         var owner: String
         var image: UIImage
         var tagList: String
+        var likers: [String]
         var likeCount: Int
+        var liked: Bool
     }
     
     var feedPosts: [FeedPostPresentation] = []
@@ -30,9 +32,11 @@ struct FeedPostsPresentation {
             for tag in feedPost.tags{
                 tagText += "#\(tag) "
             }
+            let likers = feedPost.likers
             let tagList = tagText
             let likeCount = feedPost.likeCount
-            return FeedPostPresentation(id: id, owner: owner, image: image!, tagList: tagList, likeCount: likeCount)
+            let liked = feedPost.isAlreadyLiked
+            return FeedPostPresentation(id: id, owner: owner, image: image!, tagList: tagList, likers: likers, likeCount: likeCount, liked: liked)
         })
     }
 }
@@ -134,6 +138,7 @@ class NewsFeedTableViewController: UITableViewController{
         cell.usernameLabel.text = feedPresentation.owner
         cell.photoView.image = feedPresentation.image
         cell.tagsLabel.text = feedPresentation.tagList
+        cell.likeCount.text = String(feedPresentation.likeCount)
         
         cell.tapRecognizer.addTarget(self, action: #selector(photoTapped(_:)))
         cell.tapRecognizer.numberOfTapsRequired = 2
@@ -141,6 +146,14 @@ class NewsFeedTableViewController: UITableViewController{
         cell.photoView.gestureRecognizers = []
         cell.photoView.gestureRecognizers!.append(cell.tapRecognizer)
         cell.tapRecognizer.tappedCell = cell
+        
+        if feedPresentation.liked {
+            cell.heart.image = UIImage(named: "Filled Heart")
+        } else {
+            cell.heart.image = UIImage(named: "Empty Heart")
+        }
+        
+        cell.likeCount.text = String(feedPresentation.likeCount)
         
         cell.selectionStyle = UITableViewCellSelectionStyle.None
         
@@ -152,7 +165,19 @@ class NewsFeedTableViewController: UITableViewController{
         let id = cell.id
         print(id)
         
-        model.likePhoto(id) { _ in }
+        let controller = FirebaseController()
+        
+        model.likePhoto(id)
+        
+        for feedPost in presentation.feedPosts {
+            if feedPost.id == id {
+                cell.heart.image = UIImage(named: "Filled Heart")
+                
+                if !feedPost.likers.contains(controller.getUID()!) {
+                    cell.likeCount.text = String(feedPost.likeCount + 1)
+                }
+            }
+        }
         
         UIView.animateWithDuration(3.0, delay: 0.5, options: [], animations: {
             

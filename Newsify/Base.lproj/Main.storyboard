@@ -237,20 +237,20 @@
         <scene sceneID="mYy-aK-Kzl">
             <objects>
                 <tableViewController id="quT-6B-jcQ" customClass="NewsFeedTableViewController" customModule="Slexie" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="480" sectionHeaderHeight="28" sectionFooterHeight="28" id="rt4-oe-6Qm">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="500" sectionHeaderHeight="28" sectionFooterHeight="28" id="rt4-oe-6Qm">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="NewsFeedItemCell" rowHeight="450" id="yre-oF-4ws" customClass="NewsFeedItemCell" customModule="Slexie" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="92" width="600" height="450"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="NewsFeedItemCell" rowHeight="470" id="yre-oF-4ws" customClass="NewsFeedItemCell" customModule="Slexie" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="92" width="600" height="470"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="yre-oF-4ws" id="QQ6-F7-tDY">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="449.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="469.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="ia2-OF-ud7">
-                                            <rect key="frame" x="8" y="28" width="584" height="403"/>
+                                        <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="ia2-OF-ud7">
+                                            <rect key="frame" x="8" y="28" width="584" height="463"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="83" placeholderIntrinsicHeight="21" text="Username" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZRX-vm-ghv">
                                                     <rect key="frame" x="251" y="0.0" width="83" height="21"/>
@@ -270,6 +270,21 @@
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="br5-up-Yqt">
+                                                    <rect key="frame" x="265" y="413" width="55" height="50"/>
+                                                    <subviews>
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Empty Heart" translatesAutoresizingMaskIntoConstraints="NO" id="ugd-xs-fwn">
+                                                            <rect key="frame" x="0.0" y="0.0" width="35" height="35"/>
+                                                        </imageView>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tpm-EW-i6d">
+                                                            <rect key="frame" x="43" y="7" width="42" height="21"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </view>
                                             </subviews>
                                         </stackView>
                                     </subviews>
@@ -282,6 +297,8 @@
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
+                                    <outlet property="heart" destination="ugd-xs-fwn" id="TM0-hs-2kE"/>
+                                    <outlet property="likeCount" destination="tpm-EW-i6d" id="4FH-yF-mt2"/>
                                     <outlet property="photoView" destination="SYK-Dq-CX8" id="7pg-mn-PIA"/>
                                     <outlet property="tagsLabel" destination="ErQ-6h-Nuu" id="aBW-U2-XhL"/>
                                     <outlet property="usernameLabel" destination="ZRX-vm-ghv" id="hp7-pQ-vJO"/>
@@ -657,6 +674,7 @@
     </scenes>
     <resources>
         <image name="Camera" width="50" height="50"/>
+        <image name="Empty Heart" width="100" height="100"/>
         <image name="Newsfeed" width="50" height="50"/>
         <image name="Notifications" width="50" height="50"/>
         <image name="Profile" width="50" height="50"/>
