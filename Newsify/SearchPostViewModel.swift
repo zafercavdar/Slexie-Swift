@@ -55,6 +55,12 @@ class SearchPostViewModel: HaveNetworkingController, TapExtendable {
             })
     }
     
+    func likePhoto(id: String){
+        networkingController.photoLiked(id) { (result) in
+            
+        }
+    }
+    
     func cleanSearchPosts(){
         self.emit(self.state.reloadPosts([]))
     }

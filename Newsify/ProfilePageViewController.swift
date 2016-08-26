@@ -14,7 +14,9 @@ struct ProfilePostsPresentation {
         var imageID: String
         var image: UIImage
         var tagList: String
+        var likers: [String]
         var likeCount: Int
+        var liked: Bool
     }
     
     var profilePosts: [ProfilePostPresentation] = []
@@ -28,8 +30,10 @@ struct ProfilePostsPresentation {
             for tag in profilePost.tags{
                 tagList += "#\(tag) "
             }
+            let likers = profilePost.likers
             let likeCount = profilePost.likeCount
-            return ProfilePostPresentation(imageID: id, image: image!, tagList: tagList, likeCount: likeCount)
+            let liked = profilePost.isAlreadyLiked
+            return ProfilePostPresentation(imageID: id, image: image!, tagList: tagList, likers: likers, likeCount: likeCount, liked: liked)
         })
     }
 }
@@ -158,6 +162,16 @@ class ProfilePageViewController: UITableViewController {
         cell.profilePostView.gestureRecognizers!.append(cell.tapRecognizer)
         cell.tapRecognizer.tappedCell = cell
         
+        if postPresentation.liked {
+            cell.heart.image = UIImage(named: "Filled Heart")
+        } else {
+            cell.heart.image = UIImage(named: "Empty Heart")
+        }
+        
+        cell.likeCount.text = String(postPresentation.likeCount)
+        
+        cell.selectionStyle = UITableViewCellSelectionStyle.None
+        
         cell.selectionStyle = UITableViewCellSelectionStyle.None
         
         return cell
@@ -167,7 +181,20 @@ class ProfilePageViewController: UITableViewController {
         let cell = (sender.tappedCell as! ProfilePostTableViewCell)
         let id = cell.id
         
-        model.likePhoto(id) { _ in }
+        let controller = FirebaseController()
+        
+        model.likePhoto(id)
+        
+        for profilePost in presentation.profilePosts {
+            if profilePost.imageID == id {
+                cell.heart.image = UIImage(named: "Filled Heart")
+                
+                if !profilePost.likers.contains(controller.getUID()!) {
+                    cell.likeCount.text = String(profilePost.likeCount + 1)
+                }
+            }
+        }
+
 
         UIView.animateWithDuration(3.0, delay: 0.5, options: UIViewAnimationOptions.AllowAnimatedContent, animations: {
             

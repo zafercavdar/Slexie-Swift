@@ -19,7 +19,9 @@ struct SearchPostsPresentation {
         var owner: String
         var image: UIImage
         var tagList: String
+        var likers: [String]
         var likeCount: Int
+        var liked: Bool
     }
     
     var searchPosts: [SearchPostPresentation] = []
@@ -35,8 +37,10 @@ struct SearchPostsPresentation {
             }
             let tagList = tagText
             let id = searchPost.id
+            let likers = searchPost.likers
             let likeCount = searchPost.likeCount
-            return SearchPostPresentation(id: id, owner: owner, image: image!, tagList: tagList, likeCount: likeCount)
+            let liked = searchPost.isAlreadyLiked
+            return SearchPostPresentation(id: id, owner: owner, image: image!, tagList: tagList, likers: likers, likeCount: likeCount, liked: liked)
         })
     }
 }
@@ -157,6 +161,16 @@ class SearchPageTableViewController: UITableViewController, UISearchResultsUpdat
         cell.photoView.gestureRecognizers = []
         cell.photoView.gestureRecognizers!.append(cell.tapRecognizer)
         cell.tapRecognizer.tappedCell = cell
+        
+        if feedPresentation.liked {
+            cell.heart.image = UIImage(named: "Filled Heart")
+        } else {
+            cell.heart.image = UIImage(named: "Empty Heart")
+        }
+        
+        cell.likeCount.text = String(feedPresentation.likeCount)
+
+        
         cell.selectionStyle = UITableViewCellSelectionStyle.None
         
         return cell
@@ -167,7 +181,20 @@ class SearchPageTableViewController: UITableViewController, UISearchResultsUpdat
         let id = cell.id
         print(id)
         
-        model.likePhoto(id) { _ in }
+        let controller = FirebaseController()
+
+        model.likePhoto(id)
+        
+        for searchPost in presentation.searchPosts {
+            if searchPost.id == id {
+                cell.heart.image = UIImage(named: "Filled Heart")
+                
+                if !searchPost.likers.contains(controller.getUID()!) {
+                    cell.likeCount.text = String(searchPost.likeCount + 1)
+                }
+            }
+        }
+
         
         UIView.animateWithDuration(3.0, delay: 0.5, options: UIViewAnimationOptions.AllowAnimatedContent, animations: {
             

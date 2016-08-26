@@ -55,6 +55,12 @@ class ProfilePostViewModel: HaveNetworkingController, TapExtendable{
             }
         }
     }
+    
+    func likePhoto(id: String){
+        networkingController.photoLiked(id) { (result) in
+            
+        }
+    }
 }
 
 private extension ProfilePostViewModel {

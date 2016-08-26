@@ -13,6 +13,8 @@ class ProfilePostTableViewCell: UITableViewCell, Likeable {
     
     @IBOutlet weak var profilePostView: UIImageView!
     @IBOutlet weak var profilePostTags: UILabel!
+    @IBOutlet weak var heart: UIImageView!
+    @IBOutlet weak var likeCount: UILabel!
     
     var id = ""
     
