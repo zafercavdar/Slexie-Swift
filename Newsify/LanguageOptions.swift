@@ -250,7 +250,7 @@ enum Language {
     var SignUpScreenSignUpButton: String {
         switch self {
         case .Turkish:
-            return "Giriş yap"
+            return "Kayıt ol"
         case .English:
             return "Sign up"
         case .Russian:

@@ -25,12 +25,12 @@ class RandomBase {
         let email = username + "@slexie.com"
         let imageid = getRandomContentID()
         
-        networkingController.fakeSignUp(uid, email: email, username: username, password: password, profileType: profileType)
+        //networkingController.fakeSignUp(uid, email: email, username: username, password: password, profileType: profileType)
         
         let numOfPhotos = getRandomIntBetween(5, 10)
         for _ in 0..<numOfPhotos {
             let tags = getRandomTags()
-            networkingController.fakeUpload(uid, imageid: imageid, tags: tags)
+            //networkingController.fakeUpload(uid, imageid: imageid, tags: tags)
         }
         
         print("LOG: User generated.")
