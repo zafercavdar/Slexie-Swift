@@ -8,15 +8,96 @@
 
 import UIKit
 
-class NotificationsTableViewController: UITableViewController {
+struct NotificationsPresentation {
 
+    struct NotificationPresentation{
+        let who: String
+        let actionString: String
+        let target: String
+    }
+    
+    var notifications: [NotificationPresentation] = []
+    
+    mutating func update(withState state: NotificationsViewModel.State){
+        
+        notifications = state.notifs.map({ (notif) -> NotificationPresentation in
+            
+            let who = notif.notificationDoneByUser
+            var actionString = ""
+            
+            switch notif.notificationType {
+            case .Liked:
+                actionString = preferredLanguage.NotifyLikeAction
+            case .Commented:
+                actionString = preferredLanguage.NotifyCommentAction
+            }
+            
+            let target = notif.notificationTargetID
+            return NotificationPresentation(who: who, actionString: actionString, target: target)
+        })
+    }
+}
+
+
+
+
+class NotificationsTableViewController: UITableViewController {
+    
+    private struct Identifier {
+        static let NotificationCell = "NotificationCell"
+    }
+
+    private var model = NotificationsViewModel()
+    private let loadingView = LoadingView()
+    private var presentation = NotificationsPresentation()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         self.navigationItem.title = preferredLanguage.NavBarNotifications
-
-
+        
+        loadingView.addToView(self.view, text: preferredLanguage.RefreshingInfo)
+        
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(refresh(_:)), forControlEvents: .ValueChanged)
+        tableView.addSubview(refreshControl)
+        
+        self.applyState(model.state)
+        
+        model.stateChangeHandler = { [weak self] change in
+            self?.applyStateChange(change)
+        }
+        
+        model.fetchNotifications {
+            self.loadingView.removeFromView(self.view)
+        }
     }
+    
+    func refresh(refreshControl: UIRefreshControl) {
+        model.fetchNotifications {
+            print("fetched")
+            refreshControl.endRefreshing()
+        }
+    }
+
+    
+    func applyState(state: NotificationsViewModel.State) {
+        presentation.update(withState: state)
+        self.tableView.reloadData()
+    }
+    
+    func applyStateChange(change: NotificationsViewModel.State.Change) {
+        switch change {
+        case .notifications(let collectionChange):
+            presentation.update(withState: model.state)
+            switch collectionChange {
+            case .reload:
+                self.tableView.reloadData()
+            }
+        case .none:
+            break
+        }
+    }
+
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
@@ -35,8 +116,41 @@ class NotificationsTableViewController: UITableViewController {
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 0
+        return presentation.notifications.count
     }
+    
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let notifPresentation = presentation.notifications[indexPath.row]
+        let cell = tableView.dequeueReusableCellWithIdentifier(Identifier.NotificationCell, forIndexPath: indexPath) as! NotificationTableViewCell
+        
+        cell.notifLabel.text = notifPresentation.actionString
+        cell.selectionStyle = UITableViewCellSelectionStyle.None
+        
+        return cell
+    }
+}
 
+extension Language {
+
+    var NotifyLikeAction: String {
+        switch self {
+        case .Turkish:
+            return " fotoğrafını beğendi."
+        case .English:
+            return " has liked your photo."
+        case .Russian:
+            return " любил свою фотографию."
+        }
+    }
+    
+    var NotifyCommentAction: String {
+        switch self {
+        case .Turkish:
+            return " fotoğrafına yorum yaptı."
+        case .English:
+            return " has commented on your photo."
+        case .Russian:
+            return " прокомментировал вашу фотографию."
+        }
+    }
 }

@@ -26,6 +26,7 @@ protocol NetworkingController {
     func fetchUserLanguage(completion callback: () -> Void)
     func pushNotification(notification: Notification, completion callback: () -> Void)
     func photoLiked(imageid: String, callback: (CallbackResult) -> Void)
+    func fethNotifications(completion callback: [Notification] -> Void)
 }
 
 protocol LoginController {
@@ -149,6 +150,47 @@ class FirebaseController: NetworkingController, AuthenticationController {
 
 
     // MARK: NetworkingController Methods
+    
+    func fethNotifications(completion callback: [Notification] -> Void){
+        
+        var results: [Notification] = []
+        
+        guard let uid = getUID() else { return }
+        
+        let notificationRef = References.UserRef.child(uid).child(ReferenceLabels.Notifications)
+        
+        notificationRef.observeSingleEventOfType(.Value, withBlock:  { (snapshot) in
+            guard let notificationDic = snapshot.value as? [String: AnyObject] else {
+                callback([])
+                return
+            }
+            
+            for (_, propDic) in notificationDic {
+                guard let dic = propDic as? [String: String] else {
+                    callback([])
+                    return
+                }
+                
+                let who = dic[ReferenceLabels.NotificationLabels.Who]
+                let target = dic[ReferenceLabels.NotificationLabels.Target]
+                let action = dic[ReferenceLabels.NotificationLabels.Action]
+                
+                var notificationType: NotificationType
+                switch action {
+                case ReferenceLabels.ActionLabels.Like?:
+                    notificationType = NotificationType.Liked
+                case ReferenceLabels.ActionLabels.Comment?:
+                    notificationType = NotificationType.Commented
+                default:
+                    notificationType = NotificationType.Liked
+                }
+                
+                let notification = Notification(notificationOwnerID: uid, notificationTargetID: target!, notificationDoneByUser: who!, notificationType: notificationType)
+                results += [notification]
+            }
+            callback(results)
+        })
+    }
     
     func pushNotification(notification: Notification, completion callback: () -> Void){
         

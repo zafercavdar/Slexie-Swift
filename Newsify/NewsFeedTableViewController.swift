@@ -55,7 +55,6 @@ class NewsFeedTableViewController: UITableViewController{
     
     @IBOutlet var feedPostsView: UITableView!
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -171,7 +170,6 @@ class NewsFeedTableViewController: UITableViewController{
         print("tapped")
         let cell = (sender.tappedCell as! NewsFeedItemCell)
         let post = cell.postPresentation.feedPosts[0]
-        
         let id = post.id
         print(id)
         

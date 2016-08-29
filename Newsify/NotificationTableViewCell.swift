@@ -1,16 +1,16 @@
 //
-//  TagsTableViewCell.swift
-//  Newsify
+//  NotificationTableViewCell.swift
+//  Slexie
 //
-//  Created by Zafer Cavdar on 09/08/2016.
+//  Created by Zafer Cavdar on 29/08/2016.
 //  Copyright © 2016 Zafer Cavdar. All rights reserved.
 //
 
 import UIKit
 
-class TagsTableViewCell: UITableViewCell {
-    
-    @IBOutlet weak var tagLabel: UILabel!
+class NotificationTableViewCell: UITableViewCell {
+
+    @IBOutlet weak var notifLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -18,7 +18,7 @@ class TagsTableViewCell: UITableViewCell {
 
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-        
-        self.selectionStyle = UITableViewCellSelectionStyle.None
+
     }
+
 }
