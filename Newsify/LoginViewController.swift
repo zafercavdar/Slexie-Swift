@@ -65,7 +65,12 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         super.viewDidAppear(animated)
         
         if fbNetworkingController.getCurrentUser() != nil{
+            
+            let loading = LoadingView()
+            loading.addToView(self.view, text: preferredLanguage.SigningInInfo)
+            
             fbNetworkingController.fetchUserLanguage(completion: {
+                loading.removeFromView(self.view)
                 self.router.routeTo(RouteID.NewsFeed, VC: self)
             })
         }
@@ -126,6 +131,5 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         
         return true
     }
-    
 }
 

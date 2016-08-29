@@ -152,7 +152,6 @@ class FirebaseController: NetworkingController, AuthenticationController {
     
     func pushNotification(notification: Notification, completion callback: () -> Void){
         
-        print("i am here")
         let generator = UniqueIDGenerator()
         let notificationID = generator.generateNotificationID(notification)
         
@@ -173,7 +172,6 @@ class FirebaseController: NetworkingController, AuthenticationController {
         
         notificationRef.updateChildValues(batchUpdate)
         
-        print("callback time children!")
         callback()
         
     }
@@ -276,24 +274,20 @@ class FirebaseController: NetworkingController, AuthenticationController {
                     
                     // Public check
                     guard let privacy = propertyDic[ReferenceLabels.PostPrivacy] as? String where privacy == "Public" else {
-                        print("profile is not public")
                         continue
                     }
                     
                     guard let photoTags = propertyDic[ReferenceLabels.PostTags] as? [String] else {
-                        print("there is no tags")
                         continue
                     }
                     
                     
                     guard containsAny(photoTags,checkList: tags) else {
-                        print("tag mismatch")
                         continue
                     }
                     
                     guard let ownerID = propertyDic[ReferenceLabels.PostOwner] as? String/* where owner != strongSelf.getUID() */ else {
                         
-                        print("no owner id")
                         continue
                     }
                     

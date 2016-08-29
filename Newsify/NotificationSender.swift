@@ -6,4 +6,16 @@
 //  Copyright © 2016 Zafer Cavdar. All rights reserved.
 //
 
-import Foundation
+protocol NotificationSender {
+    
+}
+
+extension NotificationSender{
+    
+    func pushNotification(notification: Notification){
+        let networkingController = FirebaseController()
+        networkingController.pushNotification(notification){
+            
+        }
+    }
+}

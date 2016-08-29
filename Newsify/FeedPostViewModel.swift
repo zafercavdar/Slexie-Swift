@@ -39,12 +39,8 @@ class FeedPostViewModel: NotificationSender {
         
         networkingController.getAccountTags { (tags) in
             
-            print("tags are gathered")
-            
             self.networkingController.getPhotosRelatedWith(tags, completion: { [weak self] (posts) in
-                
-                print("posts are gathered")
-                
+                                
                 guard let strongSelf = self else { return }
                 
                 if posts.isEmpty {
@@ -99,19 +95,4 @@ private extension FeedPostViewModel {
         stateChangeHandler?(change)
     }
     
-}
-
-
-protocol NotificationSender {
-    
-}
-
-extension NotificationSender{
-    
-    func pushNotification(notification: Notification){
-        let networkingController = FirebaseController()
-        networkingController.pushNotification(notification){
-            
-        }
-    }
 }

@@ -112,10 +112,10 @@ class NewsFeedTableViewController: UITableViewController{
                 
     }
     
-    override func scrollViewWillEndDragging(scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+    /* override func scrollViewWillEndDragging(scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
         
         NSLog("\(velocity.y)")
-    }
+    }*/
     
     func refresh(refreshControl: UIRefreshControl) {
         model.fetchFeedPosts { 
