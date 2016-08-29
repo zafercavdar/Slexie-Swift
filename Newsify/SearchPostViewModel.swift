@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SearchPostViewModel: HaveNetworkingController, TapExtendable {
+class SearchPostViewModel: NotificationSender {
     
     struct State{
         var searchPosts: [FeedPost] = []

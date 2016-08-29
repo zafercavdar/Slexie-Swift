@@ -184,6 +184,7 @@ class NewsFeedTableViewController: UITableViewController{
         cell.heart.image = UIImage(named: "Filled Heart")
         if !post.likers.contains(controller.getUID()!) {
             cell.likeCount.text = String(post.likeCount + 1)
+            cell.postPresentation.feedPosts[0].likers += [controller.getUID()!]
             
             // Send notificitaion
             let notification = Notification(notificationOwnerID: post.ownerID, notificationTargetID: post.id, notificationDoneByUser: controller.getUID()!, notificationType: NotificationType.Liked)

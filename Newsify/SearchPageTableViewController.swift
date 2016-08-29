@@ -151,7 +151,7 @@ class SearchPageTableViewController: UITableViewController, UISearchResultsUpdat
         let feedPresentation = presentation.searchPosts[indexPath.row]
         let cell = tableView.dequeueReusableCellWithIdentifier(Identifier.SearchFeedCell, forIndexPath: indexPath) as! SearchFeedItemCell
         
-        cell.postPresentation?.searchPosts = [feedPresentation]
+        cell.postPresentation.searchPosts = [feedPresentation]
         cell.usernameLabel.text = feedPresentation.ownerName
         cell.photoView.image = feedPresentation.image
         cell.tagsLabel.text = feedPresentation.tagList
@@ -179,29 +179,26 @@ class SearchPageTableViewController: UITableViewController, UISearchResultsUpdat
     
     func photoTapped(sender: AdvancedGestureRecognizer){
         let cell = (sender.tappedCell as! SearchFeedItemCell)
-        guard let post = cell.postPresentation?.searchPosts[0] else { return }
+        let post = cell.postPresentation.searchPosts[0]
         
         let id = post.id
         print(id)
         
         let controller = FirebaseController()
-
+        
+        // Update modal
         model.likePhoto(id)
         
         // Update view
         cell.heart.image = UIImage(named: "Filled Heart")
         if !post.likers.contains(controller.getUID()!) {
             cell.likeCount.text = String(post.likeCount + 1)
-        }
-        
-        // Update modal
-        model.likePhoto(id)
-        
-        // Send notificitaion
-        let notification = Notification(notificationOwnerID: post.ownerID, notificationTargetID: post.id, notificationDoneByUser: controller.getUID()!, notificationType: NotificationType.Liked)
-        
-        controller.pushNotification(notification) {
+            cell.postPresentation.searchPosts[0].likers += [controller.getUID()!]
             
+            // Send notificitaion
+            let notification = Notification(notificationOwnerID: post.ownerID, notificationTargetID: post.id, notificationDoneByUser: controller.getUID()!, notificationType: NotificationType.Liked)
+            
+            model.pushNotification(notification)
         }
         
         

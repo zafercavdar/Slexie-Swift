@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ProfilePostViewModel: HaveNetworkingController, TapExtendable{
+class ProfilePostViewModel: NotificationSender {
     
     struct State{
         var profilePosts: [ProfilePost] = []

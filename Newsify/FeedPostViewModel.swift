@@ -8,11 +8,13 @@
 
 import UIKit
 
+
 enum CollectionChange {
     case reload
 }
 
-class FeedPostViewModel: HaveNetworkingController{
+
+class FeedPostViewModel: NotificationSender {
     
     struct State{
         var feedPosts: [FeedPost] = []
@@ -71,12 +73,6 @@ class FeedPostViewModel: HaveNetworkingController{
             
         }
     }
-    
-    func pushNotification(notification: Notification){
-        networkingController.pushNotification(notification){
-        
-        }
-    }
 }
 
 private extension FeedPostViewModel {
@@ -103,4 +99,19 @@ private extension FeedPostViewModel {
         stateChangeHandler?(change)
     }
     
+}
+
+
+protocol NotificationSender {
+    
+}
+
+extension NotificationSender{
+    
+    func pushNotification(notification: Notification){
+        let networkingController = FirebaseController()
+        networkingController.pushNotification(notification){
+            
+        }
+    }
 }

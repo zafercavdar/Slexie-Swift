@@ -25,6 +25,7 @@ protocol NetworkingController {
     func getProfilePosts(completion callback: [ProfilePost] -> Void)
     func fetchUserLanguage(completion callback: () -> Void)
     func pushNotification(notification: Notification, completion callback: () -> Void)
+    func photoLiked(imageid: String, callback: (CallbackResult) -> Void)
 }
 
 protocol LoginController {
@@ -413,18 +414,6 @@ class FirebaseController: NetworkingController, AuthenticationController {
             })
         }
         
-    }
-    
-    func isAlreadyLiked(imageid: String, callback: (alredyLiked: Bool) -> Void){
-        
-        let uidNo = getUID()
-        
-        if let uid = uidNo as String!{
-            getLikers(photo: imageid, completion: { (likerList) in
-                callback(alredyLiked: likerList.contains(uid))
-            })
-        }
-
     }
 
     // MARK: Private methods
