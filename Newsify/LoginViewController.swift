@@ -29,6 +29,14 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
 
         super.viewDidLoad()
         
+        usernameField.delegate = self
+        passwordField.delegate = self
+        
+        setUITitlesColors()
+        
+    }
+    
+    private func setUITitlesColors(){
         self.view.backgroundColor = UIColor.coreColor()
         
         loginButton.setTitle(preferredLanguage.LoginButton, forState: .Normal)
@@ -40,10 +48,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         loginButton.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
         usernameLabel.textColor = UIColor.whiteColor()
         passwordLabel.textColor = UIColor.whiteColor()
-        
-        usernameField.delegate = self
-        passwordField.delegate = self
-        
+
     }
     
     @IBAction func signUpButton(sender: UIButton) {
@@ -101,11 +106,11 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             if let error = error {
                 strongSelf.signInFailedNotification(error.localizedDescription)
             } else {
-                strongSelf.router.routeTo(RouteID.NewsFeed, VC: strongSelf)
+                strongSelf.fbNetworkingController.fetchUserLanguage(completion: {
+                    strongSelf.router.routeTo(RouteID.NewsFeed, VC: strongSelf)
+                })
             }
         }
-        
-        
     }
     
     // MARK: UITextFieldDelegate

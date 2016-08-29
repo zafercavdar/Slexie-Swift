@@ -110,8 +110,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" alignment="center" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="Nbc-sR-ufn">
-                                <rect key="frame" x="20" y="120" width="560" height="380"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" axis="vertical" alignment="center" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="Nbc-sR-ufn">
+                                <rect key="frame" x="20" y="120" width="560" height="475"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Type a unique username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="82k-kP-S72">
                                         <rect key="frame" x="187" y="0.0" width="188" height="21"/>
@@ -158,8 +158,41 @@
                                             <action selector="switchStateChanged:" destination="44s-fW-cok" eventType="valueChanged" id="ADZ-aY-w9r"/>
                                         </connections>
                                     </switch>
-                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TQ5-Nz-YNT">
-                                        <rect key="frame" x="243" y="299" width="75" height="39"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Language" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bli-Ag-GMV">
+                                        <rect key="frame" x="242" y="299" width="76" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="A0z-lh-9wH">
+                                        <rect key="frame" x="183" y="332" width="194" height="50"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ty1-P3-Qkr">
+                                                <rect key="frame" x="67" y="10" width="51" height="30"/>
+                                                <state key="normal" title="English"/>
+                                                <connections>
+                                                    <action selector="englishPressed:" destination="44s-fW-cok" eventType="touchUpInside" id="egV-rd-kaI"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Jf-gK-lSV">
+                                                <rect key="frame" x="8" y="10" width="51" height="30"/>
+                                                <state key="normal" title="Türkçe"/>
+                                                <connections>
+                                                    <action selector="turkishPressed:" destination="44s-fW-cok" eventType="touchUpInside" id="gfN-Ax-pRS"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YjH-Yj-Fp3">
+                                                <rect key="frame" x="126" y="10" width="61" height="30"/>
+                                                <state key="normal" title="Русский"/>
+                                                <connections>
+                                                    <action selector="russianPressed:" destination="44s-fW-cok" eventType="touchUpInside" id="ZkE-zu-cbg"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                    </view>
+                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TQ5-Nz-YNT">
+                                        <rect key="frame" x="243" y="394" width="75" height="39"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                         <state key="normal" title="Sign up">
                                             <color key="titleColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -168,8 +201,8 @@
                                             <action selector="createAccount:" destination="44s-fW-cok" eventType="touchUpInside" id="acw-if-Hgh"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Kb-rp-P3h">
-                                        <rect key="frame" x="256" y="350" width="48" height="30"/>
+                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Kb-rp-P3h">
+                                        <rect key="frame" x="256" y="445" width="48" height="30"/>
                                         <state key="normal" title="Cancel"/>
                                         <connections>
                                             <action selector="cancel:" destination="44s-fW-cok" eventType="touchUpInside" id="fyb-qy-AYY"/>
@@ -200,12 +233,16 @@
                     <connections>
                         <outlet property="accountTypeControl" destination="xO8-yx-08H" id="dfG-Is-53C"/>
                         <outlet property="cancel" destination="7Kb-rp-P3h" id="DPf-Qi-etO"/>
+                        <outlet property="englishButton" destination="Ty1-P3-Qkr" id="yRp-3m-WB1"/>
+                        <outlet property="languageLabel" destination="bli-Ag-GMV" id="PQU-DQ-CqK"/>
                         <outlet property="passwordField" destination="gX3-bp-6kc" id="B6f-1b-VjJ"/>
                         <outlet property="passwordLabel" destination="qQ3-50-eFm" id="J4p-bP-2MK"/>
                         <outlet property="profileTypeLabel" destination="SCL-Yi-y1C" id="wxT-De-nPM"/>
                         <outlet property="repasswordField" destination="117-R8-NPI" id="6bb-Dv-bmH"/>
                         <outlet property="repasswordLabel" destination="CR7-kI-zr7" id="WTg-hg-vq0"/>
+                        <outlet property="russianButton" destination="YjH-Yj-Fp3" id="RJd-lu-oMX"/>
                         <outlet property="signUpButton" destination="TQ5-Nz-YNT" id="jM3-ax-Xpc"/>
+                        <outlet property="turkishLanguage" destination="0Jf-gK-lSV" id="a5Z-Ty-Qpy"/>
                         <outlet property="usernameField" destination="U4X-q0-fGm" id="zz9-15-T2I"/>
                         <outlet property="usernameLabel" destination="82k-kP-S72" id="oVA-IO-8sR"/>
                         <segue destination="AUG-x2-Njh" kind="show" identifier="LoggedInFromSignUp" id="NWr-JX-J3B"/>

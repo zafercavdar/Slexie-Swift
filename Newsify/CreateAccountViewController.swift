@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CreateAccountViewController: UIViewController, UITextFieldDelegate {
+class CreateAccountViewController: UIViewController, UITextFieldDelegate{
 
     
     @IBOutlet weak var usernameLabel: UILabel!
@@ -19,8 +19,13 @@ class CreateAccountViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var repasswordField: UITextField!
     @IBOutlet weak var accountTypeControl: UISwitch!
     @IBOutlet weak var profileTypeLabel: UILabel!
-    @IBOutlet weak var signUpButton: UIButton!
+    @IBOutlet weak var languageLabel: UILabel!
     
+    @IBOutlet weak var turkishLanguage: UIButton!
+    @IBOutlet weak var englishButton: UIButton!
+    @IBOutlet weak var russianButton: UIButton!
+    
+    @IBOutlet weak var signUpButton: UIButton!
     @IBOutlet weak var cancel: UIButton!
     
     private var fields: [UITextField] = []
@@ -28,6 +33,8 @@ class CreateAccountViewController: UIViewController, UITextFieldDelegate {
     private let networkingController = FirebaseController()
     private let router = SignUpRouter()
     
+    private var userLanguage = "English"
+
     struct RouteID {
         static let LoggedIn = "LoggedIn"
         static let Cancel = "Cancel"
@@ -43,23 +50,90 @@ class CreateAccountViewController: UIViewController, UITextFieldDelegate {
         for field in fields{
             field.delegate = self
         }
+
         
+        setUIColors()
+        setUITitles()
+    }
+    
+    private func setUIColors(){
         self.view.backgroundColor = UIColor.coreColor()
-        usernameLabel.text = preferredLanguage.SignUpScreenUsernameLabel
         usernameLabel.textColor = UIColor.whiteColor()
-        passwordLabel.text = preferredLanguage.SignUpScreenPasswordLabel
         passwordLabel.textColor = UIColor.whiteColor()
-        repasswordLabel.text = preferredLanguage.SignUpScreenPasswordReTypeLabel
         repasswordLabel.textColor = UIColor.whiteColor()
-        signUpButton.setTitle(preferredLanguage.SignUpScreenSignUpButton, forState: .Normal)
         signUpButton.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
-        cancel.setTitle(preferredLanguage.Cancel, forState: .Normal)
         cancel.setTitleColor(UIColor.whiteColor(), forState: .Normal)
+        languageLabel.textColor = UIColor.whiteColor()
         
+        turkishLanguage.setTitleColor(UIColor.reddishColor(), forState: .Normal)
+        englishButton.setTitleColor(UIColor.reddishColor(), forState: .Normal)
+        russianButton.setTitleColor(UIColor.reddishColor(), forState: .Normal)
         profileTypeLabel.textColor = UIColor.whiteColor()
-        profileTypeLabel.text = preferredLanguage.YourProfile + preferredLanguage.Public
         
     }
+    
+    
+    private func setUITitles(){
+        usernameLabel.text = preferredLanguage.SignUpScreenUsernameLabel
+        passwordLabel.text = preferredLanguage.SignUpScreenPasswordLabel
+        repasswordLabel.text = preferredLanguage.SignUpScreenPasswordReTypeLabel
+        signUpButton.setTitle(preferredLanguage.SignUpScreenSignUpButton, forState: .Normal)
+        cancel.setTitle(preferredLanguage.Cancel, forState: .Normal)
+        languageLabel.text = preferredLanguage.SignUpScreenLanguageLabel
+        profileTypeLabel.text = preferredLanguage.YourProfile + preferredLanguage.Public
+    }
+    
+    @IBAction func turkishPressed(sender: UIButton) {
+        preferredLanguage = Language.Turkish
+        userLanguage = "Turkish"
+        
+        turkishLanguage.enabled = false
+        turkishLanguage.alpha = 0.5
+        
+        englishButton.enabled = true
+        englishButton.alpha = 1
+        
+        russianButton.enabled = true
+        englishButton.alpha = 1
+        
+        setUITitles()
+
+    }
+    
+    @IBAction func englishPressed(sender: UIButton) {
+        preferredLanguage = Language.English
+        userLanguage = "English"
+        
+        turkishLanguage.enabled = true
+        turkishLanguage.alpha = 1
+
+        englishButton.enabled = false
+        englishButton.alpha = 0.5
+        
+        russianButton.enabled = true
+        russianButton.alpha = 1
+        
+        setUITitles()
+
+    }
+    
+    @IBAction func russianPressed(sender: UIButton) {
+        preferredLanguage = Language.Russian
+        userLanguage = "Russian"
+        
+        turkishLanguage.enabled = true
+        turkishLanguage.alpha = 1
+        
+        englishButton.enabled = true
+        englishButton.alpha = 1
+        
+        russianButton.enabled = false
+        russianButton.alpha = 0.5
+        
+        setUITitles()
+    }
+    
+    
     
     @IBAction func switchStateChanged(sender: UISwitch) {
         if sender.on {
@@ -88,7 +162,7 @@ class CreateAccountViewController: UIViewController, UITextFieldDelegate {
         let profileType = accountTypeControl.on ? "Public" : "Private"
         
         if usernameExists && passwordExists && password == repassword{
-            signUpWithUsernamePassword(email, password, username, profileType)
+            signUpWithUsernamePassword(email, password, username, profileType, language: userLanguage)
         }else if !usernameExists || !passwordExists{
             fillAllFields()
         }
@@ -105,13 +179,13 @@ class CreateAccountViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
-    private func signUpWithUsernamePassword(email: String, _ password: String, _ username: String, _ profileType: String){
+    private func signUpWithUsernamePassword(email: String, _ password: String, _ username: String, _ profileType: String, language: String){
         
         let loadingView = LoadingView()
         loadingView.addToView(self.view, text: preferredLanguage.SigningUpInfo)
         
         
-        networkingController.signUp(email, username: username, password: password, profileType: profileType) { [weak self](error) in
+        networkingController.signUp(email, username: username, password: password, profileType: profileType, language: language) { [weak self](error) in
             
             guard let strongSelf = self else { return }
             
@@ -122,7 +196,6 @@ class CreateAccountViewController: UIViewController, UITextFieldDelegate {
             } else {
                 strongSelf.router.routeTo(RouteID.LoggedIn, VC: strongSelf)
             }
-            
         }
     }
 

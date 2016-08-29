@@ -23,6 +23,7 @@ protocol NetworkingController {
     func getAccountTags(completion: [String] -> Void)
     func getPhotosRelatedWith(tags: [String], completion: [FeedPost] -> Void)
     func getProfilePosts(completion callback: [ProfilePost] -> Void)
+    func fetchUserLanguage(completion callback: () -> Void)
 }
 
 protocol LoginController {
@@ -35,7 +36,7 @@ protocol LogOutController {
 }
 
 protocol SignUpController {
-    func signUp(email: String, username: String, password: String, profileType: String, completionHandler: (error: NSError?) -> Void)
+    func signUp(email: String, username: String, password: String, profileType: String, language: String, completionHandler: (error: NSError?) -> Void)
 }
 
 protocol AuthenticationController: SignUpController, LogOutController, LoginController {
@@ -58,19 +59,20 @@ class FirebaseController: NetworkingController, AuthenticationController {
         static let PhotoStorageRef = References.StorageRef.child("images")
     }
     
-    private enum ReferenceLabels: String {
-        case Username = "username"
-        case Password = "password"
-        case PostCount = "postCount"
-        case PhotoIDS = "photoIDs"
-        case UserTags = "alltags"
-        case UserPosts = "all-photos"
-        case ProfileType = "profile-type"
+    private struct ReferenceLabels {
+        static let Username = "username"
+        static let Password = "password"
+        static let PostCount = "postCount"
+        static let PhotoIDS = "photoIDs"
+        static let UserTags = "alltags"
+        static let UserPosts = "all-photos"
+        static let ProfileType = "profile-type"
+        static let Language = "language"
         
-        case PostOwner = "owner"
-        case PostTags = "tags"
-        case PostPrivacy = "privacy"
-        case Likers = "likers"
+        static let PostOwner = "owner"
+        static let PostTags = "tags"
+        static let PostPrivacy = "privacy"
+        static let Likers = "likers"
     }
 
     
@@ -100,7 +102,7 @@ class FirebaseController: NetworkingController, AuthenticationController {
 
     }
     
-    func signUp(email: String, username: String, password: String, profileType: String, completionHandler: (error: NSError?) -> Void) {
+    func signUp(email: String, username: String, password: String, profileType: String, language: String, completionHandler: (error: NSError?) -> Void) {
         
         FIRAuth.auth()?.createUserWithEmail(email, password: password, completion: { [weak self] (user, error) in
             
@@ -110,7 +112,7 @@ class FirebaseController: NetworkingController, AuthenticationController {
                 completionHandler(error: error)
             }else{
                 print("Signed up with uid", user!.uid)
-                strongSelf.cloneUserDetails(user!, username: username, password: password, profileType: profileType)
+                strongSelf.cloneUserDetails(user!, username: username, password: password, profileType: profileType, language: language)
                 strongSelf.signInWith(username: username, password: password, enableNotification: false, completionHandler: { (Void) in
                     completionHandler(error: error)
                 })
@@ -134,6 +136,37 @@ class FirebaseController: NetworkingController, AuthenticationController {
 
 
     // MARK: NetworkingController Methods
+    
+    func fetchUserLanguage(completion callback: () -> Void) {
+        guard let uid = getUID() else {
+            callback()
+            return
+        }
+        
+        let languageRef = References.UserRef.child(uid).child(ReferenceLabels.Language)
+        
+        languageRef.observeSingleEventOfType(.Value, withBlock:  { (snapshot) in
+            
+            guard let language = snapshot.value as? String else {
+                preferredLanguage = Language.English
+                callback()
+                return
+            }
+            
+            switch language {
+            case "Turkish":
+                preferredLanguage = Language.Turkish
+            case "English":
+                preferredLanguage = Language.English
+            case "Russian":
+                preferredLanguage = Language.Russian
+            default:
+                preferredLanguage = Language.English
+            }
+            
+            callback()
+        })
+    }
     
     func uploadPhoto(image: NSData, tags: [String], callback: (error: NSError?, photoID: String, url: String) -> Void){
         let storageRef = FIRStorage.storage().reference()
@@ -167,7 +200,7 @@ class FirebaseController: NetworkingController, AuthenticationController {
             return
         }
         
-        let ref = References.UserRef.child(uid).child(ReferenceLabels.UserTags.rawValue)
+        let ref = References.UserRef.child(uid).child(ReferenceLabels.UserTags)
         
         ref.observeSingleEventOfType(.Value, withBlock: { (snapshot) in
             if let tags = snapshot.value as? [String] {
@@ -186,6 +219,7 @@ class FirebaseController: NetworkingController, AuthenticationController {
         _ = ref.observeSingleEventOfType(.Value, withBlock: { (snapshot) in
             
             guard let postDic = snapshot.value as? [String: AnyObject] else {
+                completion([])
                 return
             }
             
@@ -193,17 +227,18 @@ class FirebaseController: NetworkingController, AuthenticationController {
             userRef.observeSingleEventOfType(.Value, withBlock: { [weak self] (snapshot) in
                 
                 guard let userDic = snapshot.value as? [String: AnyObject] else {
+                    completion([])
                     return
                 }
                 
                 for (id, propertyDic) in postDic {
                     
                     // Public check
-                    guard let privacy = propertyDic[ReferenceLabels.PostPrivacy.rawValue] as? String where privacy == "Public" else {
+                    guard let privacy = propertyDic[ReferenceLabels.PostPrivacy] as? String where privacy == "Public" else {
                         continue
                     }
                     
-                    guard let photoTags = propertyDic[ReferenceLabels.PostTags.rawValue] as? [String] else {
+                    guard let photoTags = propertyDic[ReferenceLabels.PostTags] as? [String] else {
                         continue
                     }
                     
@@ -212,24 +247,26 @@ class FirebaseController: NetworkingController, AuthenticationController {
                         continue
                     }
                     
-                    guard let owner = propertyDic[ReferenceLabels.PostOwner.rawValue] as? String/* where owner != strongSelf.getUID() */ else {
+                    guard let owner = propertyDic[ReferenceLabels.PostOwner] as? String/* where owner != strongSelf.getUID() */ else {
                         continue
                     }
                     
-                    guard let likers = propertyDic[ReferenceLabels.Likers.rawValue] as? [String] else {
+                    guard let likers = propertyDic[ReferenceLabels.Likers] as? [String] else {
                         continue
                     }
                     
-                    guard let atts = userDic[owner] as? [String: AnyObject], let username = atts[ReferenceLabels.Username.rawValue] as? String else {
+                    guard let atts = userDic[owner] as? [String: AnyObject], let username = atts[ReferenceLabels.Username] as? String else {
                         continue
                     }
                     
                     let liked = likers.contains((self?.getUID())!)
                     
                     let post = FeedPost(username: username, id: id, tags: photoTags, likers: likers, likeCount: likers.count, isAlreadyLiked: liked)
+                    print("post added to the posts")
                     posts.append(post)
                     
                 }
+                print("i am at completion")
                 completion(posts)
                 })
         })
@@ -250,7 +287,7 @@ class FirebaseController: NetworkingController, AuthenticationController {
                         
                         var tags: [String]?
                         
-                        tags = ((photos[postID] as! [String: AnyObject])[ReferenceLabels.PostTags.rawValue] as? [String])
+                        tags = ((photos[postID] as! [String: AnyObject])[ReferenceLabels.PostTags] as? [String])
                         
                         if tags == nil {
                             tags = []
@@ -258,7 +295,7 @@ class FirebaseController: NetworkingController, AuthenticationController {
                         
                         var likeCount: Int
                         var liked: Bool
-                        var likers = ((photos[postID] as! [String: AnyObject])[ReferenceLabels.Likers.rawValue] as? [String])
+                        var likers = ((photos[postID] as! [String: AnyObject])[ReferenceLabels.Likers] as? [String])
                         
                         if likers == nil {
                             likers = []
@@ -324,7 +361,7 @@ class FirebaseController: NetworkingController, AuthenticationController {
             getLikers(photo: imageid, completion: { (likerList) in
                 let array = likerList + [uid]
                 let uniqueList = Array(Set(array))
-                let dic = [ReferenceLabels.Likers.rawValue : uniqueList]
+                let dic = [ReferenceLabels.Likers : uniqueList]
                 print(uniqueList)
                 photoRef.updateChildValues(dic)
                 callback(.Success)
@@ -348,7 +385,7 @@ class FirebaseController: NetworkingController, AuthenticationController {
     // MARK: Private methods
     
     private func getLikers(photo uniqueID: String, completion callback: [String] -> Void) {
-        let photoRef = References.PhotoRef.child(uniqueID).child(ReferenceLabels.Likers.rawValue)
+        let photoRef = References.PhotoRef.child(uniqueID).child(ReferenceLabels.Likers)
         
         photoRef.observeSingleEventOfType(.Value, withBlock:  { (snapshot) in
             if let likers = snapshot.value as? [String] {
@@ -365,28 +402,28 @@ class FirebaseController: NetworkingController, AuthenticationController {
         if let uid = uidNo as String!{
             let photoRef = References.PhotoRef.child(uniqueID)
             
-            photoRef.child(ReferenceLabels.PostTags.rawValue).setValue(tags)
-            photoRef.child(ReferenceLabels.PostOwner.rawValue).setValue(uid)
+            photoRef.child(ReferenceLabels.PostTags).setValue(tags)
+            photoRef.child(ReferenceLabels.PostOwner).setValue(uid)
             
             getAccountPrivacy { (privacy) in
-                photoRef.child(ReferenceLabels.PostPrivacy.rawValue).setValue(privacy)
+                photoRef.child(ReferenceLabels.PostPrivacy).setValue(privacy)
             }
             
-            photoRef.child(ReferenceLabels.Likers.rawValue).setValue([])
+            photoRef.child(ReferenceLabels.Likers).setValue([])
             
             let userRef = References.UserRef.child(uid)
             
             getPhotoCount({ (count) in
-                userRef.updateChildValues([ReferenceLabels.PostCount.rawValue : count+1])
+                userRef.updateChildValues([ReferenceLabels.PostCount : count+1])
             })
             
             getAccountTags({ (oldTags) in
                 let set = Array(Set(oldTags + tags))
-                userRef.updateChildValues([ReferenceLabels.UserTags.rawValue : set])
+                userRef.updateChildValues([ReferenceLabels.UserTags : set])
             })
             
             getAccountPosts({ (oldPosts) in
-                userRef.updateChildValues([ReferenceLabels.UserPosts.rawValue: oldPosts + [uniqueID]])
+                userRef.updateChildValues([ReferenceLabels.UserPosts: oldPosts + [uniqueID]])
             })
         }
     }
@@ -398,7 +435,7 @@ class FirebaseController: NetworkingController, AuthenticationController {
             return
         }
         
-        let ref = References.UserRef.child(uid).child(ReferenceLabels.UserPosts.rawValue)
+        let ref = References.UserRef.child(uid).child(ReferenceLabels.UserPosts)
         
         ref.observeSingleEventOfType(.Value, withBlock: { (snapshot) in
             if let photos = snapshot.value as? [String]{
@@ -411,7 +448,7 @@ class FirebaseController: NetworkingController, AuthenticationController {
     
     private func getUsername(with uid: String, completion callback: (username: String) -> Void){
     
-        let ref = References.UserRef.child(uid).child(ReferenceLabels.Username.rawValue)
+        let ref = References.UserRef.child(uid).child(ReferenceLabels.Username)
         ref.observeSingleEventOfType(.Value,  withBlock: { (snapshot) in
             let username = snapshot.value as! String
             callback(username: username)
@@ -424,7 +461,7 @@ class FirebaseController: NetworkingController, AuthenticationController {
             return
         }
         
-        let ref = References.UserRef.child(uid).child(ReferenceLabels.PostCount.rawValue)
+        let ref = References.UserRef.child(uid).child(ReferenceLabels.PostCount)
         
         ref.observeSingleEventOfType(.Value, withBlock:  { (snapshot) in
             if let count = snapshot.value as? Int {
@@ -434,25 +471,25 @@ class FirebaseController: NetworkingController, AuthenticationController {
     }
     
     private func getAccountPrivacy(callback: (privacy: String) -> Void){
-        let ref = References.UserRef.child(getUID()!).child(ReferenceLabels.ProfileType.rawValue)
+        let ref = References.UserRef.child(getUID()!).child(ReferenceLabels.ProfileType)
         ref.observeSingleEventOfType(.Value , withBlock: { (snapshot) in
             let type = snapshot.value as! String
             callback(privacy: type)
         })
     }
     
-    private func cloneUserDetails(fbUser: FIRUser!, username: String, password: String, profileType: String ){
+    private func cloneUserDetails(fbUser: FIRUser!, username: String, password: String, profileType: String, language: String ){
         
         let ref = References.UserRef.child(fbUser!.uid)
         
-        let user = [ ReferenceLabels.Username.rawValue: username,
-                     ReferenceLabels.Password.rawValue: password,
-                     ReferenceLabels.PostCount.rawValue: 0,
-                     ReferenceLabels.PhotoIDS.rawValue: [],
-                     ReferenceLabels.UserTags.rawValue: [],
-                     ReferenceLabels.UserPosts.rawValue: [],
-                     ReferenceLabels.ProfileType.rawValue: profileType]
-        
+        let user = [ ReferenceLabels.Username: username,
+                     ReferenceLabels.Password: password,
+                     ReferenceLabels.PostCount: 0,
+                     ReferenceLabels.PhotoIDS: [],
+                     ReferenceLabels.UserTags: [],
+                     ReferenceLabels.UserPosts: [],
+                     ReferenceLabels.ProfileType: profileType,
+                     ReferenceLabels.Language: language ]
         ref.updateChildValues(user as [NSObject : AnyObject])
     }
 }

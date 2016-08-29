@@ -8,7 +8,7 @@
 
 import Foundation
 
-var preferredLanguage = Language.Turkish
+var preferredLanguage = Language.English
 
 enum Language {
     
@@ -255,6 +255,28 @@ enum Language {
             return "Sign up"
         case .Russian:
             return "Зарегистрироваться"
+        }
+    }
+    
+    var SignUpScreenLanguageLabel: String {
+        switch self {
+        case .Turkish:
+            return "Dil"
+        case .English:
+            return "Language"
+        case .Russian:
+            return "Язык"
+        }
+    }
+    
+    var SignUpScreenChooseLanguage: String {
+        switch self {
+        case .Turkish:
+            return "Bir dil seç"
+        case .English:
+            return "Choose a language"
+        case .Russian:
+            return "Выберите язык"
         }
     }
     

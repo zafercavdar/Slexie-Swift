@@ -36,7 +36,12 @@ class FeedPostViewModel: HaveNetworkingController{
     func fetchFeedPosts(completion callback: () -> Void) {
         
         networkingController.getAccountTags { (tags) in
+            
+            print("tags are gathered")
+            
             self.networkingController.getPhotosRelatedWith(tags, completion: { [weak self] (posts) in
+                
+                print("posts are gathered")
                 
                 guard let strongSelf = self else { return }
                 

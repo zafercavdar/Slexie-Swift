@@ -10,10 +10,8 @@ target 'Slexie' do
   pod 'Firebase/Auth'
   pod 'Firebase/Storage'
   pod 'Alamofire', '~> 3.4'
-  pod 'SwiftyJSON'
   pod 'ObjectMapper', '~> 1.3'
   pod 'AlamofireObjectMapper', '~> 3.0'
-  pod 'DOFavoriteButton'
 
 
   target 'SlexieTests' do
