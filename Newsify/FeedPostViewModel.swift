@@ -40,7 +40,7 @@ class FeedPostViewModel: NotificationSender {
         networkingController.getAccountTags { (tags) in
             
             self.networkingController.getPhotosRelatedWith(tags, completion: { [weak self] (posts) in
-                                
+                
                 guard let strongSelf = self else { return }
                 
                 if posts.isEmpty {

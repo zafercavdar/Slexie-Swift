@@ -16,7 +16,8 @@ class ProfilePostTableViewCell: UITableViewCell, Likeable {
     @IBOutlet weak var heart: UIImageView!
     @IBOutlet weak var likeCount: UILabel!
     
-    var id = ""
+    var postPresentation = ProfilePostsPresentation()
+
     
     var tapRecognizer: AdvancedGestureRecognizer = AdvancedGestureRecognizer()
     var likedView: UIImageView!

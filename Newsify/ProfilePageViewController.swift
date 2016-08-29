@@ -159,7 +159,7 @@ class ProfilePageViewController: UITableViewController {
         
         cell.profilePostView.image = postPresentation.image
         cell.profilePostTags.text = postPresentation.tagList
-        cell.id = postPresentation.imageID
+        cell.postPresentation.profilePosts = [postPresentation]
         
         cell.tapRecognizer.addTarget(self, action: #selector(photoTapped(_:)))
         cell.tapRecognizer.numberOfTapsRequired = 2
@@ -185,20 +185,25 @@ class ProfilePageViewController: UITableViewController {
     
     func photoTapped(sender: AdvancedGestureRecognizer){
         let cell = (sender.tappedCell as! ProfilePostTableViewCell)
-        let id = cell.id
+        let post = cell.postPresentation.profilePosts[0]
+        
+        let id = post.imageID
         
         let controller = FirebaseController()
         
+        // Update modal
         model.likePhoto(id)
         
-        for profilePost in presentation.profilePosts {
-            if profilePost.imageID == id {
-                cell.heart.image = UIImage(named: "Filled Heart")
-                
-                if !profilePost.likers.contains(controller.getUID()!) {
-                    cell.likeCount.text = String(profilePost.likeCount + 1)
-                }
-            }
+        // Update view
+        cell.heart.image = UIImage(named: "Filled Heart")
+        if !post.likers.contains(controller.getUID()!) {
+            cell.likeCount.text = String(post.likeCount + 1)
+            cell.postPresentation.profilePosts[0].likers += [controller.getUID()!]
+            
+            // Send notificitaion
+            let notification = Notification(notificationOwnerID: controller.getUID()!, notificationTargetID: post.imageID, notificationDoneByUser: controller.getUID()!, notificationType: NotificationType.Liked)
+            
+            model.pushNotification(notification)
         }
 
 
