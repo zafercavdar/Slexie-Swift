@@ -65,7 +65,9 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         super.viewDidAppear(animated)
         
         if fbNetworkingController.getCurrentUser() != nil{
-            router.routeTo(RouteID.NewsFeed, VC: self)
+            fbNetworkingController.fetchUserLanguage(completion: {
+                self.router.routeTo(RouteID.NewsFeed, VC: self)
+            })
         }
     }
     

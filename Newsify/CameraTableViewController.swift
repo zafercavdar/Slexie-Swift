@@ -112,7 +112,7 @@ class CameraTableViewController: UITableViewController, UINavigationControllerDe
     
     private func uploadData() {
         
-        loadingView.addToView(self.view, text: preferredLanguage.Uploading)
+        loadingView.addToView(self.view, text: preferredLanguage.UploadingInfo)
         
         let imageData = presentation.imageData
         let tags = presentation.tags + presentation.userTags
@@ -250,7 +250,7 @@ extension CameraTableViewController : UIImagePickerControllerDelegate {
         
         self.router.routeTo(RouteID.Dismiss, VC: self)
         
-        loadingView.addToView(self.view, text: "Analyzing")
+        loadingView.addToView(self.view, text: preferredLanguage.AnalyzingInfo)
         
         model.fetchImageTags(takenPhoto) { [weak self] in
             guard let strongSelf = self else { return }
@@ -261,7 +261,7 @@ extension CameraTableViewController : UIImagePickerControllerDelegate {
 
 extension Language {
     
-    var Uploading: String {
+    var UploadingInfo: String {
         switch self {
         case .Turkish:
             return "Yükleniyor"
@@ -271,4 +271,17 @@ extension Language {
             return "Выгрузка"
         }
     }
+    
+    var AnalyzingInfo: String {
+        switch self {
+        case .Turkish:
+            return "Analiz ediliyor"
+        case .English:
+            return "Analyzing"
+        case .Russian:
+            return "Анализ."
+        }
+    }
+    
+    
 }

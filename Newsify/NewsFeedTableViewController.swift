@@ -12,7 +12,8 @@ struct FeedPostsPresentation {
     
     struct FeedPostPresentation {
         var id: String
-        var owner: String
+        var ownerName: String
+        var ownerID: String
         var image: UIImage
         var tagList: String
         var likers: [String]
@@ -26,7 +27,8 @@ struct FeedPostsPresentation {
         
         feedPosts = state.feedPosts.map({ (feedPost) -> FeedPostPresentation in
             let id = feedPost.id
-            let owner = feedPost.username
+            let ownerName = feedPost.ownerUsername
+            let ownerID = feedPost.ownerID
             let image = feedPost.photo
             var tagText = ""
             for tag in feedPost.tags{
@@ -36,7 +38,7 @@ struct FeedPostsPresentation {
             let tagList = tagText
             let likeCount = feedPost.likeCount
             let liked = feedPost.isAlreadyLiked
-            return FeedPostPresentation(id: id, owner: owner, image: image!, tagList: tagList, likers: likers, likeCount: likeCount, liked: liked)
+            return FeedPostPresentation(id: id, ownerName: ownerName, ownerID: ownerID, image: image!, tagList: tagList, likers: likers, likeCount: likeCount, liked: liked)
         })
     }
 }
@@ -139,18 +141,18 @@ class NewsFeedTableViewController: UITableViewController{
         let feedPresentation = presentation.feedPosts[indexPath.row]
         let cell = tableView.dequeueReusableCellWithIdentifier(Identifier.NewsFeedCell, forIndexPath: indexPath) as! NewsFeedItemCell
         
-        cell.id = feedPresentation.id
-        cell.usernameLabel.text = feedPresentation.owner
+        cell.postPresentation.feedPosts = [feedPresentation]
+        cell.usernameLabel.text = feedPresentation.ownerName
         cell.photoView.image = feedPresentation.image
         cell.tagsLabel.text = feedPresentation.tagList
         cell.likeCount.text = String(feedPresentation.likeCount)
         
+        cell.tapRecognizer.tappedCell = cell
         cell.tapRecognizer.addTarget(self, action: #selector(photoTapped(_:)))
         cell.tapRecognizer.numberOfTapsRequired = 2
         cell.tapRecognizer.numberOfTouchesRequired = 1
         cell.photoView.gestureRecognizers = []
         cell.photoView.gestureRecognizers!.append(cell.tapRecognizer)
-        cell.tapRecognizer.tappedCell = cell
         
         if feedPresentation.liked {
             cell.heart.image = UIImage(named: "Filled Heart")
@@ -159,29 +161,34 @@ class NewsFeedTableViewController: UITableViewController{
         }
         
         cell.likeCount.text = String(feedPresentation.likeCount)
-        
         cell.selectionStyle = UITableViewCellSelectionStyle.None
         
         return cell
     }
     
     func photoTapped(sender: AdvancedGestureRecognizer){
+        
+        print("tapped")
         let cell = (sender.tappedCell as! NewsFeedItemCell)
-        let id = cell.id
+        let post = cell.postPresentation.feedPosts[0]
+        
+        let id = post.id
         print(id)
         
         let controller = FirebaseController()
         
+        // Update modal
         model.likePhoto(id)
         
-        for feedPost in presentation.feedPosts {
-            if feedPost.id == id {
-                cell.heart.image = UIImage(named: "Filled Heart")
-                
-                if !feedPost.likers.contains(controller.getUID()!) {
-                    cell.likeCount.text = String(feedPost.likeCount + 1)
-                }
-            }
+        // Update view
+        cell.heart.image = UIImage(named: "Filled Heart")
+        if !post.likers.contains(controller.getUID()!) {
+            cell.likeCount.text = String(post.likeCount + 1)
+            
+            // Send notificitaion
+            let notification = Notification(notificationOwnerID: post.ownerID, notificationTargetID: post.id, notificationDoneByUser: controller.getUID()!, notificationType: NotificationType.Liked)
+            
+            model.pushNotification(notification)
         }
         
         UIView.animateWithDuration(3.0, delay: 0.5, options: [], animations: {

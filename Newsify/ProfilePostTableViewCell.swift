@@ -20,7 +20,6 @@ class ProfilePostTableViewCell: UITableViewCell, Likeable {
     
     var tapRecognizer: AdvancedGestureRecognizer = AdvancedGestureRecognizer()
     var likedView: UIImageView!
-
     
     override func awakeFromNib() {
         super.awakeFromNib()

@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		5BCF6FCAA453CC4F39EA819A /* Pods_SlexieTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F53886D474BB28C9050FB897 /* Pods_SlexieTests.framework */; };
 		AF4864961ED9390D82C2D5EB /* Pods_SlexieUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5898AC7FC31D89A1646EB192 /* Pods_SlexieUITests.framework */; };
+		B316429C1D7434F900F9EDB5 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = B316429B1D7434F900F9EDB5 /* Notification.swift */; };
 		B32828AA1D5DAFAD0022F85E /* AlertExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32828A91D5DAFAD0022F85E /* AlertExtension.swift */; };
 		B32828B41D5DE2660022F85E /* UniqueIDGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32828B31D5DE2660022F85E /* UniqueIDGenerator.swift */; };
 		B33741041D6EE38E00B15BA4 /* Likeable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B33741031D6EE38E00B15BA4 /* Likeable.swift */; };
@@ -95,6 +96,7 @@
 		5898AC7FC31D89A1646EB192 /* Pods_SlexieUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SlexieUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5D9BFA48A5833B74F901FA1F /* Pods-SlexieTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SlexieTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SlexieTests/Pods-SlexieTests.release.xcconfig"; sourceTree = "<group>"; };
 		9ED37C1860EE525B7CBE41CE /* Pods_Slexie.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Slexie.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B316429B1D7434F900F9EDB5 /* Notification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
 		B32828A91D5DAFAD0022F85E /* AlertExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertExtension.swift; sourceTree = "<group>"; };
 		B32828B31D5DE2660022F85E /* UniqueIDGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UniqueIDGenerator.swift; sourceTree = "<group>"; };
 		B33741031D6EE38E00B15BA4 /* Likeable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Likeable.swift; sourceTree = "<group>"; };
@@ -249,6 +251,7 @@
 				B386234D1D6B27D0007B8A5E /* Post.swift */,
 				B361FCCC1D63295800B4F8AA /* FeedPost.swift */,
 				B3B527C21D65AF8B00E31C37 /* ProfilePost.swift */,
+				B316429B1D7434F900F9EDB5 /* Notification.swift */,
 			);
 			name = "Data Models";
 			sourceTree = "<group>";
@@ -693,6 +696,7 @@
 				B33741041D6EE38E00B15BA4 /* Likeable.swift in Sources */,
 				B3B527C31D65AF8B00E31C37 /* ProfilePost.swift in Sources */,
 				B3F455AE1D54A1BD005EA708 /* AppDelegate.swift in Sources */,
+				B316429C1D7434F900F9EDB5 /* Notification.swift in Sources */,
 				B3B527C11D65AF2100E31C37 /* ProfilePostsViewModel.swift in Sources */,
 				B38E85C01D59C28C00CAE73B /* TagsTableViewCell.swift in Sources */,
 				B38623551D6C6634007B8A5E /* CameraRouter.swift in Sources */,

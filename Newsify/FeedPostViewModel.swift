@@ -71,6 +71,12 @@ class FeedPostViewModel: HaveNetworkingController{
             
         }
     }
+    
+    func pushNotification(notification: Notification){
+        networkingController.pushNotification(notification){
+        
+        }
+    }
 }
 
 private extension FeedPostViewModel {
@@ -84,8 +90,8 @@ private extension FeedPostViewModel {
         let defaultUsername2 = "default-id-2"
         let defaultTags2 = ["friends","fun", "together"]
         
-        let feedItem = FeedPost(username: defaultUsername, id: "no-id", tags: defaultTags, likers: [], likeCount: 11, isAlreadyLiked: false)
-        let feedItem2 = FeedPost(username: defaultUsername2, id: "no-id", tags: defaultTags2, likers: [], likeCount: 13, isAlreadyLiked: true)
+        let feedItem = FeedPost(ownerUsername: defaultUsername, ownerID: "665d5s565d56", id: "no-id", tags: defaultTags, likers: [], likeCount: 11, isAlreadyLiked: false)
+        let feedItem2 = FeedPost(ownerUsername: defaultUsername2, ownerID: "79009fd9fdg", id: "no-id", tags: defaultTags2, likers: [], likeCount: 13, isAlreadyLiked: true)
         
         feedItem.setPhoto(defaultImage!)
         feedItem2.setPhoto(defaultImage2!)

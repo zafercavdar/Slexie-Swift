@@ -24,6 +24,7 @@ protocol NetworkingController {
     func getPhotosRelatedWith(tags: [String], completion: [FeedPost] -> Void)
     func getProfilePosts(completion callback: [ProfilePost] -> Void)
     func fetchUserLanguage(completion callback: () -> Void)
+    func pushNotification(notification: Notification, completion callback: () -> Void)
 }
 
 protocol LoginController {
@@ -68,11 +69,23 @@ class FirebaseController: NetworkingController, AuthenticationController {
         static let UserPosts = "all-photos"
         static let ProfileType = "profile-type"
         static let Language = "language"
+        static let Notifications = "notifications"
         
         static let PostOwner = "owner"
         static let PostTags = "tags"
         static let PostPrivacy = "privacy"
         static let Likers = "likers"
+        
+        struct NotificationLabels{
+            static let Who = "Who"
+            static let Target = "Target"
+            static let Action = "Action"
+        }
+        
+        struct ActionLabels{
+            static let Like = "Liked"
+            static let Comment = "Comment"
+        }
     }
 
     
@@ -118,7 +131,6 @@ class FirebaseController: NetworkingController, AuthenticationController {
                 })
             }
         })
-
     }
     
     func signOut(callback: Void -> Void) {
@@ -136,6 +148,34 @@ class FirebaseController: NetworkingController, AuthenticationController {
 
 
     // MARK: NetworkingController Methods
+    
+    func pushNotification(notification: Notification, completion callback: () -> Void){
+        
+        print("i am here")
+        let generator = UniqueIDGenerator()
+        let notificationID = generator.generateNotificationID(notification)
+        
+        var action = ""
+        
+        switch notification.notificationType {
+        case .Liked:
+            action = ReferenceLabels.ActionLabels.Like
+        case .Commented:
+            action = ReferenceLabels.ActionLabels.Comment
+        }
+        
+        let notificationRef = References.UserRef.child(notification.notificationOwnerID).child(ReferenceLabels.Notifications).child(notificationID)
+        
+        let batchUpdate = [ReferenceLabels.NotificationLabels.Who : notification.notificationDoneByUser,
+                           ReferenceLabels.NotificationLabels.Target : notification.notificationTargetID,
+                           ReferenceLabels.NotificationLabels.Action : action]
+        
+        notificationRef.updateChildValues(batchUpdate)
+        
+        print("callback time children!")
+        callback()
+        
+    }
     
     func fetchUserLanguage(completion callback: () -> Void) {
         guard let uid = getUID() else {
@@ -235,38 +275,43 @@ class FirebaseController: NetworkingController, AuthenticationController {
                     
                     // Public check
                     guard let privacy = propertyDic[ReferenceLabels.PostPrivacy] as? String where privacy == "Public" else {
+                        print("profile is not public")
                         continue
                     }
                     
                     guard let photoTags = propertyDic[ReferenceLabels.PostTags] as? [String] else {
+                        print("there is no tags")
                         continue
                     }
                     
                     
                     guard containsAny(photoTags,checkList: tags) else {
+                        print("tag mismatch")
                         continue
                     }
                     
-                    guard let owner = propertyDic[ReferenceLabels.PostOwner] as? String/* where owner != strongSelf.getUID() */ else {
+                    guard let ownerID = propertyDic[ReferenceLabels.PostOwner] as? String/* where owner != strongSelf.getUID() */ else {
+                        
+                        print("no owner id")
                         continue
                     }
                     
-                    guard let likers = propertyDic[ReferenceLabels.Likers] as? [String] else {
+                    
+                    var likers = propertyDic[ReferenceLabels.Likers] as? [String]
+                    if likers == nil {
+                        likers = []
+                    }
+                    
+                    guard let atts = userDic[ownerID] as? [String: AnyObject], let username = atts[ReferenceLabels.Username] as? String else {
                         continue
                     }
                     
-                    guard let atts = userDic[owner] as? [String: AnyObject], let username = atts[ReferenceLabels.Username] as? String else {
-                        continue
-                    }
+                    let liked = likers!.contains((self?.getUID())!)
                     
-                    let liked = likers.contains((self?.getUID())!)
-                    
-                    let post = FeedPost(username: username, id: id, tags: photoTags, likers: likers, likeCount: likers.count, isAlreadyLiked: liked)
-                    print("post added to the posts")
+                    let post = FeedPost(ownerUsername: username, ownerID: ownerID, id: id, tags: photoTags, likers: likers!, likeCount: likers!.count, isAlreadyLiked: liked)
                     posts.append(post)
                     
                 }
-                print("i am at completion")
                 completion(posts)
                 })
         })

@@ -17,7 +17,7 @@ class SearchFeedItemCell: UITableViewCell, Likeable{
     @IBOutlet weak var heart: UIImageView!
     @IBOutlet weak var likeCount: UILabel!
     
-    var id: String = ""
+    var postPresentation: SearchPostsPresentation?
     
     var tapRecognizer: AdvancedGestureRecognizer = AdvancedGestureRecognizer()
     var likedView: UIImageView!

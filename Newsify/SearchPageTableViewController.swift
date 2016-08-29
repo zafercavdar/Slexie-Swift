@@ -8,15 +8,13 @@
 
 import UIKit
 
-class AdvancedGestureRecognizer: UITapGestureRecognizer {
-    var tappedCell = UITableViewCell()
-}
 
 struct SearchPostsPresentation {
     
     struct SearchPostPresentation {
         var id: String
-        var owner: String
+        var ownerName: String
+        var ownerID: String
         var image: UIImage
         var tagList: String
         var likers: [String]
@@ -29,18 +27,19 @@ struct SearchPostsPresentation {
     mutating func update(withState state: SearchPostViewModel.State){
         
         searchPosts = state.searchPosts.map({ (searchPost) -> SearchPostPresentation in
-            let owner = searchPost.username
+            let id = searchPost.id
+            let ownerName = searchPost.ownerUsername
+            let ownerID = searchPost.ownerID
             let image = searchPost.photo
             var tagText = ""
             for tag in searchPost.tags{
                 tagText += "#\(tag) "
             }
             let tagList = tagText
-            let id = searchPost.id
             let likers = searchPost.likers
             let likeCount = searchPost.likeCount
             let liked = searchPost.isAlreadyLiked
-            return SearchPostPresentation(id: id, owner: owner, image: image!, tagList: tagList, likers: likers, likeCount: likeCount, liked: liked)
+            return SearchPostPresentation(id: id, ownerName: ownerName, ownerID: ownerID, image: image!, tagList: tagList, likers: likers, likeCount: likeCount, liked: liked)
         })
     }
 }
@@ -152,8 +151,8 @@ class SearchPageTableViewController: UITableViewController, UISearchResultsUpdat
         let feedPresentation = presentation.searchPosts[indexPath.row]
         let cell = tableView.dequeueReusableCellWithIdentifier(Identifier.SearchFeedCell, forIndexPath: indexPath) as! SearchFeedItemCell
         
-        cell.id = feedPresentation.id
-        cell.usernameLabel.text = feedPresentation.owner
+        cell.postPresentation?.searchPosts = [feedPresentation]
+        cell.usernameLabel.text = feedPresentation.ownerName
         cell.photoView.image = feedPresentation.image
         cell.tagsLabel.text = feedPresentation.tagList
         
@@ -180,23 +179,31 @@ class SearchPageTableViewController: UITableViewController, UISearchResultsUpdat
     
     func photoTapped(sender: AdvancedGestureRecognizer){
         let cell = (sender.tappedCell as! SearchFeedItemCell)
-        let id = cell.id
+        guard let post = cell.postPresentation?.searchPosts[0] else { return }
+        
+        let id = post.id
         print(id)
         
         let controller = FirebaseController()
 
         model.likePhoto(id)
         
-        for searchPost in presentation.searchPosts {
-            if searchPost.id == id {
-                cell.heart.image = UIImage(named: "Filled Heart")
-                
-                if !searchPost.likers.contains(controller.getUID()!) {
-                    cell.likeCount.text = String(searchPost.likeCount + 1)
-                }
-            }
+        // Update view
+        cell.heart.image = UIImage(named: "Filled Heart")
+        if !post.likers.contains(controller.getUID()!) {
+            cell.likeCount.text = String(post.likeCount + 1)
         }
-
+        
+        // Update modal
+        model.likePhoto(id)
+        
+        // Send notificitaion
+        let notification = Notification(notificationOwnerID: post.ownerID, notificationTargetID: post.id, notificationDoneByUser: controller.getUID()!, notificationType: NotificationType.Liked)
+        
+        controller.pushNotification(notification) {
+            
+        }
+        
         
         UIView.animateWithDuration(3.0, delay: 0.5, options: UIViewAnimationOptions.AllowAnimatedContent, animations: {
             

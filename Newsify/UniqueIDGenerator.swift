@@ -14,4 +14,22 @@ class UniqueIDGenerator {
         let date = NSDate()
         return "\(date.uniqueTime())UU\(userID)"
     }
+    
+    func generateNotificationID(notification: Notification) -> String{
+    
+        let time = NSDate().uniqueTime()
+        var type: String
+        
+        switch notification.notificationType {
+        case .Liked:
+            type = "Like"
+        case .Commented:
+            type = "Comment"
+        }
+        
+        let actionTrigger = notification.notificationDoneByUser
+        
+        return "\(time)TT\(type)UU\(actionTrigger)"
+
+    }
 }

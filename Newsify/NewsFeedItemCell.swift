@@ -8,6 +8,12 @@
 
 import UIKit
 
+
+class AdvancedGestureRecognizer: UITapGestureRecognizer {
+    var tappedCell = UITableViewCell()
+}
+
+
 class NewsFeedItemCell: UITableViewCell, Likeable{
 
     @IBOutlet weak var usernameLabel: UILabel!
@@ -16,10 +22,10 @@ class NewsFeedItemCell: UITableViewCell, Likeable{
     @IBOutlet weak var heart: UIImageView!
     @IBOutlet weak var likeCount: UILabel!
     
+    var postPresentation = FeedPostsPresentation()
+    
     var likedView: UIImageView!
     var tapRecognizer = AdvancedGestureRecognizer()
-    
-    var id = ""
     
     
     override func awakeFromNib() {
