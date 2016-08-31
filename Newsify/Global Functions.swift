@@ -8,6 +8,10 @@
 
 import Foundation
 
+func preferredLanguage(key: String) -> String {
+    return NSLocalizedString(key, comment: "" )
+}
+
 func indexOf(source: String, substring: String) -> Int? {
     let maxIndex = source.characters.count - substring.characters.count
     for index in 0...maxIndex {

@@ -5,3 +5,32 @@
   Created by Zafer Cavdar on 31/08/2016.
   Copyright © 2016 Zafer Cavdar. All rights reserved.
 */
+
+SignUpScreenUsernameLabel = "Benzersiz bir kullanıcı adı gir";
+NavBarLogOut = "Çıkış yap";
+NavBarNewsfeed = "Haber Kaynağı";
+SignUpScreenPasswordReTypeLabel = "Şifrenizi tekrar giriniz";
+SignUpScreenLanguageLabel = "Dil";
+Cancel = "İptal";
+SignUpScreenChooseLanguage = "Bir dil seç";
+TabBarNotifications = "Bildirimler";
+TabBarCamera = "Kamera";
+NavBarNotifications = "Bildirimler";
+TabBarSearch = "Ara";
+LoginButton = "Giriş Yap";
+LoginScreenUsernameLabel = "Kullanıcı adı";
+SigningUpInfo = "Lütfen bekleyin";
+SignUpScreenSignUpButton = "Kayıt ol";
+TabBarHome = "Anasayfa";
+SigningInInfo = "Lütfen bekleyin";
+SignUpRedirect = "Hesabın yok mu? Kayıt ol.";
+Private = "Gizli";
+NavBarTags = "Etiketler";
+NavBarSearch = "Ara";
+NavBarProfile = "Profil";
+RefreshingInfo = "Yükleniyor";
+Public = "Açık";
+SignUpScreenPasswordLabel = "Zor bir şifre girmeni öneririz";
+TabBarProfile = "Profil";
+YourProfile = "Profilin: ";
+LoginScreenPasswordLabel = "Şifre";

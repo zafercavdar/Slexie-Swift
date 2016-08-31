@@ -5,3 +5,32 @@
   Created by Zafer Cavdar on 31/08/2016.
   Copyright © 2016 Zafer Cavdar. All rights reserved.
 */
+
+SignUpScreenUsernameLabel = "Введите уникальное имя пользователя";
+NavBarLogOut = "Выйти";
+NavBarNewsfeed = "Новостная лента";
+SignUpScreenPasswordReTypeLabel = "Введите свой пароль снова";
+SignUpScreenLanguageLabel = "Язык";
+Cancel = "Отмена";
+SignUpScreenChooseLanguage = "Выберите язык";
+TabBarNotifications = "Уведомления";
+TabBarCamera = "камера";
+NavBarNotifications = "Уведомления";
+TabBarSearch = "Поиск";
+LoginButton = "Авторизоваться";
+LoginScreenUsernameLabel = "Имя пользователя";
+SigningUpInfo = "Пожалуйста, подождите!";
+SignUpScreenSignUpButton = "Зарегистрироваться";
+TabBarHome = "Главная";
+SigningInInfo = "Пожалуйста, подождите!";
+SignUpRedirect = "У вас нет аккаунта ? Зарегистрироваться";
+Private = "Личный";
+NavBarTags = "Теги";
+NavBarSearch = "Поиск";
+NavBarProfile = "Профиль";
+RefreshingInfo = "загрузка";
+Public = "Общественный";
+SignUpScreenPasswordLabel = "Рекомендуется использовать надежные пароли";
+TabBarProfile = "Профиль";
+YourProfile = "Ваш профиль: ";
+LoginScreenPasswordLabel = "Пароль";

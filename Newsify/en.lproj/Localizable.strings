@@ -6,3 +6,31 @@
   Copyright © 2016 Zafer Cavdar. All rights reserved.
 */
 
+SignUpScreenUsernameLabel = "Type a unique username";
+NavBarLogOut = "Log out";
+NavBarNewsfeed = "Newsfeed";
+SignUpScreenPasswordReTypeLabel = "Re-type your password";
+SignUpScreenLanguageLabel = "Language";
+Cancel = "Cancel";
+SignUpScreenChooseLanguage = "Choose a language";
+TabBarNotifications = "Notifications";
+TabBarCamera = "Camera";
+NavBarNotifications = "Notifications";
+TabBarSearch = "Search";
+LoginButton = "Login";
+LoginScreenUsernameLabel = "Username";
+SigningUpInfo = "Please wait";
+SignUpScreenSignUpButton = "Sign up";
+TabBarHome = "Home";
+SigningInInfo = "Please wait";
+SignUpRedirect = "Don't you have an account? Create one.";
+Private = "Private";
+NavBarTags = "Tags";
+NavBarSearch = "Search";
+NavBarProfile = "Profile";
+RefreshingInfo = "Loading";
+Public = "Public";
+SignUpScreenPasswordLabel = "Strong passwords are recommended";
+TabBarProfile = "Profile";
+YourProfile = "Your profile: ";
+LoginScreenPasswordLabel = "Password";
