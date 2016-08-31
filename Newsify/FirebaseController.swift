@@ -332,6 +332,8 @@ class FirebaseController: NetworkingController, AuthenticationController {
                 return
             }
             
+            let sortedPostDic = postDic.sort { $0.0 < $1.0 }
+            
             let userRef = References.UserRef
             userRef.observeSingleEventOfType(.Value, withBlock: { [weak self] (snapshot) in
                 
@@ -340,7 +342,7 @@ class FirebaseController: NetworkingController, AuthenticationController {
                     return
                 }
                 
-                for (id, propertyDic) in postDic {
+                for (id, propertyDic) in sortedPostDic {
                     
                     // Public check
                     guard let privacy = propertyDic[ReferenceLabels.PostPrivacy] as? String where privacy == "Public" else {
