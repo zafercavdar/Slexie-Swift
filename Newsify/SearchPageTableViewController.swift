@@ -131,7 +131,10 @@ class SearchPageTableViewController: UITableViewController, UISearchResultsUpdat
     
     func updateSearchResultsForSearchController(searchController: UISearchController) {
         let searchString = searchController.searchBar.text?.lowercaseString
-        model.fetchSearchPosts(searchString!) { }
+        
+        if searchString?.characters.count >= 3 {
+            model.fetchSearchPosts(searchString!) { }
+        }
     }
     
     
@@ -182,7 +185,6 @@ class SearchPageTableViewController: UITableViewController, UISearchResultsUpdat
         let post = cell.postPresentation.searchPosts[0]
         
         let id = post.id
-        print(id)
         
         let controller = FirebaseController()
         

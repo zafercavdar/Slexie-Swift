@@ -35,11 +35,11 @@ class FeedPostViewModel: NotificationSender {
     var stateChangeHandler: ((State.Change) -> Void)?
     
         
-    func fetchFeedPosts(completion callback: () -> Void) {
+    func fetchFeedPosts(count count: Int, completion callback: () -> Void) {
         
         networkingController.getAccountTags { (tags) in
             
-            self.networkingController.getPhotosRelatedWith(tags, completion: { [weak self] (posts) in
+            self.networkingController.getPhotosRelatedWith(tags, count: count, completion: { [weak self] (posts) in
                 
                 guard let strongSelf = self else { return }
                 

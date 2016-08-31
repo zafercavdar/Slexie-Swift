@@ -39,6 +39,12 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         usernameField.delegate = self
         passwordField.delegate = self
         
+        setLanguage()
+        setUITitlesColors()
+        
+    }
+    
+    private func setLanguage(){
         let lang = NSLocale.preferredLanguages()[0]
         
         switch lang {
@@ -49,9 +55,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         default:
             preferredLanguage = Language.English
         }
-        
-        setUITitlesColors()
-        
     }
     
     private func setUITitlesColors(){
@@ -61,7 +64,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         signUpRedirect.setTitle(preferredLanguage.SignUpRedirect, forState: .Normal)
         usernameLabel.text = preferredLanguage.LoginScreenUsernameLabel
         passwordLabel.text = preferredLanguage.LoginScreenPasswordLabel
-        
         
         loginButton.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
         usernameLabel.textColor = UIColor.whiteColor()
@@ -84,13 +86,16 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         
         if fbNetworkingController.getCurrentUser() != nil{
             
-            let loading = LoadingView()
+            /*let loading = LoadingView()
             loading.addToView(self.view, text: preferredLanguage.SigningInInfo)
             
             fbNetworkingController.fetchUserLanguage(completion: {
                 loading.removeFromView(self.view)
                 self.router.routeTo(RouteID.NewsFeed, VC: self)
-            })
+            })*/
+            
+            setLanguage()
+            self.router.routeTo(RouteID.NewsFeed, VC: self)
         }
     }
     

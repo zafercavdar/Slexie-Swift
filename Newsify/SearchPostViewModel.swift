@@ -31,7 +31,7 @@ class SearchPostViewModel: NotificationSender {
     
     func fetchSearchPosts(searchTag: String, completion callback: () -> Void) {
         
-        networkingController.getPhotosRelatedWith([searchTag], completion: { [weak self] (posts) in
+        networkingController.getPhotosRelatedWith([searchTag], count: 100, completion: { [weak self] (posts) in
                 
                 guard let strongSelf = self else { return }
                 

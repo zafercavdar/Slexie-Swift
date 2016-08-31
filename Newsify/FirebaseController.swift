@@ -21,7 +21,7 @@ protocol NetworkingController {
     func uploadPhoto(image: NSData, tags: [String], callback: (error: NSError?, photoID: String, url: String) -> Void)
     func downloadPhoto(with photoID: String, completion callback: (UIImage?, NSError?) -> Void)
     func getAccountTags(completion: [String] -> Void)
-    func getPhotosRelatedWith(tags: [String], completion: [FeedPost] -> Void)
+    func getPhotosRelatedWith(tags: [String], count: Int, completion: [FeedPost] -> Void)
     func getProfilePosts(completion callback: [ProfilePost] -> Void)
     func fetchUserLanguage(completion callback: () -> Void)
     func pushNotification(notification: Notification, completion callback: () -> Void)
@@ -167,7 +167,7 @@ class FirebaseController: NetworkingController, AuthenticationController {
         
         guard let uid = getUID() else { return }
         
-        let notificationRef = References.UserRef.child(uid).child(ReferenceLabels.Notifications)
+        let notificationRef = References.UserRef.child(uid).child(ReferenceLabels.Notifications).queryLimitedToLast(50)
         
         notificationRef.observeSingleEventOfType(.Value, withBlock:  { (snapshot) in
             guard let notificationDic = snapshot.value as? [String: AnyObject] else {
@@ -320,11 +320,12 @@ class FirebaseController: NetworkingController, AuthenticationController {
         })
     }
     
-    func getPhotosRelatedWith(tags: [String], completion: [FeedPost] -> Void){
+    func getPhotosRelatedWith(tags: [String], count: Int, completion: [FeedPost] -> Void){
         
         var posts: [FeedPost] = []
         
-        let ref = References.PhotoRef
+        let ref = References.PhotoRef.queryLimitedToLast(UInt(count))
+        
         _ = ref.observeSingleEventOfType(.Value, withBlock: { (snapshot) in
             
             guard let postDic = snapshot.value as? [String: AnyObject] else {
@@ -394,8 +395,6 @@ class FirebaseController: NetworkingController, AuthenticationController {
                                 
                 if let photos = snapshot.value as? [String: AnyObject] {
                     for postID in postIDs {
-                        
-                        print(postID)
                         
                         var tags: [String]?
                         

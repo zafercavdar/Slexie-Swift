@@ -22,7 +22,7 @@ struct FeedPostsPresentation {
     }
     
     var feedPosts: [FeedPostPresentation] = []
-    
+
     mutating func update(withState state: FeedPostViewModel.State){
         
         feedPosts = state.feedPosts.map({ (feedPost) -> FeedPostPresentation in
@@ -55,6 +55,9 @@ class NewsFeedTableViewController: UITableViewController{
     
     @IBOutlet var feedPostsView: UITableView!
     
+    var postCount = 3
+    let postIncrease = 3
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -65,7 +68,7 @@ class NewsFeedTableViewController: UITableViewController{
         self.tabBarController?.tabBar.items![3].title = preferredLanguage.TabBarNotifications
         self.tabBarController?.tabBar.items![4].title = preferredLanguage.TabBarProfile
 
-
+        
         loadingView.addToView(self.view, text: preferredLanguage.RefreshingInfo)
         
         let refreshControl = UIRefreshControl()
@@ -78,10 +81,9 @@ class NewsFeedTableViewController: UITableViewController{
             self?.applyStateChange(change)
         }
         
-        model.fetchFeedPosts { 
+        model.fetchFeedPosts(count: self.postCount, completion: {
             self.loadingView.removeFromView(self.view)
-        }
-        
+        })
     }
     
     func applyState(state: FeedPostViewModel.State) {
@@ -117,9 +119,9 @@ class NewsFeedTableViewController: UITableViewController{
     }*/
     
     func refresh(refreshControl: UIRefreshControl) {
-        model.fetchFeedPosts { 
+        model.fetchFeedPosts(count: postCount, completion: {
             refreshControl.endRefreshing()
-        }
+        })
     }
 
     // MARK: - Table view data source
@@ -165,12 +167,19 @@ class NewsFeedTableViewController: UITableViewController{
         return cell
     }
     
+    override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+        
+        if (indexPath.row >= presentation.feedPosts.count - 1) {
+            postCount += postIncrease
+            model.fetchFeedPosts(count: postCount, completion: { })
+        }
+    }
+    
     func photoTapped(sender: AdvancedGestureRecognizer){
         
         let cell = (sender.tappedCell as! NewsFeedItemCell)
         let post = cell.postPresentation.feedPosts[0]
         let id = post.id
-        print(id)
         
         let controller = FirebaseController()
         

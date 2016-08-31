@@ -77,7 +77,6 @@ class NotificationsTableViewController: UITableViewController {
     
     func refresh(refreshControl: UIRefreshControl) {
         model.fetchNotifications {
-            print("fetched")
             refreshControl.endRefreshing()
         }
     }

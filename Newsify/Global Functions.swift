@@ -31,8 +31,10 @@ func += <K, V> (inout left: Dictionary <K,V> , right: Dictionary <K,V>) {
 
 func containsAny(storage: [String], checkList: [String]) -> Bool{
     for element in checkList{
-        if storage.contains(element){
-            return true
+        for storageElement in storage {
+            if storageElement.hasPrefix(element){
+                return true
+            }
         }
     }
     
