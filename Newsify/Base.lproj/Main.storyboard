@@ -623,8 +623,11 @@
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lXf-d2-hz1">
+                                            <rect key="frame" x="14" y="2" width="37" height="37.5"/>
+                                        </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Notify!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QBL-0r-X9H">
-                                            <rect key="frame" x="15" y="11" width="577" height="21"/>
+                                            <rect key="frame" x="59" y="11" width="577" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
@@ -633,6 +636,7 @@
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="notifLabel" destination="QBL-0r-X9H" id="nGZ-Jy-33r"/>
+                                    <outlet property="targetImageView" destination="lXf-d2-hz1" id="Mef-cg-zNE"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -641,7 +645,13 @@
                             <outlet property="delegate" destination="oVk-7w-AFw" id="ywq-4E-Yud"/>
                         </connections>
                     </tableView>
-                    <tabBarItem key="tabBarItem" title="Notifications" image="Notifications" id="9yM-2x-je5"/>
+                    <tabBarItem key="tabBarItem" title="Notifications" image="Notifications" id="9yM-2x-je5">
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="color" keyPath="tintColor">
+                                <color key="value" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </tabBarItem>
                     <navigationItem key="navigationItem" title="Notifications" id="Qri-dD-Jjg"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="b1j-Tw-8yy" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -699,7 +709,13 @@
                             <outlet property="delegate" destination="Egf-gr-7O3" id="ZcO-Cb-b5M"/>
                         </connections>
                     </tableView>
-                    <tabBarItem key="tabBarItem" title="Camera" image="Camera" id="0cA-CG-ddI"/>
+                    <tabBarItem key="tabBarItem" title="Camera" image="Camera" id="0cA-CG-ddI">
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="color" keyPath="tintColor">
+                                <color key="value" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </tabBarItem>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Tags" id="l72-Zr-6Xz">
                         <barButtonItem key="leftBarButtonItem" systemItem="add" id="Y3u-bO-G5B">
