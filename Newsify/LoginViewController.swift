@@ -6,6 +6,13 @@
 //  Copyright © 2016 Zafer Cavdar. All rights reserved.
 //
 
+
+enum LanguageCodes: String {
+    case Turkish = "tr-TR"
+    case English = "en-US"
+    case Russian = "ru-RU"
+}
+
 import UIKit
 
 class LoginViewController: UIViewController, UITextFieldDelegate {
@@ -31,6 +38,17 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         
         usernameField.delegate = self
         passwordField.delegate = self
+        
+        let lang = NSLocale.preferredLanguages()[0]
+        
+        switch lang {
+        case LanguageCodes.Turkish.rawValue:
+            preferredLanguage = Language.Turkish
+        case LanguageCodes.Russian.rawValue:
+            preferredLanguage = Language.Russian
+        default:
+            preferredLanguage = Language.English
+        }
         
         setUITitlesColors()
         
