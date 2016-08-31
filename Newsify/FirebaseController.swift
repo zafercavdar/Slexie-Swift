@@ -247,7 +247,8 @@ class FirebaseController: NetworkingController, AuthenticationController {
     }
     
     func fetchUserLanguage(completion callback: () -> Void) {
-        guard let uid = getUID() else {
+        
+        /*guard let uid = getUID() else {
             callback()
             return
         }
@@ -274,7 +275,9 @@ class FirebaseController: NetworkingController, AuthenticationController {
             }*/
             
             callback()
-        })
+        }) */
+        
+        callback()
     }
     
     func uploadPhoto(image: NSData, tags: [String], callback: (error: NSError?, photoID: String, url: String) -> Void){

@@ -39,13 +39,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         usernameField.delegate = self
         passwordField.delegate = self
         
-        setLanguage()
         setUITitlesColors()
-        
-    }
-    
-    private func setLanguage(){
-        let lang = NSLocale.preferredLanguages()[0]
         
     }
     
@@ -76,8 +70,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
-        if fbNetworkingController.getCurrentUser() != nil{
-            setLanguage()
+        if fbNetworkingController.getCurrentUser() != nil {
             self.router.routeTo(RouteID.NewsFeed, VC: self)
         }
     }
