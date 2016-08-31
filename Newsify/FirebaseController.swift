@@ -207,7 +207,7 @@ class FirebaseController: NetworkingController, AuthenticationController {
                     guard let props = (allUsers[result.whoID] as? [String: AnyObject]),
                         let username = props[ReferenceLabels.Username] as? String else { return }
                     
-                    let notification = Notification(notificationOwnerID: result.ownerID, notificationTargetID: result.targetID, notificationDoneByUserID: result.whoID, notificationDoneByUsername: username, notificationType: result.type)
+                    let notification = Notification(ownerID: result.ownerID, targetID: result.targetID, doneByUserID: result.whoID, doneByUsername: username, type: result.type)
                     
                     results += [notification]
                 }

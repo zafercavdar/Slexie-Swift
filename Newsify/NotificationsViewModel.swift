@@ -6,6 +6,8 @@
 //  Copyright © 2016 Zafer Cavdar. All rights reserved.
 //
 
+import UIKit
+
 class NotificationsViewModel {
     
     struct State{
@@ -27,10 +29,25 @@ class NotificationsViewModel {
     var stateChangeHandler: ((State.Change) -> Void)?
 
     func fetchNotifications(completion callback: () -> Void){
-        networkingController.fethNotifications { (notifications) in
+        networkingController.fethNotifications { [weak self] (notifications) in
+            
+            guard let strongSelf = self else { return }
             
             if !notifications.isEmpty {
-                self.emit(self.state.reloadPosts(notifications))
+                strongSelf.emit(strongSelf.state.reloadPosts(notifications))
+                
+                for notification in notifications {
+                    let id = notification.notificationTargetID
+                    
+                    strongSelf.networkingController.downloadPhoto(with: id, completion: { (image, error) in
+                        if error == nil {
+                            notification.targetImage = UIImage.resizeImage(image!, newWidth: CGFloat(37.5))
+                            strongSelf.emit(strongSelf.state.reloadPosts(notifications))
+                            callback()
+                        }
+                    })
+                }
+                
             }
             callback()
         }

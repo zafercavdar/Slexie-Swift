@@ -14,6 +14,7 @@ struct NotificationsPresentation {
         let who: String
         let actionString: String
         let target: String
+        let targetImage: UIImage
     }
     
     var notifications: [NotificationPresentation] = []
@@ -34,8 +35,9 @@ struct NotificationsPresentation {
             }
             
             let target = notif.notificationTargetID
+            let image = notif.targetImage
             
-            return NotificationPresentation(who: who, actionString: actionString, target: target)
+            return NotificationPresentation(who: who, actionString: actionString, target: target, targetImage: image)
             
         })
     }
@@ -127,6 +129,7 @@ class NotificationsTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCellWithIdentifier(Identifier.NotificationCell, forIndexPath: indexPath) as! NotificationTableViewCell
         
         cell.notifLabel.text = notifPresentation.who + notifPresentation.actionString
+        cell.targetImageView.image = notifPresentation.targetImage
         cell.selectionStyle = UITableViewCellSelectionStyle.None
         
         return cell

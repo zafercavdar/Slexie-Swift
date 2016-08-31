@@ -12,6 +12,9 @@ class NotificationTableViewCell: UITableViewCell {
 
     @IBOutlet weak var notifLabel: UILabel!
     
+    @IBOutlet weak var targetImageView: UIImageView!
+    
+    
     override func awakeFromNib() {
         super.awakeFromNib()
     }

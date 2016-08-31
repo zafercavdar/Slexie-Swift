@@ -22,7 +22,7 @@ extension Likeable{
     
         var resultView: UIImageView
         let image = UIImage(named: "Liked")
-        let newImage = resizeImage(image!, newWidth: 100)
+        let newImage = UIImage.resizeImage(image!, newWidth: 100)
         
         let imageMidX = (UIScreen.mainScreen().bounds.width - newImage.size.width) / 2
         let imageMidY = photoView.center.y - newImage.size.height/2
@@ -34,17 +34,4 @@ extension Likeable{
         
         return resultView
     }
-    
-    func resizeImage(image: UIImage, newWidth: CGFloat) -> UIImage {
-        
-        let scale = newWidth / image.size.width
-        let newHeight = image.size.height * scale
-        UIGraphicsBeginImageContext(CGSizeMake(newWidth, newHeight))
-        image.drawInRect(CGRectMake(0, 0, newWidth, newHeight))
-        let newImage = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        
-        return newImage
-    }
-
 }

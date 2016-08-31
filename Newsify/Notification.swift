@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 enum NotificationType {
     case Liked
@@ -22,10 +23,19 @@ enum NotificationType {
     }
 }
 
-struct Notification {
+class Notification {
     var notificationOwnerID: String
     var notificationTargetID: String
     var notificationDoneByUserID: String
     var notificationDoneByUsername: String
     var notificationType: NotificationType
+    var targetImage = UIImage()
+    
+    init(ownerID: String, targetID: String, doneByUserID: String, doneByUsername: String, type: NotificationType){
+        notificationOwnerID = ownerID
+        notificationTargetID = targetID
+        notificationDoneByUserID = doneByUserID
+        notificationDoneByUsername = doneByUsername
+        notificationType = type
+    }
 }

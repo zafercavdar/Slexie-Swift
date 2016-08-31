@@ -28,5 +28,5 @@ class Post {
     func setPhoto(photo: UIImage) {
         self.photo = photo
     }
-
+    
 }
