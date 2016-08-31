@@ -27,6 +27,7 @@ protocol NetworkingController {
     func pushNotification(notification: Notification, completion callback: () -> Void)
     func photoLiked(imageid: String, callback: (CallbackResult) -> Void)
     func fethNotifications(completion callback: [Notification] -> Void)
+    func getUsername(with uid: String, completion callback: (username: String) -> Void)
 }
 
 protocol LoginController {
@@ -451,6 +452,16 @@ class FirebaseController: NetworkingController, AuthenticationController {
         }
         
     }
+    
+    func getUsername(with uid: String, completion callback: (username: String) -> Void){
+        
+        let ref = References.UserRef.child(uid).child(ReferenceLabels.Username)
+        ref.observeSingleEventOfType(.Value,  withBlock: { (snapshot) in
+            let username = snapshot.value as! String
+            callback(username: username)
+        })
+    }
+
 
     // MARK: Private methods
     
@@ -513,15 +524,6 @@ class FirebaseController: NetworkingController, AuthenticationController {
             } else {
                 completion([])
             }
-        })
-    }
-    
-    private func getUsername(with uid: String, completion callback: (username: String) -> Void){
-    
-        let ref = References.UserRef.child(uid).child(ReferenceLabels.Username)
-        ref.observeSingleEventOfType(.Value,  withBlock: { (snapshot) in
-            let username = snapshot.value as! String
-            callback(username: username)
         })
     }
     

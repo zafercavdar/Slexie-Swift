@@ -17,12 +17,17 @@ struct NotificationsPresentation {
     }
     
     var notifications: [NotificationPresentation] = []
+    var controller = FirebaseController()
     
     mutating func update(withState state: NotificationsViewModel.State){
         
         notifications = state.notifs.map({ (notif) -> NotificationPresentation in
             
-            let who = notif.notificationDoneByUser
+            var who = "default"
+            controller.getUsername(with: notif.notificationDoneByUser, completion: { (username) in
+                who = username
+            })
+            
             var actionString = ""
             
             switch notif.notificationType {
@@ -33,7 +38,9 @@ struct NotificationsPresentation {
             }
             
             let target = notif.notificationTargetID
+            
             return NotificationPresentation(who: who, actionString: actionString, target: target)
+            
         })
     }
 }
@@ -123,7 +130,7 @@ class NotificationsTableViewController: UITableViewController {
         let notifPresentation = presentation.notifications[indexPath.row]
         let cell = tableView.dequeueReusableCellWithIdentifier(Identifier.NotificationCell, forIndexPath: indexPath) as! NotificationTableViewCell
         
-        cell.notifLabel.text = notifPresentation.actionString
+        cell.notifLabel.text = notifPresentation.who + notifPresentation.actionString
         cell.selectionStyle = UITableViewCellSelectionStyle.None
         
         return cell

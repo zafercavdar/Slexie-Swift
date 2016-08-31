@@ -156,6 +156,8 @@ enum Language {
             return "Don't you have an account? Create one."
         case .Russian:
             return "У вас нет аккаунта ? Зарегистрироваться"
+            
+            NSBundle(identifier: "en")?.localizedStringForKey("welcome", value: ";", table: "Localizable")
         }
     }
     
