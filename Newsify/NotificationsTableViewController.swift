@@ -44,8 +44,6 @@ struct NotificationsPresentation {
 }
 
 
-
-
 class NotificationsTableViewController: UITableViewController {
     
     private struct Identifier {

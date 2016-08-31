@@ -36,12 +36,12 @@ class NotificationsViewModel {
             if !notifications.isEmpty {
                 strongSelf.emit(strongSelf.state.reloadPosts(notifications))
                 
-                for notification in notifications {
-                    let id = notification.notificationTargetID
+                for i in 0..<notifications.count {
+                    let id = notifications[i].notificationTargetID
                     
                     strongSelf.networkingController.downloadPhoto(with: id, completion: { (image, error) in
                         if error == nil {
-                            notification.targetImage = UIImage.resizeImage(image!, newWidth: CGFloat(37.5))
+                            notifications[i].targetImage = UIImage.resizeImage(image!, newWidth: CGFloat(49))
                             strongSelf.emit(strongSelf.state.reloadPosts(notifications))
                             callback()
                         }

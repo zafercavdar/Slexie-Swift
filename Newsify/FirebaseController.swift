@@ -175,7 +175,9 @@ class FirebaseController: NetworkingController, AuthenticationController {
                 return
             }
             
-            for (_, propDic) in notificationDic {
+            let sortedDic = notificationDic.sort { $0.0 < $1.0 }
+            
+            for (_, propDic) in sortedDic {
                 guard let dic = propDic as? [String: String] else {
                     callback([])
                     return
@@ -198,6 +200,7 @@ class FirebaseController: NetworkingController, AuthenticationController {
                 let notification = MissingNotification(ownerID: uid, targetID: target!, whoID: who!, type: notificationType)
                 firstResults += [notification]
             }
+            
             
             let ref = References.UserRef
             ref.observeSingleEventOfType(.Value, withBlock: { (snapshot) in
