@@ -25,6 +25,7 @@ enum NotificationType {
 struct Notification {
     var notificationOwnerID: String
     var notificationTargetID: String
-    var notificationDoneByUser: String
+    var notificationDoneByUserID: String
+    var notificationDoneByUsername: String
     var notificationType: NotificationType
 }

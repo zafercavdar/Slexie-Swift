@@ -26,7 +26,6 @@
 		B36E72171D5B846700F626D0 /* RandomBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36E72161D5B846700F626D0 /* RandomBase.swift */; };
 		B36F50C21D74714D0037CCB0 /* NotificationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36F50C11D74714D0037CCB0 /* NotificationTableViewCell.swift */; };
 		B36F50C41D7472D10037CCB0 /* NotificationsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36F50C31D7472D10037CCB0 /* NotificationsViewModel.swift */; };
-		B36F50C71D748E760037CCB0 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = B36F50C91D748E760037CCB0 /* Localizable.strings */; };
 		B37DB5C81D66F94A00ADB79B /* ImaggaService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B37DB5C71D66F94A00ADB79B /* ImaggaService.swift */; };
 		B386234E1D6B27D0007B8A5E /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = B386234D1D6B27D0007B8A5E /* Post.swift */; };
 		B38623511D6C332B007B8A5E /* NotificationsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B38623501D6C332B007B8A5E /* NotificationsTableViewController.swift */; };
@@ -116,7 +115,6 @@
 		B36E72161D5B846700F626D0 /* RandomBase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RandomBase.swift; sourceTree = "<group>"; };
 		B36F50C11D74714D0037CCB0 /* NotificationTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationTableViewCell.swift; sourceTree = "<group>"; };
 		B36F50C31D7472D10037CCB0 /* NotificationsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationsViewModel.swift; sourceTree = "<group>"; };
-		B36F50C81D748E760037CCB0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		B37DB5C71D66F94A00ADB79B /* ImaggaService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImaggaService.swift; sourceTree = "<group>"; };
 		B386234D1D6B27D0007B8A5E /* Post.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		B38623501D6C332B007B8A5E /* NotificationsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationsTableViewController.swift; sourceTree = "<group>"; };
@@ -308,7 +306,6 @@
 				B33E93691D664EB30011019B /* DebugOptions.swift */,
 				B33E936B1D665C570011019B /* Global Functions.swift */,
 				B337410A1D7083AF00B15BA4 /* LanguageOptions.swift */,
-				B36F50C91D748E760037CCB0 /* Localizable.strings */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -515,7 +512,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B36F50C71D748E760037CCB0 /* Localizable.strings in Resources */,
 				B3F455B81D54A1BD005EA708 /* LaunchScreen.storyboard in Resources */,
 				B3ED71011D5CC655001159A6 /* GoogleService-Info.plist in Resources */,
 				B3F455B51D54A1BD005EA708 /* Assets.xcassets in Resources */,
@@ -747,14 +743,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		B36F50C91D748E760037CCB0 /* Localizable.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				B36F50C81D748E760037CCB0 /* en */,
-			);
-			name = Localizable.strings;
-			sourceTree = "<group>";
-		};
 		B3F455B11D54A1BD005EA708 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (

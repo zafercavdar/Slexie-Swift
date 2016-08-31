@@ -154,6 +154,15 @@ class FirebaseController: NetworkingController, AuthenticationController {
     
     func fethNotifications(completion callback: [Notification] -> Void){
         
+        
+        struct MissingNotification {
+            var ownerID: String
+            var targetID: String
+            var whoID: String
+            var type: NotificationType
+        }
+        
+        var firstResults: [MissingNotification] = []
         var results: [Notification] = []
         
         guard let uid = getUID() else { return }
@@ -186,10 +195,25 @@ class FirebaseController: NetworkingController, AuthenticationController {
                     notificationType = NotificationType.Liked
                 }
                 
-                let notification = Notification(notificationOwnerID: uid, notificationTargetID: target!, notificationDoneByUser: who!, notificationType: notificationType)
-                results += [notification]
+                let notification = MissingNotification(ownerID: uid, targetID: target!, whoID: who!, type: notificationType)
+                firstResults += [notification]
             }
-            callback(results)
+            
+            let ref = References.UserRef
+            ref.observeSingleEventOfType(.Value, withBlock: { (snapshot) in
+                guard let allUsers = snapshot.value as? [String: AnyObject] else { return }
+                
+                for result in firstResults {
+                    guard let props = (allUsers[result.whoID] as? [String: AnyObject]),
+                        let username = props[ReferenceLabels.Username] as? String else { return }
+                    
+                    let notification = Notification(notificationOwnerID: result.ownerID, notificationTargetID: result.targetID, notificationDoneByUserID: result.whoID, notificationDoneByUsername: username, notificationType: result.type)
+                    
+                    results += [notification]
+                }
+                
+                callback(results)
+            })
         })
     }
     
@@ -209,7 +233,7 @@ class FirebaseController: NetworkingController, AuthenticationController {
         
         let notificationRef = References.UserRef.child(notification.notificationOwnerID).child(ReferenceLabels.Notifications).child(notificationID)
         
-        let batchUpdate = [ReferenceLabels.NotificationLabels.Who : notification.notificationDoneByUser,
+        let batchUpdate = [ReferenceLabels.NotificationLabels.Who : notification.notificationDoneByUserID,
                            ReferenceLabels.NotificationLabels.Target : notification.notificationTargetID,
                            ReferenceLabels.NotificationLabels.Action : action]
         

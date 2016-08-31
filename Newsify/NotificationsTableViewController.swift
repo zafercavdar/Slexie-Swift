@@ -23,11 +23,7 @@ struct NotificationsPresentation {
         
         notifications = state.notifs.map({ (notif) -> NotificationPresentation in
             
-            var who = "default"
-            controller.getUsername(with: notif.notificationDoneByUser, completion: { (username) in
-                who = username
-            })
-            
+            let who = notif.notificationDoneByUsername
             var actionString = ""
             
             switch notif.notificationType {

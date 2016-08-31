@@ -27,7 +27,7 @@ class UniqueIDGenerator {
             type = "Comment"
         }
         
-        let actionTrigger = notification.notificationDoneByUser
+        let actionTrigger = notification.notificationDoneByUserID
         
         return "\(time)TT\(type)UU\(actionTrigger)"
 

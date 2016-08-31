@@ -201,7 +201,7 @@ class ProfilePageViewController: UITableViewController {
             cell.postPresentation.profilePosts[0].likers += [controller.getUID()!]
             
             // Send notificitaion
-            let notification = Notification(notificationOwnerID: controller.getUID()!, notificationTargetID: post.imageID, notificationDoneByUser: controller.getUID()!, notificationType: NotificationType.Liked)
+            let notification = Notification(notificationOwnerID: controller.getUID()!, notificationTargetID: post.imageID, notificationDoneByUserID: controller.getUID()!, notificationDoneByUsername: "no-need-for-push-notification", notificationType: NotificationType.Liked)
             
             model.pushNotification(notification)
         }

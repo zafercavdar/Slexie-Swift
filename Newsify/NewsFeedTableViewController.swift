@@ -184,7 +184,7 @@ class NewsFeedTableViewController: UITableViewController{
             cell.postPresentation.feedPosts[0].likers += [controller.getUID()!]
             
             // Send notificitaion
-            let notification = Notification(notificationOwnerID: post.ownerID, notificationTargetID: post.id, notificationDoneByUser: controller.getUID()!, notificationType: NotificationType.Liked)
+            let notification = Notification(notificationOwnerID: post.ownerID, notificationTargetID: post.id, notificationDoneByUserID: controller.getUID()!, notificationDoneByUsername: "no-need-for-push-notification", notificationType: NotificationType.Liked)
             
             model.pushNotification(notification)
         }
