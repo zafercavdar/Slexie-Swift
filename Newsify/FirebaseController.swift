@@ -257,12 +257,12 @@ class FirebaseController: NetworkingController, AuthenticationController {
         languageRef.observeSingleEventOfType(.Value, withBlock:  { (snapshot) in
             
             guard let language = snapshot.value as? String else {
-                preferredLanguage = Language.English
+                //preferredLanguage = Language.English
                 callback()
                 return
             }
             
-            switch language {
+            /*switch language {
             case "Turkish":
                 preferredLanguage = Language.Turkish
             case "English":
@@ -271,7 +271,7 @@ class FirebaseController: NetworkingController, AuthenticationController {
                 preferredLanguage = Language.Russian
             default:
                 preferredLanguage = Language.English
-            }
+            }*/
             
             callback()
         })

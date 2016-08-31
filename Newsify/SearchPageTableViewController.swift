@@ -72,7 +72,7 @@ class SearchPageTableViewController: UITableViewController, UISearchResultsUpdat
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationItem.title = preferredLanguage.NavBarSearch
+        self.navigationItem.title = preferredLanguage("NavBarSearch")
         
         self.definesPresentationContext = true
         configureSearchController()

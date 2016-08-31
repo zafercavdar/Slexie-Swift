@@ -34,3 +34,7 @@ SignUpScreenPasswordLabel = "Рекомендуется использовать
 TabBarProfile = "Профиль";
 YourProfile = "Ваш профиль: ";
 LoginScreenPasswordLabel = "Пароль";
+UploadingInfo = "Выгрузка";
+AnalyzingInfo = "Анализ";
+NotifyCommentAction = " прокомментировал вашу фотографию.";
+NotifyLikeAction = " любил свою фотографию.";

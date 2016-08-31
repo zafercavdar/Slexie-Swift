@@ -323,4 +323,50 @@ enum Language {
             return "Ваш профиль: "
         }
     }
+
+    var UploadingInfo: String {
+        switch self {
+        case .Turkish:
+            return "Yükleniyor"
+        case .English:
+            return "Uploading"
+        case .Russian:
+            return "Выгрузка"
+        }
+    }
+
+    var AnalyzingInfo: String {
+        switch self {
+        case .Turkish:
+            return "Analiz ediliyor"
+        case .English:
+            return "Analyzing"
+        case .Russian:
+            return "Анализ."
+        }
+    }
+
+    var NotifyLikeAction: String {
+        switch self {
+        case .Turkish:
+            return " fotoğrafını beğendi."
+        case .English:
+            return " has liked your photo."
+        case .Russian:
+            return " любил свою фотографию."
+        }
+    }
+    
+    var NotifyCommentAction: String {
+        switch self {
+        case .Turkish:
+            return " fotoğrafına yorum yaptı."
+        case .English:
+            return " has commented on your photo."
+        case .Russian:
+            return " прокомментировал вашу фотографию."
+        }
+    }
+
+
 }

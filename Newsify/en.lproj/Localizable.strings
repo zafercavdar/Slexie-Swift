@@ -34,3 +34,7 @@ SignUpScreenPasswordLabel = "Strong passwords are recommended";
 TabBarProfile = "Profile";
 YourProfile = "Your profile: ";
 LoginScreenPasswordLabel = "Password";
+UploadingInfo = "Uploading";
+AnalyzingInfo = "Analyzing";
+NotifyCommentAction = " has commented on your photo.";
+NotifyLikeAction = " has liked your photo.";

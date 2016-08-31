@@ -51,7 +51,7 @@ class CameraTableViewController: UITableViewController, UINavigationControllerDe
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationItem.title = preferredLanguage.NavBarTags
+        self.navigationItem.title = preferredLanguage("NavBarTags")
 
         
         self.applyState(model.state)
@@ -112,7 +112,7 @@ class CameraTableViewController: UITableViewController, UINavigationControllerDe
     
     private func uploadData() {
         
-        loadingView.addToView(self.view, text: preferredLanguage.UploadingInfo)
+        loadingView.addToView(self.view, text: preferredLanguage("UploadingInfo"))
         
         let imageData = presentation.imageData
         let tags = presentation.tags + presentation.userTags
@@ -250,38 +250,11 @@ extension CameraTableViewController : UIImagePickerControllerDelegate {
         
         self.router.routeTo(RouteID.Dismiss, VC: self)
         
-        loadingView.addToView(self.view, text: preferredLanguage.AnalyzingInfo)
+        loadingView.addToView(self.view, text: preferredLanguage("AnalyzingInfo"))
         
         model.fetchImageTags(takenPhoto) { [weak self] in
             guard let strongSelf = self else { return }
             strongSelf.loadingView.removeFromView(strongSelf.view)
         }
     }
-}
-
-extension Language {
-    
-    var UploadingInfo: String {
-        switch self {
-        case .Turkish:
-            return "Yükleniyor"
-        case .English:
-            return "Uploading"
-        case .Russian:
-            return "Выгрузка"
-        }
-    }
-    
-    var AnalyzingInfo: String {
-        switch self {
-        case .Turkish:
-            return "Analiz ediliyor"
-        case .English:
-            return "Analyzing"
-        case .Russian:
-            return "Анализ."
-        }
-    }
-    
-    
 }

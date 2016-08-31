@@ -34,3 +34,7 @@ SignUpScreenPasswordLabel = "Zor bir şifre girmeni öneririz";
 TabBarProfile = "Profil";
 YourProfile = "Profilin: ";
 LoginScreenPasswordLabel = "Şifre";
+UploadingInfo = "Yükleniyor";
+AnalyzingInfo = "Analiz ediliyor";
+NotifyCommentAction = " fotoğrafına yorum yaptı.";
+NotifyLikeAction = " fotoğrafını beğendi.";

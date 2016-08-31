@@ -29,9 +29,9 @@ struct NotificationsPresentation {
             
             switch notif.notificationType {
             case .Liked:
-                actionString = preferredLanguage.NotifyLikeAction
+                actionString = preferredLanguage("NotifyLikeAction")
             case .Commented:
-                actionString = preferredLanguage.NotifyCommentAction
+                actionString = preferredLanguage("NotifyCommentAction")
             }
             
             let target = notif.notificationTargetID
@@ -56,9 +56,9 @@ class NotificationsTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationItem.title = preferredLanguage.NavBarNotifications
+        self.navigationItem.title = preferredLanguage("NavBarNotifications")
         
-        loadingView.addToView(self.view, text: preferredLanguage.RefreshingInfo)
+        loadingView.addToView(self.view, text: preferredLanguage("RefreshingInfo"))
         
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(refresh(_:)), forControlEvents: .ValueChanged)
@@ -130,30 +130,5 @@ class NotificationsTableViewController: UITableViewController {
         cell.selectionStyle = UITableViewCellSelectionStyle.None
         
         return cell
-    }
-}
-
-extension Language {
-
-    var NotifyLikeAction: String {
-        switch self {
-        case .Turkish:
-            return " fotoğrafını beğendi."
-        case .English:
-            return " has liked your photo."
-        case .Russian:
-            return " любил свою фотографию."
-        }
-    }
-    
-    var NotifyCommentAction: String {
-        switch self {
-        case .Turkish:
-            return " fotoğrafına yorum yaptı."
-        case .English:
-            return " has commented on your photo."
-        case .Russian:
-            return " прокомментировал вашу фотографию."
-        }
     }
 }

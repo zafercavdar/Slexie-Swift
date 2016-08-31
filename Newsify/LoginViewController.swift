@@ -47,23 +47,23 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     private func setLanguage(){
         let lang = NSLocale.preferredLanguages()[0]
         
-        switch lang {
+        /*switch lang {
         case LanguageCodes.Turkish.rawValue:
             preferredLanguage = Language.Turkish
         case LanguageCodes.Russian.rawValue:
             preferredLanguage = Language.Russian
         default:
             preferredLanguage = Language.English
-        }
+        }*/
     }
     
     private func setUITitlesColors(){
         self.view.backgroundColor = UIColor.coreColor()
         
-        loginButton.setTitle(preferredLanguage.LoginButton, forState: .Normal)
-        signUpRedirect.setTitle(preferredLanguage.SignUpRedirect, forState: .Normal)
-        usernameLabel.text = preferredLanguage.LoginScreenUsernameLabel
-        passwordLabel.text = preferredLanguage.LoginScreenPasswordLabel
+        loginButton.setTitle(preferredLanguage("LoginButton"), forState: .Normal)
+        signUpRedirect.setTitle(preferredLanguage("SignUpRedirect"), forState: .Normal)
+        usernameLabel.text = preferredLanguage("LoginScreenUsernameLabel")
+        passwordLabel.text = preferredLanguage("LoginScreenPasswordLabel")
         
         loginButton.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
         usernameLabel.textColor = UIColor.whiteColor()
@@ -126,7 +126,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     private func loginWithUsername(username: String, _ password: String){
         
         let loadingView = LoadingView()
-        loadingView.addToView(self.view, text: preferredLanguage.SigningInInfo)
+        loadingView.addToView(self.view, text: preferredLanguage("SigningInInfo"))
         
         fbNetworkingController.signInWith(username: username, password: password, enableNotification: true) { [weak self](error) in
             
