@@ -61,15 +61,15 @@ class NewsFeedTableViewController: UITableViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.tabBarItem.title = preferredLanguage("TabBarHome")
-        self.navigationItem.title = preferredLanguage("NavBarNewsfeed")
-        self.tabBarController?.tabBar.items![1].title = preferredLanguage("TabBarSearch")
-        self.tabBarController?.tabBar.items![2].title = preferredLanguage("TabBarCamera")
-        self.tabBarController?.tabBar.items![3].title = preferredLanguage("TabBarNotifications")
-        self.tabBarController?.tabBar.items![4].title = preferredLanguage("TabBarProfile")
+        self.tabBarItem.title = localized("TabBarHome")
+        self.navigationItem.title = localized("NavBarNewsfeed")
+        self.tabBarController?.tabBar.items![1].title = localized("TabBarSearch")
+        self.tabBarController?.tabBar.items![2].title = localized("TabBarCamera")
+        self.tabBarController?.tabBar.items![3].title = localized("TabBarNotifications")
+        self.tabBarController?.tabBar.items![4].title = localized("TabBarProfile")
 
         
-        loadingView.addToView(self.view, text: preferredLanguage("RefreshingInfo"))
+        loadingView.addToView(self.view, text: localized("RefreshingInfo"))
         
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(refresh(_:)), forControlEvents: .ValueChanged)
@@ -178,6 +178,8 @@ class NewsFeedTableViewController: UITableViewController{
             model.fetchFeedPosts(count: postCount, completion: { })
         }
     }
+    
+    
     
     func heartTapped(sender: AdvancedGestureRecognizer) {
         print("heart tapped")

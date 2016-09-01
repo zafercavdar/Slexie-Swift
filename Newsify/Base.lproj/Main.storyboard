@@ -555,10 +555,10 @@
             </objects>
             <point key="canvasLocation" x="-1448" y="-1451"/>
         </scene>
-        <!--Tab Bar Controller-->
+        <!--Main Tabbar Controller-->
         <scene sceneID="7yg-Oj-Q8Y">
             <objects>
-                <tabBarController id="AUG-x2-Njh" sceneMemberID="viewController">
+                <tabBarController id="AUG-x2-Njh" customClass="MainTabbarController" customModule="Slexie" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="TdN-nb-R2c"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="64u-Hr-wUX">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>

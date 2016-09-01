@@ -284,12 +284,12 @@ class FirebaseController: NetworkingController, AuthenticationController {
                 guard action == notiAction else { continue }
                 
                 removalID = id
-                break
+                notificationsRef.child(removalID).removeValueWithCompletionBlock({ (error, reference) in
+                    callback()
+                })
             }
             
-            notificationsRef.child(removalID).removeValueWithCompletionBlock({ (error, reference) in
-                callback()
-            })
+            
             
         })
         

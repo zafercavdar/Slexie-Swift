@@ -62,6 +62,8 @@
 		B3F455C31D54A1BD005EA708 /* NewsifyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F455C21D54A1BD005EA708 /* NewsifyTests.swift */; };
 		B3F455CE1D54A1BD005EA708 /* NewsifyUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F455CD1D54A1BD005EA708 /* NewsifyUITests.swift */; };
 		B3FCACAF1D78109E00577D0F /* ArrayExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3FCACAE1D78109E00577D0F /* ArrayExtensions.swift */; };
+		B3FCACB11D782DD000577D0F /* MainTabbarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3FCACB01D782DD000577D0F /* MainTabbarController.swift */; };
+		B3FCACB31D78301100577D0F /* TV Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3FCACB21D78301100577D0F /* TV Extensions.swift */; };
 		B98D52ABE6D122B358F4D2A4 /* Pods_Slexie.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9ED37C1860EE525B7CBE41CE /* Pods_Slexie.framework */; };
 /* End PBXBuildFile section */
 
@@ -161,6 +163,8 @@
 		B3F455CD1D54A1BD005EA708 /* NewsifyUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsifyUITests.swift; sourceTree = "<group>"; };
 		B3F455CF1D54A1BD005EA708 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B3FCACAE1D78109E00577D0F /* ArrayExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArrayExtensions.swift; sourceTree = "<group>"; };
+		B3FCACB01D782DD000577D0F /* MainTabbarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabbarController.swift; sourceTree = "<group>"; };
+		B3FCACB21D78301100577D0F /* TV Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TV Extensions.swift"; sourceTree = "<group>"; };
 		CC3C60FDDE6A10BF794E6220 /* Pods-Slexie.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Slexie.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Slexie/Pods-Slexie.debug.xcconfig"; sourceTree = "<group>"; };
 		DD1A85313045A74F6765499B /* Pods-SlexieUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SlexieUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SlexieUITests/Pods-SlexieUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		EAB4D06CD24ACBC2E7B3E35F /* Pods-Slexie.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Slexie.release.xcconfig"; path = "Pods/Target Support Files/Pods-Slexie/Pods-Slexie.release.xcconfig"; sourceTree = "<group>"; };
@@ -280,6 +284,7 @@
 			children = (
 				B3F455AF1D54A1BD005EA708 /* LoginViewController.swift */,
 				B3ACD3731D54D3E6004BEF24 /* CreateAccountViewController.swift */,
+				B3FCACB01D782DD000577D0F /* MainTabbarController.swift */,
 				B3ED70F21D5C87E9001159A6 /* NewsFeedTableViewController.swift */,
 				B3ED70F41D5C87FD001159A6 /* SearchPageTableViewController.swift */,
 				B38623521D6C40A0007B8A5E /* CameraTableViewController.swift */,
@@ -312,6 +317,7 @@
 				B33E93691D664EB30011019B /* DebugOptions.swift */,
 				B33E936B1D665C570011019B /* Global Functions.swift */,
 				B3FCACAE1D78109E00577D0F /* ArrayExtensions.swift */,
+				B3FCACB21D78301100577D0F /* TV Extensions.swift */,
 				B337410A1D7083AF00B15BA4 /* LanguageOptions.swift */,
 				B335520E1D77012C006D56AE /* Localizable.strings */,
 			);
@@ -681,6 +687,7 @@
 				B38623591D6C89F7007B8A5E /* SearchPostViewModel.swift in Sources */,
 				B36F50C41D7472D10037CCB0 /* NotificationsViewModel.swift in Sources */,
 				B33741081D6EF5B200B15BA4 /* VM Protocols.swift in Sources */,
+				B3FCACB31D78301100577D0F /* TV Extensions.swift in Sources */,
 				B386234E1D6B27D0007B8A5E /* Post.swift in Sources */,
 				B3BA49BD1D65F35700106930 /* LoginRouter.swift in Sources */,
 				B3BA49C21D65F97200106930 /* Router.swift in Sources */,
@@ -715,6 +722,7 @@
 				B3BA49C81D65FC5E00106930 /* ProfileRouter.swift in Sources */,
 				B33741041D6EE38E00B15BA4 /* Likeable.swift in Sources */,
 				B3B527C31D65AF8B00E31C37 /* ProfilePost.swift in Sources */,
+				B3FCACB11D782DD000577D0F /* MainTabbarController.swift in Sources */,
 				B3F455AE1D54A1BD005EA708 /* AppDelegate.swift in Sources */,
 				B316429C1D7434F900F9EDB5 /* Notification.swift in Sources */,
 				B3B527C11D65AF2100E31C37 /* ProfilePostsViewModel.swift in Sources */,

@@ -51,7 +51,7 @@ class CameraTableViewController: UITableViewController, UINavigationControllerDe
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationItem.title = preferredLanguage("NavBarTags")
+        self.navigationItem.title = localized("NavBarTags")
 
         
         self.applyState(model.state)
@@ -112,7 +112,7 @@ class CameraTableViewController: UITableViewController, UINavigationControllerDe
     
     private func uploadData() {
         
-        loadingView.addToView(self.view, text: preferredLanguage("UploadingInfo"))
+        loadingView.addToView(self.view, text: localized("UploadingInfo"))
         
         let imageData = presentation.imageData
         let tags = presentation.tags + presentation.userTags
@@ -250,7 +250,7 @@ extension CameraTableViewController : UIImagePickerControllerDelegate {
         
         self.router.routeTo(RouteID.Dismiss, VC: self)
         
-        loadingView.addToView(self.view, text: preferredLanguage("AnalyzingInfo"))
+        loadingView.addToView(self.view, text: localized("AnalyzingInfo"))
         
         model.fetchImageTags(takenPhoto) { [weak self] in
             guard let strongSelf = self else { return }

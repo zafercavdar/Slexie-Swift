@@ -62,9 +62,9 @@ class ProfilePageViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        logout.title = preferredLanguage("NavBarLogOut")
+        logout.title = localized("NavBarLogOut")
         
-        self.navigationItem.title = preferredLanguage("NavBarProfile")
+        self.navigationItem.title = localized("NavBarProfile")
         
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(refresh(_:)), forControlEvents: .ValueChanged)
@@ -116,7 +116,7 @@ class ProfilePageViewController: UITableViewController {
     }
     
     private func reload() {
-        loadingView.addToView(self.view, text: preferredLanguage("RefreshingInfo"))
+        loadingView.addToView(self.view, text: localized("RefreshingInfo"))
         
         model.fetchProfilePosts { [weak self] in
             

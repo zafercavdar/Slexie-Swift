@@ -67,13 +67,13 @@ class CreateAccountViewController: UIViewController, UITextFieldDelegate{
     
     
     private func setUITitles(){
-        usernameLabel.text = preferredLanguage("SignUpScreenUsernameLabel")
-        passwordLabel.text = preferredLanguage("SignUpScreenPasswordLabel")
-        repasswordLabel.text = preferredLanguage("SignUpScreenPasswordReTypeLabel")
-        signUpButton.setTitle(preferredLanguage("SignUpScreenSignUpButton"), forState: .Normal)
-        cancel.setTitle(preferredLanguage("Cancel"), forState: .Normal)
-        languageLabel.text = preferredLanguage("SignUpScreenLanguageLabel")
-        profileTypeLabel.text = preferredLanguage("YourProfile") + preferredLanguage("Public")
+        usernameLabel.text = localized("SignUpScreenUsernameLabel")
+        passwordLabel.text = localized("SignUpScreenPasswordLabel")
+        repasswordLabel.text = localized("SignUpScreenPasswordReTypeLabel")
+        signUpButton.setTitle(localized("SignUpScreenSignUpButton"), forState: .Normal)
+        cancel.setTitle(localized("Cancel"), forState: .Normal)
+        languageLabel.text = localized("SignUpScreenLanguageLabel")
+        profileTypeLabel.text = localized("YourProfile") + localized("Public")
     }
     
     
@@ -81,9 +81,9 @@ class CreateAccountViewController: UIViewController, UITextFieldDelegate{
     
     @IBAction func switchStateChanged(sender: UISwitch) {
         if sender.on {
-            profileTypeLabel.text = preferredLanguage("YourProfile") + preferredLanguage("Public")
+            profileTypeLabel.text = localized("YourProfile") + localized("Public")
         } else {
-            profileTypeLabel.text = preferredLanguage("YourProfile") + preferredLanguage("Private")
+            profileTypeLabel.text = localized("YourProfile") + localized("Private")
         }
     }
     
@@ -126,7 +126,7 @@ class CreateAccountViewController: UIViewController, UITextFieldDelegate{
     private func signUpWithUsernamePassword(email: String, _ password: String, _ username: String, _ profileType: String, language: String){
         
         let loadingView = LoadingView()
-        loadingView.addToView(self.view, text: preferredLanguage("SigningUpInfo"))
+        loadingView.addToView(self.view, text: localized("SigningUpInfo"))
         
         
         networkingController.signUp(email, username: username, password: password, profileType: profileType, language: language) { [weak self](error) in

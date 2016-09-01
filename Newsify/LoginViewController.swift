@@ -46,10 +46,10 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     private func setUITitlesColors(){
         self.view.backgroundColor = UIColor.coreColor()
         
-        loginButton.setTitle(preferredLanguage("LoginButton"), forState: .Normal)
-        signUpRedirect.setTitle(preferredLanguage("SignUpRedirect"), forState: .Normal)
-        usernameLabel.text = preferredLanguage("LoginScreenUsernameLabel")
-        passwordLabel.text = preferredLanguage("LoginScreenPasswordLabel")
+        loginButton.setTitle(localized("LoginButton"), forState: .Normal)
+        signUpRedirect.setTitle(localized("SignUpRedirect"), forState: .Normal)
+        usernameLabel.text = localized("LoginScreenUsernameLabel")
+        passwordLabel.text = localized("LoginScreenPasswordLabel")
         
         loginButton.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
         usernameLabel.textColor = UIColor.whiteColor()
@@ -101,7 +101,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     private func loginWithUsername(username: String, _ password: String){
         
         let loadingView = LoadingView()
-        loadingView.addToView(self.view, text: preferredLanguage("SigningInInfo"))
+        loadingView.addToView(self.view, text: localized("SigningInInfo"))
         
         fbNetworkingController.signInWith(username: username, password: password, enableNotification: true) { [weak self](error) in
             

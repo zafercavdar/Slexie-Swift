@@ -8,7 +8,7 @@
 
 import Foundation
 
-func preferredLanguage(key: String) -> String {
+func localized(key: String) -> String {
     return NSLocalizedString(key, comment: "" )
 }
 
