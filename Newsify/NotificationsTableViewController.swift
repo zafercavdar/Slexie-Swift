@@ -108,6 +108,8 @@ class NotificationsTableViewController: UITableViewController {
         nav?.barTintColor = UIColor.coreColor()
         nav?.barStyle = UIBarStyle.BlackOpaque
         
+        model.fetchNotifications { }
+        
     }
 
 
