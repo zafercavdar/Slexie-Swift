@@ -246,6 +246,10 @@ class FirebaseController: NetworkingController, AuthenticationController {
         
     }
     
+    func removeNotification(notification: Notification, completion callback: () -> Void) {
+        
+    }
+    
     func fetchUserLanguage(completion callback: () -> Void) {
         
         /*guard let uid = getUID() else {
@@ -480,9 +484,33 @@ class FirebaseController: NetworkingController, AuthenticationController {
                 photoRef.updateChildValues(dic)
                 callback(.Success)
             })
+        } else {
+            callback(.Failed)
         }
         
     }
+    
+    func photoUnliked(imageid: String, callback: (CallbackResult) -> Void){
+        
+        let uidNo = getUID()
+        
+        if let uid = uidNo as String!{
+            let photoRef = References.PhotoRef.child(imageid)
+            
+            getLikers(photo: imageid, completion: { (likerList) in
+                var likers = likerList
+                likers.removeObject(uid)
+                let uniqueList = Array(Set(likers))
+                let dic = [ReferenceLabels.Likers : uniqueList]
+                print(uniqueList)
+                photoRef.updateChildValues(dic)
+                callback(.Success)
+            })
+        } else {
+            callback(.Failed)
+        }
+    }
+
     
     func getUsername(with uid: String, completion callback: (username: String) -> Void){
         
