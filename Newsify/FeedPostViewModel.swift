@@ -14,7 +14,7 @@ enum CollectionChange {
 }
 
 
-class FeedPostViewModel: NotificationSender {
+class FeedPostViewModel: NotificationSender, LikerUnliker {
     
     struct State{
         var feedPosts: [FeedPost] = []
@@ -61,12 +61,6 @@ class FeedPostViewModel: NotificationSender {
                     }
                 }
             })
-        }
-    }
-    
-    func likePhoto(id: String){
-        networkingController.photoLiked(id) { (result) in
-            
         }
     }
 }

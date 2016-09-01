@@ -288,11 +288,6 @@ class FirebaseController: NetworkingController, AuthenticationController {
             }
             
             notificationsRef.child(removalID).removeValueWithCompletionBlock({ (error, reference) in
-                if error != nil {
-                    print("removal failed.")
-                } else {
-                    print("successfully removed.")
-                }
                 callback()
             })
             

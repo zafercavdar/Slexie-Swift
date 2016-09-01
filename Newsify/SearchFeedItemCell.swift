@@ -20,6 +20,8 @@ class SearchFeedItemCell: UITableViewCell, Likeable{
     var postPresentation = SearchPostsPresentation()
     
     var tapRecognizer: AdvancedGestureRecognizer = AdvancedGestureRecognizer()
+    var heartTapRecognizer = AdvancedGestureRecognizer()
+
     var likedView: UIImageView!
 
     

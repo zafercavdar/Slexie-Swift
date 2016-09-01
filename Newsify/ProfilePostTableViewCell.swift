@@ -17,9 +17,10 @@ class ProfilePostTableViewCell: UITableViewCell, Likeable {
     @IBOutlet weak var likeCount: UILabel!
     
     var postPresentation = ProfilePostsPresentation()
-
     
     var tapRecognizer: AdvancedGestureRecognizer = AdvancedGestureRecognizer()
+    var heartTapRecognizer = AdvancedGestureRecognizer()
+
     var likedView: UIImageView!
     
     override func awakeFromNib() {

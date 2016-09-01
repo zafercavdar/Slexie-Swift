@@ -26,7 +26,7 @@ class NewsFeedItemCell: UITableViewCell, Likeable{
     
     var likedView: UIImageView!
     var tapRecognizer = AdvancedGestureRecognizer()
-    
+    var heartTapRecognizer = AdvancedGestureRecognizer()
     
     override func awakeFromNib() {
         super.awakeFromNib()

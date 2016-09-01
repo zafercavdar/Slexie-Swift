@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ProfilePostViewModel: NotificationSender {
+class ProfilePostViewModel: NotificationSender, LikerUnliker {
     
     struct State{
         var profilePosts: [ProfilePost] = []

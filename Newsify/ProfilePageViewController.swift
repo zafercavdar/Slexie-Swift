@@ -164,9 +164,16 @@ class ProfilePageViewController: UITableViewController {
         cell.tapRecognizer.addTarget(self, action: #selector(photoTapped(_:)))
         cell.tapRecognizer.numberOfTapsRequired = 2
         cell.tapRecognizer.numberOfTouchesRequired = 1
+        cell.tapRecognizer.tappedCell = cell
         cell.profilePostView.gestureRecognizers = []
         cell.profilePostView.gestureRecognizers!.append(cell.tapRecognizer)
-        cell.tapRecognizer.tappedCell = cell
+        
+        cell.heartTapRecognizer.tappedCell = cell
+        cell.heartTapRecognizer.addTarget(self, action: #selector(heartTapped(_:)))
+        cell.heartTapRecognizer.numberOfTapsRequired = 1
+        cell.heartTapRecognizer.numberOfTouchesRequired = 1
+        cell.heart.gestureRecognizers = []
+        cell.heart.gestureRecognizers!.append(cell.heartTapRecognizer)
         
         if postPresentation.liked {
             cell.heart.image = UIImage(named: "Filled Heart")
@@ -182,7 +189,42 @@ class ProfilePageViewController: UITableViewController {
         
         return cell
     }
-    
+    func heartTapped(sender: AdvancedGestureRecognizer) {
+        print("heart tapped")
+        let cell = (sender.tappedCell as! ProfilePostTableViewCell)
+        let post = cell.postPresentation.profilePosts[0]
+        let id = post.imageID
+        
+        let controller = FirebaseController()
+        let uid = controller.getUID()!
+        
+        // Update view
+        if !post.likers.contains(uid){
+            model.likePhoto(id)
+            
+            cell.heart.image = UIImage(named: "Filled Heart")
+            cell.postPresentation.profilePosts[0].likers += [uid]
+            let count = cell.postPresentation.profilePosts[0].likers.count
+            cell.likeCount.text = String(count)
+            
+            // Send notificitaion
+            let notification = Notification(ownerID: uid, targetID: post.imageID, doneByUserID: uid, doneByUsername: "no-need-for-push-notification", type: NotificationType.Liked)
+            
+            model.pushNotification(notification)
+            
+        } else {
+            model.unlikePhoto(id)
+            cell.heart.image = UIImage(named: "Empty Heart")
+            cell.postPresentation.profilePosts[0].likers.removeObject(uid)
+            let count = cell.postPresentation.profilePosts[0].likers.count
+            cell.likeCount.text = String(count)
+            
+            let notification = Notification(ownerID: uid, targetID: post.imageID, doneByUserID: uid, doneByUsername: "no-need-for-push-notification", type: NotificationType.Liked)
+            
+            model.removeNotification(notification)
+        }
+    }
+
     func photoTapped(sender: AdvancedGestureRecognizer){
         let cell = (sender.tappedCell as! ProfilePostTableViewCell)
         let post = cell.postPresentation.profilePosts[0]

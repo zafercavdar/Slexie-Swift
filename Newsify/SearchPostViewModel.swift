@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SearchPostViewModel: NotificationSender {
+class SearchPostViewModel: NotificationSender, LikerUnliker {
     
     struct State{
         var searchPosts: [FeedPost] = []

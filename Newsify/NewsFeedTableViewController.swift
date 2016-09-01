@@ -113,16 +113,13 @@ class NewsFeedTableViewController: UITableViewController{
                 
     }
     
-    /* override func scrollViewWillEndDragging(scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
-        
-        NSLog("\(velocity.y)")
-    }*/
-    
     func refresh(refreshControl: UIRefreshControl) {
         model.fetchFeedPosts(count: postCount, completion: {
             refreshControl.endRefreshing()
         })
     }
+    
+    
 
     // MARK: - Table view data source
 
@@ -155,6 +152,13 @@ class NewsFeedTableViewController: UITableViewController{
         cell.photoView.gestureRecognizers = []
         cell.photoView.gestureRecognizers!.append(cell.tapRecognizer)
         
+        cell.heartTapRecognizer.tappedCell = cell
+        cell.heartTapRecognizer.addTarget(self, action: #selector(heartTapped(_:)))
+        cell.heartTapRecognizer.numberOfTapsRequired = 1
+        cell.heartTapRecognizer.numberOfTouchesRequired = 1
+        cell.heart.gestureRecognizers = []
+        cell.heart.gestureRecognizers!.append(cell.heartTapRecognizer)
+        
         if feedPresentation.liked {
             cell.heart.image = UIImage(named: "Filled Heart")
         } else {
@@ -172,6 +176,42 @@ class NewsFeedTableViewController: UITableViewController{
         if (indexPath.row >= presentation.feedPosts.count - 1) {
             postCount += postIncrease
             model.fetchFeedPosts(count: postCount, completion: { })
+        }
+    }
+    
+    func heartTapped(sender: AdvancedGestureRecognizer) {
+        print("heart tapped")
+        let cell = (sender.tappedCell as! NewsFeedItemCell)
+        let post = cell.postPresentation.feedPosts[0]
+        let id = post.id
+        
+        let controller = FirebaseController()
+        let uid = controller.getUID()!
+        
+        // Update view
+        if !post.likers.contains(uid){
+            model.likePhoto(id)
+
+            cell.heart.image = UIImage(named: "Filled Heart")
+            cell.postPresentation.feedPosts[0].likers += [uid]
+            let count = cell.postPresentation.feedPosts[0].likers.count
+            cell.likeCount.text = String(count)
+            
+            // Send notificitaion
+            let notification = Notification(ownerID: post.ownerID, targetID: post.id, doneByUserID: uid, doneByUsername: "no-need-for-push-notification", type: NotificationType.Liked)
+            
+            model.pushNotification(notification)
+            
+        } else {
+            model.unlikePhoto(id)
+            cell.heart.image = UIImage(named: "Empty Heart")
+            cell.postPresentation.feedPosts[0].likers.removeObject(uid)
+            let count = cell.postPresentation.feedPosts[0].likers.count
+            cell.likeCount.text = String(count)
+            
+            let notification = Notification(ownerID: post.ownerID, targetID: post.id, doneByUserID: uid, doneByUsername: "no-need-for-push-notification", type: NotificationType.Liked)
+            
+            model.removeNotification(notification)
         }
     }
     
