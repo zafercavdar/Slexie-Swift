@@ -188,7 +188,6 @@ class SearchPageTableViewController: UITableViewController, UISearchResultsUpdat
     }
     
     func heartTapped(sender: AdvancedGestureRecognizer) {
-        print("heart tapped")
         let cell = (sender.tappedCell as! SearchFeedItemCell)
         let post = cell.postPresentation.searchPosts[0]
         let id = post.id

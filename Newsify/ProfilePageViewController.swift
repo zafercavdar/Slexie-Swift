@@ -51,7 +51,6 @@ class ProfilePageViewController: UITableViewController {
     private let loadingView = LoadingView()
     
     struct RouteID {
-        static let LogOut = "LogOut"
     }
     
     private struct Identifier {
@@ -174,7 +173,6 @@ class ProfilePageViewController: UITableViewController {
         return cell
     }
     func heartTapped(sender: AdvancedGestureRecognizer) {
-        print("heart tapped")
         let cell = (sender.tappedCell as! ProfilePostTableViewCell)
         let post = cell.postPresentation.profilePosts[0]
         let id = post.imageID

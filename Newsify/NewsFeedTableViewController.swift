@@ -182,7 +182,6 @@ class NewsFeedTableViewController: UITableViewController{
     
     
     func heartTapped(sender: AdvancedGestureRecognizer) {
-        print("heart tapped")
         let cell = (sender.tappedCell as! NewsFeedItemCell)
         let post = cell.postPresentation.feedPosts[0]
         let id = post.id
