@@ -14,7 +14,7 @@ class SettingsViewModel {
     private let controller = FirebaseController()
     
     let sectionHeaders = ["Account", "Preferences", "About", "Don't do it"]
-    let sections: [[String]] = [ ["Edit your profile", "Change your password", "Private account"],
+    let sections: [[String]] = [ ["Edit profile", "Change password", "Private account"],
                                  ["Language"],
                                  ["Privacy Policy"],
                                  ["Log out"]]

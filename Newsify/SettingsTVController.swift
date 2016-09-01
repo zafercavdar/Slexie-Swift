@@ -13,7 +13,7 @@ enum Privacy{
     case Private
 }
 
-class SettingssTVController: UITableViewController {
+class SettingsTVController: UITableViewController {
 
     
     struct CellIdentifiers {
@@ -23,6 +23,7 @@ class SettingssTVController: UITableViewController {
     
     struct RouteID {
         static let LogOut = "LogOut"
+        static let ChangePassword = "ChangePassword"
     }
     
     private var model = SettingsViewModel()
@@ -31,17 +32,28 @@ class SettingssTVController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.backgroundColor = UIColor.tableBackgroundGray()
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
+        setUIColors()
+        setUITitles()
+    }
+    
+    // MARK: UI Settings
+    
+    private func setUIColors(){
+        tableView.backgroundColor = UIColor.tableBackgroundGray()
+        
         let nav = self.navigationController?.navigationBar
         nav?.barTintColor = UIColor.coreColor()
         nav?.barStyle = UIBarStyle.BlackOpaque
         nav?.tintColor = UIColor.whiteColor()
-
+    }
+    
+    private func setUITitles(){
+        self.navigationController?.title = "Settings"
     }
     
     func privacyChanged(sender: UISwitch){
@@ -77,7 +89,6 @@ class SettingssTVController: UITableViewController {
         self.presentViewController(alertController, animated: true, completion: nil)
         
     }
-
 
     // MARK: - Table view data source
 
@@ -143,6 +154,11 @@ class SettingssTVController: UITableViewController {
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let section = indexPath.section
         let row = indexPath.row
+        
+        // Change password cell
+        if (section == 0 && row == 1){
+            self.router.routeTo(RouteID.ChangePassword, VC: self)
+        }
         
         // Log out cell
         if (section == 3 && row == 0){

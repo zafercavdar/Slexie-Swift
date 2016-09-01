@@ -440,7 +440,7 @@
         <!--Settings-->
         <scene sceneID="YpL-Jg-JWG">
             <objects>
-                <tableViewController id="WU2-Oi-4Er" customClass="SettingssTVController" customModule="Slexie" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="WU2-Oi-4Er" customClass="SettingsTVController" customModule="Slexie" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="37" sectionFooterHeight="28" id="b78-dS-qwK">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -493,11 +493,75 @@
                     <navigationItem key="navigationItem" title="Settings" id="KXv-yf-1pz"/>
                     <connections>
                         <segue destination="BYZ-38-t0r" kind="presentation" identifier="LogOut" id="O1p-1h-BT4"/>
+                        <segue destination="fqW-w5-FGv" kind="show" identifier="ChangePassword" id="JZI-PH-OwC"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mZW-NQ-CeD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1448" y="-2888"/>
+        </scene>
+        <!--Password-->
+        <scene sceneID="0Zq-VU-PSX">
+            <objects>
+                <tableViewController title="Password" id="648-rk-Ysg" customClass="ChangePasswordTVController" customModule="Slexie" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="CbH-4h-wTQ">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ChangePasswordCell" id="cWT-x9-R5S" customClass="ChangePasswordTVCell" customModule="Slexie" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="92" width="600" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="cWT-x9-R5S" id="7ef-dp-hap">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Cjl-ho-Cfk">
+                                            <rect key="frame" x="16" y="7" width="238" height="30"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                        </textField>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="trailingMargin" secondItem="Cjl-ho-Cfk" secondAttribute="trailing" id="IM2-Io-idS"/>
+                                        <constraint firstItem="Cjl-ho-Cfk" firstAttribute="leading" secondItem="7ef-dp-hap" secondAttribute="leadingMargin" id="gP1-md-FcA"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="Cjl-ho-Cfk" secondAttribute="trailing" constant="338" id="uPw-w4-i9E"/>
+                                        <constraint firstItem="Cjl-ho-Cfk" firstAttribute="leading" secondItem="7ef-dp-hap" secondAttribute="leadingMargin" id="wmc-uY-Du5"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="passwordTextField" destination="Cjl-ho-Cfk" id="AJA-hd-dLT"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="648-rk-Ysg" id="6Jy-we-UzO"/>
+                            <outlet property="delegate" destination="648-rk-Ysg" id="HDf-JA-8e3"/>
+                        </connections>
+                    </tableView>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" title="Root View Controller" id="gbP-Fl-Bmw"/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="166-5Q-U5B" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="64" y="-3214"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="bwZ-bk-0Kn">
+            <objects>
+                <navigationController id="fqW-w5-FGv" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="36g-0A-8KP">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="648-rk-Ysg" kind="relationship" relationship="rootViewController" id="mEZ-Rw-CwI"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1ny-4m-Wup" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-756" y="-3214"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="hOB-JA-Fln">

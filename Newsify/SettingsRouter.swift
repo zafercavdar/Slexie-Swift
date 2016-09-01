@@ -15,6 +15,8 @@ class SettingsRouter: Router {
         switch routeID {
         case "LogOut":
             VC.performSegueWithIdentifier("LogOut", sender: nil)
+        case "ChangePassword":
+            VC.performSegueWithIdentifier("ChangePassword", sender: nil)
         default:
             break
         }
