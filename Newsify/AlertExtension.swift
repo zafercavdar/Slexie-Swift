@@ -35,6 +35,7 @@ extension UIViewController {
 
     }
     
+    
     private func showAlertView(title: String?, message: String?, duration: Int) {
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .Alert)
         let okAction = UIAlertAction(title: "OK", style: .Cancel, handler: nil)
