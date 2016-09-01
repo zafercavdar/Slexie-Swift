@@ -60,7 +60,14 @@ class SettingssTVController: UITableViewController {
         
         if !(section == 0 && row == 2) {
             cell.accessoryType = .DisclosureIndicator
+        } else {
+            let privacySwitch = UISwitch()
+            privacySwitch.onTintColor = UIColor.reddishColor()
+            cell.accessoryView = privacySwitch
+            cell.selectionStyle = UITableViewCellSelectionStyle.None
         }
+        
+        
         
         return cell
     }
@@ -91,6 +98,8 @@ class SettingssTVController: UITableViewController {
         let section = indexPath.section
         let row = indexPath.row
         
+        
+        // Log out cell
         if (section == 3 && row == 0){
             logOut()
         }
