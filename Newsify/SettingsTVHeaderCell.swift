@@ -19,6 +19,8 @@ class SettingsTVHeaderCell: UITableViewCell {
 
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
+        
+        self.selectionStyle = UITableViewCellSelectionStyle.None
     }
 
 }

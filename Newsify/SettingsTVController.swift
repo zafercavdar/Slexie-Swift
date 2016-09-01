@@ -10,13 +10,27 @@ import UIKit
 
 class SettingssTVController: UITableViewController {
 
+    
+    struct CellIdentifiers {
+        static let CustomCell = "SettingsTVCell"
+        static let CustomHeaderCell = "SettingsTVHeaderCell"
+    }
+    
     private var model = SettingsViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         tableView.backgroundColor = UIColor.tableBackgroundGray()
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
         
+        let nav = self.navigationController?.navigationBar
+        nav?.barTintColor = UIColor.coreColor()
+        nav?.barStyle = UIBarStyle.BlackOpaque
+        nav?.tintColor = UIColor.whiteColor()
+
     }
 
     // MARK: - Table view data source
@@ -30,14 +44,17 @@ class SettingssTVController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("SettingsTVCell", forIndexPath: indexPath) as! SettingsCell
+        let cell = tableView.dequeueReusableCellWithIdentifier(CellIdentifiers.CustomCell, forIndexPath: indexPath) as! SettingsCell
 
         let section = indexPath.section
         let row = indexPath.row
         
         cell.menuTitle.text = model.sections[section][row]
-        cell.selectionStyle = UITableViewCellSelectionStyle.None
         cell.backgroundColor = UIColor.whiteColor()
+        
+        if !(section == 0 && row == 2) {
+            cell.accessoryType = .DisclosureIndicator
+        }
         
         return cell
     }
@@ -54,7 +71,7 @@ class SettingssTVController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let  headerCell = tableView.dequeueReusableCellWithIdentifier("SettingsTVHeaderCell") as! SettingsTVHeaderCell
+        let  headerCell = tableView.dequeueReusableCellWithIdentifier(CellIdentifiers.CustomHeaderCell) as! SettingsTVHeaderCell
         headerCell.backgroundColor = UIColor.cyanColor()
         
         headerCell.headerTitle.text = model.sectionHeaders[section].uppercaseString

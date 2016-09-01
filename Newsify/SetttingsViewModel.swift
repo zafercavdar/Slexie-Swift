@@ -14,5 +14,5 @@ class SettingsViewModel {
     let sections: [[String]] = [ ["Edit your profile", "Change your password", "Private account"],
                                  ["Language"],
                                  ["Privacy Policy"],
-                                 ["Logout"]]
+                                 ["Log out"]]
 }

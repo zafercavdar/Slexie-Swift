@@ -185,8 +185,6 @@ class ProfilePageViewController: UITableViewController {
         
         cell.selectionStyle = UITableViewCellSelectionStyle.None
         
-        cell.selectionStyle = UITableViewCellSelectionStyle.None
-        
         return cell
     }
     func heartTapped(sender: AdvancedGestureRecognizer) {
