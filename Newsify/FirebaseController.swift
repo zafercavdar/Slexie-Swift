@@ -59,7 +59,7 @@ class FirebaseController: NetworkingController, AuthenticationController {
         static let domain = "@slexie.com"
     }
     
-    private struct References {
+    struct References {
         static let DatabaseRef = FIRDatabase.database().reference()
         static let UserRef = DatabaseRef.child("users")
         static let PhotoRef = DatabaseRef.child("photos")
@@ -67,7 +67,7 @@ class FirebaseController: NetworkingController, AuthenticationController {
         static let PhotoStorageRef = References.StorageRef.child("images")
     }
     
-    private struct ReferenceLabels {
+    struct ReferenceLabels {
         static let Username = "username"
         static let Password = "password"
         static let PostCount = "postCount"
@@ -311,17 +311,6 @@ class FirebaseController: NetworkingController, AuthenticationController {
                 callback()
                 return
             }
-            
-            /*switch language {
-            case "Turkish":
-                preferredLanguage = Language.Turkish
-            case "English":
-                preferredLanguage = Language.English
-            case "Russian":
-                preferredLanguage = Language.Russian
-            default:
-                preferredLanguage = Language.English
-            }*/
             
             callback()
         }) */
@@ -654,7 +643,7 @@ class FirebaseController: NetworkingController, AuthenticationController {
         })
     }
     
-    private func getAccountPrivacy(callback: (privacy: String) -> Void){
+    func getAccountPrivacy(callback: (privacy: String) -> Void){
         
         guard let uid = getUID() else {
             return

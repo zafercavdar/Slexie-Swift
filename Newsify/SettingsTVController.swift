@@ -8,6 +8,11 @@
 
 import UIKit
 
+enum Privacy{
+    case Public
+    case Private
+}
+
 class SettingssTVController: UITableViewController {
 
     
@@ -38,6 +43,41 @@ class SettingssTVController: UITableViewController {
         nav?.tintColor = UIColor.whiteColor()
 
     }
+    
+    func privacyChanged(sender: UISwitch){
+        
+        let title = "Change Privacy?"
+        var message = ""
+        var privacy: Privacy
+        
+        if sender.on {
+            message = "Your profile will be PRIVATE and none of your photos will be available for other users."
+            privacy = Privacy.Private
+        } else {
+            message = "Your profile will be PUBLIC and all of your photos will be available for other users."
+            privacy = Privacy.Public
+        }
+        
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .Alert)
+        
+        let noAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: { (action: UIAlertAction!) in
+            alertController.dismissViewControllerAnimated(true, completion: nil)
+            sender.setOn(!sender.on, animated: true)
+        })
+        
+        let yesAction = UIAlertAction(title: "Okay", style: .Default, handler: { [weak self] (action: UIAlertAction!) in
+            
+            guard let strongSelf = self else { return }
+            
+            strongSelf.model.setPrivacy(privacy)
+        })
+        
+        alertController.addAction(yesAction)
+        alertController.addAction(noAction)
+        self.presentViewController(alertController, animated: true, completion: nil)
+        
+    }
+
 
     // MARK: - Table view data source
 
@@ -63,6 +103,11 @@ class SettingssTVController: UITableViewController {
         } else {
             let privacySwitch = UISwitch()
             privacySwitch.onTintColor = UIColor.reddishColor()
+            
+            model.isPrivateAccount({ (isPrivate) in
+                privacySwitch.setOn(isPrivate, animated: false)
+            })
+            
             privacySwitch.addTarget(self, action: #selector(privacyChanged(_:)), forControlEvents: .ValueChanged)
             cell.accessoryView = privacySwitch
             cell.selectionStyle = UITableViewCellSelectionStyle.None
@@ -71,34 +116,6 @@ class SettingssTVController: UITableViewController {
         
         
         return cell
-    }
-    
-    func privacyChanged(sender: UISwitch){
-
-        let title = "Change Privacy?"
-        var message = ""
-        
-        if sender.on {
-            message = "Your profile will be PRIVATE and none of your photos will be available for other users."
-        } else {
-            message = "Your profile will be PUBLIC and all of your photos will be available for other users."
-        }
-        
-        let alertController = UIAlertController(title: title, message: message, preferredStyle: .Alert)
-        
-        let noAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: { (action: UIAlertAction!) in
-            alertController.dismissViewControllerAnimated(true, completion: nil)
-            sender.setOn(!sender.on, animated: true)
-        })
-        
-        let yesAction = UIAlertAction(title: "Okay", style: .Default, handler: { (action: UIAlertAction!) in
-            print("call appropriate methods")
-        })
-
-        alertController.addAction(yesAction)
-        alertController.addAction(noAction)
-        self.presentViewController(alertController, animated: true, completion: nil)
-
     }
     
     override func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {

@@ -68,6 +68,7 @@
 		B3FCACB91D78459700577D0F /* SettingsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3FCACB81D78459700577D0F /* SettingsCell.swift */; };
 		B3FCACBB1D784AEA00577D0F /* SettingsTVHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3FCACBA1D784AEA00577D0F /* SettingsTVHeaderCell.swift */; };
 		B3FCACBD1D7855B500577D0F /* SettingsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3FCACBC1D7855B500577D0F /* SettingsRouter.swift */; };
+		B3FCACBF1D786A6600577D0F /* FirebaseController2.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3FCACBE1D786A6600577D0F /* FirebaseController2.swift */; };
 		B98D52ABE6D122B358F4D2A4 /* Pods_Slexie.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9ED37C1860EE525B7CBE41CE /* Pods_Slexie.framework */; };
 /* End PBXBuildFile section */
 
@@ -173,6 +174,7 @@
 		B3FCACB81D78459700577D0F /* SettingsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsCell.swift; sourceTree = "<group>"; };
 		B3FCACBA1D784AEA00577D0F /* SettingsTVHeaderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTVHeaderCell.swift; sourceTree = "<group>"; };
 		B3FCACBC1D7855B500577D0F /* SettingsRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsRouter.swift; sourceTree = "<group>"; };
+		B3FCACBE1D786A6600577D0F /* FirebaseController2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseController2.swift; sourceTree = "<group>"; };
 		CC3C60FDDE6A10BF794E6220 /* Pods-Slexie.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Slexie.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Slexie/Pods-Slexie.debug.xcconfig"; sourceTree = "<group>"; };
 		DD1A85313045A74F6765499B /* Pods-SlexieUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SlexieUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SlexieUITests/Pods-SlexieUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		EAB4D06CD24ACBC2E7B3E35F /* Pods-Slexie.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Slexie.release.xcconfig"; path = "Pods/Target Support Files/Pods-Slexie/Pods-Slexie.release.xcconfig"; sourceTree = "<group>"; };
@@ -244,6 +246,7 @@
 			isa = PBXGroup;
 			children = (
 				B3ED70FC1D5CB3C6001159A6 /* FirebaseController.swift */,
+				B3FCACBE1D786A6600577D0F /* FirebaseController2.swift */,
 				B37DB5C71D66F94A00ADB79B /* ImaggaService.swift */,
 			);
 			name = Networking;
@@ -712,6 +715,7 @@
 				B361FCCD1D63295800B4F8AA /* FeedPost.swift in Sources */,
 				B3ED70F91D5C8AC6001159A6 /* NewsFeedItemCell.swift in Sources */,
 				B39BBA961D67179300A2C9E4 /* TagResponse.swift in Sources */,
+				B3FCACBF1D786A6600577D0F /* FirebaseController2.swift in Sources */,
 				B38623571D6C6E48007B8A5E /* CameraViewModel.swift in Sources */,
 				B386235B1D6C8DDC007B8A5E /* SearchFeedItemCell.swift in Sources */,
 				B33E936C1D665C570011019B /* Global Functions.swift in Sources */,

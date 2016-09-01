@@ -122,7 +122,7 @@ class CameraTableViewController: UITableViewController, UINavigationControllerDe
             guard let strongSelf = self else { return }
             
             if error == nil {
-                _ = NSTimer.scheduledTimerWithTimeInterval(2, target: strongSelf, selector: #selector(strongSelf.callRouter), userInfo: nil, repeats: false)
+                _ = NSTimer.scheduledTimerWithTimeInterval(3, target: strongSelf, selector: #selector(strongSelf.callRouter), userInfo: nil, repeats: false)
 
             }
         }
