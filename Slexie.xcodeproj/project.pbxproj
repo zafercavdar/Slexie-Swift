@@ -63,6 +63,10 @@
 		B3FCACAF1D78109E00577D0F /* ArrayExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3FCACAE1D78109E00577D0F /* ArrayExtensions.swift */; };
 		B3FCACB11D782DD000577D0F /* MainTabbarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3FCACB01D782DD000577D0F /* MainTabbarController.swift */; };
 		B3FCACB31D78301100577D0F /* TV Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3FCACB21D78301100577D0F /* TV Extensions.swift */; };
+		B3FCACB51D783E7800577D0F /* SettingsTVController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3FCACB41D783E7800577D0F /* SettingsTVController.swift */; };
+		B3FCACB71D78404D00577D0F /* SetttingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3FCACB61D78404D00577D0F /* SetttingsViewModel.swift */; };
+		B3FCACB91D78459700577D0F /* SettingsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3FCACB81D78459700577D0F /* SettingsCell.swift */; };
+		B3FCACBB1D784AEA00577D0F /* SettingsTVHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3FCACBA1D784AEA00577D0F /* SettingsTVHeaderCell.swift */; };
 		B98D52ABE6D122B358F4D2A4 /* Pods_Slexie.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9ED37C1860EE525B7CBE41CE /* Pods_Slexie.framework */; };
 /* End PBXBuildFile section */
 
@@ -163,6 +167,10 @@
 		B3FCACAE1D78109E00577D0F /* ArrayExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArrayExtensions.swift; sourceTree = "<group>"; };
 		B3FCACB01D782DD000577D0F /* MainTabbarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabbarController.swift; sourceTree = "<group>"; };
 		B3FCACB21D78301100577D0F /* TV Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TV Extensions.swift"; sourceTree = "<group>"; };
+		B3FCACB41D783E7800577D0F /* SettingsTVController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTVController.swift; sourceTree = "<group>"; };
+		B3FCACB61D78404D00577D0F /* SetttingsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetttingsViewModel.swift; sourceTree = "<group>"; };
+		B3FCACB81D78459700577D0F /* SettingsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsCell.swift; sourceTree = "<group>"; };
+		B3FCACBA1D784AEA00577D0F /* SettingsTVHeaderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTVHeaderCell.swift; sourceTree = "<group>"; };
 		CC3C60FDDE6A10BF794E6220 /* Pods-Slexie.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Slexie.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Slexie/Pods-Slexie.debug.xcconfig"; sourceTree = "<group>"; };
 		DD1A85313045A74F6765499B /* Pods-SlexieUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SlexieUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SlexieUITests/Pods-SlexieUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		EAB4D06CD24ACBC2E7B3E35F /* Pods-Slexie.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Slexie.release.xcconfig"; path = "Pods/Target Support Files/Pods-Slexie/Pods-Slexie.release.xcconfig"; sourceTree = "<group>"; };
@@ -288,6 +296,7 @@
 				B38623521D6C40A0007B8A5E /* CameraTableViewController.swift */,
 				B38623501D6C332B007B8A5E /* NotificationsTableViewController.swift */,
 				B3ED70F01D5C6ADF001159A6 /* ProfilePageViewController.swift */,
+				B3FCACB41D783E7800577D0F /* SettingsTVController.swift */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -300,6 +309,7 @@
 				B38623561D6C6E48007B8A5E /* CameraViewModel.swift */,
 				B36F50C31D7472D10037CCB0 /* NotificationsViewModel.swift */,
 				B3B527C01D65AF2100E31C37 /* ProfilePostsViewModel.swift */,
+				B3FCACB61D78404D00577D0F /* SetttingsViewModel.swift */,
 				B33741071D6EF5B200B15BA4 /* VM Protocols.swift */,
 			);
 			name = "View Models";
@@ -330,6 +340,8 @@
 				B38E85BF1D59C28C00CAE73B /* TagsTableViewCell.swift */,
 				B36F50C11D74714D0037CCB0 /* NotificationTableViewCell.swift */,
 				B3B527BE1D65AD2A00E31C37 /* ProfilePostTableViewCell.swift */,
+				B3FCACB81D78459700577D0F /* SettingsCell.swift */,
+				B3FCACBA1D784AEA00577D0F /* SettingsTVHeaderCell.swift */,
 			);
 			name = TableViewCells;
 			sourceTree = "<group>";
@@ -681,6 +693,7 @@
 				B33E936A1D664EB30011019B /* DebugOptions.swift in Sources */,
 				B3BA49CA1D66003500106930 /* ImageExtension.swift in Sources */,
 				B3BA49BA1D65EE2B00106930 /* DateExtension.swift in Sources */,
+				B3FCACB51D783E7800577D0F /* SettingsTVController.swift in Sources */,
 				B38623591D6C89F7007B8A5E /* SearchPostViewModel.swift in Sources */,
 				B36F50C41D7472D10037CCB0 /* NotificationsViewModel.swift in Sources */,
 				B33741081D6EF5B200B15BA4 /* VM Protocols.swift in Sources */,
@@ -688,8 +701,10 @@
 				B386234E1D6B27D0007B8A5E /* Post.swift in Sources */,
 				B3BA49BD1D65F35700106930 /* LoginRouter.swift in Sources */,
 				B3BA49C21D65F97200106930 /* Router.swift in Sources */,
+				B3FCACBB1D784AEA00577D0F /* SettingsTVHeaderCell.swift in Sources */,
 				B32828B41D5DE2660022F85E /* UniqueIDGenerator.swift in Sources */,
 				B36AF20B1D6728E600F2B87E /* ContentIDResponse.swift in Sources */,
+				B3FCACB91D78459700577D0F /* SettingsCell.swift in Sources */,
 				B35487891D6AD42F00F84C2D /* Requesters.swift in Sources */,
 				B361FCCD1D63295800B4F8AA /* FeedPost.swift in Sources */,
 				B3ED70F91D5C8AC6001159A6 /* NewsFeedItemCell.swift in Sources */,
@@ -719,6 +734,7 @@
 				B33741041D6EE38E00B15BA4 /* Likeable.swift in Sources */,
 				B3B527C31D65AF8B00E31C37 /* ProfilePost.swift in Sources */,
 				B3FCACB11D782DD000577D0F /* MainTabbarController.swift in Sources */,
+				B3FCACB71D78404D00577D0F /* SetttingsViewModel.swift in Sources */,
 				B3F455AE1D54A1BD005EA708 /* AppDelegate.swift in Sources */,
 				B316429C1D7434F900F9EDB5 /* Notification.swift in Sources */,
 				B3B527C11D65AF2100E31C37 /* ProfilePostsViewModel.swift in Sources */,
