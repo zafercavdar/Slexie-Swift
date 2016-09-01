@@ -491,6 +491,9 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Settings" id="KXv-yf-1pz"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="presentation" identifier="LogOut" id="O1p-1h-BT4"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mZW-NQ-CeD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -607,11 +610,6 @@
                         </userDefinedRuntimeAttributes>
                     </tabBarItem>
                     <navigationItem key="navigationItem" title="Profile" id="lVS-fe-96S">
-                        <barButtonItem key="leftBarButtonItem" title="Log out" id="QED-Hd-Xsp">
-                            <connections>
-                                <action selector="logOutPressed:" destination="ROT-uo-k3j" id="fZc-XQ-VBS"/>
-                            </connections>
-                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" image="Settings" id="tJg-gh-teT">
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="color" keyPath="tintColor">
@@ -624,9 +622,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="logout" destination="QED-Hd-Xsp" id="Pmk-qq-Acc"/>
                         <outlet property="profilePostsView" destination="gdQ-VH-d2O" id="tZg-rq-Rhl"/>
-                        <segue destination="BYZ-38-t0r" kind="presentation" identifier="LogOut" id="aOw-T5-xUS"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GDK-2P-AFd" userLabel="First Responder" sceneMemberID="firstResponder"/>

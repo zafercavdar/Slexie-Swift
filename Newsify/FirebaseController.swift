@@ -426,7 +426,11 @@ class FirebaseController: NetworkingController, AuthenticationController {
                         continue
                     }
                     
-                    let liked = likers!.contains((self?.getUID())!)
+                    guard let uid = self?.getUID() else {
+                        return
+                    }
+                    
+                    let liked = likers!.contains(uid)
                     
                     let post = FeedPost(ownerUsername: username, ownerID: ownerID, id: id, tags: photoTags, likers: likers!, likeCount: likers!.count, isAlreadyLiked: liked)
                     posts.append(post)
@@ -450,6 +454,10 @@ class FirebaseController: NetworkingController, AuthenticationController {
                         
                         var tags: [String]?
                         
+                        guard let uid = self.getUID() else {
+                            return
+                        }
+                        
                         tags = ((photos[postID] as! [String: AnyObject])[ReferenceLabels.PostTags] as? [String])
                         
                         if tags == nil {
@@ -466,7 +474,7 @@ class FirebaseController: NetworkingController, AuthenticationController {
                             liked = false
                         } else {
                             likeCount = likers!.count
-                            liked = (likers?.contains(self.getUID()!))!
+                            liked = (likers?.contains(uid))!
                         }
                         
                         let post = ProfilePost(id: postID, tags: tags!, likers: likers!, likeCount: likeCount, isAlreadyLiked: liked)
@@ -647,7 +655,12 @@ class FirebaseController: NetworkingController, AuthenticationController {
     }
     
     private func getAccountPrivacy(callback: (privacy: String) -> Void){
-        let ref = References.UserRef.child(getUID()!).child(ReferenceLabels.ProfileType)
+        
+        guard let uid = getUID() else {
+            return
+        }
+        
+        let ref = References.UserRef.child(uid).child(ReferenceLabels.ProfileType)
         ref.observeSingleEventOfType(.Value , withBlock: { (snapshot) in
             let type = snapshot.value as! String
             callback(privacy: type)

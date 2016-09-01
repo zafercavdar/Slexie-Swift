@@ -16,7 +16,13 @@ class SettingssTVController: UITableViewController {
         static let CustomHeaderCell = "SettingsTVHeaderCell"
     }
     
+    struct RouteID {
+        static let LogOut = "LogOut"
+    }
+    
     private var model = SettingsViewModel()
+    private let controller = FirebaseController()
+    private var router = SettingsRouter()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -80,4 +86,21 @@ class SettingssTVController: UITableViewController {
         
         return headerCell
     }
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let section = indexPath.section
+        let row = indexPath.row
+        
+        if (section == 3 && row == 0){
+            logOut()
+        }
+    }
+    
+    private func logOut(){
+        controller.signOut { [weak self] (Void) in
+            guard let strongSelf = self else { return }
+            strongSelf.router.routeTo(RouteID.LogOut, VC: strongSelf)
+        }
+    }
+    
 }

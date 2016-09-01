@@ -41,7 +41,6 @@ struct ProfilePostsPresentation {
 class ProfilePageViewController: UITableViewController {
 
     @IBOutlet var profilePostsView: UITableView!
-    @IBOutlet weak var logout: UIBarButtonItem!
     
     
     private let networkingController = FirebaseController()
@@ -61,8 +60,6 @@ class ProfilePageViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        logout.title = localized("NavBarLogOut")
         
         self.navigationItem.title = localized("NavBarProfile")
         
@@ -124,24 +121,13 @@ class ProfilePageViewController: UITableViewController {
             strongSelf.loadingView.removeFromView(strongSelf.view)
         }
     }
-
-    
-    // MARK: Button actions
-    
-    @IBAction func logOutPressed(sender: UIBarButtonItem) {
-        
-        networkingController.signOut { [weak self] (Void) in
-            guard let strongSelf = self else { return }
-            strongSelf.router.routeTo(RouteID.LogOut, VC: strongSelf)
-        }
-    }
     
     @IBAction func unwindToProfile(sender: UIStoryboardSegue) {
         reload()
     }
 
     
-    // MARK: tableviewcontroller methods
+    // MARK: TableVC Methods
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
