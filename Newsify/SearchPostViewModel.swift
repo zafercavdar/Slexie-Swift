@@ -19,7 +19,7 @@ class SearchPostViewModel: NotificationSender {
         }
         
         mutating func reloadPosts(searchPosts: [FeedPost]) -> Change{
-            self.searchPosts = searchPosts
+            self.searchPosts = searchPosts.reverse()
             return Change.posts(.reload)
         }
     }
