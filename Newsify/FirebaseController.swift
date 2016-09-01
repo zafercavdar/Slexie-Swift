@@ -24,10 +24,14 @@ protocol NetworkingController {
     func getPhotosRelatedWith(tags: [String], count: Int, completion: [FeedPost] -> Void)
     func getProfilePosts(completion callback: [ProfilePost] -> Void)
     func fetchUserLanguage(completion callback: () -> Void)
-    func pushNotification(notification: Notification, completion callback: () -> Void)
     func photoLiked(imageid: String, callback: (CallbackResult) -> Void)
+    func photoUnliked(imageid: String, callback: (CallbackResult) -> Void)
+    
+    func pushNotification(notification: Notification, completion callback: () -> Void)
+    func removeNotification(notification: Notification, completion callback: () -> Void)
     func fethNotifications(completion callback: [Notification] -> Void)
     func getUsername(with uid: String, completion callback: (username: String) -> Void)
+    
 }
 
 protocol LoginController {
@@ -247,6 +251,52 @@ class FirebaseController: NetworkingController, AuthenticationController {
     }
     
     func removeNotification(notification: Notification, completion callback: () -> Void) {
+        let notificationsRef = References.UserRef.child(notification.notificationOwnerID).child(ReferenceLabels.Notifications)
+        
+        notificationsRef.observeSingleEventOfType(.Value , withBlock:  { (snapshot) in
+            guard let dic = snapshot.value as? [String: AnyObject] else {
+                callback()
+                return
+            }
+            
+            var removalID: String = ""
+            
+            for (id, properties) in dic {
+                guard properties is [String: String] else { continue }
+                
+                let target = properties[ReferenceLabels.NotificationLabels.Target] as! String
+                let who = properties[ReferenceLabels.NotificationLabels.Who] as! String
+                
+                guard target == notification.notificationTargetID && who == notification.notificationDoneByUserID else {
+                    continue
+                }
+                
+                var notiAction = ""
+                let action = properties[ReferenceLabels.NotificationLabels.Action] as! String
+                
+                switch notification.notificationType {
+                case .Liked:
+                    notiAction = ReferenceLabels.ActionLabels.Like
+                case .Commented:
+                    notiAction = ReferenceLabels.ActionLabels.Comment
+                }
+                
+                guard action == notiAction else { continue }
+                
+                removalID = id
+                break
+            }
+            
+            notificationsRef.child(removalID).removeValueWithCompletionBlock({ (error, reference) in
+                if error != nil {
+                    print("removal failed.")
+                } else {
+                    print("successfully removed.")
+                }
+                callback()
+            })
+            
+        })
         
     }
     
