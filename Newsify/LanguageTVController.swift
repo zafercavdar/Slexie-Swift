@@ -36,7 +36,9 @@ class LanguageTVModel{
     }
     
     func changeLanguage(identifier: LanguageIdentifier, completion callback: () -> Void){
-        callback()
+        controller.changeLanguage(identifier) { 
+            callback()
+        }
     }
 }
 

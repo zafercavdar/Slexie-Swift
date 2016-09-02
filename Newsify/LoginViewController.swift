@@ -70,7 +70,16 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         super.viewDidAppear(animated)
         
         if fbNetworkingController.getCurrentUser() != nil {
-            self.router.routeTo(RouteID.NewsFeed, VC: self)
+            self.fbNetworkingController.fetchUserLanguage(completion: { (identifier) in
+                switch identifier{
+                case LanguageIdentifier.Turkish.rawValue, LanguageIdentifier.English.rawValue, LanguageIdentifier.Russian.rawValue:
+                    lang = identifier
+                default:
+                    lang = LanguageIdentifier.English.rawValue
+                }
+                
+                self.router.routeTo(RouteID.NewsFeed, VC: self)
+            })
         }
     }
     
@@ -111,7 +120,17 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             if let error = error {
                 strongSelf.signInFailedNotification(error.localizedDescription)
             } else {
-                strongSelf.router.routeTo(RouteID.NewsFeed, VC: strongSelf)
+                strongSelf.fbNetworkingController.fetchUserLanguage(completion: { (identifier) in
+                    switch identifier{
+                    case LanguageIdentifier.Turkish.rawValue, LanguageIdentifier.English.rawValue, LanguageIdentifier.Russian.rawValue:
+                        lang = identifier
+                    default:
+                        lang = LanguageIdentifier.English.rawValue
+                    }
+                    
+                    strongSelf.router.routeTo(RouteID.NewsFeed, VC: strongSelf)
+                })
+                
             }
         }
     }

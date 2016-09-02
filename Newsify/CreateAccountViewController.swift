@@ -9,7 +9,6 @@
 import UIKit
 
 class CreateAccountViewController: UIViewController, UITextFieldDelegate{
-
     
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var usernameField: UITextField!
@@ -19,7 +18,6 @@ class CreateAccountViewController: UIViewController, UITextFieldDelegate{
     @IBOutlet weak var repasswordField: UITextField!
     @IBOutlet weak var accountTypeControl: UISwitch!
     @IBOutlet weak var profileTypeLabel: UILabel!
-    @IBOutlet weak var languageLabel: UILabel!
     
     @IBOutlet weak var signUpButton: UIButton!
     @IBOutlet weak var cancel: UIButton!
@@ -29,7 +27,7 @@ class CreateAccountViewController: UIViewController, UITextFieldDelegate{
     private let networkingController = FirebaseController()
     private let router = SignUpRouter()
     
-    private var userLanguage = "English"
+    private var userLanguage = NSBundle.mainBundle().preferredLocalizations.first! as String
 
     struct RouteID {
         static let LoggedIn = "LoggedIn"
@@ -59,7 +57,6 @@ class CreateAccountViewController: UIViewController, UITextFieldDelegate{
         repasswordLabel.textColor = UIColor.whiteColor()
         signUpButton.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
         cancel.setTitleColor(UIColor.whiteColor(), forState: .Normal)
-        languageLabel.textColor = UIColor.whiteColor()
         
         profileTypeLabel.textColor = UIColor.whiteColor()
         
@@ -72,7 +69,6 @@ class CreateAccountViewController: UIViewController, UITextFieldDelegate{
         repasswordLabel.text = localized("SignUpScreenPasswordReTypeLabel")
         signUpButton.setTitle(localized("SignUpScreenSignUpButton"), forState: .Normal)
         cancel.setTitle(localized("Cancel"), forState: .Normal)
-        languageLabel.text = localized("SignUpScreenLanguageLabel")
         profileTypeLabel.text = localized("YourProfile") + localized("Public")
     }
     

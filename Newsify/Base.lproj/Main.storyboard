@@ -111,7 +111,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" alignment="center" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="Nbc-sR-ufn">
-                                <rect key="frame" x="20" y="120" width="560" height="413"/>
+                                <rect key="frame" x="20" y="120" width="560" height="380"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Type a unique username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="82k-kP-S72">
                                         <rect key="frame" x="187" y="0.0" width="188" height="21"/>
@@ -158,14 +158,8 @@
                                             <action selector="switchStateChanged:" destination="44s-fW-cok" eventType="valueChanged" id="ADZ-aY-w9r"/>
                                         </connections>
                                     </switch>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Language" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bli-Ag-GMV">
-                                        <rect key="frame" x="242" y="299" width="76" height="21"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                     <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TQ5-Nz-YNT">
-                                        <rect key="frame" x="243" y="332" width="75" height="39"/>
+                                        <rect key="frame" x="243" y="299" width="75" height="39"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                         <state key="normal" title="Sign up">
                                             <color key="titleColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -175,7 +169,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Kb-rp-P3h">
-                                        <rect key="frame" x="256" y="383" width="48" height="30"/>
+                                        <rect key="frame" x="256" y="350" width="48" height="30"/>
                                         <state key="normal" title="Cancel"/>
                                         <connections>
                                             <action selector="cancel:" destination="44s-fW-cok" eventType="touchUpInside" id="fyb-qy-AYY"/>
@@ -206,7 +200,6 @@
                     <connections>
                         <outlet property="accountTypeControl" destination="xO8-yx-08H" id="dfG-Is-53C"/>
                         <outlet property="cancel" destination="7Kb-rp-P3h" id="DPf-Qi-etO"/>
-                        <outlet property="languageLabel" destination="bli-Ag-GMV" id="PQU-DQ-CqK"/>
                         <outlet property="passwordField" destination="gX3-bp-6kc" id="B6f-1b-VjJ"/>
                         <outlet property="passwordLabel" destination="qQ3-50-eFm" id="J4p-bP-2MK"/>
                         <outlet property="profileTypeLabel" destination="SCL-Yi-y1C" id="wxT-De-nPM"/>
@@ -537,6 +530,9 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Root View Controller" id="cqM-5D-XhW"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="presentation" identifier="RestartForLanguage" id="xWU-Dy-i3y"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Zwf-ef-Axu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -969,5 +965,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="NWr-JX-J3B"/>
+        <segue reference="xWU-Dy-i3y"/>
     </inferredMetricsTieBreakers>
 </document>

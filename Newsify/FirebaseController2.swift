@@ -45,6 +45,16 @@ extension FirebaseController {
         })
     }
     
+    func changeLanguage(identifier: LanguageIdentifier, completion callback: () -> Void){
+        let language = identifier.rawValue
+        guard let uid = getUID() else { return }
+        
+        let langRef = References.UserRef.child(uid).child(ReferenceLabels.Language)
+        langRef.setValue(language)
+        lang = identifier.rawValue
+        callback()
+    }
+    
     func changePassword(oldPassword: String, newPassword: String, completion callback: (NSError?) -> Void){
         
         guard let uid = self.getUID() else { return }

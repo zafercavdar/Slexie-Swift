@@ -16,7 +16,7 @@ class LanguageTVRouter: Router {
         case "Cancel":
             VC.dismissViewControllerAnimated(true, completion: nil)
         case "Apply":
-            VC.dismissViewControllerAnimated(true, completion: nil)
+            VC.performSegueWithIdentifier("RestartForLanguage", sender: nil)
         default:
             break
         }

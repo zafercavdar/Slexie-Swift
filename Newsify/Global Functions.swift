@@ -8,8 +8,14 @@
 
 import Foundation
 
+var lang = NSBundle.mainBundle().preferredLocalizations.first! as NSString
+
 func localized(key: String) -> String {
-    return NSLocalizedString(key, comment: "" )
+    
+    let path = NSBundle.mainBundle().pathForResource(lang as String, ofType: "lproj")
+    let bundle = NSBundle(path: path!)
+    
+    return NSLocalizedString(key, tableName: nil, bundle: bundle!, comment: "" )
 }
 
 func indexOf(source: String, substring: String) -> Int? {
