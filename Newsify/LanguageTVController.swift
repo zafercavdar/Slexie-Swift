@@ -140,7 +140,7 @@ class LanguageTVController: UITableViewController {
     }
     
     private func setUITitles(){
-        self.title = "Language"
+        self.title = localized("Language")
     }
 
     // MARK: - Table view data source
@@ -168,17 +168,17 @@ class LanguageTVController: UITableViewController {
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
-        let title = "Change Language?"
-        let message = "You'll need to restart Slexie after changing the language."
+        let title = localized("ChangeLanguage")
+        let message = localized("RestartWarning")
         
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .Alert)
         alertController.view.tintColor = UIColor.reddishColor()
         
-        let noAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: { (action: UIAlertAction!) in
+        let noAction = UIAlertAction(title: localized("Cancel"), style: .Cancel, handler: { (action: UIAlertAction!) in
             alertController.dismissViewControllerAnimated(true, completion: nil)
         })
         
-        let yesAction = UIAlertAction(title: "Change", style: .Default, handler: { [weak self] (action: UIAlertAction!) in
+        let yesAction = UIAlertAction(title: localized("Change"), style: .Default, handler: { [weak self] (action: UIAlertAction!) in
             
             guard let strongSelf = self else { return }
             let identifier = strongSelf.presentation.languages[indexPath.row].identifier

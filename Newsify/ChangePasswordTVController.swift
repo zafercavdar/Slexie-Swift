@@ -10,8 +10,8 @@ import UIKit
 
 class ChangePasswordViewModel{
     
-    let placeholders = [["Current Password"],
-                        ["New password", "New password, again"]]
+    let placeholders = [[localized("CurrentPassword")],
+                        [localized("NewPassword"), localized("NewPasswordAgain")]]
     
     private var controller = FirebaseController()
     
@@ -51,9 +51,9 @@ class ChangePasswordTVController: UITableViewController{
         
         tableView.tableFooterView = UIView()
         
-        cancelButton = UIBarButtonItem(title: "Cancel", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(cancel(_:)))
+        cancelButton = UIBarButtonItem(title: localized("Cancel"), style: UIBarButtonItemStyle.Plain, target: self, action: #selector(cancel(_:)))
         
-        doneButton = UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(changePassword(_:)))
+        doneButton = UIBarButtonItem(title: localized("Done"), style: UIBarButtonItemStyle.Plain, target: self, action: #selector(changePassword(_:)))
         
         self.navigationItem.leftBarButtonItem = cancelButton
         self.navigationItem.rightBarButtonItem = doneButton
@@ -92,7 +92,7 @@ class ChangePasswordTVController: UITableViewController{
 
             if (!isCorrect){
                 
-                strongSelf.showErrorView(with: "Your current password is wrong.")
+                strongSelf.showErrorView(with: localized("ErrorCurrentPasswordIsWrong"))
                 
                 //oldPasswordField.leftView = passViewRed
             } else {
@@ -100,7 +100,7 @@ class ChangePasswordTVController: UITableViewController{
                 
                 if newPassword != rePassword {
                     
-                    strongSelf.showErrorView(with: "Passwords do not match.")
+                    strongSelf.showErrorView(with: localized("ErrorPasswordsDoNotMatch"))
                     
                     //newPasswordField.leftView = passViewRed
                     //rePasswordField.leftView = passViewRed
@@ -110,7 +110,7 @@ class ChangePasswordTVController: UITableViewController{
                     //rePasswordField.leftView = passViewBlack
                     
                     if newPassword?.characters.count < 6 {
-                        strongSelf.showErrorView(with: "Password must be at least 6 characters.")
+                        strongSelf.showErrorView(with: localized("ErrorPasswordLength"))
                         //newPasswordField.leftView = passViewRed
                         //rePasswordField.leftView = passViewBlack
                     } else {
@@ -124,11 +124,11 @@ class ChangePasswordTVController: UITableViewController{
                             strongSelf.doneButton.enabled = true
                             
                             if error == nil {
-                                strongSelf.showDoneView(with: "Successfully changed.")
+                                strongSelf.showDoneView(with: localized("SuccessPasswordChanged"))
                                 NSTimer.scheduledTimerWithTimeInterval(3, target: strongSelf, selector: #selector(strongSelf.callRouter), userInfo: nil, repeats: false)
                                 
                             } else {
-                                strongSelf.showErrorView(with: "Unexpected error.")
+                                strongSelf.showErrorView(with: localized("ErrorUnexpected"))
                             }
                         })
                     }
@@ -182,7 +182,7 @@ class ChangePasswordTVController: UITableViewController{
 
     
     private func setUITitles(){
-        self.title = "Password"
+        self.title = localized("Password")
     }
 
     // MARK: - Table view data source

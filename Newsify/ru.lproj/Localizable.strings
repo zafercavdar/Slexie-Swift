@@ -11,7 +11,6 @@ Cancel = "Отмена";
 LoginButton = "Авторизоваться";
 LoginScreenPasswordLabel = "Пароль";
 LoginScreenUsernameLabel = "Имя пользователя";
-NavBarLogOut = "Выйти";
 NavBarNewsfeed = "Новостная лента";
 NavBarNotifications = "Уведомления";
 NavBarProfile = "Профиль";

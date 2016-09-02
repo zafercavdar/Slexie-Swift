@@ -69,40 +69,40 @@ class SettingsTVController: UITableViewController {
     }
     
     private func setUITitles(){
-        self.navigationController?.title = "Settings"
+        self.title = localized("Settings")
     }
     
     func privacyChanged(sender: UISwitch){
         
-        let title = "Change Privacy?"
+        let title = localized("ChangePrivacy")
         var message = ""
         var privacy: Privacy
         
         if sender.on {
-            message = "Your profile will be PRIVATE and none of your photos will be available for other users."
+            message = localized("PrivateWarning")
             privacy = Privacy.Private
         } else {
-            message = "Your profile will be PUBLIC and all of your photos will be available for other users."
+            message = localized("PublicWarning")
             privacy = Privacy.Public
         }
         
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .Alert)
         alertController.view.tintColor = UIColor.reddishColor()
         
-        let noAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: { (action: UIAlertAction!) in
+        let noAction = UIAlertAction(title: localized("Cancel"), style: .Default, handler: { (action: UIAlertAction!) in
             alertController.dismissViewControllerAnimated(true, completion: nil)
             sender.setOn(!sender.on, animated: true)
         })
         
-        let yesAction = UIAlertAction(title: "Okay", style: .Default, handler: { [weak self] (action: UIAlertAction!) in
+        let yesAction = UIAlertAction(title: localized("Okay"), style: .Default, handler: { [weak self] (action: UIAlertAction!) in
             
             guard let strongSelf = self else { return }
             
             strongSelf.model.setPrivacy(privacy)
         })
         
-        alertController.addAction(yesAction)
         alertController.addAction(noAction)
+        alertController.addAction(yesAction)
         self.presentViewController(alertController, animated: true, completion: nil)
         
     }

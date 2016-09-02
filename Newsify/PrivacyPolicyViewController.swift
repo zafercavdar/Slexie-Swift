@@ -62,7 +62,7 @@ class PrivacyPolicyViewController: UIViewController {
     }
     
     private func setUITitles(){
-        self.title = "Privacy Policy"
+        self.title = localized("PrivacyPolicy")
     }
 
 }

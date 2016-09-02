@@ -11,7 +11,6 @@ Cancel = "Cancel";
 LoginButton = "Login";
 LoginScreenPasswordLabel = "Password";
 LoginScreenUsernameLabel = "Username";
-NavBarLogOut = "Log out";
 NavBarNewsfeed = "Newsfeed";
 NavBarNotifications = "Notifications";
 NavBarProfile = "Profile";
@@ -36,3 +35,36 @@ TabBarProfile = "Profile";
 TabBarSearch = "Search";
 UploadingInfo = "Uploading";
 YourProfile = "Your profile: ";
+
+Settings = "Settings";
+Account = "Account";
+Preferences = "Preferences";
+About = "About";
+App = "App";
+EditProfile = "Edit profile";
+ChangePassword = "Change password";
+PrivateAccount = "Private account";
+Language = "Language";
+PrivacyPolicy = "Privacy Policy";
+LogOut = "Log out";
+ChangePrivacy = "Change Privacy?";
+PrivateWarning = "Your profile will be PRIVATE and none of your photos will be available for other users.";
+PublicWarning = "Your profile will be PUBLIC and all of your photos will be available for other users.";
+Okay = "Okay";
+
+CurrentPassword = "Current Password";
+NewPassword = "New password";
+NewPasswordAgain = "New password, again";
+Done = "Done";
+ErrorCurrentPasswordIsWrong = "Your current password is wrong.";
+ErrorPasswordsDoNotMatch = "Passwords do not match.";
+ErrorPasswordLength = "Password must be at least 6 characters.";
+SuccessPasswordChanged = "Successfully changed.";
+ErrorUnexpected = "Unexpected error.";
+Password = "Password";
+
+ChangeLanguage = "Change Language?";
+RestartWarning = "Slexie will restart after changing the language.";
+Change = "Change";
+
+

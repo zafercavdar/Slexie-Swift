@@ -13,11 +13,11 @@ class SettingsViewModel {
     
     private let controller = FirebaseController()
     
-    let sectionHeaders = ["Account", "Preferences", "About", "Don't do it"]
-    let sections: [[String]] = [ ["Edit profile", "Change password", "Private account"],
-                                 ["Language"],
-                                 ["Privacy Policy"],
-                                 ["Log out"]]
+    let sectionHeaders = [localized("Account"), localized("Preferences"), localized("About"), localized("App")]
+    let sections: [[String]] = [ [localized("EditProfile"), localized("ChangePassword"), localized("PrivateAccount")],
+                                 [localized("Language")],
+                                 [localized("PrivacyPolicy")],
+                                 [localized("LogOut")]]
     
     
     func setPrivacy(privacy: Privacy){
