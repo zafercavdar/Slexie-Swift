@@ -32,9 +32,7 @@ extension UIViewController {
     
     func photoLibraryNotAvailable() {
         showAlertView("Error!", message: "Photo Library is not avaiable in this device.", duration: 3)
-
     }
-    
     
     private func showAlertView(title: String?, message: String?, duration: Int) {
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .Alert)

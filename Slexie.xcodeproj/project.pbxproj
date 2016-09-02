@@ -71,6 +71,9 @@
 		B3FCACBF1D786A6600577D0F /* FirebaseController2.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3FCACBE1D786A6600577D0F /* FirebaseController2.swift */; };
 		B3FCACC11D7872D100577D0F /* ChangePasswordTVController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3FCACC01D7872D100577D0F /* ChangePasswordTVController.swift */; };
 		B3FCACC31D7875B700577D0F /* ChangePasswordTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3FCACC21D7875B700577D0F /* ChangePasswordTVCell.swift */; };
+		B3FCACC51D797D7800577D0F /* CustomErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3FCACC41D797D7800577D0F /* CustomErrorView.swift */; };
+		B3FCACC71D799CC700577D0F /* ChangePasswordRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3FCACC61D799CC700577D0F /* ChangePasswordRouter.swift */; };
+		B3FCACC91D79A21300577D0F /* CustomDoneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3FCACC81D79A21300577D0F /* CustomDoneView.swift */; };
 		B98D52ABE6D122B358F4D2A4 /* Pods_Slexie.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9ED37C1860EE525B7CBE41CE /* Pods_Slexie.framework */; };
 /* End PBXBuildFile section */
 
@@ -179,6 +182,9 @@
 		B3FCACBE1D786A6600577D0F /* FirebaseController2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseController2.swift; sourceTree = "<group>"; };
 		B3FCACC01D7872D100577D0F /* ChangePasswordTVController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangePasswordTVController.swift; sourceTree = "<group>"; };
 		B3FCACC21D7875B700577D0F /* ChangePasswordTVCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangePasswordTVCell.swift; sourceTree = "<group>"; };
+		B3FCACC41D797D7800577D0F /* CustomErrorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomErrorView.swift; sourceTree = "<group>"; };
+		B3FCACC61D799CC700577D0F /* ChangePasswordRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangePasswordRouter.swift; sourceTree = "<group>"; };
+		B3FCACC81D79A21300577D0F /* CustomDoneView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomDoneView.swift; sourceTree = "<group>"; };
 		CC3C60FDDE6A10BF794E6220 /* Pods-Slexie.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Slexie.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Slexie/Pods-Slexie.debug.xcconfig"; sourceTree = "<group>"; };
 		DD1A85313045A74F6765499B /* Pods-SlexieUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SlexieUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SlexieUITests/Pods-SlexieUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		EAB4D06CD24ACBC2E7B3E35F /* Pods-Slexie.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Slexie.release.xcconfig"; path = "Pods/Target Support Files/Pods-Slexie/Pods-Slexie.release.xcconfig"; sourceTree = "<group>"; };
@@ -290,6 +296,8 @@
 			children = (
 				B3BA49B81D65ED4D00106930 /* TableViewCells */,
 				B36E72141D5B78A700F626D0 /* LoadingView.swift */,
+				B3FCACC41D797D7800577D0F /* CustomErrorView.swift */,
+				B3FCACC81D79A21300577D0F /* CustomDoneView.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -366,6 +374,7 @@
 				B38623541D6C6634007B8A5E /* CameraRouter.swift */,
 				B3BA49C71D65FC5E00106930 /* ProfileRouter.swift */,
 				B3FCACBC1D7855B500577D0F /* SettingsRouter.swift */,
+				B3FCACC61D799CC700577D0F /* ChangePasswordRouter.swift */,
 			);
 			name = Routers;
 			sourceTree = "<group>";
@@ -725,14 +734,17 @@
 				B39BBA961D67179300A2C9E4 /* TagResponse.swift in Sources */,
 				B3FCACBF1D786A6600577D0F /* FirebaseController2.swift in Sources */,
 				B38623571D6C6E48007B8A5E /* CameraViewModel.swift in Sources */,
+				B3FCACC51D797D7800577D0F /* CustomErrorView.swift in Sources */,
 				B386235B1D6C8DDC007B8A5E /* SearchFeedItemCell.swift in Sources */,
 				B33E936C1D665C570011019B /* Global Functions.swift in Sources */,
+				B3FCACC91D79A21300577D0F /* CustomDoneView.swift in Sources */,
 				B3BA49BF1D65F8FA00106930 /* SignUpRouter.swift in Sources */,
 				B38623531D6C40A0007B8A5E /* CameraTableViewController.swift in Sources */,
 				B3BA49C61D65FAEE00106930 /* ColorExtension.swift in Sources */,
 				B37DB5C81D66F94A00ADB79B /* ImaggaService.swift in Sources */,
 				B3ACD3741D54D3E6004BEF24 /* CreateAccountViewController.swift in Sources */,
 				B3ED70FD1D5CB3C6001159A6 /* FirebaseController.swift in Sources */,
+				B3FCACC71D799CC700577D0F /* ChangePasswordRouter.swift in Sources */,
 				B36E72171D5B846700F626D0 /* RandomBase.swift in Sources */,
 				B38623511D6C332B007B8A5E /* NotificationsTableViewController.swift in Sources */,
 				B3FCACAF1D78109E00577D0F /* ArrayExtensions.swift in Sources */,

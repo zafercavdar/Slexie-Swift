@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Firebase
 
 extension FirebaseController {
 
@@ -42,7 +43,46 @@ extension FirebaseController {
             
             photoRef.updateChildValues(updateDic)
         })
-        
     }
     
+    func changePassword(oldPassword: String, newPassword: String, completion callback: (NSError?) -> Void){
+        
+        guard let uid = self.getUID() else { return }
+        
+        let usernameRef = References.UserRef.child(uid).child(ReferenceLabels.Username)
+        
+        usernameRef.observeSingleEventOfType(.Value, withBlock: { (snapshot) in
+            let username = snapshot.value as! String
+            self.signInWith(username: username, password: oldPassword, enableNotification: false, completionHandler: { (error) in
+                if (error == nil){
+                    
+                    self.getCurrentUser()?.updatePassword(newPassword, completion: { (error) in
+                        
+                        if (error == nil){
+                            let userRef = References.UserRef.child(uid)
+                            let update = [ReferenceLabels.Password : newPassword]
+                            userRef.updateChildValues(update)
+                        }
+                        
+                        callback(error)
+                    })
+
+                } else {
+                    callback(error)
+                }
+            })
+        })
+    }
+    
+    func isPasswordCorrect(oldPassword: String, completion callback: (isCorrect: Bool) -> Void) {
+        
+        guard let uid = self.getUID() else { return }
+        
+        let passwordRef = References.UserRef.child(uid).child(ReferenceLabels.Password)
+        passwordRef.observeSingleEventOfType(.Value, withBlock:  { (snapshot) in
+            guard let password = snapshot.value as? String else { return }
+            
+            callback(isCorrect: password == oldPassword)
+        })
+    }
 }
