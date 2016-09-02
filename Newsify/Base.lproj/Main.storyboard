@@ -529,7 +529,7 @@
                             <outlet property="delegate" destination="mZ9-qQ-iNp" id="yUL-aj-8WV"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Root View Controller" id="cqM-5D-XhW"/>
+                    <navigationItem key="navigationItem" title="Language" id="cqM-5D-XhW"/>
                     <connections>
                         <segue destination="BYZ-38-t0r" kind="presentation" identifier="RestartForLanguage" id="xWU-Dy-i3y"/>
                     </connections>
@@ -594,7 +594,7 @@
                         </connections>
                     </tableView>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" title="Root View Controller" id="gbP-Fl-Bmw"/>
+                    <navigationItem key="navigationItem" title="Password" id="gbP-Fl-Bmw"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="166-5Q-U5B" userLabel="First Responder" sceneMemberID="firstResponder"/>
