@@ -10,9 +10,9 @@ import UIKit
 
 class LoadingView: UIView {
 
-    var loadingView = UIView()
-    var textLabel = UILabel()
-    var activityIndicator = UIActivityIndicatorView()
+    private var loadingView = UIView()
+    private var textLabel = UILabel()
+    private var activityIndicator = UIActivityIndicatorView()
     
     func addToView(view: UIView, text: String){
         
