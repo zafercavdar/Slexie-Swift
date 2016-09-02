@@ -64,7 +64,8 @@ class SearchPageTableViewController: UITableViewController, UISearchResultsUpdat
         searchController.hidesNavigationBarDuringPresentation = true
         searchController.dimsBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "Search ..."
-        //searchController.searchBar.delegate = self
+        
+        searchController.searchBar.setValue(localized("Cancel"), forKey: "_cancelButtonText")
         searchController.searchBar.sizeToFit()
         tableView.tableHeaderView = searchController.searchBar
     }
