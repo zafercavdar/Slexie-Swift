@@ -24,14 +24,21 @@ class SettingsTVController: UITableViewController {
     struct RouteID {
         static let LogOut = "LogOut"
         static let ChangePassword = "ChangePassword"
+        static let Cancel = "Cancel"
     }
     
     private var model = SettingsViewModel()
     private let controller = FirebaseController()
     private var router = SettingsRouter()
     
+    private var backButton = UIBarButtonItem()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        backButton = UIBarButtonItem(title: "< Back", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(self.backButtonPressed(_:)))
+        
+        self.navigationItem.leftBarButtonItem = backButton
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -39,6 +46,12 @@ class SettingsTVController: UITableViewController {
         
         setUIColors()
         setUITitles()
+    }
+    
+    // MARK: Selector methods
+    
+    func backButtonPressed(sender: UIBarButtonItem){
+        self.router.routeTo(RouteID.Cancel, VC: self)
     }
     
     // MARK: UI Settings

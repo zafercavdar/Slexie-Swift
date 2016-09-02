@@ -17,6 +17,8 @@ class SettingsRouter: Router {
             VC.performSegueWithIdentifier("LogOut", sender: nil)
         case "ChangePassword":
             VC.performSegueWithIdentifier("ChangePassword", sender: nil)
+        case "Cancel":
+            VC.dismissViewControllerAnimated(true, completion: nil)
         default:
             break
         }

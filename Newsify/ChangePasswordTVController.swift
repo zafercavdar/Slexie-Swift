@@ -13,13 +13,25 @@ class ChangePasswordViewModel{
     let placeholders = [["Current Password"],
                         ["New password", "New password, again"]]
     
+    private var controller = FirebaseController()
+    
+    func isPasswordCorrect(oldPassword: String, completion callback: (Bool) -> Void){
+        controller.isPasswordCorrect(oldPassword) { (isCorrect) in
+            callback(isCorrect)
+        }
+    }
+    
+    func changePassword(oldPassword: String, newPassword: String, completion callback: (NSError?) -> Void){
+        controller.changePassword(oldPassword, newPassword: newPassword) { (error) in
+            callback(error)
+        }
+    }
 }
 
 
 class ChangePasswordTVController: UITableViewController{
 
     private var model = ChangePasswordViewModel()
-    private var controller = FirebaseController()
     private var router = ChangePasswordRouter()
     
     private struct CellIdentifiers {
@@ -72,7 +84,7 @@ class ChangePasswordTVController: UITableViewController{
         let rePasswordField = (tableView.cellForRowAtIndexPath(rePasswordIndexPath) as! ChangePasswordTVCell).passwordTextField
         let rePassword = rePasswordField.text
         
-        controller.isPasswordCorrect(oldPassword!) { [weak self] (isCorrect) in
+        model.isPasswordCorrect(oldPassword!) { [weak self] (isCorrect) in
             guard let strongSelf = self else { return }
 
             let passViewBlack = UIImageView(frame: CGRect(x: 0, y: 0, width: 35, height: 20))
@@ -112,7 +124,7 @@ class ChangePasswordTVController: UITableViewController{
                         
                         strongSelf.doneButton.enabled = false
 
-                        strongSelf.controller.changePassword(oldPassword!,newPassword: newPassword!, completion: { (error) in
+                        strongSelf.model.changePassword(oldPassword!,newPassword: newPassword!, completion: { (error) in
                             strongSelf.doneButton.enabled = true
                             
                             if error == nil {
