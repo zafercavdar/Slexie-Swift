@@ -26,6 +26,7 @@ class SettingsTVController: UITableViewController {
         static let ChangePassword = "ChangePassword"
         static let Cancel = "Cancel"
         static let PrivacyPolicy = "PrivacyPolicy"
+        static let ChangeLanguage = "ChangeLanguage"
     }
     
     private var model = SettingsViewModel()
@@ -157,7 +158,6 @@ class SettingsTVController: UITableViewController {
     
     override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let  headerCell = tableView.dequeueReusableCellWithIdentifier(CellIdentifiers.CustomHeaderCell) as! SettingsTVHeaderCell
-        headerCell.backgroundColor = UIColor.cyanColor()
         
         headerCell.headerTitle.text = model.sectionHeaders[section].uppercaseString
         headerCell.headerTitle.textColor = UIColor.headerTitleGray()
@@ -170,9 +170,14 @@ class SettingsTVController: UITableViewController {
         let section = indexPath.section
         let row = indexPath.row
         
-        // Change password cell
+        // Change password
         if (section == 0 && row == 1){
             self.router.routeTo(RouteID.ChangePassword, VC: self)
+        }
+        
+        // Change language
+        if (section == 1 && row == 0){
+            self.router.routeTo(RouteID.ChangeLanguage, VC: self)
         }
         
         // Privacy Policy

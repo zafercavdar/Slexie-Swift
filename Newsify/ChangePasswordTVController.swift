@@ -51,11 +51,7 @@ class ChangePasswordTVController: UITableViewController{
         
         tableView.tableFooterView = UIView()
         
-        /*cancelButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Cancel, target: self, action: #selector(cancel(_:)))*/
-        
         cancelButton = UIBarButtonItem(title: "Cancel", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(cancel(_:)))
-        
-        /*doneButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Done, target: self, action: #selector(changePassword(_:)))*/
         
         doneButton = UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(changePassword(_:)))
         

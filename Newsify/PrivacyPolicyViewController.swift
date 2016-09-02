@@ -51,7 +51,7 @@ class PrivacyPolicyViewController: UIViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         setUIColors()
-        
+        setUITitles()
     }
     
     private func setUIColors(){
@@ -59,6 +59,10 @@ class PrivacyPolicyViewController: UIViewController {
         nav?.barTintColor = UIColor.coreColor()
         nav?.barStyle = UIBarStyle.BlackOpaque
         nav?.tintColor = UIColor.whiteColor()
+    }
+    
+    private func setUITitles(){
+        self.title = "Privacy Policy"
     }
 
 }

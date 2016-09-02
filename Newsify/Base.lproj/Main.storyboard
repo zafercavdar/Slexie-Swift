@@ -495,11 +495,68 @@
                         <segue destination="BYZ-38-t0r" kind="presentation" identifier="LogOut" id="O1p-1h-BT4"/>
                         <segue destination="fqW-w5-FGv" kind="show" identifier="ChangePassword" id="JZI-PH-OwC"/>
                         <segue destination="3dg-PE-nKr" kind="show" identifier="ShowPolicy" id="2dD-uM-Tgc"/>
+                        <segue destination="vwd-Jf-cnn" kind="show" identifier="ShowLanguageChange" id="3Cr-ep-5oi"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mZW-NQ-CeD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1448" y="-2888"/>
+        </scene>
+        <!--Language-->
+        <scene sceneID="vs6-dS-j0c">
+            <objects>
+                <tableViewController title="Language" id="mZ9-qQ-iNp" customClass="LanguageTVController" customModule="Slexie" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="Bpg-AC-KGS">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="LanguageTVCell" id="PVe-Uu-TaY" customClass="LanguageTVCell" customModule="Slexie" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="92" width="600" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="PVe-Uu-TaY" id="r5q-We-3FQ">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Language" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Scw-mY-Orq">
+                                            <rect key="frame" x="18" y="11" width="180" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="languageLabel" destination="Scw-mY-Orq" id="Sjh-Ne-tRx"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="mZ9-qQ-iNp" id="vZw-Ih-bkH"/>
+                            <outlet property="delegate" destination="mZ9-qQ-iNp" id="yUL-aj-8WV"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Root View Controller" id="cqM-5D-XhW"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Zwf-ef-Axu" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-32" y="-3913"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="wBP-vK-9JO">
+            <objects>
+                <navigationController id="vwd-Jf-cnn" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="bga-MY-Nb2">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="mZ9-qQ-iNp" kind="relationship" relationship="rootViewController" id="haJ-d1-AVc"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="JYs-xw-4zc" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-756" y="-3913"/>
         </scene>
         <!--Password-->
         <scene sceneID="0Zq-VU-PSX">

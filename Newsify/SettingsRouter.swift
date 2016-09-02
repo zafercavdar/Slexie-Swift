@@ -21,6 +21,8 @@ class SettingsRouter: Router {
             VC.dismissViewControllerAnimated(true, completion: nil)
         case "PrivacyPolicy":
             VC.performSegueWithIdentifier("ShowPolicy", sender: nil)
+        case "ChangeLanguage":
+            VC.performSegueWithIdentifier("ShowLanguageChange", sender: nil)
         default:
             break
         }

@@ -23,7 +23,7 @@ protocol NetworkingController {
     func getAccountTags(completion: [String] -> Void)
     func getPhotosRelatedWith(tags: [String], count: Int, completion: [FeedPost] -> Void)
     func getProfilePosts(completion callback: [ProfilePost] -> Void)
-    func fetchUserLanguage(completion callback: () -> Void)
+    func fetchUserLanguage(completion callback: (identifier: String) -> Void)
     func photoLiked(imageid: String, callback: (CallbackResult) -> Void)
     func photoUnliked(imageid: String, callback: (CallbackResult) -> Void)
     
@@ -295,10 +295,10 @@ class FirebaseController: NetworkingController, AuthenticationController {
         
     }
     
-    func fetchUserLanguage(completion callback: () -> Void) {
+    func fetchUserLanguage(completion callback: (identifier: String) -> Void) {
         
-        /*guard let uid = getUID() else {
-            callback()
+        guard let uid = getUID() else {
+            callback(identifier: "nil")
             return
         }
         
@@ -306,16 +306,13 @@ class FirebaseController: NetworkingController, AuthenticationController {
         
         languageRef.observeSingleEventOfType(.Value, withBlock:  { (snapshot) in
             
-            guard let language = snapshot.value as? String else {
-                //preferredLanguage = Language.English
-                callback()
+            guard let identifier = snapshot.value as? String else {
+                callback(identifier: "nil")
                 return
             }
             
-            callback()
-        }) */
-        
-        callback()
+            callback(identifier: identifier)
+        })
     }
     
     func uploadPhoto(image: NSData, tags: [String], callback: (error: NSError?, photoID: String, url: String) -> Void){

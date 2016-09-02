@@ -111,9 +111,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             if let error = error {
                 strongSelf.signInFailedNotification(error.localizedDescription)
             } else {
-                strongSelf.fbNetworkingController.fetchUserLanguage(completion: {
-                    strongSelf.router.routeTo(RouteID.NewsFeed, VC: strongSelf)
-                })
+                strongSelf.router.routeTo(RouteID.NewsFeed, VC: strongSelf)
             }
         }
     }
