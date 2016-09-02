@@ -188,8 +188,8 @@ class LanguageTVController: UITableViewController {
             })
         })
         
-        alertController.addAction(yesAction)
         alertController.addAction(noAction)
+        alertController.addAction(yesAction)
         self.presentViewController(alertController, animated: true, completion: nil)
     }
 }
