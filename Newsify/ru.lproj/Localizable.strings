@@ -35,3 +35,36 @@ TabBarProfile = "Профиль";
 TabBarSearch = "Поиск";
 UploadingInfo = "Выгрузка";
 YourProfile = "Ваш профиль: ";
+
+Settings = "установка";
+Account = "Счет";
+Preferences = "Настройки";
+About = "Около";
+App = "Заявка";
+EditProfile = "Редактировать профиль";
+ChangePassword = "Изменить пароль";
+PrivateAccount = "Частный счет";
+Language = "Язык";
+PrivacyPolicy = "Политика конфиденциальности";
+LogOut = "Выйти";
+ChangePrivacy = "Изменение конфиденциальности?";
+PrivateWarning = "Ваш профиль будет приватным и ни один из ваших фотографий не будет доступен для других пользователей";
+PublicWarning = "Ваш профиль будет открытым и все ваши фотографии будут доступны для других пользователей";
+Okay = "Хорошо";
+
+CurrentPassword = "Текущий пароль";
+NewPassword = "Новый пароль";
+NewPasswordAgain = "Новый пароль (еще раз)";
+Done = "Готово";
+ErrorCurrentPasswordIsWrong = "Ваш текущий пароль является неправильным.";
+ErrorPasswordsDoNotMatch = "Пароли не совпадают.";
+ErrorPasswordLength = "Пароль должен быть не менее 6 символов.";
+SuccessPasswordChanged = "Успешно изменилось.";
+ErrorUnexpected = "Неожиданная ошибка.";
+Password = "Пароль";
+
+ChangeLanguage = "Изменение языка?";
+RestartWarning = "Slexie будет перезагружен после смены языка";
+Change = "Изменить";
+
+
