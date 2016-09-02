@@ -138,7 +138,7 @@ class ChangePasswordTVController: UITableViewController{
     }
     
     private func showErrorView(with text: String){
-        let errorView = CustomErrorView()
+        var errorView = CustomErrorView()
         
         UIView.animateWithDuration(0.6, animations: {
             self.tableView.tableHeaderView = errorView.createView(text)
@@ -148,7 +148,7 @@ class ChangePasswordTVController: UITableViewController{
     }
     
     private func showDoneView(with text: String){
-        let doneView = CustomDoneView()
+        var doneView = CustomDoneView()
         
         UIView.animateWithDuration(0.6, animations: {
             self.tableView.tableHeaderView = doneView.createView(text)
