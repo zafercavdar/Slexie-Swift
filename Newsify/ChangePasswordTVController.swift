@@ -43,8 +43,8 @@ class ChangePasswordTVController: UITableViewController{
         static let Cancel = "Cancel"
     }
     
-    var cancelButton = UIBarButtonItem()
-    var doneButton = UIBarButtonItem()
+    private var cancelButton = UIBarButtonItem()
+    private var doneButton = UIBarButtonItem()
     
     override func viewDidLoad() {
         super.viewDidLoad()

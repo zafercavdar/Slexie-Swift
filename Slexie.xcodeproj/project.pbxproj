@@ -37,6 +37,11 @@
 		B38E85C01D59C28C00CAE73B /* TagsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B38E85BF1D59C28C00CAE73B /* TagsTableViewCell.swift */; };
 		B39BBA961D67179300A2C9E4 /* TagResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39BBA951D67179300A2C9E4 /* TagResponse.swift */; };
 		B3ACD3741D54D3E6004BEF24 /* CreateAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3ACD3731D54D3E6004BEF24 /* CreateAccountViewController.swift */; };
+		B3B5188B1D79C19D00F44B26 /* PrivacyPolicyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B5188A1D79C19D00F44B26 /* PrivacyPolicyViewController.swift */; };
+		B3B518901D79C61500F44B26 /* Policy.html in Resources */ = {isa = PBXBuildFile; fileRef = B3B5188F1D79C61500F44B26 /* Policy.html */; };
+		B3B518921D79C66600F44B26 /* style.css in Resources */ = {isa = PBXBuildFile; fileRef = B3B518911D79C66600F44B26 /* style.css */; };
+		B3B518951D79C7AF00F44B26 /* privacy-policy-updates.xml in Resources */ = {isa = PBXBuildFile; fileRef = B3B518941D79C7AF00F44B26 /* privacy-policy-updates.xml */; };
+		B3B518971D79CA8F00F44B26 /* PolicyPageRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B518961D79CA8F00F44B26 /* PolicyPageRouter.swift */; };
 		B3B527BF1D65AD2A00E31C37 /* ProfilePostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B527BE1D65AD2A00E31C37 /* ProfilePostTableViewCell.swift */; };
 		B3B527C11D65AF2100E31C37 /* ProfilePostsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B527C01D65AF2100E31C37 /* ProfilePostsViewModel.swift */; };
 		B3B527C31D65AF8B00E31C37 /* ProfilePost.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B527C21D65AF8B00E31C37 /* ProfilePost.swift */; };
@@ -142,6 +147,11 @@
 		B38E85BF1D59C28C00CAE73B /* TagsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagsTableViewCell.swift; sourceTree = "<group>"; };
 		B39BBA951D67179300A2C9E4 /* TagResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagResponse.swift; sourceTree = "<group>"; };
 		B3ACD3731D54D3E6004BEF24 /* CreateAccountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateAccountViewController.swift; sourceTree = "<group>"; };
+		B3B5188A1D79C19D00F44B26 /* PrivacyPolicyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyViewController.swift; sourceTree = "<group>"; };
+		B3B5188F1D79C61500F44B26 /* Policy.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = Policy.html; sourceTree = "<group>"; };
+		B3B518911D79C66600F44B26 /* style.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = style.css; sourceTree = "<group>"; };
+		B3B518941D79C7AF00F44B26 /* privacy-policy-updates.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "privacy-policy-updates.xml"; sourceTree = "<group>"; };
+		B3B518961D79CA8F00F44B26 /* PolicyPageRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PolicyPageRouter.swift; sourceTree = "<group>"; };
 		B3B527BE1D65AD2A00E31C37 /* ProfilePostTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfilePostTableViewCell.swift; sourceTree = "<group>"; };
 		B3B527C01D65AF2100E31C37 /* ProfilePostsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfilePostsViewModel.swift; sourceTree = "<group>"; };
 		B3B527C21D65AF8B00E31C37 /* ProfilePost.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfilePost.swift; sourceTree = "<group>"; };
@@ -280,6 +290,25 @@
 			name = Helpers;
 			sourceTree = "<group>";
 		};
+		B3B5188E1D79C60A00F44B26 /* HTML Files */ = {
+			isa = PBXGroup;
+			children = (
+				B3B518941D79C7AF00F44B26 /* privacy-policy-updates.xml */,
+				B3B5188F1D79C61500F44B26 /* Policy.html */,
+				B3B518911D79C66600F44B26 /* style.css */,
+			);
+			name = "HTML Files";
+			sourceTree = "<group>";
+		};
+		B3B518931D79C6AE00F44B26 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				B3FCACC01D7872D100577D0F /* ChangePasswordTVController.swift */,
+				B3B5188A1D79C19D00F44B26 /* PrivacyPolicyViewController.swift */,
+			);
+			name = Settings;
+			sourceTree = "<group>";
+		};
 		B3BA49B31D65EC8700106930 /* Data Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -314,7 +343,7 @@
 				B38623501D6C332B007B8A5E /* NotificationsTableViewController.swift */,
 				B3ED70F01D5C6ADF001159A6 /* ProfilePageViewController.swift */,
 				B3FCACB41D783E7800577D0F /* SettingsTVController.swift */,
-				B3FCACC01D7872D100577D0F /* ChangePasswordTVController.swift */,
+				B3B518931D79C6AE00F44B26 /* Settings */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -375,6 +404,7 @@
 				B3BA49C71D65FC5E00106930 /* ProfileRouter.swift */,
 				B3FCACBC1D7855B500577D0F /* SettingsRouter.swift */,
 				B3FCACC61D799CC700577D0F /* ChangePasswordRouter.swift */,
+				B3B518961D79CA8F00F44B26 /* PolicyPageRouter.swift */,
 			);
 			name = Routers;
 			sourceTree = "<group>";
@@ -404,6 +434,7 @@
 		B3F455AC1D54A1BD005EA708 /* Newsify */ = {
 			isa = PBXGroup;
 			children = (
+				B3B5188E1D79C60A00F44B26 /* HTML Files */,
 				B36AF20D1D6739E000F2B87E /* Networking */,
 				B36AF2031D671D7200F2B87E /* HTTP Request */,
 				B37DB5C91D67032D00ADB79B /* HTTP Responses */,
@@ -560,9 +591,12 @@
 			files = (
 				B335520C1D77012C006D56AE /* Localizable.strings in Resources */,
 				B3F455B81D54A1BD005EA708 /* LaunchScreen.storyboard in Resources */,
+				B3B518921D79C66600F44B26 /* style.css in Resources */,
 				B3ED71011D5CC655001159A6 /* GoogleService-Info.plist in Resources */,
 				B3F455B51D54A1BD005EA708 /* Assets.xcassets in Resources */,
+				B3B518901D79C61500F44B26 /* Policy.html in Resources */,
 				B3F455B31D54A1BD005EA708 /* Main.storyboard in Resources */,
+				B3B518951D79C7AF00F44B26 /* privacy-policy-updates.xml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -749,6 +783,7 @@
 				B38623511D6C332B007B8A5E /* NotificationsTableViewController.swift in Sources */,
 				B3FCACAF1D78109E00577D0F /* ArrayExtensions.swift in Sources */,
 				B36E72151D5B78A700F626D0 /* LoadingView.swift in Sources */,
+				B3B5188B1D79C19D00F44B26 /* PrivacyPolicyViewController.swift in Sources */,
 				B3ED70F11D5C6ADF001159A6 /* ProfilePageViewController.swift in Sources */,
 				B36AF2051D671D8A00F2B87E /* Requests.swift in Sources */,
 				B3F455B01D54A1BD005EA708 /* LoginViewController.swift in Sources */,
@@ -760,6 +795,7 @@
 				B3BA49C81D65FC5E00106930 /* ProfileRouter.swift in Sources */,
 				B33741041D6EE38E00B15BA4 /* Likeable.swift in Sources */,
 				B3B527C31D65AF8B00E31C37 /* ProfilePost.swift in Sources */,
+				B3B518971D79CA8F00F44B26 /* PolicyPageRouter.swift in Sources */,
 				B3FCACB11D782DD000577D0F /* MainTabbarController.swift in Sources */,
 				B3FCACB71D78404D00577D0F /* SetttingsViewModel.swift in Sources */,
 				B3F455AE1D54A1BD005EA708 /* AppDelegate.swift in Sources */,

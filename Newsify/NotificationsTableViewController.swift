@@ -112,7 +112,6 @@ class NotificationsTableViewController: UITableViewController {
         
     }
 
-
     // MARK: - Table view data source
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -129,6 +128,7 @@ class NotificationsTableViewController: UITableViewController {
         
         cell.notifLabel.text = notifPresentation.who + notifPresentation.actionString
         cell.targetImageView.image = notifPresentation.targetImage
+        cell.targetImageView.center = CGPointMake(cell.targetImageView.center.x, cell.contentView.bounds.size.height/2)
         cell.selectionStyle = UITableViewCellSelectionStyle.None
         
         return cell

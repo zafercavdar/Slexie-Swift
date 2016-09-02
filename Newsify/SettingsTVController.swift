@@ -25,6 +25,7 @@ class SettingsTVController: UITableViewController {
         static let LogOut = "LogOut"
         static let ChangePassword = "ChangePassword"
         static let Cancel = "Cancel"
+        static let PrivacyPolicy = "PrivacyPolicy"
     }
     
     private var model = SettingsViewModel()
@@ -36,7 +37,8 @@ class SettingsTVController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        backButton = UIBarButtonItem(title: "< Back", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(self.backButtonPressed(_:)))
+        let buttonImage = UIImage(named: "backButton")
+        backButton = UIBarButtonItem(image: buttonImage, style: UIBarButtonItemStyle.Plain, target: self, action: #selector(self.backButtonPressed(_:)))
         
         self.navigationItem.leftBarButtonItem = backButton
     }
@@ -171,6 +173,11 @@ class SettingsTVController: UITableViewController {
         // Change password cell
         if (section == 0 && row == 1){
             self.router.routeTo(RouteID.ChangePassword, VC: self)
+        }
+        
+        // Privacy Policy
+        if (section == 2 && row == 0){
+            self.router.routeTo(RouteID.PrivacyPolicy, VC: self)
         }
         
         // Log out cell

@@ -494,6 +494,7 @@
                     <connections>
                         <segue destination="BYZ-38-t0r" kind="presentation" identifier="LogOut" id="O1p-1h-BT4"/>
                         <segue destination="fqW-w5-FGv" kind="show" identifier="ChangePassword" id="JZI-PH-OwC"/>
+                        <segue destination="3dg-PE-nKr" kind="show" identifier="ShowPolicy" id="2dD-uM-Tgc"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mZW-NQ-CeD" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -545,7 +546,42 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="166-5Q-U5B" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="64" y="-3214"/>
+            <point key="canvasLocation" x="-32" y="-3214"/>
+        </scene>
+        <!--Privacy Policy-->
+        <scene sceneID="zzS-lp-OkD">
+            <objects>
+                <viewController id="sO1-08-ATk" customClass="PrivacyPolicyViewController" customModule="Slexie" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="5E6-I1-wAc"/>
+                        <viewControllerLayoutGuide type="bottom" id="hw5-5F-j7B"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="gOU-0r-Dup">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Privacy Policy" id="TIj-pp-yA6"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7In-6m-aKV" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-32" y="-2545"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="RYj-U0-8A2">
+            <objects>
+                <navigationController id="3dg-PE-nKr" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="zKN-VG-BKm">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="sO1-08-ATk" kind="relationship" relationship="rootViewController" id="PfU-rQ-NDc"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fvh-Ya-Wfh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-756" y="-2545"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="bwZ-bk-0Kn">

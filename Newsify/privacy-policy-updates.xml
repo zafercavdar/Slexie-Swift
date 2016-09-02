@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0">
+<channel>
+        <title>SLEXIE Privacy Policy Changes</title>
+        <description>This feel contains updates to the privacy policy for SLEXIE.</description>
+        <link><!--Put the URI of your privacy policy or privacy dshboard here.--></link>
+        <lastBuildDate>01 Dec 2016 00:00:00 +0000 </lastBuildDate>
+        <pubDate>01 Dec 2016 00:00:00 +0000 </pubDate>
+        <ttl>1800</ttl>
+ 
+        <item>
+                <title>First Policy</title>
+                <description>We posted a brand new pirvacy policy!</description>
+                <link><!--your privacy policy's URI--></link>
+                <guid><!--unique string per item--></guid>
+                <pubDate>01 Dec 2016 00:00:00 +0000 </pubDate>
+        </item>
+ 
+</channel>
+</rss>
