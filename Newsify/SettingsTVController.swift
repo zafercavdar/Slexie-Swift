@@ -87,6 +87,7 @@ class SettingsTVController: UITableViewController {
         }
         
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .Alert)
+        alertController.view.tintColor = UIColor.reddishColor()
         
         let noAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: { (action: UIAlertAction!) in
             alertController.dismissViewControllerAnimated(true, completion: nil)

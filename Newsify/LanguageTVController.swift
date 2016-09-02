@@ -34,6 +34,10 @@ class LanguageTVModel{
             }
         }
     }
+    
+    func changeLanguage(identifier: LanguageIdentifier, completion callback: () -> Void){
+        callback()
+    }
 }
 
 class LanguageTVController: UITableViewController {
@@ -78,7 +82,6 @@ class LanguageTVController: UITableViewController {
     private var cancelButton = UIBarButtonItem()
     private var applyButton = UIBarButtonItem()
     
-    private var selectedLanguageIndex = NSIndexPath()
     private var userLanguageIdentifier = LanguageIdentifier.NULL
     private var checkMarkIndex = -1
     
@@ -119,10 +122,6 @@ class LanguageTVController: UITableViewController {
     
     func cancelButtonPressed(sender: UIBarButtonItem){
         self.router.routeTo(RouteID.Cancel, VC: self)
-    }
-    
-    func changeLanguage(){
-        
     }
 
     override func viewWillAppear(animated: Bool) {
@@ -165,7 +164,30 @@ class LanguageTVController: UITableViewController {
         return cell
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {        selectedLanguageIndex = indexPath
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
+        let title = "Change Language?"
+        let message = "You'll need to restart Slexie after changing the language."
+        
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .Alert)
+        alertController.view.tintColor = UIColor.reddishColor()
+        
+        let noAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: { (action: UIAlertAction!) in
+            alertController.dismissViewControllerAnimated(true, completion: nil)
+        })
+        
+        let yesAction = UIAlertAction(title: "Change", style: .Default, handler: { [weak self] (action: UIAlertAction!) in
+            
+            guard let strongSelf = self else { return }
+            let identifier = strongSelf.presentation.languages[indexPath.row].identifier
+            
+            strongSelf.model.changeLanguage(identifier, completion: {
+                strongSelf.router.routeTo(RouteID.Apply, VC: strongSelf)
+            })
+        })
+        
+        alertController.addAction(yesAction)
+        alertController.addAction(noAction)
+        self.presentViewController(alertController, animated: true, completion: nil)
     }
 }
