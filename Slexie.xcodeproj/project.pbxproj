@@ -35,6 +35,10 @@
 		B38623591D6C89F7007B8A5E /* SearchPostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B38623581D6C89F7007B8A5E /* SearchPostViewModel.swift */; };
 		B386235B1D6C8DDC007B8A5E /* SearchFeedItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B386235A1D6C8DDC007B8A5E /* SearchFeedItemCell.swift */; };
 		B38E85C01D59C28C00CAE73B /* TagsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B38E85BF1D59C28C00CAE73B /* TagsTableViewCell.swift */; };
+		B39AA30C1D7D68A30018F7DE /* PostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39AA30B1D7D68A30018F7DE /* PostView.swift */; };
+		B39AA30E1D7D87950018F7DE /* PostViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39AA30D1D7D87950018F7DE /* PostViewCell.swift */; };
+		B39AA3101D7D88770018F7DE /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39AA30F1D7D88770018F7DE /* PostViewController.swift */; };
+		B39AA3121D7D908A0018F7DE /* PostViewRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39AA3111D7D908A0018F7DE /* PostViewRouter.swift */; };
 		B39BBA961D67179300A2C9E4 /* TagResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39BBA951D67179300A2C9E4 /* TagResponse.swift */; };
 		B3ACD3741D54D3E6004BEF24 /* CreateAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3ACD3731D54D3E6004BEF24 /* CreateAccountViewController.swift */; };
 		B3B5188B1D79C19D00F44B26 /* PrivacyPolicyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B5188A1D79C19D00F44B26 /* PrivacyPolicyViewController.swift */; };
@@ -147,6 +151,10 @@
 		B38623581D6C89F7007B8A5E /* SearchPostViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchPostViewModel.swift; sourceTree = "<group>"; };
 		B386235A1D6C8DDC007B8A5E /* SearchFeedItemCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchFeedItemCell.swift; sourceTree = "<group>"; };
 		B38E85BF1D59C28C00CAE73B /* TagsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagsTableViewCell.swift; sourceTree = "<group>"; };
+		B39AA30B1D7D68A30018F7DE /* PostView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostView.swift; sourceTree = "<group>"; };
+		B39AA30D1D7D87950018F7DE /* PostViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostViewCell.swift; sourceTree = "<group>"; };
+		B39AA30F1D7D88770018F7DE /* PostViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
+		B39AA3111D7D908A0018F7DE /* PostViewRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostViewRouter.swift; sourceTree = "<group>"; };
 		B39BBA951D67179300A2C9E4 /* TagResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagResponse.swift; sourceTree = "<group>"; };
 		B3ACD3731D54D3E6004BEF24 /* CreateAccountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateAccountViewController.swift; sourceTree = "<group>"; };
 		B3B5188A1D79C19D00F44B26 /* PrivacyPolicyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyViewController.swift; sourceTree = "<group>"; };
@@ -331,6 +339,7 @@
 				B3BA49B81D65ED4D00106930 /* TableViewCells */,
 				B36E72141D5B78A700F626D0 /* LoadingView.swift */,
 				B3B5189E1D79E56D00F44B26 /* CustomViews.swift */,
+				B39AA30B1D7D68A30018F7DE /* PostView.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -347,6 +356,7 @@
 				B38623501D6C332B007B8A5E /* NotificationsTableViewController.swift */,
 				B3ED70F01D5C6ADF001159A6 /* ProfilePageViewController.swift */,
 				B3FCACB41D783E7800577D0F /* SettingsTVController.swift */,
+				B39AA30F1D7D88770018F7DE /* PostViewController.swift */,
 				B3B518931D79C6AE00F44B26 /* Settings */,
 			);
 			name = "View Controllers";
@@ -395,6 +405,7 @@
 				B3FCACBA1D784AEA00577D0F /* SettingsTVHeaderCell.swift */,
 				B3FCACC21D7875B700577D0F /* ChangePasswordTVCell.swift */,
 				B3B5189A1D79D0DF00F44B26 /* LanguageTVCell.swift */,
+				B39AA30D1D7D87950018F7DE /* PostViewCell.swift */,
 			);
 			name = TableViewCells;
 			sourceTree = "<group>";
@@ -411,6 +422,7 @@
 				B3FCACC61D799CC700577D0F /* ChangePasswordRouter.swift */,
 				B3B518961D79CA8F00F44B26 /* PolicyPageRouter.swift */,
 				B3B5189C1D79D21E00F44B26 /* LanguageTVRouter.swift */,
+				B39AA3111D7D908A0018F7DE /* PostViewRouter.swift */,
 			);
 			name = Routers;
 			sourceTree = "<group>";
@@ -757,6 +769,7 @@
 				B3FCACC31D7875B700577D0F /* ChangePasswordTVCell.swift in Sources */,
 				B3FCACB51D783E7800577D0F /* SettingsTVController.swift in Sources */,
 				B38623591D6C89F7007B8A5E /* SearchPostViewModel.swift in Sources */,
+				B39AA30C1D7D68A30018F7DE /* PostView.swift in Sources */,
 				B36F50C41D7472D10037CCB0 /* NotificationsViewModel.swift in Sources */,
 				B33741081D6EF5B200B15BA4 /* VM Protocols.swift in Sources */,
 				B3FCACB31D78301100577D0F /* TV Extensions.swift in Sources */,
@@ -778,11 +791,13 @@
 				B33E936C1D665C570011019B /* Global Functions.swift in Sources */,
 				B3BA49BF1D65F8FA00106930 /* SignUpRouter.swift in Sources */,
 				B38623531D6C40A0007B8A5E /* CameraTableViewController.swift in Sources */,
+				B39AA3101D7D88770018F7DE /* PostViewController.swift in Sources */,
 				B3BA49C61D65FAEE00106930 /* ColorExtension.swift in Sources */,
 				B37DB5C81D66F94A00ADB79B /* ImaggaService.swift in Sources */,
 				B3ACD3741D54D3E6004BEF24 /* CreateAccountViewController.swift in Sources */,
 				B3ED70FD1D5CB3C6001159A6 /* FirebaseController.swift in Sources */,
 				B3FCACC71D799CC700577D0F /* ChangePasswordRouter.swift in Sources */,
+				B39AA3121D7D908A0018F7DE /* PostViewRouter.swift in Sources */,
 				B36E72171D5B846700F626D0 /* RandomBase.swift in Sources */,
 				B38623511D6C332B007B8A5E /* NotificationsTableViewController.swift in Sources */,
 				B3FCACAF1D78109E00577D0F /* ArrayExtensions.swift in Sources */,
@@ -795,6 +810,7 @@
 				B36F50C21D74714D0037CCB0 /* NotificationTableViewCell.swift in Sources */,
 				B361FCCB1D63234800B4F8AA /* FeedPostViewModel.swift in Sources */,
 				B3B518991D79CF5B00F44B26 /* LanguageTVController.swift in Sources */,
+				B39AA30E1D7D87950018F7DE /* PostViewCell.swift in Sources */,
 				B3ED70F31D5C87E9001159A6 /* NewsFeedTableViewController.swift in Sources */,
 				B3ED70F51D5C87FD001159A6 /* SearchPageTableViewController.swift in Sources */,
 				B3BA49C81D65FC5E00106930 /* ProfileRouter.swift in Sources */,

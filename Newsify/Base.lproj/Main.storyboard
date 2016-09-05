@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -7,6 +7,51 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
+        <!--Root View Controller-->
+        <scene sceneID="e1Z-7H-9vI">
+            <objects>
+                <tableViewController id="luu-01-A5w" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="qA4-VJ-B4e">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="YuR-yf-HSz">
+                                <rect key="frame" x="0.0" y="92" width="600" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="YuR-yf-HSz" id="mRd-CG-zUl">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="luu-01-A5w" id="gku-Kv-igt"/>
+                            <outlet property="delegate" destination="luu-01-A5w" id="YZP-M6-p7g"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Root View Controller" id="Zei-Sq-Phb"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pDd-Gz-I1V" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1236" y="-360"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="6YY-IT-dDx">
+            <objects>
+                <navigationController id="L4l-KE-Bpc" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="fs5-0d-Kch">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="luu-01-A5w" kind="relationship" relationship="rootViewController" id="ham-mN-jAp"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mgS-mo-uRo" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2056" y="-360"/>
+        </scene>
         <!--Login View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
@@ -430,6 +475,51 @@
             </objects>
             <point key="canvasLocation" x="940" y="-957"/>
         </scene>
+        <!--Photo-->
+        <scene sceneID="FMD-qp-3VY">
+            <objects>
+                <tableViewController id="EHf-w6-cbk" customClass="PostViewController" customModule="Slexie" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="61g-T4-A2B">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="PostViewCell" id="lCd-2W-dSA" customClass="PostViewCell" customModule="Slexie" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="92" width="600" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="lCd-2W-dSA" id="Iwl-bE-fDP">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="EHf-w6-cbk" id="mSw-78-2hE"/>
+                            <outlet property="delegate" destination="EHf-w6-cbk" id="9Do-Vh-hWW"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Photo" id="NEf-D2-Iz3"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wOs-5D-hM0" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1448" y="-4263"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="wIR-mL-bb2">
+            <objects>
+                <navigationController id="Ff1-7a-mNb" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="oly-ZP-tmE">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="EHf-w6-cbk" kind="relationship" relationship="rootViewController" id="OcS-V5-Sfz"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ZZn-xa-YDD" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1448" y="-3594"/>
+        </scene>
         <!--Settings-->
         <scene sceneID="YpL-Jg-JWG">
             <objects>
@@ -489,6 +579,7 @@
                         <segue destination="fqW-w5-FGv" kind="show" identifier="ChangePassword" id="JZI-PH-OwC"/>
                         <segue destination="3dg-PE-nKr" kind="show" identifier="ShowPolicy" id="2dD-uM-Tgc"/>
                         <segue destination="vwd-Jf-cnn" kind="show" identifier="ShowLanguageChange" id="3Cr-ep-5oi"/>
+                        <segue destination="Ff1-7a-mNb" kind="show" identifier="OpenPost" id="NaA-1f-OxA"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mZW-NQ-CeD" userLabel="First Responder" sceneMemberID="firstResponder"/>

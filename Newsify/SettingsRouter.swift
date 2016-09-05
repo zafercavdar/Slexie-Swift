@@ -23,6 +23,8 @@ class SettingsRouter: Router {
             VC.performSegueWithIdentifier("ShowPolicy", sender: nil)
         case "ChangeLanguage":
             VC.performSegueWithIdentifier("ShowLanguageChange", sender: nil)
+        case "OpenPost":
+            VC.performSegueWithIdentifier("OpenPost", sender: nil)
         default:
             break
         }

@@ -8,18 +8,19 @@
 
 import UIKit
 
+struct FeedPostPresentation {
+    var id: String
+    var ownerName: String
+    var ownerID: String
+    var image: UIImage
+    var tagList: String
+    var likers: [String]
+    var likeCount: Int
+    var liked: Bool
+}
+
+
 struct FeedPostsPresentation {
-    
-    struct FeedPostPresentation {
-        var id: String
-        var ownerName: String
-        var ownerID: String
-        var image: UIImage
-        var tagList: String
-        var likers: [String]
-        var likeCount: Int
-        var liked: Bool
-    }
     
     var feedPosts: [FeedPostPresentation] = []
 

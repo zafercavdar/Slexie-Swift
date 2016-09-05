@@ -27,6 +27,7 @@ class SettingsTVController: UITableViewController {
         static let Cancel = "Cancel"
         static let PrivacyPolicy = "PrivacyPolicy"
         static let ChangeLanguage = "ChangeLanguage"
+        static let OpenPost = "OpenPost"
     }
     
     private var model = SettingsViewModel()
@@ -170,6 +171,13 @@ class SettingsTVController: UITableViewController {
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let section = indexPath.section
         let row = indexPath.row
+        
+        
+        // Temporaryly postview controller
+        
+        if (section == 0 && row == 0){
+            self.router.routeTo(RouteID.OpenPost, VC: self)
+        }
         
         // Change password
         if (section == 0 && row == 1){
