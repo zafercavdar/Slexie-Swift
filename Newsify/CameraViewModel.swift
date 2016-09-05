@@ -38,7 +38,7 @@ class CameraViewModel {
     var stateChangeHandler: ((State.Change) -> Void)?
 
     
-    func fetchImageTags(image: UIImage, completion callback: () -> Void) {
+    func fetchImageTags(image: UIImage, completion callback: (tags: [String]) -> Void) {
         
         let rate = state.post.compressionRate
         
@@ -57,7 +57,7 @@ class CameraViewModel {
                     guard let sself = self else {return}
                     sself.state.post.trustedTags = tags
                     sself.emit(State.Change.tags(CollectionChange.reload))
-                    callback()
+                    callback(tags: tags)
                     })
                 })
         }

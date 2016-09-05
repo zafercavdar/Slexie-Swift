@@ -69,6 +69,8 @@ class CameraTableViewController: UITableViewController, UINavigationControllerDe
             callCameraController()
         }
         
+        model.resetImage()
+        
         super.viewWillAppear(animated)
         
         let nav = self.navigationController?.navigationBar
@@ -194,6 +196,7 @@ class CameraTableViewController: UITableViewController, UINavigationControllerDe
     @IBAction func addTag(sender: UIBarButtonItem) {
         addManuelTag()
     }
+    
     func addManuelTag(){
         if presentation.manuelTagsRemained != 0{
             
@@ -235,7 +238,6 @@ extension CameraTableViewController : UIImagePickerControllerDelegate {
         model.resetImage()
         
         self.router.routeTo(RouteID.Dismiss, VC: self)
-        self.router.routeTo(RouteID.toFeed, VC: self)
     }
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
@@ -252,9 +254,14 @@ extension CameraTableViewController : UIImagePickerControllerDelegate {
         
         loadingView.addToView(self.view, text: localized("AnalyzingInfo"))
         
-        model.fetchImageTags(takenPhoto) { [weak self] in
+        model.fetchImageTags(takenPhoto) { [weak self] (tags) in
             guard let strongSelf = self else { return }
+            
             strongSelf.loadingView.removeFromView(strongSelf.view)
+
+            if tags.count == 0 {
+                strongSelf.callCameraController()
+            }
         }
     }
 }

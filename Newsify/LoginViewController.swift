@@ -19,6 +19,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     private let fbNetworkingController = FirebaseController()
     private let router = LoginRouter()
+    private let loadingView = LoadingView()
+
     
     struct RouteID {
         static let NewsFeed = "Newsfeed"
@@ -69,7 +71,11 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
+        
         if fbNetworkingController.getCurrentUser() != nil {
+            
+            loadingView.addToView(self.view, text: localized("SigningInInfo"))
+            
             self.fbNetworkingController.fetchUserLanguage(completion: { (identifier) in
                 switch identifier{
                 case LanguageIdentifier.Turkish.rawValue, LanguageIdentifier.English.rawValue, LanguageIdentifier.Russian.rawValue:
@@ -77,6 +83,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                 default:
                     lang = LanguageIdentifier.English.rawValue
                 }
+                
+                self.loadingView.removeFromView(self.view)
                 
                 self.router.routeTo(RouteID.NewsFeed, VC: self)
             })
@@ -109,15 +117,14 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     private func loginWithUsername(username: String, _ password: String){
         
-        let loadingView = LoadingView()
         loadingView.addToView(self.view, text: localized("SigningInInfo"))
         
         fbNetworkingController.signInWith(username: username, password: password, enableNotification: true) { [weak self](error) in
             
             guard let strongSelf = self else { return }
 
-            loadingView.removeFromView(strongSelf.view)
             if let error = error {
+                strongSelf.loadingView.removeFromView(strongSelf.view)
                 strongSelf.signInFailedNotification(error.localizedDescription)
             } else {
                 strongSelf.fbNetworkingController.fetchUserLanguage(completion: { (identifier) in
@@ -128,6 +135,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                         lang = LanguageIdentifier.English.rawValue
                     }
                     
+                    strongSelf.loadingView.removeFromView(strongSelf.view)
                     strongSelf.router.routeTo(RouteID.NewsFeed, VC: strongSelf)
                 })
                 
