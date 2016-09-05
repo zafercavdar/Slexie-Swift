@@ -238,6 +238,7 @@ extension CameraTableViewController : UIImagePickerControllerDelegate {
         model.resetImage()
         
         self.router.routeTo(RouteID.Dismiss, VC: self)
+        self.router.routeTo(RouteID.toFeed, VC: self)
     }
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
