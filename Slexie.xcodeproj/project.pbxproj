@@ -62,6 +62,7 @@
 		B3C0F7DF1D7EA82C00E41C96 /* SinglePostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3C0F7DE1D7EA82C00E41C96 /* SinglePostViewModel.swift */; };
 		B3C0F7E11D7EB50B00E41C96 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3C0F7E01D7EB50B00E41C96 /* LoginViewModel.swift */; };
 		B3C0F7E31D7EB51D00E41C96 /* CreateAccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3C0F7E21D7EB51D00E41C96 /* CreateAccountViewModel.swift */; };
+		B3C0F7E41D7F0D8E00E41C96 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B3F455B11D54A1BD005EA708 /* Main.storyboard */; };
 		B3ED70F11D5C6ADF001159A6 /* ProfilePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3ED70F01D5C6ADF001159A6 /* ProfilePageViewController.swift */; };
 		B3ED70F31D5C87E9001159A6 /* NewsFeedTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3ED70F21D5C87E9001159A6 /* NewsFeedTableViewController.swift */; };
 		B3ED70F51D5C87FD001159A6 /* SearchPageTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3ED70F41D5C87FD001159A6 /* SearchPageTableViewController.swift */; };
@@ -70,7 +71,6 @@
 		B3ED71011D5CC655001159A6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B3ED71001D5CC655001159A6 /* GoogleService-Info.plist */; };
 		B3F455AE1D54A1BD005EA708 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F455AD1D54A1BD005EA708 /* AppDelegate.swift */; };
 		B3F455B01D54A1BD005EA708 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F455AF1D54A1BD005EA708 /* LoginViewController.swift */; };
-		B3F455B31D54A1BD005EA708 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B3F455B11D54A1BD005EA708 /* Main.storyboard */; };
 		B3F455B51D54A1BD005EA708 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B3F455B41D54A1BD005EA708 /* Assets.xcassets */; };
 		B3F455B81D54A1BD005EA708 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B3F455B61D54A1BD005EA708 /* LaunchScreen.storyboard */; };
 		B3F455C31D54A1BD005EA708 /* NewsifyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F455C21D54A1BD005EA708 /* NewsifyTests.swift */; };
@@ -616,10 +616,10 @@
 				B335520C1D77012C006D56AE /* Localizable.strings in Resources */,
 				B3F455B81D54A1BD005EA708 /* LaunchScreen.storyboard in Resources */,
 				B3B518921D79C66600F44B26 /* style.css in Resources */,
+				B3C0F7E41D7F0D8E00E41C96 /* Main.storyboard in Resources */,
 				B3ED71011D5CC655001159A6 /* GoogleService-Info.plist in Resources */,
 				B3F455B51D54A1BD005EA708 /* Assets.xcassets in Resources */,
 				B3B518901D79C61500F44B26 /* Policy.html in Resources */,
-				B3F455B31D54A1BD005EA708 /* Main.storyboard in Resources */,
 				B3B518951D79C7AF00F44B26 /* privacy-policy-updates.xml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

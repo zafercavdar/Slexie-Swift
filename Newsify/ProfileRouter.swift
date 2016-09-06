@@ -13,8 +13,10 @@ class ProfileRouter: Router {
     func routeTo(routeID: String, VC: UIViewController){
         
         switch routeID {
-        case "LogOut":
-            VC.performSegueWithIdentifier("LogOut", sender: nil)
+        case "Settings":
+            //let settingsTVController = SettingsTVController()
+            //VC.navigationController!.presentViewController(settingsTVController, animated: true, completion: nil)
+            VC.performSegueWithIdentifier("Settings", sender: nil)
         default:
             break
         }

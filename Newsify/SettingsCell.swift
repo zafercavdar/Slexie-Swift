@@ -20,7 +20,4 @@ class SettingsCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
     }
     
-    
-
-    
 }

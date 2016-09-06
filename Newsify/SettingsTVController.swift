@@ -17,7 +17,7 @@ class SettingsTVController: UITableViewController {
 
     
     struct CellIdentifiers {
-        static let CustomCell = "SettingsTVCell"
+        static let CustomCell = "SettingsCell"
         static let CustomHeaderCell = "SettingsTVHeaderCell"
     }
     
@@ -119,7 +119,8 @@ class SettingsTVController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(CellIdentifiers.CustomCell, forIndexPath: indexPath) as! SettingsCell
+        
+        let cell = self.tableView.dequeueReusableCellWithIdentifier(CellIdentifiers.CustomCell, forIndexPath: indexPath) as! SettingsCell
 
         let section = indexPath.section
         let row = indexPath.row

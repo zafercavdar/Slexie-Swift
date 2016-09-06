@@ -406,7 +406,7 @@
                                     <outlet property="headerTitle" destination="NDi-X0-01p" id="C2M-SI-x8Q"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SettingsTVCell" id="R8P-cD-ulT" customClass="SettingsCell" customModule="Slexie" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SettingsCell" id="R8P-cD-ulT" customClass="SettingsCell" customModule="Slexie" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="145" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="R8P-cD-ulT" id="n1W-zO-Wjs">
@@ -650,6 +650,9 @@
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="469.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="rAg-gG-J4r" kind="show" identifier="Settings" id="XGM-3f-g87"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -672,7 +675,7 @@
                                 </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
                             <connections>
-                                <segue destination="rAg-gG-J4r" kind="show" id="iaE-3m-QCJ"/>
+                                <action selector="settingsPressed:" destination="ROT-uo-k3j" id="5hi-ul-vFb"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -864,6 +867,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="v1H-f1-fwr"/>
-        <segue reference="xWU-Dy-i3y"/>
+        <segue reference="O1p-1h-BT4"/>
     </inferredMetricsTieBreakers>
 </document>

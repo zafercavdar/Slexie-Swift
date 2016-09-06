@@ -33,6 +33,7 @@ class ProfilePageViewController: UITableViewController {
     private let loadingView = LoadingView()
     
     struct RouteID {
+        static let Setting = "Settings"
     }
     
     private struct Identifier {
@@ -105,6 +106,10 @@ class ProfilePageViewController: UITableViewController {
     
     @IBAction func unwindToProfile(sender: UIStoryboardSegue) {
         reload()
+    }
+    
+    @IBAction func settingsPressed(sender: UIBarButtonItem) {
+        self.router.routeTo(RouteID.Setting, VC: self)
     }
 
     
