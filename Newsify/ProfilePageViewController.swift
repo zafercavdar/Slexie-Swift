@@ -107,11 +107,10 @@ class ProfilePageViewController: UITableViewController {
     @IBAction func unwindToProfile(sender: UIStoryboardSegue) {
         reload()
     }
-    
+
     @IBAction func settingsPressed(sender: UIBarButtonItem) {
         self.router.routeTo(RouteID.Setting, VC: self)
     }
-
     
     // MARK: TableVC Methods
     
