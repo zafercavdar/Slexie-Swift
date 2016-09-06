@@ -61,6 +61,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             router.routeTo(RouteID.NewsFeed, VC: self)
         case .error(let error):
             signInFailedNotification(error)
+        case .redirectSignup:
+            router.routeTo(RouteID.CreateAccount, VC: self)
         default:
             break
         }
@@ -83,7 +85,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func signUpButton(sender: UIButton) {
-        router.routeTo(RouteID.CreateAccount, VC: self)
+        model.signUpPressed()
     }
     
     

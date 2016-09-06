@@ -19,6 +19,7 @@ class LoginViewModel{
             case loadingView
             case removeView
             case error(String)
+            case redirectSignup
         }
     }
     
@@ -73,10 +74,15 @@ class LoginViewModel{
         }
     }
     
+    func signUpPressed(){
+        emit(State.Change.redirectSignup)
+    }
+}
 
+private extension LoginViewModel{
+    
     private func emit(change: State.Change){
         stateChangeHandler?(change)
     }
-
     
 }

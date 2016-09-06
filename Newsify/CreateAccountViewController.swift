@@ -26,6 +26,9 @@ class CreateAccountViewController: UIViewController, UITextFieldDelegate{
     
     private let networkingController = FirebaseController()
     private let router = SignUpRouter()
+    private let model = CreateAccountViewModel()
+    
+    private let loadingView = LoadingView()
     
     private var userLanguage = NSBundle.mainBundle().preferredLocalizations.first! as String
 
@@ -44,11 +47,32 @@ class CreateAccountViewController: UIViewController, UITextFieldDelegate{
         for field in fields{
             field.delegate = self
         }
-
         
         setUIColors()
         setUITitles()
+        
+        model.stateChangeHandler = { [weak self] change in
+            self?.applyStateChange(change)
+        }
     }
+    
+    func applyStateChange(change: CreateAccountViewModel.State.Change) {
+        switch change {
+        case .loadingView:
+            loadingView.addToView(self.view, text: localized("SigningUpInfo"))
+        case .removeView:
+            loadingView.removeFromView(self.view)
+        case .signUpAttemp(CallbackResult.Success):
+            self.router.routeTo(RouteID.LoggedIn, VC: self)
+        case .cancel:
+            self.router.routeTo(RouteID.Cancel, VC: self)
+        case .error(let error):
+            signUpFailedNotification(error)
+        default:
+            break
+        }
+    }
+
     
     private func setUIColors(){
         self.view.backgroundColor = UIColor.flatBlue()
@@ -85,7 +109,7 @@ class CreateAccountViewController: UIViewController, UITextFieldDelegate{
     
     
     @IBAction func cancel(sender: UIButton) {
-        self.router.routeTo(RouteID.Cancel, VC: self)
+        model.cancelPressed()
     }
     
     
@@ -102,7 +126,7 @@ class CreateAccountViewController: UIViewController, UITextFieldDelegate{
         let profileType = accountTypeControl.on ? "Public" : "Private"
         
         if usernameExists && passwordExists && password == repassword{
-            signUpWithUsernamePassword(email, password, username, profileType, language: userLanguage)
+            model.signUpWithUsernamePassword(email, password, username, profileType, language: userLanguage)
         }else if !usernameExists || !passwordExists{
             fillAllFields()
         }
@@ -119,26 +143,6 @@ class CreateAccountViewController: UIViewController, UITextFieldDelegate{
         }
     }
     
-    private func signUpWithUsernamePassword(email: String, _ password: String, _ username: String, _ profileType: String, language: String){
-        
-        let loadingView = LoadingView()
-        loadingView.addToView(self.view, text: localized("SigningUpInfo"))
-        
-        
-        networkingController.signUp(email, username: username, password: password, profileType: profileType, language: language) { [weak self](error) in
-            
-            guard let strongSelf = self else { return }
-            
-            loadingView.removeFromView(strongSelf.view)
-
-            if let error = error {
-                strongSelf.signUpFailedNotification(error.localizedDescription)
-            } else {
-                strongSelf.router.routeTo(RouteID.LoggedIn, VC: strongSelf)
-            }
-        }
-    }
-
     // MARK: UITextFieldDelegate
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
