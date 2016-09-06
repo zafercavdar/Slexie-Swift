@@ -42,7 +42,6 @@ class CameraTableViewController: UITableViewController, UINavigationControllerDe
     }
     
     
-    private let networkingController = FirebaseController()
     private let router = CameraRouter()
     private let loadingView = LoadingView()
     private let model = CameraViewModel()

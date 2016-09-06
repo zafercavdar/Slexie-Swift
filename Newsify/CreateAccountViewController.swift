@@ -24,7 +24,6 @@ class CreateAccountViewController: UIViewController, UITextFieldDelegate{
     
     private var fields: [UITextField] = []
     
-    private let networkingController = FirebaseController()
     private let router = SignUpRouter()
     private let model = CreateAccountViewModel()
     

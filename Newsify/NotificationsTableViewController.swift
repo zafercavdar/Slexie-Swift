@@ -18,7 +18,6 @@ struct NotificationsPresentation {
     }
     
     var notifications: [NotificationPresentation] = []
-    var controller = FirebaseController()
     
     mutating func update(withState state: NotificationsViewModel.State){
         
