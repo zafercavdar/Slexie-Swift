@@ -11,7 +11,7 @@ import UIKit
 extension UIColor {
     
     static func coreColor() -> UIColor {
-        return UIColor.blackColor()
+        return UIColor.flatBlue()
     }
     
     static func reddishColor() -> UIColor {
