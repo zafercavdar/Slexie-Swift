@@ -51,7 +51,7 @@ class CreateAccountViewController: UIViewController, UITextFieldDelegate{
     }
     
     private func setUIColors(){
-        self.view.backgroundColor = UIColor.coreColor()
+        self.view.backgroundColor = UIColor.flatBlue()
         usernameLabel.textColor = UIColor.whiteColor()
         passwordLabel.textColor = UIColor.whiteColor()
         repasswordLabel.textColor = UIColor.whiteColor()

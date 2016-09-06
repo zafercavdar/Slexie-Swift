@@ -27,4 +27,9 @@ class SinglePostViewModel: PostViewModel{
     private(set) var state = State()
     var stateChangeHandler: ((State.Change) -> Void)?
     
+    private func emit(change: State.Change){
+        stateChangeHandler?(change)
+    }
+
+    
 }

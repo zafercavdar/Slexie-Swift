@@ -60,6 +60,8 @@
 		B3BA49CA1D66003500106930 /* ImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3BA49C91D66003500106930 /* ImageExtension.swift */; };
 		B3C0F7DD1D7DC06500E41C96 /* PostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3C0F7DC1D7DC06500E41C96 /* PostViewModel.swift */; };
 		B3C0F7DF1D7EA82C00E41C96 /* SinglePostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3C0F7DE1D7EA82C00E41C96 /* SinglePostViewModel.swift */; };
+		B3C0F7E11D7EB50B00E41C96 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3C0F7E01D7EB50B00E41C96 /* LoginViewModel.swift */; };
+		B3C0F7E31D7EB51D00E41C96 /* CreateAccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3C0F7E21D7EB51D00E41C96 /* CreateAccountViewModel.swift */; };
 		B3ED70F11D5C6ADF001159A6 /* ProfilePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3ED70F01D5C6ADF001159A6 /* ProfilePageViewController.swift */; };
 		B3ED70F31D5C87E9001159A6 /* NewsFeedTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3ED70F21D5C87E9001159A6 /* NewsFeedTableViewController.swift */; };
 		B3ED70F51D5C87FD001159A6 /* SearchPageTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3ED70F41D5C87FD001159A6 /* SearchPageTableViewController.swift */; };
@@ -176,6 +178,8 @@
 		B3BA49C91D66003500106930 /* ImageExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageExtension.swift; sourceTree = "<group>"; };
 		B3C0F7DC1D7DC06500E41C96 /* PostViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostViewModel.swift; sourceTree = "<group>"; };
 		B3C0F7DE1D7EA82C00E41C96 /* SinglePostViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SinglePostViewModel.swift; sourceTree = "<group>"; };
+		B3C0F7E01D7EB50B00E41C96 /* LoginViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		B3C0F7E21D7EB51D00E41C96 /* CreateAccountViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateAccountViewModel.swift; sourceTree = "<group>"; };
 		B3ED70F01D5C6ADF001159A6 /* ProfilePageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfilePageViewController.swift; sourceTree = "<group>"; };
 		B3ED70F21D5C87E9001159A6 /* NewsFeedTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsFeedTableViewController.swift; sourceTree = "<group>"; };
 		B3ED70F41D5C87FD001159A6 /* SearchPageTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchPageTableViewController.swift; sourceTree = "<group>"; };
@@ -364,6 +368,8 @@
 		B3BA49B61D65ECE600106930 /* View Models */ = {
 			isa = PBXGroup;
 			children = (
+				B3C0F7E01D7EB50B00E41C96 /* LoginViewModel.swift */,
+				B3C0F7E21D7EB51D00E41C96 /* CreateAccountViewModel.swift */,
 				B3C0F7DC1D7DC06500E41C96 /* PostViewModel.swift */,
 				B361FCCA1D63234800B4F8AA /* FeedPostViewModel.swift */,
 				B38623581D6C89F7007B8A5E /* SearchPostViewModel.swift */,
@@ -797,6 +803,7 @@
 				B3ED70FD1D5CB3C6001159A6 /* FirebaseController.swift in Sources */,
 				B3FCACC71D799CC700577D0F /* ChangePasswordRouter.swift in Sources */,
 				B39AA3121D7D908A0018F7DE /* SinglePostViewRouter.swift in Sources */,
+				B3C0F7E11D7EB50B00E41C96 /* LoginViewModel.swift in Sources */,
 				B36E72171D5B846700F626D0 /* RandomBase.swift in Sources */,
 				B38623511D6C332B007B8A5E /* NotificationsTableViewController.swift in Sources */,
 				B3FCACAF1D78109E00577D0F /* ArrayExtensions.swift in Sources */,
@@ -821,6 +828,7 @@
 				B3FCACB11D782DD000577D0F /* MainTabbarController.swift in Sources */,
 				B3C0F7DD1D7DC06500E41C96 /* PostViewModel.swift in Sources */,
 				B3FCACB71D78404D00577D0F /* SetttingsViewModel.swift in Sources */,
+				B3C0F7E31D7EB51D00E41C96 /* CreateAccountViewModel.swift in Sources */,
 				B3F455AE1D54A1BD005EA708 /* AppDelegate.swift in Sources */,
 				B316429C1D7434F900F9EDB5 /* Notification.swift in Sources */,
 				B3B527C11D65AF2100E31C37 /* ProfilePostsViewModel.swift in Sources */,

@@ -18,7 +18,7 @@ class LoadingView: UIView {
         
         UIApplication.sharedApplication().networkActivityIndicatorVisible = true
         loadingView = UIView(frame: CGRect(x: view.frame.midX - 90, y: view.frame.midY - 25, width: 180, height: 50))
-        loadingView.backgroundColor = UIColor.reddishColor()
+        loadingView.backgroundColor = UIColor.midnightBlue()
         loadingView.alpha = 1
         loadingView.layer.cornerRadius = 10
         

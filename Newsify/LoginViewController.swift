@@ -17,9 +17,9 @@ import UIKit
 
 class LoginViewController: UIViewController, UITextFieldDelegate {
     
-    private let fbNetworkingController = FirebaseController()
     private let router = LoginRouter()
     private let loadingView = LoadingView()
+    private let model = LoginViewModel()
 
     
     struct RouteID {
@@ -38,6 +38,10 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
 
         super.viewDidLoad()
         
+        model.stateChangeHandler = { [weak self] change in
+            self?.applyStateChange(change)
+        }
+        
         usernameField.delegate = self
         passwordField.delegate = self
         
@@ -45,8 +49,27 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         
     }
     
+    func applyStateChange(change: LoginViewModel.State.Change) {
+        switch change {
+        case .loadingView:
+            loadingView.addToView(self.view, text: localized("SigningInInfo"))
+        case .removeView:
+            loadingView.removeFromView(self.view)
+        case .loggedIn(CallbackResult.Success):
+            router.routeTo(RouteID.NewsFeed, VC: self)
+        case .loginAttemp(CallbackResult.Success):
+            router.routeTo(RouteID.NewsFeed, VC: self)
+        case .error(let error):
+            signInFailedNotification(error)
+        default:
+            break
+        }
+    }
+
+    
+    
     private func setUITitlesColors(){
-        self.view.backgroundColor = UIColor.coreColor()
+        self.view.backgroundColor = UIColor.flatBlue()
         
         loginButton.setTitle(localized("LoginButton"), forState: .Normal)
         signUpRedirect.setTitle(localized("SignUpRedirect"), forState: .Normal)
@@ -70,25 +93,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        
-        
-        if fbNetworkingController.getCurrentUser() != nil {
-            
-            loadingView.addToView(self.view, text: localized("SigningInInfo"))
-            
-            self.fbNetworkingController.fetchUserLanguage(completion: { (identifier) in
-                switch identifier{
-                case LanguageIdentifier.Turkish.rawValue, LanguageIdentifier.English.rawValue, LanguageIdentifier.Russian.rawValue:
-                    lang = identifier
-                default:
-                    lang = LanguageIdentifier.English.rawValue
-                }
-                
-                self.loadingView.removeFromView(self.view)
-                
-                self.router.routeTo(RouteID.NewsFeed, VC: self)
-            })
-        }
+        model.checkUserLoginStatus()
     }
     
     
@@ -106,41 +111,11 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         
         
         if usernameExists && passwordExists {
-            loginWithUsername(username, password)
+            model.loginWithUsername(username, password)
         } else {
             fillAllFields()
         }
         
-    }
-    
-    // MARK: Helper methods
-    
-    private func loginWithUsername(username: String, _ password: String){
-        
-        loadingView.addToView(self.view, text: localized("SigningInInfo"))
-        
-        fbNetworkingController.signInWith(username: username, password: password, enableNotification: true) { [weak self](error) in
-            
-            guard let strongSelf = self else { return }
-
-            if let error = error {
-                strongSelf.loadingView.removeFromView(strongSelf.view)
-                strongSelf.signInFailedNotification(error.localizedDescription)
-            } else {
-                strongSelf.fbNetworkingController.fetchUserLanguage(completion: { (identifier) in
-                    switch identifier{
-                    case LanguageIdentifier.Turkish.rawValue, LanguageIdentifier.English.rawValue, LanguageIdentifier.Russian.rawValue:
-                        lang = identifier
-                    default:
-                        lang = LanguageIdentifier.English.rawValue
-                    }
-                    
-                    strongSelf.loadingView.removeFromView(strongSelf.view)
-                    strongSelf.router.routeTo(RouteID.NewsFeed, VC: strongSelf)
-                })
-                
-            }
-        }
     }
     
     // MARK: UITextFieldDelegate

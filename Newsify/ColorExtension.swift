@@ -34,4 +34,7 @@ extension UIColor {
         return UIColor(red: 52.0 / 255.0, green: 152.0 / 255.0 , blue: 219.0 / 255.0, alpha: 1)    
     }
     
+    static func midnightBlue() -> UIColor {
+        return UIColor(red: 44.0 / 255.0, green: 62.0 / 255.0 , blue: 80.0 / 255.0, alpha: 1)
+    }
 }
