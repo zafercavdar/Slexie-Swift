@@ -13,8 +13,7 @@ enum CollectionChange {
     case reload
 }
 
-
-class FeedPostViewModel: NotificationSender, LikerUnliker {
+class FeedPostViewModel: PostViewModel {
     
     struct State{
         var feedPosts: [FeedPost] = []
@@ -30,7 +29,6 @@ class FeedPostViewModel: NotificationSender, LikerUnliker {
         }
     }
     
-    var networkingController = FirebaseController()
     private(set) var state = State()
     var stateChangeHandler: ((State.Change) -> Void)?
     

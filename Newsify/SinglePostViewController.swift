@@ -1,128 +1,91 @@
 //
-//  ProfilePageViewController.swift
+//  PostViewController.swift
 //  Slexie
 //
-//  Created by Zafer Cavdar on 11/08/2016.
+//  Created by Zafer Cavdar on 05/09/2016.
 //  Copyright © 2016 Zafer Cavdar. All rights reserved.
 //
 
 import UIKit
 
-struct ProfilePostViewPresentation {
-    
-    var postViews: [PostView] = []
-    
-    mutating func update(withState state: ProfilePostViewModel.State){
-        postViews = state.profilePosts.map({ (profilePost) -> PostView in
-            return PostView(post: profilePost)
-        })
-    }
+struct SinglePostViewPresentation{
 
+    var postView: PostView?
+    
+    mutating func update(withState state: SinglePostViewModel.State){
+        let post = state.post!
+        postView = PostView(post: post)
+    }
 }
 
-class ProfilePageViewController: UITableViewController {
 
-    @IBOutlet var profilePostsView: UITableView!
+class SinglePostViewController: UITableViewController {
     
-    
-    private let networkingController = FirebaseController()
-    private let model = ProfilePostViewModel()
-    private let router = ProfileRouter()
-    private var presentation = ProfilePostViewPresentation()
-    
-    private let loadingView = LoadingView()
-    
-    struct RouteID {
+    private struct Identifier{
+        static let PostViewCell = "PostViewCell"
     }
     
-    private struct Identifier {
-        static let ProfilePostCell = "ProfilePostTableViewCell"
+    private struct RouteID {
+        static let Back = "Back"
     }
+    
+    private var backButton = UIBarButtonItem()
+    
+    private var router = SinglePostViewRouter()
+    private var model = SinglePostViewModel()
+    private var presentation = SinglePostViewPresentation()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationItem.title = localized("NavBarProfile")
-        
-        let refreshControl = UIRefreshControl()
-        refreshControl.addTarget(self, action: #selector(refresh(_:)), forControlEvents: .ValueChanged)
-        tableView.addSubview(refreshControl)
-
-        self.applyState(model.state)
-        
-        self.model.stateChangeHandler = { [weak self] change in
-            self?.applyStateChange(change)
-        }
-        
-        reload()
+        let buttonImage = UIImage(named: "backButton")
+        backButton = UIBarButtonItem(image: buttonImage, style: UIBarButtonItemStyle.Plain, target: self, action: #selector(self.backButtonPressed(_:)))
+        self.navigationItem.leftBarButtonItem = backButton
         
     }
     
-    func applyState(state: ProfilePostViewModel.State) {
-        presentation.update(withState: state)
-        self.tableView.reloadData()
+    func backButtonPressed(sender: UITabBarItem){
+        self.router.routeTo(RouteID.Back, VC: self)
     }
     
-    func applyStateChange(change: ProfilePostViewModel.State.Change) {
-        switch change {
-        case .posts(let collectionChange):
-            presentation.update(withState: model.state)
-            switch collectionChange {
-            case .reload:
-                self.tableView.reloadData()
-            }
-        case .none:
-            break
-        }
-    }
-
     override func viewWillAppear(animated: Bool) {
-        
         super.viewWillAppear(animated)
-
-        let nav = self.navigationController?.navigationBar
         
+        setUIColors()
+        setUITitles()
+    }
+    
+    private func setUIColors(){
+        tableView.backgroundColor = UIColor.tableBackgroundGray()
+        
+        let nav = self.navigationController?.navigationBar
         nav?.barTintColor = UIColor.coreColor()
         nav?.barStyle = UIBarStyle.BlackOpaque
         nav?.tintColor = UIColor.whiteColor()
     }
     
-    func refresh(refreshControl: UIRefreshControl) {
-        model.fetchProfilePosts {
-            refreshControl.endRefreshing()
-        }
-    }
-    
-    private func reload() {
-        loadingView.addToView(self.view, text: localized("RefreshingInfo"))
-        
-        model.fetchProfilePosts { [weak self] in
-            
-            guard let strongSelf = self else {return}
-            strongSelf.loadingView.removeFromView(strongSelf.view)
-        }
-    }
-    
-    @IBAction func unwindToProfile(sender: UIStoryboardSegue) {
-        reload()
+    private func setUITitles(){
+        self.navigationController?.navigationController?.title = localized("Photo")
+        self.title = localized("Photo")
     }
 
-    
-    // MARK: TableVC Methods
-    
+
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return presentation.postViews.count
+        if presentation.postView != nil {
+            return 1
+        } else {
+            return 0
+        }
     }
-    
+
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
     }
-    
+
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier(Identifier.PostViewCell, forIndexPath: indexPath) as! SinglePostViewCell
         
-        let cell = tableView.dequeueReusableCellWithIdentifier(Identifier.ProfilePostCell, forIndexPath: indexPath) as! ProfilePostTableViewCell
-        
-        let postView = presentation.postViews[indexPath.section]
+        let postView = presentation.postView!
         
         cell.selectionStyle = UITableViewCellSelectionStyle.None
         for subview in cell.contentView.subviews {
@@ -137,7 +100,6 @@ class ProfilePageViewController: UITableViewController {
         postView.imageView.gestureRecognizers = []
         postView.imageView.addGestureRecognizer(cell.tapRecognizer)
         
-        cell.indexPath = indexPath
         cell.heartTapRecognizer.tappedCell = cell
         cell.heartTapRecognizer.addTarget(self, action: #selector(heartTapped(_:)))
         cell.heartTapRecognizer.numberOfTapsRequired = 1
@@ -145,25 +107,22 @@ class ProfilePageViewController: UITableViewController {
         postView.likedView.gestureRecognizers = []
         postView.likedView.addGestureRecognizer(cell.heartTapRecognizer)
         return cell
-
     }
     
     override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        return presentation.postViews[section].headerView
+        return presentation.postView!.headerView
     }
     
     override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return presentation.postViews[section].headerView.frame.height
+        return presentation.postView!.headerView.frame.height
     }
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return presentation.postViews[indexPath.section].cellView.frame.height
+        return presentation.postView!.cellView.frame.height
     }
-
     
     func heartTapped(sender: AdvancedGestureRecognizer) {
-        let cell = (sender.tappedCell as! ProfilePostTableViewCell)
-        let postView = presentation.postViews[cell.indexPath.section]
+        let postView = presentation.postView!
         let post = postView.post!
         let id = post.id
         
@@ -196,9 +155,7 @@ class ProfilePageViewController: UITableViewController {
     
     func photoTapped(sender: AdvancedGestureRecognizer){
         
-        let cell = (sender.tappedCell as! ProfilePostTableViewCell)
-        let index = cell.indexPath.section
-        let postView = presentation.postViews[index]
+        let postView = presentation.postView!
         let post = postView.post!
         let id = post.id
         
@@ -218,26 +175,23 @@ class ProfilePageViewController: UITableViewController {
         }
         UIView.animateWithDuration(3.0, delay: 0.5, options: [], animations: {
             
-            self.presentation.postViews[index].heartTapView.alpha = 1
+            self.presentation.postView!.heartTapView.alpha = 1
             
             }, completion: {
                 (value:Bool) in
                 
-                self.presentation.postViews[index].heartTapView.hidden = false
+                self.presentation.postView!.heartTapView.hidden = false
         })
         
         
         UIView.animateWithDuration(1.0, delay: 0.5, options: [], animations: {
             
-            self.presentation.postViews[index].heartTapView.alpha = 0
+            self.presentation.postView!.heartTapView.alpha = 0
             
             }, completion: {
                 (value:Bool) in
                 
-                self.presentation.postViews[index].heartTapView.hidden = true
+                self.presentation.postView!.heartTapView.hidden = true
         })
     }
-
-    
-    
 }

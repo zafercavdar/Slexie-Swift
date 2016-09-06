@@ -22,7 +22,7 @@ protocol NetworkingController {
     func downloadPhoto(with photoID: String, completion callback: (UIImage?, NSError?) -> Void)
     func getAccountTags(completion: [String] -> Void)
     func getPhotosRelatedWith(tags: [String], count: Int, completion: [FeedPost] -> Void)
-    func getProfilePosts(completion callback: [ProfilePost] -> Void)
+    func getProfilePosts(completion callback: [FeedPost] -> Void)
     func fetchUserLanguage(completion callback: (identifier: String) -> Void)
     func photoLiked(imageid: String, callback: (CallbackResult) -> Void)
     func photoUnliked(imageid: String, callback: (CallbackResult) -> Void)
@@ -427,52 +427,58 @@ class FirebaseController: NetworkingController, AuthenticationController {
         })
     }
     
-    func getProfilePosts(completion callback: [ProfilePost] -> Void) {
+    func getProfilePosts(completion callback: [FeedPost] -> Void) {
         
-        var profilePosts: [ProfilePost] = []
+        var profilePosts: [FeedPost] = []
         
-        getAccountPosts { (postIDs) in
-            let photoRef = References.PhotoRef
-            photoRef.observeSingleEventOfType(.Value, withBlock: {(snapshot) in
-                                
-                if let photos = snapshot.value as? [String: AnyObject] {
-                    for postID in postIDs {
-                        
-                        var tags: [String]?
-                        
-                        guard let uid = self.getUID() else {
-                            return
+        let uid = getUID()!
+        
+        getUsername(with: uid) { (username) in
+            self.getAccountPosts { (postIDs) in
+                let photoRef = References.PhotoRef
+                photoRef.observeSingleEventOfType(.Value, withBlock: {(snapshot) in
+                    
+                    if let photos = snapshot.value as? [String: AnyObject] {
+                        for postID in postIDs {
+                            
+                            var tags: [String]?
+                            
+                            guard let uid = self.getUID() else {
+                                return
+                            }
+                            
+                            tags = ((photos[postID] as! [String: AnyObject])[ReferenceLabels.PostTags] as? [String])
+                            
+                            if tags == nil {
+                                tags = []
+                            }
+                            
+                            var likeCount: Int
+                            var liked: Bool
+                            var likers = ((photos[postID] as! [String: AnyObject])[ReferenceLabels.Likers] as? [String])
+                            
+                            if likers == nil {
+                                likers = []
+                                likeCount = 0
+                                liked = false
+                            } else {
+                                likeCount = likers!.count
+                                liked = (likers?.contains(uid))!
+                            }
+                            
+                            let post = FeedPost(ownerUsername: username, ownerID: uid, id: postID, tags: tags!, likers: likers!, likeCount: likeCount, isAlreadyLiked: liked)
+                            profilePosts.append(post)
+                            
                         }
-                        
-                        tags = ((photos[postID] as! [String: AnyObject])[ReferenceLabels.PostTags] as? [String])
-                        
-                        if tags == nil {
-                            tags = []
-                        }
-                        
-                        var likeCount: Int
-                        var liked: Bool
-                        var likers = ((photos[postID] as! [String: AnyObject])[ReferenceLabels.Likers] as? [String])
-                        
-                        if likers == nil {
-                            likers = []
-                            likeCount = 0
-                            liked = false
-                        } else {
-                            likeCount = likers!.count
-                            liked = (likers?.contains(uid))!
-                        }
-                        
-                        let post = ProfilePost(id: postID, tags: tags!, likers: likers!, likeCount: likeCount, isAlreadyLiked: liked)
-                        profilePosts.append(post)
-                        
+                        callback(profilePosts)
+                    } else {
+                        callback([])
                     }
-                    callback(profilePosts)
-                } else {
-                    callback([])
-                }
-            })
+                })
+            }
+
         }
+        
     }
     
     func downloadPhoto(with photoID: String, completion callback: (UIImage?, NSError?) -> Void){

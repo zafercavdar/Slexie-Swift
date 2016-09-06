@@ -14,25 +14,15 @@ class AdvancedGestureRecognizer: UITapGestureRecognizer {
 }
 
 
-class NewsFeedItemCell: UITableViewCell, Likeable{
+class NewsFeedItemCell: UITableViewCell{
 
-    @IBOutlet weak var usernameLabel: UILabel!
-    @IBOutlet weak var photoView: UIImageView!
-    @IBOutlet weak var tagsLabel: UILabel!
-    @IBOutlet weak var heart: UIImageView!
-    @IBOutlet weak var likeCount: UILabel!
-    
-    var postPresentation = FeedPostsPresentation()
-    
-    var likedView: UIImageView!
     var tapRecognizer = AdvancedGestureRecognizer()
     var heartTapRecognizer = AdvancedGestureRecognizer()
     
+    var indexPath = NSIndexPath()
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-        
-        likedView = generateLikedView(photoView)
-        photoView.addSubview(likedView)
     }
     
     override func setSelected(selected: Bool, animated: Bool) {

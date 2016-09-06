@@ -11,26 +11,28 @@ import UIKit
 class PostView {
 
     var headerView = UIView() // username
+    
     var cellView = UIView() // image and tags
-    private var heartTapView = UIImageView()
+    var heartTapView = UIImageView()
+    var imageView = UIImageView()
+    
     var footerView = UIView() // like button + count
-    private var likedView = UIImageView()
-    private var countLabel = UILabel()
+    var likedView = UIImageView()
+    var countLabel = UILabel()
     
-    private var post: FeedPostPresentation? = nil
     
-    init(post: FeedPostPresentation){
+    var post: FeedPost? = nil
+    
+    init(post: FeedPost){
     
         self.post = post
         
         createHeaderView()
         createCellView()
-        createFooterView()
-        
     }
     
     private func createHeaderView(){
-        let username = post?.ownerName
+        let username = post?.ownerUsername
         let width = UIScreen.mainScreen().bounds.size.width
         headerView = UIView(frame: CGRect(x: 0, y: 0, width: width, height: 30))
         headerView.backgroundColor = UIColor.whiteColor()
@@ -46,15 +48,22 @@ class PostView {
     }
     
     private func createCellView(){
-        let image = post?.image
-        let tags = post?.tagList
+        let image = post!.photo
+        let tags = post!.tags
+        var tagText = ""
+        for tag in tags{
+            tagText += "#\(tag) "
+        }
+
         let width = UIScreen.mainScreen().bounds.size.width
 
-        cellView = UIView(frame: CGRect(x: 0, y: 0, width: width, height: width + 30))
+        cellView = UIView(frame: CGRect(x: 0, y: 0, width: width, height: width + 30 + 54))
+        cellView.userInteractionEnabled = true
         
-        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: width, height: width))
+        imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: width, height: width))
         imageView.image = image
         imageView.contentMode = .ScaleAspectFit
+        imageView.userInteractionEnabled = true
         cellView.addSubview(imageView)
         
         let heart = UIImage(named: "Liked")
@@ -66,15 +75,32 @@ class PostView {
         heartTapView.contentMode = UIViewContentMode.Center
         heartTapView.hidden = true
         cellView.addSubview(heartTapView)
-
+        
         let tagsLabel = UILabel(frame: CGRect(x: 0, y: imageView.frame.height, width: width, height: 30))
         tagsLabel.textColor = UIColor.blackColor()
-        tagsLabel.text = tags
+        tagsLabel.text = tagText
         tagsLabel.textAlignment = .Center
         tagsLabel.font = UIFont.boldSystemFontOfSize(10.00)
         tagsLabel.center.x = cellView.center.x
         cellView.addSubview(tagsLabel)
         
+        let offSet = 0.0
+        let gap = 0.0
+        let imageWidth = 44.0
+        let labelWidth = 10.0
+        
+        likedView = UIImageView(frame: CGRect(x: (Double(width) - imageWidth - gap - labelWidth)/2, y: Double(imageView.frame.height) + offSet + 30, width: imageWidth, height: imageWidth))
+        likedView.userInteractionEnabled = true
+        updateLikedView()
+        cellView.addSubview(likedView)
+        
+        countLabel = UILabel(frame: CGRect(x: (Double(width) + imageWidth + gap)/2, y: Double(imageView.frame.height) + offSet + 30, width: labelWidth, height: imageWidth))
+        updateCountLabel()
+        countLabel.textColor = UIColor.blackColor()
+        countLabel.textAlignment = .Center
+        countLabel.font = UIFont.boldSystemFontOfSize(11.00)
+        countLabel.center.y = likedView.center.y
+        cellView.addSubview(countLabel)
     }
     
     private func createFooterView(){
@@ -86,8 +112,11 @@ class PostView {
         let labelWidth = 10.0
 
         footerView = UIView(frame: CGRect(x: 0, y: 0, width: width, height: 54))
+        footerView.userInteractionEnabled = true
         footerView.backgroundColor = UIColor.whiteColor()
+        
         likedView = UIImageView(frame: CGRect(x: (width - imageWidth - gap - labelWidth)/2, y: offSet, width: imageWidth, height: imageWidth))
+        likedView.userInteractionEnabled = true
         updateLikedView()
         footerView.addSubview(likedView)
         
@@ -101,7 +130,7 @@ class PostView {
     }
     
     func updateLikedView(){
-        let liked = post!.liked
+        let liked = post!.isAlreadyLiked
         var image = UIImage()
         
         image = liked ? UIImage(named: "Filled Heart")! : UIImage(named: "Empty Heart")!
@@ -109,9 +138,8 @@ class PostView {
     }
     
     func updateCountLabel(){
-        let count = post!.likeCount
+        let count = post!.likers.count
         
         countLabel.text = String(count)
     }
-    
 }

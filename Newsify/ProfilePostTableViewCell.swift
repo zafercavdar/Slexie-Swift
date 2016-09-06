@@ -8,27 +8,15 @@
 
 import UIKit
 
-class ProfilePostTableViewCell: UITableViewCell, Likeable {
-
-    
-    @IBOutlet weak var profilePostView: UIImageView!
-    @IBOutlet weak var profilePostTags: UILabel!
-    @IBOutlet weak var heart: UIImageView!
-    @IBOutlet weak var likeCount: UILabel!
-    
-    var postPresentation = ProfilePostsPresentation()
+class ProfilePostTableViewCell: UITableViewCell {
     
     var tapRecognizer: AdvancedGestureRecognizer = AdvancedGestureRecognizer()
     var heartTapRecognizer = AdvancedGestureRecognizer()
-
-    var likedView: UIImageView!
     
+    var indexPath = NSIndexPath()
+
     override func awakeFromNib() {
         super.awakeFromNib()
-        
-        likedView = generateLikedView(profilePostView)
-        profilePostView.addSubview(likedView)
-        
         
     }
 

@@ -44,6 +44,15 @@ struct SearchPostsPresentation {
     }
 }
 
+struct SearchPostViewPresentation{
+    var postViews: [PostView] = []
+    
+    mutating func update(withState state: SearchPostViewModel.State){
+        postViews = state.searchPosts.map({ (feedPost) -> PostView in
+            return PostView(post: feedPost)
+        })
+    }
+}
 
 
 class SearchPageTableViewController: UITableViewController, UISearchResultsUpdating {
@@ -54,7 +63,7 @@ class SearchPageTableViewController: UITableViewController, UISearchResultsUpdat
     
     private var model = SearchPostViewModel()
     private let loadingView = LoadingView()
-    private var presentation = SearchPostsPresentation()
+    private var presentation = SearchPostViewPresentation()
 
 
     var searchController = UISearchController(searchResultsController: nil)
@@ -142,55 +151,57 @@ class SearchPageTableViewController: UITableViewController, UISearchResultsUpdat
     // MARK: - Table view data source
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        if presentation.searchPosts.count > 0 {
-            return 1
-        } else { return 0 }
+        return presentation.postViews.count
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return presentation.searchPosts.count
+        return 1
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let feedPresentation = presentation.searchPosts[indexPath.row]
         let cell = tableView.dequeueReusableCellWithIdentifier(Identifier.SearchFeedCell, forIndexPath: indexPath) as! SearchFeedItemCell
         
-        cell.postPresentation.searchPosts = [feedPresentation]
-        cell.usernameLabel.text = feedPresentation.ownerName
-        cell.photoView.image = feedPresentation.image
-        cell.tagsLabel.text = feedPresentation.tagList
+        let postView = presentation.postViews[indexPath.section]
         
+        cell.selectionStyle = UITableViewCellSelectionStyle.None
+        for subview in cell.contentView.subviews {
+            subview.removeFromSuperview()
+        }
+        cell.contentView.addSubview(postView.cellView)
+        
+        cell.tapRecognizer.tappedCell = cell
         cell.tapRecognizer.addTarget(self, action: #selector(photoTapped(_:)))
         cell.tapRecognizer.numberOfTapsRequired = 2
         cell.tapRecognizer.numberOfTouchesRequired = 1
-        cell.tapRecognizer.tappedCell = cell
-        cell.photoView.gestureRecognizers = []
-        cell.photoView.gestureRecognizers!.append(cell.tapRecognizer)
+        postView.imageView.gestureRecognizers = []
+        postView.imageView.addGestureRecognizer(cell.tapRecognizer)
         
+        cell.indexPath = indexPath
         cell.heartTapRecognizer.tappedCell = cell
         cell.heartTapRecognizer.addTarget(self, action: #selector(heartTapped(_:)))
         cell.heartTapRecognizer.numberOfTapsRequired = 1
         cell.heartTapRecognizer.numberOfTouchesRequired = 1
-        cell.heart.gestureRecognizers = []
-        cell.heart.gestureRecognizers!.append(cell.heartTapRecognizer)
-        
-        if feedPresentation.liked {
-            cell.heart.image = UIImage(named: "Filled Heart")
-        } else {
-            cell.heart.image = UIImage(named: "Empty Heart")
-        }
-        
-        cell.likeCount.text = String(feedPresentation.likeCount)
-
-        
-        cell.selectionStyle = UITableViewCellSelectionStyle.None
-        
+        postView.likedView.gestureRecognizers = []
+        postView.likedView.addGestureRecognizer(cell.heartTapRecognizer)
         return cell
+    }
+    
+    override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        return presentation.postViews[section].headerView
+    }
+    
+    override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return presentation.postViews[section].headerView.frame.height
+    }
+    
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return presentation.postViews[indexPath.section].cellView.frame.height
     }
     
     func heartTapped(sender: AdvancedGestureRecognizer) {
         let cell = (sender.tappedCell as! SearchFeedItemCell)
-        let post = cell.postPresentation.searchPosts[0]
+        let postView = presentation.postViews[cell.indexPath.section]
+        let post = postView.post!
         let id = post.id
         
         let controller = FirebaseController()
@@ -199,12 +210,10 @@ class SearchPageTableViewController: UITableViewController, UISearchResultsUpdat
         // Update view
         if !post.likers.contains(uid){
             model.likePhoto(id)
-            
-            cell.heart.image = UIImage(named: "Filled Heart")
-            cell.postPresentation.searchPosts[0].likers += [uid]
-            let count = cell.postPresentation.searchPosts[0].likers.count
-            cell.likeCount.text = String(count)
-            
+            post.isAlreadyLiked = true
+            post.likers += [uid]
+            postView.updateLikedView()
+            postView.updateCountLabel()
             // Send notificitaion
             let notification = Notification(ownerID: post.ownerID, targetID: post.id, doneByUserID: uid, doneByUsername: "no-need-for-push-notification", type: NotificationType.Liked)
             
@@ -212,11 +221,10 @@ class SearchPageTableViewController: UITableViewController, UISearchResultsUpdat
             
         } else {
             model.unlikePhoto(id)
-            cell.heart.image = UIImage(named: "Empty Heart")
-            cell.postPresentation.searchPosts[0].likers.removeObject(uid)
-            let count = cell.postPresentation.searchPosts[0].likers.count
-            cell.likeCount.text = String(count)
-            
+            post.isAlreadyLiked = false
+            post.likers.removeObject(uid)
+            postView.updateCountLabel()
+            postView.updateLikedView()
             let notification = Notification(ownerID: post.ownerID, targetID: post.id, doneByUserID: uid, doneByUsername: "no-need-for-push-notification", type: NotificationType.Liked)
             
             model.removeNotification(notification)
@@ -224,48 +232,47 @@ class SearchPageTableViewController: UITableViewController, UISearchResultsUpdat
     }
     
     func photoTapped(sender: AdvancedGestureRecognizer){
-        let cell = (sender.tappedCell as! SearchFeedItemCell)
-        let post = cell.postPresentation.searchPosts[0]
         
+        let cell = (sender.tappedCell as! SearchFeedItemCell)
+        let index = cell.indexPath.section
+        let postView = presentation.postViews[index]
+        let post = postView.post!
         let id = post.id
         
         let controller = FirebaseController()
-        
-        // Update modal
-        model.likePhoto(id)
-        
-        // Update view
-        cell.heart.image = UIImage(named: "Filled Heart")
-        if !post.likers.contains(controller.getUID()!) {
-            cell.likeCount.text = String(post.likeCount + 1)
-            cell.postPresentation.searchPosts[0].likers += [controller.getUID()!]
-            
+        let uid = controller.getUID()!
+        if !post.likers.contains(uid){
+            model.likePhoto(id)
+            post.isAlreadyLiked = true
+            post.likers += [uid]
+            postView.updateLikedView()
+            postView.updateCountLabel()
             // Send notificitaion
-            let notification = Notification(ownerID: post.ownerID, targetID: post.id, doneByUserID: controller.getUID()!, doneByUsername: "no-need-for-push-notification", type: NotificationType.Liked)
+            let notification = Notification(ownerID: post.ownerID, targetID: post.id, doneByUserID: uid, doneByUsername: "no-need-for-push-notification", type: NotificationType.Liked)
             
             model.pushNotification(notification)
-        }
-        
-        
-        UIView.animateWithDuration(3.0, delay: 0.5, options: UIViewAnimationOptions.AllowAnimatedContent, animations: {
             
-            cell.likedView.alpha = 1
+        }
+        UIView.animateWithDuration(3.0, delay: 0.5, options: [], animations: {
+            
+            self.presentation.postViews[index].heartTapView.alpha = 1
             
             }, completion: {
                 (value:Bool) in
                 
-                cell.likedView.hidden = false
+                self.presentation.postViews[index].heartTapView.hidden = false
         })
         
         
-        UIView.animateWithDuration(1.0, delay: 0.5, options: UIViewAnimationOptions.AllowAnimatedContent, animations: {
+        UIView.animateWithDuration(1.0, delay: 0.5, options: [], animations: {
             
-            cell.likedView.alpha = 0
+            self.presentation.postViews[index].heartTapView.alpha = 0
             
             }, completion: {
                 (value:Bool) in
                 
-                cell.likedView.hidden = true
+                self.presentation.postViews[index].heartTapView.hidden = true
         })
     }
+
 }

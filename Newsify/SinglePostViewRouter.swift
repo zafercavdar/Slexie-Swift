@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PostViewRouter: Router {
+class SinglePostViewRouter: Router {
     
     func routeTo(routeID: String, VC: UIViewController){
         

@@ -88,7 +88,6 @@ class SettingsTVController: UITableViewController {
         }
         
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .Alert)
-        alertController.view.tintColor = UIColor.reddishColor()
         
         let noAction = UIAlertAction(title: localized("Cancel"), style: .Default, handler: { (action: UIAlertAction!) in
             alertController.dismissViewControllerAnimated(true, completion: nil)
@@ -105,6 +104,7 @@ class SettingsTVController: UITableViewController {
         alertController.addAction(noAction)
         alertController.addAction(yesAction)
         self.presentViewController(alertController, animated: true, completion: nil)
+        alertController.view.tintColor = UIColor.reddishColor()
         
     }
 

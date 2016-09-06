@@ -8,7 +8,10 @@
 
 import UIKit
 
-class PostViewCell: UITableViewCell {
+class SinglePostViewCell: UITableViewCell {
+    
+    var tapRecognizer = AdvancedGestureRecognizer()
+    var heartTapRecognizer = AdvancedGestureRecognizer()
     
     override func awakeFromNib() {
         super.awakeFromNib()

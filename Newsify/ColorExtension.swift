@@ -30,4 +30,8 @@ extension UIColor {
         return UIColor(red: 120.0 / 255.0, green: 120.0 / 255.0 , blue: 120.0 / 255.0, alpha: 1)
     }
     
+    static func flatBlue() -> UIColor {
+        return UIColor(red: 52.0 / 255.0, green: 152.0 / 255.0 , blue: 219.0 / 255.0, alpha: 1)    
+    }
+    
 }

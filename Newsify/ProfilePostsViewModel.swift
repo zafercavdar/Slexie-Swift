@@ -8,24 +8,22 @@
 
 import UIKit
 
-class ProfilePostViewModel: NotificationSender, LikerUnliker {
+class ProfilePostViewModel: PostViewModel {
     
     struct State{
-        var profilePosts: [ProfilePost] = []
+        var profilePosts: [FeedPost] = []
         
         enum Change{
             case none
             case posts(CollectionChange)
         }
         
-        mutating func reloadPosts(profilePosts: [ProfilePost]) -> Change{
+        mutating func reloadPosts(profilePosts: [FeedPost]) -> Change{
             self.profilePosts = profilePosts.reverse()
             return Change.posts(.reload)
         }
     }
 
-    
-    var networkingController = FirebaseController()
     private(set) var state = State()
     var stateChangeHandler: ((State.Change) -> Void)?
 
@@ -55,27 +53,28 @@ class ProfilePostViewModel: NotificationSender, LikerUnliker {
             }
         }
     }
-    
-    func likePhoto(id: String){
-        networkingController.photoLiked(id) { (result) in
-            
-        }
-    }
 }
 
 private extension ProfilePostViewModel {
     
-    private func defaultPosts() -> [ProfilePost]{
-        let defaultImage = UIImage(named: "greyDefault")
-        let defaultTags = ["grey","grey", "grey"]
+    private func defaultPosts() -> [FeedPost]{
         
-        let profileItem = ProfilePost(id: "no-id", tags: defaultTags, likers: [], likeCount: 54, isAlreadyLiked: false)
-        let profileItem2 = ProfilePost(id: "no-id", tags: defaultTags, likers: [], likeCount: 11, isAlreadyLiked: true)
+        let defaultImage = UIImage(named: "example1")
+        let defaultUsername = "zctr"
+        let defaultTags = ["food","spoon", "wood"]
         
-        profileItem.setPhoto(defaultImage!)
-        profileItem2.setPhoto(defaultImage!)
+        let defaultImage2 = UIImage(named: "example2")
+        let defaultUsername2 = "zctr"
+        let defaultTags2 = ["friends","fun", "together"]
         
-        return [profileItem, profileItem2]
+        let feedItem = FeedPost(ownerUsername: defaultUsername, ownerID: "665d5s565d56", id: "no-id", tags: defaultTags, likers: [], likeCount: 11, isAlreadyLiked: false)
+        let feedItem2 = FeedPost(ownerUsername: defaultUsername2, ownerID: "79009fd9fdg", id: "no-id", tags: defaultTags2, likers: [], likeCount: 13, isAlreadyLiked: true)
+        
+        feedItem.setPhoto(defaultImage!)
+        feedItem2.setPhoto(defaultImage2!)
+        
+        return [feedItem,feedItem2]
+
     }
     
     private func emit(change: State.Change){

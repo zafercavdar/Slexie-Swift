@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SearchPostViewModel: NotificationSender, LikerUnliker {
+class SearchPostViewModel: PostViewModel {
     
     struct State{
         var searchPosts: [FeedPost] = []
@@ -24,7 +24,6 @@ class SearchPostViewModel: NotificationSender, LikerUnliker {
         }
     }
     
-    var networkingController = FirebaseController()
     private(set) var state = State()
     var stateChangeHandler: ((State.Change) -> Void)?
     
@@ -53,12 +52,6 @@ class SearchPostViewModel: NotificationSender, LikerUnliker {
                     }
                 }
             })
-    }
-    
-    func likePhoto(id: String){
-        networkingController.photoLiked(id) { (result) in
-            
-        }
     }
     
     func cleanSearchPosts(){
