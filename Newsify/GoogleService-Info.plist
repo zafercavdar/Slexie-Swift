@@ -7,9 +7,9 @@
 	<key>AD_UNIT_ID_FOR_INTERSTITIAL_TEST</key>
 	<string>ca-app-pub-3940256099942544/4411468910</string>
 	<key>CLIENT_ID</key>
-	<string>849372547667-8o6bmuft1er93d67o5n43p7r3jmba1vl.apps.googleusercontent.com</string>
+	<string>849372547667-dhmh2hihfna73m91mu5qov8337uq305s.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.849372547667-8o6bmuft1er93d67o5n43p7r3jmba1vl</string>
+	<string>com.googleusercontent.apps.849372547667-dhmh2hihfna73m91mu5qov8337uq305s</string>
 	<key>API_KEY</key>
 	<string>AIzaSyAqbqGajmtgI6PPQ9wOsakSEK8UUBD-QD4</string>
 	<key>GCM_SENDER_ID</key>
@@ -17,7 +17,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>monitise.Newsify</string>
+	<string>slexie.ios</string>
 	<key>PROJECT_ID</key>
 	<string>hackify-a48e3</string>
 	<key>STORAGE_BUCKET</key>
@@ -33,7 +33,7 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true/>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:849372547667:ios:e0f1be163fe7fbad</string>
+	<string>1:849372547667:ios:b346008802c41754</string>
 	<key>DATABASE_URL</key>
 	<string>https://hackify-a48e3.firebaseio.com</string>
 </dict>
