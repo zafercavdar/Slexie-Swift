@@ -58,25 +58,17 @@ class NotificationsTableViewController: UITableViewController {
         super.viewDidLoad()
         self.navigationItem.title = localized("NavBarNotifications")
         
-        loadingView.addToView(self.view, text: localized("RefreshingInfo"))
-        
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(refresh(_:)), forControlEvents: .ValueChanged)
         tableView.addSubview(refreshControl)
         
-        self.applyState(model.state)
-        
         model.stateChangeHandler = { [weak self] change in
             self?.applyStateChange(change)
-        }
-        
-        model.fetchNotifications {
-            self.loadingView.removeFromView(self.view)
         }
     }
     
     func refresh(refreshControl: UIRefreshControl) {
-        model.fetchNotifications {
+        model.fetchNotifications(false) {
             refreshControl.endRefreshing()
         }
     }
@@ -95,6 +87,10 @@ class NotificationsTableViewController: UITableViewController {
             case .reload:
                 self.tableView.reloadData()
             }
+        case .loadingView(let text):
+            loadingView.addToView(self.view, text: text)
+        case .removeView:
+            loadingView.removeFromView(self.view)
         case .none:
             break
         }
@@ -108,8 +104,8 @@ class NotificationsTableViewController: UITableViewController {
         nav?.barTintColor = UIColor.coreColor()
         nav?.barStyle = UIBarStyle.BlackOpaque
         
-        model.fetchNotifications { }
-        
+        model.fetchNotifications(true) {
+        }
     }
 
     // MARK: - Table view data source

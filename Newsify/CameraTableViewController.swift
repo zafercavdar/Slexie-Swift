@@ -53,9 +53,6 @@ class CameraTableViewController: UITableViewController, UINavigationControllerDe
         
         self.navigationItem.title = localized("NavBarTags")
 
-        
-        self.applyState(model.state)
-        
         model.stateChangeHandler = { [weak self] change in
             self?.applyStateChange(change)
         }
@@ -68,9 +65,7 @@ class CameraTableViewController: UITableViewController, UINavigationControllerDe
         if self.tabBarController?.selectedIndex != 2 {
             callCameraController()
         }
-        
-        model.resetImage()
-        
+                
         super.viewWillAppear(animated)
         
         let nav = self.navigationController?.navigationBar
@@ -92,6 +87,17 @@ class CameraTableViewController: UITableViewController, UINavigationControllerDe
             case .reload:
                 self.tableView.reloadData()
             }
+        case .photo:
+            presentation.update(withState: model.state)
+            //self.tableView.reloadData()
+        case .loadingView(let text):
+            loadingView.addToView(self.view, text: text)
+        case .removeView:
+            loadingView.removeFromView(self.view)
+        case .upload(let error):
+            if error == nil {
+                NSTimer.scheduledTimerWithTimeInterval(3, target: self, selector: #selector(self.callRouter), userInfo: nil, repeats: false)
+            }
         case .none:
             break
         }
@@ -107,28 +113,15 @@ class CameraTableViewController: UITableViewController, UINavigationControllerDe
             presentViewController(imagePickerController, animated: true, completion: nil)
             
         } else {
-            cameraNotAvailable()
+            let alertController = UIAlertController(title: "Error", message: "Camera is not avaiable in this device.", preferredStyle: .Alert)
+            let okAction = UIAlertAction(title: "OK", style: .Cancel, handler: { (UIAlertAction) in
+                self.router.routeTo(RouteID.toFeed, VC: self)
+            })
+            
+            alertController.addAction(okAction)
+            self.presentViewController(alertController, animated: true, completion: nil)
         }
 
-    }
-    
-    private func uploadData() {
-        
-        loadingView.addToView(self.view, text: localized("UploadingInfo"))
-        
-        let imageData = presentation.imageData
-        let tags = presentation.tags + presentation.userTags
-        
-        networkingController.uploadPhoto(imageData, tags: tags) { [weak self] (error, photoID, url) in
-            
-            guard let strongSelf = self else { return }
-            
-            if error == nil {
-                _ = NSTimer.scheduledTimerWithTimeInterval(3, target: strongSelf, selector: #selector(strongSelf.callRouter), userInfo: nil, repeats: false)
-
-            }
-        }
-        
     }
     
     @objc private func callRouter(){
@@ -139,7 +132,9 @@ class CameraTableViewController: UITableViewController, UINavigationControllerDe
     // MARK: Actions
     
     @IBAction func uploadPressed(sender: UIBarButtonItem) {
-        uploadData()
+        let imageData = presentation.imageData
+        let tags = presentation.tags + presentation.userTags
+        model.uploadData(imageData, tags: tags)
     }
     
     
@@ -227,6 +222,7 @@ class CameraTableViewController: UITableViewController, UINavigationControllerDe
             alert.addAction(cancelAction)
             
             self.presentViewController(alert, animated: true, completion: nil)
+            alert.view.tintColor = UIColor.flatBlue()
         }
 
     }
@@ -235,8 +231,8 @@ class CameraTableViewController: UITableViewController, UINavigationControllerDe
 extension CameraTableViewController : UIImagePickerControllerDelegate {
     
     func imagePickerControllerDidCancel(picker: UIImagePickerController) {
-        model.resetImage()
         
+        model.resetImage()
         self.router.routeTo(RouteID.Dismiss, VC: self)
         self.router.routeTo(RouteID.toFeed, VC: self)
     }
@@ -253,13 +249,9 @@ extension CameraTableViewController : UIImagePickerControllerDelegate {
         
         self.router.routeTo(RouteID.Dismiss, VC: self)
         
-        loadingView.addToView(self.view, text: localized("AnalyzingInfo"))
-        
         model.fetchImageTags(takenPhoto) { [weak self] (tags) in
             guard let strongSelf = self else { return }
             
-            strongSelf.loadingView.removeFromView(strongSelf.view)
-
             if tags.count == 0 {
                 strongSelf.callCameraController()
             }

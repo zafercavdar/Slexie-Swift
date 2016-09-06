@@ -495,7 +495,6 @@ class FirebaseController: NetworkingController, AuthenticationController {
         
         
         if fileManager.fileExistsAtPath(filePath){
-            
             guard let data = NSData(contentsOfURL: localURL!), let image = UIImage(data: data) else { return }
             callback(image, nil)
             

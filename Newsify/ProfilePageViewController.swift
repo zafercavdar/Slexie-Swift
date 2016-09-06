@@ -48,7 +48,7 @@ class ProfilePageViewController: UITableViewController {
         refreshControl.addTarget(self, action: #selector(refresh(_:)), forControlEvents: .ValueChanged)
         tableView.addSubview(refreshControl)
 
-        self.applyState(model.state)
+        //self.applyState(model.state)
         
         self.model.stateChangeHandler = { [weak self] change in
             self?.applyStateChange(change)
@@ -71,6 +71,10 @@ class ProfilePageViewController: UITableViewController {
             case .reload:
                 self.tableView.reloadData()
             }
+        case .loadingView(let text):
+            loadingView.addToView(self.view, text: text)
+        case .removeView:
+            loadingView.removeFromView(self.view)
         case .none:
             break
         }
@@ -88,18 +92,14 @@ class ProfilePageViewController: UITableViewController {
     }
     
     func refresh(refreshControl: UIRefreshControl) {
-        model.fetchProfilePosts {
+        model.fetchProfilePosts(false, completion: {
             refreshControl.endRefreshing()
-        }
+        })
     }
     
     private func reload() {
-        loadingView.addToView(self.view, text: localized("RefreshingInfo"))
+        model.fetchProfilePosts(true) {
         
-        model.fetchProfilePosts { [weak self] in
-            
-            guard let strongSelf = self else {return}
-            strongSelf.loadingView.removeFromView(strongSelf.view)
         }
     }
     

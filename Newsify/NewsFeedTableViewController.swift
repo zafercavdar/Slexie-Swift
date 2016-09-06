@@ -19,7 +19,6 @@ struct PostViewPresentation{
     }
 }
 
-
 class NewsFeedTableViewController: UITableViewController{
 
     private struct Identifier {
@@ -45,7 +44,6 @@ class NewsFeedTableViewController: UITableViewController{
         self.tabBarController?.tabBar.items![3].title = localized("TabBarNotifications")
         self.tabBarController?.tabBar.items![4].title = localized("TabBarProfile")
 
-        loadingView.addToView(self.view, text: localized("RefreshingInfo"))
         
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(refresh(_:)), forControlEvents: .ValueChanged)
@@ -57,9 +55,7 @@ class NewsFeedTableViewController: UITableViewController{
             self?.applyStateChange(change)
         }
         
-        model.fetchFeedPosts(count: self.postCount, completion: {
-            self.loadingView.removeFromView(self.view)
-        })
+        model.fetchFeedPosts(count: self.postCount, showView: true, completion: { })
     }
     
     func applyState(state: FeedPostViewModel.State) {
@@ -75,6 +71,10 @@ class NewsFeedTableViewController: UITableViewController{
             case .reload:
                 self.tableView.reloadData()
             }
+        case .loadingView(let text):
+            self.loadingView.addToView(self.view, text: text)
+        case .removeView:
+            self.loadingView.removeFromView(self.view)
         case .none:
             break
         }
@@ -90,13 +90,11 @@ class NewsFeedTableViewController: UITableViewController{
     }
     
     func refresh(refreshControl: UIRefreshControl) {
-        model.fetchFeedPosts(count: postCount, completion: {
+        model.fetchFeedPosts(count: postCount, showView: false, completion: {
             refreshControl.endRefreshing()
         })
     }
     
-    
-
     // MARK: - Table view data source
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {

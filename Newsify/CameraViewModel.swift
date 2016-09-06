@@ -24,27 +24,43 @@ class CameraViewModel {
         enum Change{
             case none
             case tags(CollectionChange)
+            case photo
+            case loadingView(String)
+            case removeView
+            case upload(NSError?)
         }
         
         mutating func reloadTags(picTags: [String]) -> Change{
             self.post.trustedTags = picTags
             return Change.tags(.reload)
         }
+        
+        mutating func updatePhoto(data: NSData) -> Change{
+            self.post.imageData = data
+            return Change.photo
+        }
+        
+        func showLoadingView(text: String) -> Change {
+            return Change.loadingView(text)
+        }
     }
     
     private(set) var state = State()
     private let imaggaService = ImaggaService()
+    private let controller = FirebaseController()
 
     var stateChangeHandler: ((State.Change) -> Void)?
 
     
     func fetchImageTags(image: UIImage, completion callback: (tags: [String]) -> Void) {
         
+        self.emit(self.state.showLoadingView(localized("AnalyzingInfo")))
+        
         let rate = state.post.compressionRate
         
         if let imageData = UIImageJPEGRepresentation(image, rate) {
             
-            state.post.imageData = imageData
+            self.emit(self.state.updatePhoto(imageData))
             
             imaggaService.uploadPhotoGetContentID(imageData, completion: { [weak self] (id) in
                 
@@ -55,11 +71,20 @@ class CameraViewModel {
                 strongSelf.imaggaService.findRelatedTagsWith(contentID: id, completion: { [weak self] (tags) in
                     
                     guard let sself = self else {return}
-                    sself.state.post.trustedTags = tags
-                    sself.emit(State.Change.tags(CollectionChange.reload))
+                    sself.emit(State.Change.removeView)
+                    sself.emit(sself.state.reloadTags(tags))
                     callback(tags: tags)
                     })
                 })
+        }
+    }
+    
+    func uploadData(imageData: NSData, tags: [String]){
+        
+        emit(state.showLoadingView(localized("UploadingInfo")))
+        
+        controller.uploadPhoto(imageData, tags: tags) { [weak self] (error, photoID, url) in
+            self?.emit(State.Change.upload(error))
         }
     }
     

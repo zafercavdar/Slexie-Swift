@@ -16,11 +16,17 @@ class ProfilePostViewModel: PostViewModel {
         enum Change{
             case none
             case posts(CollectionChange)
+            case loadingView(String)
+            case removeView
         }
         
         mutating func reloadPosts(profilePosts: [FeedPost]) -> Change{
             self.profilePosts = profilePosts.reverse()
             return Change.posts(.reload)
+        }
+        
+        func showView(text: String) -> Change {
+            return Change.loadingView(text)
         }
     }
 
@@ -28,11 +34,19 @@ class ProfilePostViewModel: PostViewModel {
     var stateChangeHandler: ((State.Change) -> Void)?
 
         
-    func fetchProfilePosts(completion callback: () -> Void) {
+    func fetchProfilePosts(showView: Bool, completion callback: () -> Void) {
+        
+        if showView {
+            self.emit(state.showView(localized("RefreshingInfo")))
+        }
         
         networkingController.getProfilePosts { [weak self] (fetchedPosts) in
             
             guard let strongSelf = self else { return }
+            
+            if showView{
+                strongSelf.emit(State.Change.removeView)
+            }
             
             if fetchedPosts.isEmpty {
                 strongSelf.emit(strongSelf.state.reloadPosts(strongSelf.defaultPosts()))
@@ -42,11 +56,11 @@ class ProfilePostViewModel: PostViewModel {
                 
                 for post in strongSelf.state.profilePosts {
                     strongSelf.networkingController.downloadPhoto(with: post.id, completion: { (image, error) in
-                        guard error != nil else {
+                        
+                        if error == nil {
                             post.setPhoto(image!)
                             strongSelf.emit(State.Change.posts(.reload))
                             callback()
-                            return
                         }
                     })
                 }

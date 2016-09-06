@@ -21,11 +21,17 @@ class FeedPostViewModel: PostViewModel {
         enum Change{
             case none
             case posts(CollectionChange)
+            case loadingView(String)
+            case removeView
         }
         
         mutating func reloadPosts(feedPosts: [FeedPost]) -> Change{
             self.feedPosts = feedPosts.reverse()
             return Change.posts(.reload)
+        }
+        
+        func showLoadingView(text: String) -> Change {
+            return Change.loadingView(text)
         }
     }
     
@@ -33,13 +39,19 @@ class FeedPostViewModel: PostViewModel {
     var stateChangeHandler: ((State.Change) -> Void)?
     
         
-    func fetchFeedPosts(count count: Int, completion callback: () -> Void) {
+    func fetchFeedPosts(count count: Int, showView: Bool, completion callback: () -> Void) {
+        
+        if showView {
+            self.emit(self.state.showLoadingView(localized("RefreshingInfo")))
+        }
         
         networkingController.getAccountTags { (tags) in
             
             self.networkingController.getPhotosRelatedWith(tags, count: count, completion: { [weak self] (posts) in
                 
                 guard let strongSelf = self else { return }
+                
+                strongSelf.emit(State.Change.removeView)
                 
                 if posts.isEmpty {
                     strongSelf.emit(strongSelf.state.reloadPosts(strongSelf.defaultPosts()))

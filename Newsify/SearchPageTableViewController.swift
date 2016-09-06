@@ -62,7 +62,6 @@ class SearchPageTableViewController: UITableViewController, UISearchResultsUpdat
     }
     
     private var model = SearchPostViewModel()
-    private let loadingView = LoadingView()
     private var presentation = SearchPostViewPresentation()
 
 

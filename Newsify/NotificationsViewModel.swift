@@ -16,11 +16,17 @@ class NotificationsViewModel {
         enum Change{
             case none
             case notifications(CollectionChange)
+            case loadingView(String)
+            case removeView
         }
         
         mutating func reloadPosts(notifs: [Notification]) -> Change{
             self.notifs = notifs.reverse()
             return Change.notifications(.reload)
+        }
+        
+        func callLoadingView(text: String) -> Change{
+            return Change.loadingView(text)
         }
     }
     
@@ -28,7 +34,12 @@ class NotificationsViewModel {
     private(set) var state = State()
     var stateChangeHandler: ((State.Change) -> Void)?
 
-    func fetchNotifications(completion callback: () -> Void){
+    func fetchNotifications(showView: Bool, completion callback: () -> Void){
+        
+        if showView {
+            self.emit(state.callLoadingView(localized("RefreshingInfo")))
+        }
+        
         networkingController.fethNotifications { [weak self] (notifications) in
             
             guard let strongSelf = self else { return }
@@ -42,6 +53,7 @@ class NotificationsViewModel {
                     strongSelf.networkingController.downloadPhoto(with: id, completion: { (image, error) in
                         if error == nil {
                             notifications[i].targetImage = UIImage.resizeImage(image!, newWidth: CGFloat(49))
+                            strongSelf.emit(State.Change.removeView)
                             strongSelf.emit(strongSelf.state.reloadPosts(notifications))
                             callback()
                         }
