@@ -650,9 +650,6 @@
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="469.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
-                                <connections>
-                                    <segue destination="rAg-gG-J4r" kind="show" identifier="Settings" id="XGM-3f-g87"/>
-                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -675,17 +672,18 @@
                                 </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
                             <connections>
-                                <action selector="settingsPressed:" destination="ROT-uo-k3j" id="5hi-ul-vFb"/>
+                                <action selector="settingsPressed:" destination="ROT-uo-k3j" id="i1u-2P-LdY"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="profilePostsView" destination="gdQ-VH-d2O" id="tZg-rq-Rhl"/>
+                        <segue destination="rAg-gG-J4r" kind="show" identifier="Settings" id="ooK-Ae-rNd"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GDK-2P-AFd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1448" y="-1451"/>
+            <point key="canvasLocation" x="-1448" y="-1499"/>
         </scene>
         <!--Main Tabbar Controller-->
         <scene sceneID="7yg-Oj-Q8Y">

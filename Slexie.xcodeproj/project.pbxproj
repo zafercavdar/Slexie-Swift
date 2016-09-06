@@ -63,12 +63,12 @@
 		B3C0F7E11D7EB50B00E41C96 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3C0F7E01D7EB50B00E41C96 /* LoginViewModel.swift */; };
 		B3C0F7E31D7EB51D00E41C96 /* CreateAccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3C0F7E21D7EB51D00E41C96 /* CreateAccountViewModel.swift */; };
 		B3C0F7E41D7F0D8E00E41C96 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B3F455B11D54A1BD005EA708 /* Main.storyboard */; };
+		B3C0F7E61D7F250F00E41C96 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B3C0F7E51D7F250F00E41C96 /* GoogleService-Info.plist */; };
 		B3ED70F11D5C6ADF001159A6 /* ProfilePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3ED70F01D5C6ADF001159A6 /* ProfilePageViewController.swift */; };
 		B3ED70F31D5C87E9001159A6 /* NewsFeedTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3ED70F21D5C87E9001159A6 /* NewsFeedTableViewController.swift */; };
 		B3ED70F51D5C87FD001159A6 /* SearchPageTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3ED70F41D5C87FD001159A6 /* SearchPageTableViewController.swift */; };
 		B3ED70F91D5C8AC6001159A6 /* NewsFeedItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3ED70F81D5C8AC6001159A6 /* NewsFeedItemCell.swift */; };
 		B3ED70FD1D5CB3C6001159A6 /* FirebaseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3ED70FC1D5CB3C6001159A6 /* FirebaseController.swift */; };
-		B3ED71011D5CC655001159A6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B3ED71001D5CC655001159A6 /* GoogleService-Info.plist */; };
 		B3F455AE1D54A1BD005EA708 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F455AD1D54A1BD005EA708 /* AppDelegate.swift */; };
 		B3F455B01D54A1BD005EA708 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F455AF1D54A1BD005EA708 /* LoginViewController.swift */; };
 		B3F455B51D54A1BD005EA708 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B3F455B41D54A1BD005EA708 /* Assets.xcassets */; };
@@ -180,12 +180,12 @@
 		B3C0F7DE1D7EA82C00E41C96 /* SinglePostViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SinglePostViewModel.swift; sourceTree = "<group>"; };
 		B3C0F7E01D7EB50B00E41C96 /* LoginViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		B3C0F7E21D7EB51D00E41C96 /* CreateAccountViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateAccountViewModel.swift; sourceTree = "<group>"; };
+		B3C0F7E51D7F250F00E41C96 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B3ED70F01D5C6ADF001159A6 /* ProfilePageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfilePageViewController.swift; sourceTree = "<group>"; };
 		B3ED70F21D5C87E9001159A6 /* NewsFeedTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsFeedTableViewController.swift; sourceTree = "<group>"; };
 		B3ED70F41D5C87FD001159A6 /* SearchPageTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchPageTableViewController.swift; sourceTree = "<group>"; };
 		B3ED70F81D5C8AC6001159A6 /* NewsFeedItemCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsFeedItemCell.swift; sourceTree = "<group>"; };
 		B3ED70FC1D5CB3C6001159A6 /* FirebaseController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseController.swift; sourceTree = "<group>"; };
-		B3ED71001D5CC655001159A6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B3F455AA1D54A1BD005EA708 /* Slexie.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Slexie.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B3F455AD1D54A1BD005EA708 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B3F455AF1D54A1BD005EA708 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -470,11 +470,11 @@
 				B3BA49B41D65ECC400106930 /* Views */,
 				B3F455B61D54A1BD005EA708 /* LaunchScreen.storyboard */,
 				B3F455B11D54A1BD005EA708 /* Main.storyboard */,
+				B3C0F7E51D7F250F00E41C96 /* GoogleService-Info.plist */,
 				B3F455AD1D54A1BD005EA708 /* AppDelegate.swift */,
 				B386234F1D6B35E0007B8A5E /* Helpers */,
 				B3F455B41D54A1BD005EA708 /* Assets.xcassets */,
 				B3F455B91D54A1BD005EA708 /* Info.plist */,
-				B3ED71001D5CC655001159A6 /* GoogleService-Info.plist */,
 			);
 			path = Newsify;
 			sourceTree = "<group>";
@@ -614,10 +614,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				B335520C1D77012C006D56AE /* Localizable.strings in Resources */,
+				B3C0F7E61D7F250F00E41C96 /* GoogleService-Info.plist in Resources */,
 				B3F455B81D54A1BD005EA708 /* LaunchScreen.storyboard in Resources */,
 				B3B518921D79C66600F44B26 /* style.css in Resources */,
 				B3C0F7E41D7F0D8E00E41C96 /* Main.storyboard in Resources */,
-				B3ED71011D5CC655001159A6 /* GoogleService-Info.plist in Resources */,
 				B3F455B51D54A1BD005EA708 /* Assets.xcassets in Resources */,
 				B3B518901D79C61500F44B26 /* Policy.html in Resources */,
 				B3B518951D79C7AF00F44B26 /* privacy-policy-updates.xml in Resources */,
@@ -994,8 +994,9 @@
 				INFOPLIST_FILE = Newsify/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -DDEBUG";
-				PRODUCT_BUNDLE_IDENTIFIER = monitise.Newsify;
+				PRODUCT_BUNDLE_IDENTIFIER = slexie.ios;
 				PRODUCT_NAME = Slexie;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -1007,8 +1008,9 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = Newsify/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = monitise.Newsify;
+				PRODUCT_BUNDLE_IDENTIFIER = slexie.ios;
 				PRODUCT_NAME = Slexie;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
