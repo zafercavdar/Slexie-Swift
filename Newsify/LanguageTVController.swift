@@ -156,7 +156,7 @@ class LanguageTVController: UITableViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(Identifier.LanguageTVCell, forIndexPath: indexPath) as! LanguageTVCell
         
-        cell.tintColor = UIColor.reddishColor()
+        cell.tintColor = UIColor.flatBlue()
         cell.languageLabel.text = presentation.languages[indexPath.row].languageName
         
         if (checkMarkIndex == indexPath.row){
@@ -172,7 +172,6 @@ class LanguageTVController: UITableViewController {
         let message = localized("RestartWarning")
         
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .Alert)
-        alertController.view.tintColor = UIColor.reddishColor()
         
         let noAction = UIAlertAction(title: localized("Cancel"), style: .Default, handler: { (action: UIAlertAction!) in
             alertController.dismissViewControllerAnimated(true, completion: nil)
@@ -191,5 +190,6 @@ class LanguageTVController: UITableViewController {
         alertController.addAction(noAction)
         alertController.addAction(yesAction)
         self.presentViewController(alertController, animated: true, completion: nil)
+        alertController.view.tintColor = UIColor.flatBlue()
     }
 }

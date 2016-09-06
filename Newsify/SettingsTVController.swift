@@ -104,7 +104,7 @@ class SettingsTVController: UITableViewController {
         alertController.addAction(noAction)
         alertController.addAction(yesAction)
         self.presentViewController(alertController, animated: true, completion: nil)
-        alertController.view.tintColor = UIColor.reddishColor()
+        alertController.view.tintColor = UIColor.flatBlue()
         
     }
 
@@ -131,7 +131,7 @@ class SettingsTVController: UITableViewController {
             cell.accessoryType = .DisclosureIndicator
         } else {
             let privacySwitch = UISwitch()
-            privacySwitch.onTintColor = UIColor.reddishColor()
+            privacySwitch.onTintColor = UIColor.flatBlue()
             
             model.isPrivateAccount({ (isPrivate) in
                 privacySwitch.setOn(isPrivate, animated: false)
@@ -141,8 +141,6 @@ class SettingsTVController: UITableViewController {
             cell.accessoryView = privacySwitch
             cell.selectionStyle = UITableViewCellSelectionStyle.None
         }
-        
-        
         
         return cell
     }
