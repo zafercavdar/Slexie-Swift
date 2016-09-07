@@ -55,7 +55,6 @@ class ProfilePageViewController: UITableViewController {
             self?.applyStateChange(change)
         }
         
-        reload()
         
     }
     
@@ -95,6 +94,8 @@ class ProfilePageViewController: UITableViewController {
         nav?.barTintColor = UIColor.coreColor()
         nav?.barStyle = UIBarStyle.BlackOpaque
         nav?.tintColor = UIColor.whiteColor()
+        
+        reload()
     }
     
     func refresh(refreshControl: UIRefreshControl) {
@@ -111,6 +112,10 @@ class ProfilePageViewController: UITableViewController {
     
     @IBAction func unwindToProfile(sender: UIStoryboardSegue) {
         reload()
+        print("unwind")
+        /*let firstVC = (self.tabBarController?.viewControllers![0] as! UINavigationController).viewControllers[0] as! NewsFeedTableViewController
+        firstVC.applyStateChange(FeedPostViewModel.State.Change.profilePostDeleted)*/
+
     }
 
     @IBAction func settingsPressed(sender: UIBarButtonItem) {
@@ -187,6 +192,9 @@ class ProfilePageViewController: UITableViewController {
             let yesAction = UIAlertAction(title: localized("Delete"), style: .Destructive, handler: { (action: UIAlertAction!) in
                 
                 self.model.deletePost(id, index: index)
+                /*let firstVC = (self.tabBarController?.viewControllers![0] as! UINavigationController).viewControllers[0] as! NewsFeedTableViewController
+                firstVC.applyStateChange(FeedPostViewModel.State.Change.profilePostDeleted)*/
+                
             })
             
             alertController.addAction(noAction)

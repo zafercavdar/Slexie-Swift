@@ -64,6 +64,7 @@ class ProfilePostViewModel: PostViewModel {
                         
                         if error == nil {
                             post.setPhoto(image!)
+                            strongSelf.emit(State.Change.removeView)
                             strongSelf.emit(State.Change.posts(.reload))
                             callback()
                         }
