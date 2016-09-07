@@ -682,7 +682,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GDK-2P-AFd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1448" y="-1499"/>
+            <point key="canvasLocation" x="-1448" y="-1446"/>
         </scene>
         <!--Main Tabbar Controller-->
         <scene sceneID="7yg-Oj-Q8Y">
@@ -834,8 +834,13 @@
                         </barButtonItem>
                     </navigationItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <segue destination="ROT-uo-k3j" kind="show" identifier="ReturnToProfile" id="WOI-QD-I8M"/>
+                        <segue destination="bMy-M7-oXT" kind="unwind" unwindAction="unwindToProfile:" id="lsL-IV-Kpc"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yul-yJ-wZv" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="bMy-M7-oXT" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="940" y="516"/>
         </scene>
@@ -868,5 +873,6 @@
     <inferredMetricsTieBreakers>
         <segue reference="v1H-f1-fwr"/>
         <segue reference="O1p-1h-BT4"/>
+        <segue reference="WOI-QD-I8M"/>
     </inferredMetricsTieBreakers>
 </document>
