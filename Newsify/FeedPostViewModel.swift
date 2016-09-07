@@ -70,7 +70,6 @@ class FeedPostViewModel: PostViewModel {
                             strongSelf.networkingController.downloadPhoto(with: post.id, completion: { (image, error) in
                                 if error == nil {
                                     post.setPhoto(image!)
-                                    print("Adding new photo")
                                     strongSelf.emit(strongSelf.state.insertPost(post))
                                     callback()
                                 }

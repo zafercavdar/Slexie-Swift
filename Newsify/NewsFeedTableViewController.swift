@@ -152,7 +152,6 @@ class NewsFeedTableViewController: UITableViewController{
     override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
         
         if (indexPath.section >= presentation.postViews.count - 1) {
-            print("loading more")
             postCount += postIncrease
             model.fetchFeedPosts(count: postCount, showView: false, completion: { })
         }
