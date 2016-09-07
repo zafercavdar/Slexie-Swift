@@ -12,7 +12,7 @@ import UIKit
 struct PostViewPresentation{
     var postViews: [PostView] = []
     
-    mutating func update(withState state: FeedPostViewModel.State){
+    mutating func update(withState state: NewsFeedPostViewModel.State){
         postViews = state.feedPosts.map({ (feedPost) -> PostView in
             return PostView(post: feedPost)
         })
@@ -25,7 +25,7 @@ class NewsFeedTableViewController: UITableViewController{
         static let NewsFeedCell = "NewsFeedItemCell"
     }
     
-    private var model = FeedPostViewModel()
+    private var model = NewsFeedPostViewModel()
     private let loadingView = LoadingView()
     private var presentation = PostViewPresentation()
     
@@ -58,12 +58,12 @@ class NewsFeedTableViewController: UITableViewController{
         model.fetchFeedPosts(count: self.postCount, showView: true, completion: { })
     }
     
-    func applyState(state: FeedPostViewModel.State) {
+    func applyState(state: NewsFeedPostViewModel.State) {
         presentation.update(withState: state)
         self.tableView.reloadData()
     }
     
-    func applyStateChange(change: FeedPostViewModel.State.Change) {
+    func applyStateChange(change: NewsFeedPostViewModel.State.Change) {
         switch change {
         case .posts(let collectionChange):
             presentation.update(withState: model.state)

@@ -15,7 +15,7 @@ enum CollectionChange {
     case deletion(Int)
 }
 
-class FeedPostViewModel: PostViewModel {
+class NewsFeedPostViewModel: PostViewModel {
     
     struct State{
         var feedPosts: [FeedPost] = []
