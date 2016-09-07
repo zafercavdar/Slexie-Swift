@@ -175,7 +175,7 @@ class SettingsTVController: UITableViewController {
         // Temporaryly postview controller
         
         if (section == 0 && row == 0){
-            self.router.routeTo(RouteID.OpenPost, VC: self)
+            
         }
         
         // Change password
