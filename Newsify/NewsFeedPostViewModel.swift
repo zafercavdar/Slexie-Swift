@@ -148,7 +148,7 @@ class NewsFeedPostViewModel: PostViewModel {
     
 }
 
-private extension FeedPostViewModel {
+private extension NewsFeedPostViewModel {
     
     private func defaultPosts() -> [FeedPost]{
         /*let defaultImage = UIImage(named: "example1")
