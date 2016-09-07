@@ -11,6 +11,22 @@ import Firebase
 
 extension FirebaseController {
 
+    func reportPost(id: String){
+        
+        let ugen = UniqueIDGenerator()
+        let uniqueReportID = ugen.generateReportID(id)
+        let time = NSDate().uniqueTime()
+        let uid = getUID()!
+        let ref = References.ReportRef.child(uniqueReportID)
+        
+        let batchUpdate = ["Time" : time,
+                           "WhoReported" : uid,
+                           "Reported": id]
+        
+        ref.updateChildValues(batchUpdate)
+    }
+
+    
     func deletePost(with id: String){
         let postRef = References.PhotoRef.child(id)
         postRef.setValue(nil)

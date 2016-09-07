@@ -58,6 +58,10 @@ class SearchPostViewModel: PostViewModel {
         self.emit(self.state.reloadPosts([]))
     }
     
+    func reportPost(id: String){
+        networkingController.reportPost(id)
+    }
+    
 }
 
 private extension SearchPostViewModel {

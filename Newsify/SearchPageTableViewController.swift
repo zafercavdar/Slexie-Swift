@@ -188,6 +188,10 @@ class SearchPageTableViewController: UITableViewController, UISearchResultsUpdat
     }
     
     override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let postView = presentation.postViews[section]
+        postView.moreButton.index = section
+        postView.moreButton.addTarget(self, action: #selector(moreButtonClicked), forControlEvents: .TouchDown)
+        
         return presentation.postViews[section].headerView
     }
     
@@ -198,6 +202,34 @@ class SearchPageTableViewController: UITableViewController, UISearchResultsUpdat
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return presentation.postViews[indexPath.section].cellView.frame.height
     }
+    
+    func moreButtonClicked(sender: ButtonWithIndex){
+        let index = sender.index!
+        let id = presentation.postViews[index].post!.id
+        
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
+        alert.addAction(UIAlertAction(title: "Report", style: .Destructive , handler:{ (action)in
+            
+            let alertController = UIAlertController(title: "Report Photo?", message: nil, preferredStyle: .Alert)
+            
+            let noAction = UIAlertAction(title: localized("Cancel"), style: .Cancel, handler: nil)
+            
+            let yesAction = UIAlertAction(title: localized("Report"), style: .Destructive, handler: { (action: UIAlertAction!) in
+                
+                self.model.reportPost(id)
+                
+            })
+            
+            alertController.addAction(noAction)
+            alertController.addAction(yesAction)
+            self.presentViewController(alertController, animated: true, completion: nil)
+            alertController.view.tintColor = UIColor.flatBlue()
+            
+        }))
+        alert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil))
+        self.presentViewController(alert, animated: true, completion: nil)
+    }
+
     
     func heartTapped(sender: AdvancedGestureRecognizer) {
         let cell = (sender.tappedCell as! SearchFeedItemCell)

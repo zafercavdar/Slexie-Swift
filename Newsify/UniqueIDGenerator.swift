@@ -32,6 +32,10 @@ class UniqueIDGenerator {
         let actionTrigger = notification.notificationDoneByUserID
         
         return "\(time)TT\(type)UU\(actionTrigger)"
-
+    }
+    
+    func generateReportID(id: String) -> String{
+        let time = NSDate().uniqueTime()
+        return "\(time)RRR\(id)"
     }
 }

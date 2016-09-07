@@ -181,7 +181,8 @@ class NewsFeedTableViewController: UITableViewController{
             
             let yesAction = UIAlertAction(title: localized("Report"), style: .Destructive, handler: { (action: UIAlertAction!) in
                 
-                print("report is not added")
+                self.model.reportPost(id)
+                
             })
             
             alertController.addAction(noAction)

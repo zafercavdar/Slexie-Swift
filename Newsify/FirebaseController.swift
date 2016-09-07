@@ -65,6 +65,7 @@ class FirebaseController: NetworkingController, AuthenticationController {
         static let PhotoRef = DatabaseRef.child("photos")
         static let StorageRef = FIRStorage.storage().reference()
         static let PhotoStorageRef = References.StorageRef.child("images")
+        static let ReportRef = References.DatabaseRef.child("reports")
     }
     
     struct ReferenceLabels {

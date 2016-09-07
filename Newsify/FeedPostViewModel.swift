@@ -132,6 +132,10 @@ class FeedPostViewModel: PostViewModel {
         }
     }
     
+    func reportPost(id: String){
+        networkingController.reportPost(id)
+    }
+    
     private func checkContains(feedPost: FeedPost) -> Bool{
         for statePost in state.feedPosts {
             if statePost.id == feedPost.id {
@@ -141,6 +145,7 @@ class FeedPostViewModel: PostViewModel {
         
         return false
     }
+    
 }
 
 private extension FeedPostViewModel {
