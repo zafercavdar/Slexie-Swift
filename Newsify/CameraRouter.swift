@@ -14,7 +14,8 @@ class CameraRouter: Router {
         
         switch routeID {
         case "Upload":
-            VC.tabBarController?.selectedViewController = VC.tabBarController?.viewControllers![4]
+            VC.performSegueWithIdentifier("ReturnToProfile", sender: nil)
+            //VC.tabBarController?.selectedViewController = VC.tabBarController?.viewControllers![4]
         case "toFeed":
             VC.tabBarController?.selectedViewController = VC.tabBarController?.viewControllers![0]
         case "Dismiss":
