@@ -150,24 +150,6 @@ class NewsFeedPostViewModel: PostViewModel {
 
 private extension NewsFeedPostViewModel {
     
-    private func defaultPosts() -> [FeedPost]{
-        /*let defaultImage = UIImage(named: "example1")
-        let defaultUsername = "default-id"
-        let defaultTags = ["food","spoon", "wood"]
-        
-        let defaultImage2 = UIImage(named: "example2")
-        let defaultUsername2 = "default-id-2"
-        let defaultTags2 = ["friends","fun", "together"]
-        
-        let feedItem = FeedPost(ownerUsername: defaultUsername, ownerID: "665d5s565d56", id: "no-id", tags: defaultTags, likers: [], likeCount: 11, isAlreadyLiked: false)
-        let feedItem2 = FeedPost(ownerUsername: defaultUsername2, ownerID: "79009fd9fdg", id: "no-id", tags: defaultTags2, likers: [], likeCount: 13, isAlreadyLiked: true)
-        
-        feedItem.setPhoto(defaultImage!)
-        feedItem2.setPhoto(defaultImage2!)*/
-        
-        return []
-    }
-    
     private func emit(change: State.Change){
         stateChangeHandler?(change)
     }
