@@ -25,6 +25,11 @@ class ProfilePostViewModel: PostViewModel {
             return Change.posts(.reload)
         }
         
+        mutating func deletePost(index: Int) -> Change {
+            self.profilePosts.removeAtIndex(index)
+            return Change.posts(.deletion(index))
+        }
+        
         func showView(text: String) -> Change {
             return Change.loadingView(text)
         }
@@ -66,6 +71,11 @@ class ProfilePostViewModel: PostViewModel {
                 }
             }
         }
+    }
+    
+    func deletePost(id: String, index: Int){
+        networkingController.deletePost(with: id)
+        self.emit(state.deletePost(index))
     }
 }
 

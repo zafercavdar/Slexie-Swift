@@ -71,6 +71,9 @@ class ProfilePageViewController: UITableViewController {
             switch collectionChange {
             case .reload:
                 self.tableView.reloadData()
+            case .deletion(let index):
+                let indexSet = NSIndexSet(index: index)
+                tableView.deleteSections(indexSet, withRowAnimation: .Fade)
             default:
                 break
             }
@@ -155,6 +158,10 @@ class ProfilePageViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let postView = presentation.postViews[section]
+        postView.moreButton.index = section
+        postView.moreButton.addTarget(self, action: #selector(moreButtonClicked), forControlEvents: .TouchDown)
+        
         return presentation.postViews[section].headerView
     }
     
@@ -165,6 +172,33 @@ class ProfilePageViewController: UITableViewController {
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return presentation.postViews[indexPath.section].cellView.frame.height
     }
+    
+    func moreButtonClicked(sender: ButtonWithIndex){
+        let index = sender.index!
+        let id = presentation.postViews[index].post!.id
+        
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
+        alert.addAction(UIAlertAction(title: "Delete", style: .Destructive , handler:{ (action)in
+            
+            let alertController = UIAlertController(title: "Delete Photo?", message: nil, preferredStyle: .Alert)
+            
+            let noAction = UIAlertAction(title: localized("Cancel"), style: .Cancel, handler: nil)
+            
+            let yesAction = UIAlertAction(title: localized("Delete"), style: .Destructive, handler: { (action: UIAlertAction!) in
+                
+                self.model.deletePost(id, index: index)
+            })
+            
+            alertController.addAction(noAction)
+            alertController.addAction(yesAction)
+            self.presentViewController(alertController, animated: true, completion: nil)
+            alertController.view.tintColor = UIColor.flatBlue()
+            
+        }))
+        alert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil))
+        self.presentViewController(alert, animated: true, completion: nil)
+    }
+
 
     
     func heartTapped(sender: AdvancedGestureRecognizer) {
