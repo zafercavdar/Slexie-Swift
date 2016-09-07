@@ -292,9 +292,6 @@ class FirebaseController: NetworkingController, AuthenticationController {
                     callback()
                 })
             }
-            
-            
-            
         })
         
     }
@@ -391,6 +388,13 @@ class FirebaseController: NetworkingController, AuthenticationController {
                     guard let privacy = propertyDic[ReferenceLabels.PostPrivacy] as? String where privacy == "Public" else {
                         continue
                     }
+                    guard let uid = self?.getUID() else {
+                        return
+                    }
+                    
+                    guard let ownerID = propertyDic[ReferenceLabels.PostOwner] as? String /*where ownerID != uid*/ else {
+                        continue
+                    }
                     
                     guard let photoTags = propertyDic[ReferenceLabels.PostTags] as? [String] else {
                         continue
@@ -399,11 +403,6 @@ class FirebaseController: NetworkingController, AuthenticationController {
                     guard containsAny(photoTags,checkList: tags) else {
                         continue
                     }
-                    
-                    guard let ownerID = propertyDic[ReferenceLabels.PostOwner] as? String/* where owner != strongSelf.getUID() */ else {
-                        continue
-                    }
-                    
                     
                     var likers = propertyDic[ReferenceLabels.Likers] as? [String]
                     if likers == nil {
@@ -414,9 +413,7 @@ class FirebaseController: NetworkingController, AuthenticationController {
                         continue
                     }
                     
-                    guard let uid = self?.getUID() else {
-                        return
-                    }
+                    
                     
                     let liked = likers!.contains(uid)
                     
@@ -444,17 +441,15 @@ class FirebaseController: NetworkingController, AuthenticationController {
                     if let photos = snapshot.value as? [String: AnyObject] {
                         for postID in postIDs {
                             
-                            var tags: [String]?
-                            
                             guard let uid = self.getUID() else {
                                 return
                             }
                             
-                            tags = ((photos[postID] as! [String: AnyObject])[ReferenceLabels.PostTags] as? [String])
-                            
-                            if tags == nil {
-                                tags = []
+                            guard let diccc = ((photos[postID] as? [String: AnyObject])), let tags = (diccc[ReferenceLabels.PostTags]) as? [String] else {
+                                print("error: " + postID)
+                                continue
                             }
+                            
                             
                             var likeCount: Int
                             var liked: Bool
@@ -469,7 +464,7 @@ class FirebaseController: NetworkingController, AuthenticationController {
                                 liked = (likers?.contains(uid))!
                             }
                             
-                            let post = FeedPost(ownerUsername: username, ownerID: uid, id: postID, tags: tags!, likers: likers!, likeCount: likeCount, isAlreadyLiked: liked)
+                            let post = FeedPost(ownerUsername: username, ownerID: uid, id: postID, tags: tags, likers: likers!, likeCount: likeCount, isAlreadyLiked: liked)
                             profilePosts.append(post)
                             
                         }
