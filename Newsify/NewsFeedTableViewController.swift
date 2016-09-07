@@ -100,7 +100,8 @@ class NewsFeedTableViewController: UITableViewController{
     }
     
     func refresh(refreshControl: UIRefreshControl) {
-        model.fetchFeedPosts(count: postCount, showView: false, completion: {
+        postCount += postIncrease
+        model.reloadFeedPosts(count: postCount, completion: {
             refreshControl.endRefreshing()
         })
     }
