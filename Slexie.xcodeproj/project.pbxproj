@@ -64,6 +64,7 @@
 		B3C0F7E31D7EB51D00E41C96 /* CreateAccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3C0F7E21D7EB51D00E41C96 /* CreateAccountViewModel.swift */; };
 		B3C0F7E41D7F0D8E00E41C96 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B3F455B11D54A1BD005EA708 /* Main.storyboard */; };
 		B3C0F7E61D7F250F00E41C96 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B3C0F7E51D7F250F00E41C96 /* GoogleService-Info.plist */; };
+		B3CDADBF1D800C940023457A /* NotificationsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3CDADBE1D800C940023457A /* NotificationsRouter.swift */; };
 		B3ED70F11D5C6ADF001159A6 /* ProfilePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3ED70F01D5C6ADF001159A6 /* ProfilePageViewController.swift */; };
 		B3ED70F31D5C87E9001159A6 /* NewsFeedTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3ED70F21D5C87E9001159A6 /* NewsFeedTableViewController.swift */; };
 		B3ED70F51D5C87FD001159A6 /* SearchPageTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3ED70F41D5C87FD001159A6 /* SearchPageTableViewController.swift */; };
@@ -181,6 +182,7 @@
 		B3C0F7E01D7EB50B00E41C96 /* LoginViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		B3C0F7E21D7EB51D00E41C96 /* CreateAccountViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateAccountViewModel.swift; sourceTree = "<group>"; };
 		B3C0F7E51D7F250F00E41C96 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		B3CDADBE1D800C940023457A /* NotificationsRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationsRouter.swift; sourceTree = "<group>"; };
 		B3ED70F01D5C6ADF001159A6 /* ProfilePageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfilePageViewController.swift; sourceTree = "<group>"; };
 		B3ED70F21D5C87E9001159A6 /* NewsFeedTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsFeedTableViewController.swift; sourceTree = "<group>"; };
 		B3ED70F41D5C87FD001159A6 /* SearchPageTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchPageTableViewController.swift; sourceTree = "<group>"; };
@@ -423,6 +425,7 @@
 				B3BA49BC1D65F35700106930 /* LoginRouter.swift */,
 				B3BA49BE1D65F8FA00106930 /* SignUpRouter.swift */,
 				B38623541D6C6634007B8A5E /* CameraRouter.swift */,
+				B3CDADBE1D800C940023457A /* NotificationsRouter.swift */,
 				B3BA49C71D65FC5E00106930 /* ProfileRouter.swift */,
 				B3FCACBC1D7855B500577D0F /* SettingsRouter.swift */,
 				B3FCACC61D799CC700577D0F /* ChangePasswordRouter.swift */,
@@ -813,6 +816,7 @@
 				B36AF2051D671D8A00F2B87E /* Requests.swift in Sources */,
 				B3F455B01D54A1BD005EA708 /* LoginViewController.swift in Sources */,
 				B32828AA1D5DAFAD0022F85E /* AlertExtension.swift in Sources */,
+				B3CDADBF1D800C940023457A /* NotificationsRouter.swift in Sources */,
 				B36F50C21D74714D0037CCB0 /* NotificationTableViewCell.swift in Sources */,
 				B361FCCB1D63234800B4F8AA /* FeedPostViewModel.swift in Sources */,
 				B3B518991D79CF5B00F44B26 /* LanguageTVController.swift in Sources */,

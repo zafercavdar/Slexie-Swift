@@ -12,6 +12,7 @@ import UIKit
 enum NotificationType {
     case Liked
     case Commented
+    case Null
     
     var actionString: String {
         switch self {
@@ -19,6 +20,8 @@ enum NotificationType {
             return " has liked your photo."
         case .Commented:
             return " has commented on your photo."
+        case .Null:
+            return "There is no notification :("
         }
     }
 }

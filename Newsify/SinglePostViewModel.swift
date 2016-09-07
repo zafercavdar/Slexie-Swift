@@ -30,6 +30,10 @@ class SinglePostViewModel: PostViewModel{
     private func emit(change: State.Change){
         stateChangeHandler?(change)
     }
+    
+    func updatePost(post: FeedPost){
+        self.emit(state.reloadPost(post))
+    }
 
     
 }

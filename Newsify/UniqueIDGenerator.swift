@@ -25,6 +25,8 @@ class UniqueIDGenerator {
             type = "Like"
         case .Commented:
             type = "Comment"
+        default:
+            type = "Unknown"
         }
         
         let actionTrigger = notification.notificationDoneByUserID

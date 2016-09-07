@@ -29,7 +29,7 @@ protocol NetworkingController {
     
     func pushNotification(notification: Notification, completion callback: () -> Void)
     func removeNotification(notification: Notification, completion callback: () -> Void)
-    func fethNotifications(completion callback: [Notification] -> Void)
+    func fetchNotifications(completion callback: [Notification] -> Void)
     func getUsername(with uid: String, completion callback: (username: String) -> Void)
     
 }
@@ -156,7 +156,7 @@ class FirebaseController: NetworkingController, AuthenticationController {
 
     // MARK: NetworkingController Methods
     
-    func fethNotifications(completion callback: [Notification] -> Void){
+    func fetchNotifications(completion callback: [Notification] -> Void){
         
         
         struct MissingNotification {
@@ -211,6 +211,7 @@ class FirebaseController: NetworkingController, AuthenticationController {
                 guard let allUsers = snapshot.value as? [String: AnyObject] else { return }
                 
                 for result in firstResults {
+                    print(result.whoID)
                     guard let props = (allUsers[result.whoID] as? [String: AnyObject]),
                         let username = props[ReferenceLabels.Username] as? String else { return }
                     
@@ -236,6 +237,8 @@ class FirebaseController: NetworkingController, AuthenticationController {
             action = ReferenceLabels.ActionLabels.Like
         case .Commented:
             action = ReferenceLabels.ActionLabels.Comment
+        default:
+            action = "Unknown"
         }
         
         let notificationRef = References.UserRef.child(notification.notificationOwnerID).child(ReferenceLabels.Notifications).child(notificationID)
@@ -279,6 +282,8 @@ class FirebaseController: NetworkingController, AuthenticationController {
                     notiAction = ReferenceLabels.ActionLabels.Like
                 case .Commented:
                     notiAction = ReferenceLabels.ActionLabels.Comment
+                default:
+                    notiAction = "Unknown"
                 }
                 
                 guard action == notiAction else { continue }

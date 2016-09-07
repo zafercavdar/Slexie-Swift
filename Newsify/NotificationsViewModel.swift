@@ -18,6 +18,7 @@ class NotificationsViewModel {
             case notifications(CollectionChange)
             case loadingView(String)
             case removeView
+            case postProduced(FeedPost)
         }
         
         mutating func reloadPosts(notifs: [Notification]) -> Change{
@@ -40,7 +41,7 @@ class NotificationsViewModel {
             self.emit(state.callLoadingView(localized("RefreshingInfo")))
         }
         
-        networkingController.fethNotifications { [weak self] (notifications) in
+        networkingController.fetchNotifications { [weak self] (notifications) in
             
             guard let strongSelf = self else { return }
             
@@ -59,9 +60,32 @@ class NotificationsViewModel {
                         }
                     })
                 }
-                
+            } else {
+                strongSelf.emit(State.Change.removeView)
+                let notification = Notification(ownerID: "", targetID: "", doneByUserID: "", doneByUsername: "", type: .Null)
+                notification.targetImage = UIImage(named: "greyDefault")!
+                strongSelf.emit(strongSelf.state.reloadPosts([notification]))
             }
             callback()
+        }
+    }
+    
+    func startListeningNotifications(){
+        
+    }
+    
+    func detailedInfoAboutPost(postID: String){
+        networkingController.getPost(with: postID) { (singlePost) in
+            
+            self.networkingController.downloadPhoto(with: postID, completion: { (image, error) in
+                if error == nil {
+                    singlePost.photo = image!
+                }
+                
+                self.emit(State.Change.postProduced(singlePost))
+
+            })
+            
         }
     }
     

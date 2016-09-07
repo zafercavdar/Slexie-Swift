@@ -11,6 +11,42 @@ import Firebase
 
 extension FirebaseController {
 
+    
+    func getPost(with id: String, completion callback: (FeedPost) -> Void){
+        
+        let selfid = getUID()!
+        let ref = References.PhotoRef.child(id)
+        ref.observeSingleEventOfType(.Value, withBlock: { (snapshot) in
+            guard let post = snapshot.value as? [String: AnyObject] else { return }
+            
+            guard let ownerID = post[ReferenceLabels.PostOwner] as? String else { return }
+            
+            var likers: [String] = []
+            var likerCount = 0
+            var ownerName: String?
+            var liked = false
+            var tags: [String] = []
+            self.getUsername(with: ownerID, completion: { (username) in
+                ownerName = username
+                
+                if let likerPeople = post[ReferenceLabels.Likers] as? [String]{
+                    likers = likerPeople
+                    likerCount = likers.count
+                }
+                
+                if let photoTags = post[ReferenceLabels.PostTags] as? [String]{
+                    tags = photoTags
+                }
+                
+                liked = likers.contains(selfid)
+                
+                let singlePost = FeedPost(ownerUsername: ownerName!, ownerID: ownerID, id: id, tags: tags, likers: likers, likeCount: likerCount, isAlreadyLiked: liked)
+                
+                callback(singlePost)
+            })
+        })
+    }
+    
     func setAccountPrivacy(privacy: Privacy){
         
         var privacyString: String

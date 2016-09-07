@@ -34,6 +34,8 @@ struct NotificationsPresentation {
                 actionString = localized("NotifyLikeAction")
             case .Commented:
                 actionString = localized("NotifyCommentAction")
+            case .Null:
+                actionString = notif.notificationType.actionString
             }
             
             let target = notif.notificationTargetID
@@ -51,11 +53,17 @@ class NotificationsTableViewController: UITableViewController {
     private struct Identifier {
         static let NotificationCell = "NotificationCell"
     }
+    
+    private struct RouteID{
+        static let DetailedSinglePost = "DetailedSinglePost"
+    }
 
     private var model = NotificationsViewModel()
     private let loadingView = LoadingView()
     private var presentation = NotificationsPresentation()
-    
+    private let router = NotificationsRouter()
+    var selectedPost: FeedPost?
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.title = localized("NavBarNotifications")
@@ -63,6 +71,11 @@ class NotificationsTableViewController: UITableViewController {
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(refresh(_:)), forControlEvents: .ValueChanged)
         tableView.addSubview(refreshControl)
+        
+        let view = UIView()
+        view.backgroundColor = UIColor.whiteColor()
+        tableView.tableFooterView = view
+        
         
         model.stateChangeHandler = { [weak self] change in
             self?.applyStateChange(change)
@@ -99,6 +112,9 @@ class NotificationsTableViewController: UITableViewController {
             loadingView.addToView(self.view, text: text)
         case .removeView:
             loadingView.removeFromView(self.view)
+        case .postProduced(let post):
+            selectedPost = post
+            router.routeTo(RouteID.DetailedSinglePost, VC: self)
         case .none:
             break
         }
@@ -136,5 +152,21 @@ class NotificationsTableViewController: UITableViewController {
         cell.selectionStyle = UITableViewCellSelectionStyle.None
         
         return cell
+    }
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let index = indexPath.row
+        let notif = presentation.notifications[index]
+        let postID = notif.target
+        if notif.who != ""{
+            model.detailedInfoAboutPost(postID)
+        }
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if (segue.identifier == "DetailedSinglePost"){
+            let singlePostViewController = (segue.destinationViewController as! UINavigationController).viewControllers[0] as! SinglePostViewController
+            singlePostViewController.model.updatePost(selectedPost!)
+        }
     }
 }

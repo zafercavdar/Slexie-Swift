@@ -32,7 +32,7 @@ class SinglePostViewController: UITableViewController {
     private var backButton = UIBarButtonItem()
     
     private var router = SinglePostViewRouter()
-    private var model = SinglePostViewModel()
+    var model = SinglePostViewModel()
     private var presentation = SinglePostViewPresentation()
 
     override func viewDidLoad() {
@@ -42,7 +42,37 @@ class SinglePostViewController: UITableViewController {
         backButton = UIBarButtonItem(image: buttonImage, style: UIBarButtonItemStyle.Plain, target: self, action: #selector(self.backButtonPressed(_:)))
         self.navigationItem.leftBarButtonItem = backButton
         
+        self.tableView.tableFooterView = UIView()
+        self.tableView.tableFooterView?.backgroundColor = UIColor.whiteColor()
+        
+        applyState(model.state)
+        
+        model.stateChangeHandler = { [weak self] change in
+            self?.applyStateChange(change)
+        }
+        
     }
+    
+    func applyState(state: SinglePostViewModel.State) {
+        presentation.update(withState: state)
+        self.tableView.reloadData()
+    }
+    
+    func applyStateChange(change: SinglePostViewModel.State.Change) {
+        switch change {
+        case .post(let collectionChange):
+            presentation.update(withState: model.state)
+            switch collectionChange {
+            case .reload:
+                self.tableView.reloadData()
+            default:
+                break
+            }
+        case .none:
+            break
+        }
+    }
+
     
     func backButtonPressed(sender: UITabBarItem){
         self.router.routeTo(RouteID.Back, VC: self)
@@ -56,7 +86,7 @@ class SinglePostViewController: UITableViewController {
     }
     
     private func setUIColors(){
-        tableView.backgroundColor = UIColor.tableBackgroundGray()
+        tableView.backgroundColor = UIColor.whiteColor()
         
         let nav = self.navigationController?.navigationBar
         nav?.barTintColor = UIColor.coreColor()

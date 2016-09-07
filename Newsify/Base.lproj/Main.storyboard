@@ -753,6 +753,9 @@
                         </userDefinedRuntimeAttributes>
                     </tabBarItem>
                     <navigationItem key="navigationItem" title="Notifications" id="Qri-dD-Jjg"/>
+                    <connections>
+                        <segue destination="Ff1-7a-mNb" kind="presentation" identifier="DetailedSinglePost" id="nEj-q9-ng0"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="b1j-Tw-8yy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -864,7 +867,8 @@
         <image name="Settings" width="44" height="44"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="v1H-f1-fwr"/>
         <segue reference="O1p-1h-BT4"/>
+        <segue reference="v1H-f1-fwr"/>
+        <segue reference="nEj-q9-ng0"/>
     </inferredMetricsTieBreakers>
 </document>
