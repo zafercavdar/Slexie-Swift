@@ -44,7 +44,7 @@ class ImaggaService: TagService {
         }
     }
     
-    private let threshold = 25.00
+    private let threshold = 10.00
     private let maxTagNumber = 6
     
     func uploadPhotoGetContentID(imageData: NSData, completion: (id:String) -> Void){
@@ -76,7 +76,6 @@ class ImaggaService: TagService {
                     completion(tags: [])
                     return
                 }
-            
                 completion(tags: strongSelf.getHighlyTrustedTags(tags))
         }
     }
