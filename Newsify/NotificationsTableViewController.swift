@@ -18,8 +18,11 @@ struct NotificationsPresentation {
     }
     
     var notifications: [NotificationPresentation] = []
+    var badgeValue = 0
     
     mutating func update(withState state: NotificationsViewModel.State){
+        
+        badgeValue = state.notifs.count - notifications.count
         
         notifications = state.notifs.map({ (notif) -> NotificationPresentation in
             
@@ -85,6 +88,12 @@ class NotificationsTableViewController: UITableViewController {
             switch collectionChange {
             case .reload:
                 self.tableView.reloadData()
+                //if presentation.badgeValue > 0 {
+                    self.tabBarItem.badgeValue = String(presentation.badgeValue)
+                //}
+                self.tabBarItem = self.tabBarItem
+            default:
+                break
             }
         case .loadingView(let text):
             loadingView.addToView(self.view, text: text)

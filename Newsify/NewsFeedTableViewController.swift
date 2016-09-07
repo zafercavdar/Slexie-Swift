@@ -31,7 +31,7 @@ class NewsFeedTableViewController: UITableViewController{
     
     @IBOutlet var feedPostsView: UITableView!
     
-    var postCount = 100
+    var postCount = 3
     let postIncrease = 3
     
     override func viewDidLoad() {
@@ -70,6 +70,9 @@ class NewsFeedTableViewController: UITableViewController{
             switch collectionChange {
             case .reload:
                 self.tableView.reloadData()
+            case .insertion(let index):
+                let indexSet = NSIndexSet(index: index)
+                tableView.insertSections(indexSet, withRowAnimation: .Automatic)
             }
         case .loadingView(let text):
             self.loadingView.addToView(self.view, text: text)
@@ -146,13 +149,14 @@ class NewsFeedTableViewController: UITableViewController{
     }
     
 
-    /*override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
         
-        if (indexPath.section == presentation.postViews.count - 2) {
+        if (indexPath.section >= presentation.postViews.count - 1) {
+            print("loading more")
             postCount += postIncrease
-            model.fetchFeedPosts(count: postCount, completion: { })
+            model.fetchFeedPosts(count: postCount, showView: false, completion: { })
         }
-    }*/
+    }
     
     func heartTapped(sender: AdvancedGestureRecognizer) {
         let cell = (sender.tappedCell as! NewsFeedItemCell)

@@ -117,6 +117,8 @@ class SearchPageTableViewController: UITableViewController, UISearchResultsUpdat
             switch collectionChange {
             case .reload:
                 self.tableView.reloadData()
+            default:
+                break
             }
         case .none:
             break

@@ -11,6 +11,7 @@ import UIKit
 
 enum CollectionChange {
     case reload
+    case insertion(Int)
 }
 
 class FeedPostViewModel: PostViewModel {
@@ -26,8 +27,13 @@ class FeedPostViewModel: PostViewModel {
         }
         
         mutating func reloadPosts(feedPosts: [FeedPost]) -> Change{
-            self.feedPosts = feedPosts.reverse()
+            self.feedPosts = feedPosts
             return Change.posts(.reload)
+        }
+        
+        mutating func insertPost(feedPost: FeedPost) -> Change{
+            self.feedPosts.append(feedPost)
+            return Change.posts(.insertion(feedPosts.count - 1))
         }
         
         func showLoadingView(text: String) -> Change {
@@ -57,21 +63,34 @@ class FeedPostViewModel: PostViewModel {
                     strongSelf.emit(strongSelf.state.reloadPosts(strongSelf.defaultPosts()))
                     callback()
                 } else {
-                    strongSelf.emit(strongSelf.state.reloadPosts(posts))
+                    //strongSelf.emit(strongSelf.state.reloadPosts(posts))
                     
-                    for post in strongSelf.state.feedPosts {
-                        strongSelf.networkingController.downloadPhoto(with: post.id, completion: { (image, error) in
-                            guard error != nil else {
-                                post.setPhoto(image!)
-                                strongSelf.emit(State.Change.posts(.reload))
-                                callback()
-                                return
-                            }
-                        })
+                    for post in posts.reverse() {
+                        if !strongSelf.checkContains(post){
+                            strongSelf.networkingController.downloadPhoto(with: post.id, completion: { (image, error) in
+                                if error == nil {
+                                    post.setPhoto(image!)
+                                    print("Adding new photo")
+                                    strongSelf.emit(strongSelf.state.insertPost(post))
+                                    callback()
+                                }
+                            })
+                        }
+                        
                     }
                 }
             })
         }
+    }
+    
+    private func checkContains(feedPost: FeedPost) -> Bool{
+        for statePost in state.feedPosts {
+            if statePost.id == feedPost.id {
+                return true
+            }
+        }
+        
+        return false
     }
 }
 

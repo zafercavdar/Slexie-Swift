@@ -85,6 +85,8 @@ class CameraTableViewController: UITableViewController, UINavigationControllerDe
             switch collectionChange {
             case .reload:
                 self.tableView.reloadData()
+            default:
+                break
             }
         case .photo:
             presentation.update(withState: model.state)

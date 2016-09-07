@@ -71,6 +71,8 @@ class ProfilePageViewController: UITableViewController {
             switch collectionChange {
             case .reload:
                 self.tableView.reloadData()
+            default:
+                break
             }
         case .loadingView(let text):
             loadingView.addToView(self.view, text: text)
