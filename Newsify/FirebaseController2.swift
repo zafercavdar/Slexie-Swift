@@ -11,6 +11,41 @@ import Firebase
 
 extension FirebaseController {
 
+    func deletePost(with id: String){
+        let postRef = References.PhotoRef.child(id)
+        postRef.setValue(nil)
+        
+        let uid = getUID()!
+        
+        let userRef = References.UserRef.child(uid).child(ReferenceLabels.UserPosts)
+        userRef.observeSingleEventOfType(.Value, withBlock:  { (snapshot) in
+            guard var posts = snapshot.value as? [String] else {
+                return
+            }
+            posts.removeObject(id)
+            userRef.setValue(posts)
+        })
+        
+        let storageRef = References.PhotoStorageRef.child("\(id).png")
+        storageRef.deleteWithCompletion { (error) in
+        }
+        
+        let notifRef = References.UserRef.child(uid).child(ReferenceLabels.Notifications)
+        notifRef.observeSingleEventOfType(.Value, withBlock: { (snapshot) in
+            guard let notifs = snapshot.value as? [String: AnyObject] else { return }
+            
+            for (notifID, propDic) in notifs{
+                guard let props = propDic as? [String: String] else {
+                    continue
+                }
+                
+                if props[ReferenceLabels.NotificationLabels.Target] == id {
+                    notifRef.child(notifID).setValue(nil)
+                }
+            }
+        })
+        
+    }
     
     func getPost(with id: String, completion callback: (FeedPost) -> Void){
         
