@@ -72,12 +72,20 @@ class NewsFeedTableViewController: UITableViewController{
                 self.tableView.reloadData()
             case .insertion(let index):
                 let indexSet = NSIndexSet(index: index)
-                tableView.insertSections(indexSet, withRowAnimation: .Automatic)
+                tableView.insertSections(indexSet, withRowAnimation: .Fade)
+            case .deletion(let index):
+                let indexSet = NSIndexSet(index: index)
+                tableView.deleteSections(indexSet, withRowAnimation: .Fade)
             }
         case .loadingView(let text):
             self.loadingView.addToView(self.view, text: text)
         case .removeView:
             self.loadingView.removeFromView(self.view)
+        case .emptyFeed:
+            if postCount < 20 {
+                postCount += postIncrease
+                model.fetchFeedPosts(count: postCount, showView: true, completion: {})
+            }
         case .none:
             break
         }
@@ -89,7 +97,6 @@ class NewsFeedTableViewController: UITableViewController{
         let nav = self.navigationController?.navigationBar
         nav?.barTintColor = UIColor.coreColor()
         nav?.barStyle = UIBarStyle.BlackOpaque
-                
     }
     
     func refresh(refreshControl: UIRefreshControl) {
@@ -162,19 +169,18 @@ class NewsFeedTableViewController: UITableViewController{
     
     func moreButtonClicked(sender: ButtonWithIndex){
         let index = sender.index!
-        let imageID = presentation.postViews[index].post!.id
-        print(imageID)
+        let id = presentation.postViews[index].post!.id
         
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
-        alert.addAction(UIAlertAction(title: "Delete", style: .Destructive , handler:{ (action)in
+        alert.addAction(UIAlertAction(title: "Report", style: .Destructive , handler:{ (action)in
             
-            let alertController = UIAlertController(title: "Delete Photo?", message: nil, preferredStyle: .Alert)
+            let alertController = UIAlertController(title: "Report Photo?", message: nil, preferredStyle: .Alert)
             
             let noAction = UIAlertAction(title: localized("Cancel"), style: .Cancel, handler: nil)
             
-            let yesAction = UIAlertAction(title: localized("Delete"), style: .Destructive, handler: { (action: UIAlertAction!) in
+            let yesAction = UIAlertAction(title: localized("Report"), style: .Destructive, handler: { (action: UIAlertAction!) in
                 
-                print("deleted")
+                print("report is not added")
             })
             
             alertController.addAction(noAction)
