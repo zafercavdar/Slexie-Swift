@@ -8,9 +8,14 @@
 
 import UIKit
 
+class ButtonWithIndex: UIButton {
+    var index: Int?
+}
+
 class PostView {
 
     var headerView = UIView() // username
+    var moreButton = ButtonWithIndex()
     
     var cellView = UIView() // image and tags
     var heartTapView = UIImageView()
@@ -44,6 +49,13 @@ class PostView {
         usernameLabel.font = UIFont.boldSystemFontOfSize(16.00)
         usernameLabel.center = headerView.center
         headerView.addSubview(usernameLabel)
+        
+        moreButton = ButtonWithIndex(frame: CGRect(x: UIScreen.mainScreen().bounds.width - 30, y: 0, width: 30, height: 30))
+        moreButton.setTitleColor(UIColor.blackColor(), forState: .Normal)
+        moreButton.setTitle("...", forState: .Normal)
+        moreButton.titleLabel?.font = UIFont.boldSystemFontOfSize(16.00)
+        moreButton.center.y = headerView.center.y
+        headerView.addSubview(moreButton)
         
     }
     
