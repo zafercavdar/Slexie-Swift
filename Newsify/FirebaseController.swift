@@ -211,7 +211,6 @@ class FirebaseController: NetworkingController, AuthenticationController {
                 guard let allUsers = snapshot.value as? [String: AnyObject] else { return }
                 
                 for result in firstResults {
-                    print(result.whoID)
                     guard let props = (allUsers[result.whoID] as? [String: AnyObject]),
                         let username = props[ReferenceLabels.Username] as? String else { return }
                     
@@ -397,13 +396,11 @@ class FirebaseController: NetworkingController, AuthenticationController {
                         continue
                     }
                     
-                    
                     guard containsAny(photoTags,checkList: tags) else {
                         continue
                     }
                     
                     guard let ownerID = propertyDic[ReferenceLabels.PostOwner] as? String/* where owner != strongSelf.getUID() */ else {
-                        
                         continue
                     }
                     
@@ -424,6 +421,7 @@ class FirebaseController: NetworkingController, AuthenticationController {
                     let liked = likers!.contains(uid)
                     
                     let post = FeedPost(ownerUsername: username, ownerID: ownerID, id: id, tags: photoTags, likers: likers!, likeCount: likers!.count, isAlreadyLiked: liked)
+                    
                     posts.append(post)
                     
                 }
