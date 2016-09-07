@@ -43,6 +43,11 @@ class FeedPostViewModel: PostViewModel {
             return Change.posts(.deletion(index))
         }
         
+        mutating func clearPosts() -> Change{
+            self.feedPosts = []
+            return Change.posts(.reload)
+        }
+        
         func showLoadingView(text: String) -> Change {
             return Change.loadingView(text)
         }
@@ -51,8 +56,44 @@ class FeedPostViewModel: PostViewModel {
     private(set) var state = State()
     var stateChangeHandler: ((State.Change) -> Void)?
     
-        
+    
+    func reloadFeedPosts(count count: Int, completion callback: () -> Void) {
+        print("reloading: " + String(count))
+        networkingController.getAccountTags { (tags) in
+            
+            self.networkingController.getPhotosRelatedWith(tags, count: count, completion: { [weak self] (posts) in
+                
+                guard let strongSelf = self else { return }
+                
+                if posts.isEmpty {
+                    strongSelf.emit(State.Change.emptyFeed)
+                    callback()
+                } else {
+ 
+                    let reversed = posts.reverse() as [FeedPost]
+                    
+                    strongSelf.emit(strongSelf.state.reloadPosts(reversed))
+                    
+                    for post in reversed {
+                            strongSelf.networkingController.downloadPhoto(with: post.id, completion: { (image, error) in
+                                if error == nil {
+                                    post.setPhoto(image!)
+                                    print(post.id)
+                                    strongSelf.emit(strongSelf.state.reloadPosts(reversed))
+                                    callback()
+                                }
+                            })
+                    }
+                }
+            })
+        }
+    }
+
+    
     func fetchFeedPosts(count count: Int, showView: Bool, completion callback: () -> Void) {
+        
+        print("fetching: " + String(count))
+
         
         if showView {
             self.emit(self.state.showLoadingView(localized("RefreshingInfo")))
@@ -71,13 +112,14 @@ class FeedPostViewModel: PostViewModel {
                     //strongSelf.emit(strongSelf.state.reloadPosts(strongSelf.defaultPosts()))
                     callback()
                 } else {
-                    //strongSelf.emit(strongSelf.state.reloadPosts(posts))
+                    //strongSelf.emit(strongSelf.state.reloadPosts(posts.reverse()))
                     
                     for post in posts.reverse() {
                         if !strongSelf.checkContains(post){
                             strongSelf.networkingController.downloadPhoto(with: post.id, completion: { (image, error) in
                                 if error == nil {
                                     post.setPhoto(image!)
+                                    print(post.id)
                                     strongSelf.emit(strongSelf.state.insertPost(post))
                                     callback()
                                 }
