@@ -80,6 +80,8 @@ class ChangePasswordTVController: UITableViewController{
         let rePasswordField = (tableView.cellForRowAtIndexPath(rePasswordIndexPath) as! ChangePasswordTVCell).passwordTextField
         let rePassword = rePasswordField.text
         
+        //let fields = [oldPasswordField, newPasswordField, rePasswordField]
+        
         model.isPasswordCorrect(oldPassword!) { [weak self] (isCorrect) in
             guard let strongSelf = self else { return }
 
@@ -90,11 +92,13 @@ class ChangePasswordTVController: UITableViewController{
             passViewBlack.image = UIImage(named: "password")
             passViewRed.image = UIImage(named: "password-error")
 
+            var willChangeField: UITextField?
+            
             if (!isCorrect){
                 
                 strongSelf.showErrorView(with: localized("ErrorCurrentPasswordIsWrong"))
                 
-                //oldPasswordField.leftView = passViewRed
+                willChangeField = oldPasswordField
             } else {
                 oldPasswordField.leftView = passViewBlack
                 
@@ -102,21 +106,15 @@ class ChangePasswordTVController: UITableViewController{
                     
                     strongSelf.showErrorView(with: localized("ErrorPasswordsDoNotMatch"))
                     
-                    //newPasswordField.leftView = passViewRed
-                    //rePasswordField.leftView = passViewRed
+                    willChangeField = rePasswordField
                     
                 } else {
-                    //newPasswordField.leftView = passViewBlack
-                    //rePasswordField.leftView = passViewBlack
                     
                     if newPassword?.characters.count < 6 {
                         strongSelf.showErrorView(with: localized("ErrorPasswordLength"))
-                        //newPasswordField.leftView = passViewRed
-                        //rePasswordField.leftView = passViewBlack
+                        willChangeField = newPasswordField
                     } else {
                         // Everything is OK
-                        //rePasswordField.leftView = passViewBlack
-                        //newPasswordField.leftView = passViewBlack
                         
                         strongSelf.doneButton.enabled = false
 
@@ -134,6 +132,14 @@ class ChangePasswordTVController: UITableViewController{
                     }
                 }
             }
+            
+            /*for field in fields {
+                if field != willChangeField {
+                    field.leftView = passViewBlack
+                } else {
+                    field.leftView = passViewRed
+                }
+            }*/
         }
     }
     
