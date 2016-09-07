@@ -360,7 +360,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wOs-5D-hM0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1448" y="-4263"/>
+            <point key="canvasLocation" x="-2418" y="-4128"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="wIR-mL-bb2">
@@ -376,7 +376,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZZn-xa-YDD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1448" y="-3594"/>
+            <point key="canvasLocation" x="-2418" y="-3470"/>
         </scene>
         <!--Settings-->
         <scene sceneID="YpL-Jg-JWG">
@@ -437,7 +437,6 @@
                         <segue destination="fqW-w5-FGv" kind="show" identifier="ChangePassword" id="JZI-PH-OwC"/>
                         <segue destination="3dg-PE-nKr" kind="show" identifier="ShowPolicy" id="2dD-uM-Tgc"/>
                         <segue destination="vwd-Jf-cnn" kind="show" identifier="ShowLanguageChange" id="3Cr-ep-5oi"/>
-                        <segue destination="Ff1-7a-mNb" kind="show" identifier="OpenPost" id="NaA-1f-OxA"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mZW-NQ-CeD" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -867,8 +866,7 @@
         <image name="Settings" width="44" height="44"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="O1p-1h-BT4"/>
         <segue reference="v1H-f1-fwr"/>
-        <segue reference="nEj-q9-ng0"/>
+        <segue reference="O1p-1h-BT4"/>
     </inferredMetricsTieBreakers>
 </document>
