@@ -12,6 +12,7 @@ import UIKit
 enum CollectionChange {
     case reload
     case insertion(Int)
+    case deletion(Int)
 }
 
 class FeedPostViewModel: PostViewModel {
@@ -24,6 +25,7 @@ class FeedPostViewModel: PostViewModel {
             case posts(CollectionChange)
             case loadingView(String)
             case removeView
+            case emptyFeed
         }
         
         mutating func reloadPosts(feedPosts: [FeedPost]) -> Change{
@@ -34,6 +36,11 @@ class FeedPostViewModel: PostViewModel {
         mutating func insertPost(feedPost: FeedPost) -> Change{
             self.feedPosts.append(feedPost)
             return Change.posts(.insertion(feedPosts.count - 1))
+        }
+        
+        mutating func deletePost(index: Int) -> Change {
+            self.feedPosts.removeAtIndex(index)
+            return Change.posts(.deletion(index))
         }
         
         func showLoadingView(text: String) -> Change {
@@ -60,7 +67,8 @@ class FeedPostViewModel: PostViewModel {
                 strongSelf.emit(State.Change.removeView)
                 
                 if posts.isEmpty {
-                    strongSelf.emit(strongSelf.state.reloadPosts(strongSelf.defaultPosts()))
+                    strongSelf.emit(State.Change.emptyFeed)
+                    //strongSelf.emit(strongSelf.state.reloadPosts(strongSelf.defaultPosts()))
                     callback()
                 } else {
                     //strongSelf.emit(strongSelf.state.reloadPosts(posts))
@@ -96,7 +104,7 @@ class FeedPostViewModel: PostViewModel {
 private extension FeedPostViewModel {
     
     private func defaultPosts() -> [FeedPost]{
-        let defaultImage = UIImage(named: "example1")
+        /*let defaultImage = UIImage(named: "example1")
         let defaultUsername = "default-id"
         let defaultTags = ["food","spoon", "wood"]
         
@@ -108,9 +116,9 @@ private extension FeedPostViewModel {
         let feedItem2 = FeedPost(ownerUsername: defaultUsername2, ownerID: "79009fd9fdg", id: "no-id", tags: defaultTags2, likers: [], likeCount: 13, isAlreadyLiked: true)
         
         feedItem.setPhoto(defaultImage!)
-        feedItem2.setPhoto(defaultImage2!)
+        feedItem2.setPhoto(defaultImage2!)*/
         
-        return [feedItem,feedItem2]
+        return []
     }
     
     private func emit(change: State.Change){
