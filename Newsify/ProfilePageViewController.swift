@@ -109,7 +109,7 @@ class ProfilePageViewController: UITableViewController {
     }
     
     private func reload() {
-        model.fetchProfilePosts(true) {
+        model.fetchProfilePosts(false) {
         
         }
     }
