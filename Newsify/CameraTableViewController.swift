@@ -138,7 +138,6 @@ class CameraTableViewController: UITableViewController, UINavigationControllerDe
         model.uploadData(imageData, tags: tags)
     }
     
-    
     // MARK: - Table view data source
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {

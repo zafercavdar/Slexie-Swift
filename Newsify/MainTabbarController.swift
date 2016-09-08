@@ -17,10 +17,6 @@ class MainTabbarController: UITabBarController, UITabBarControllerDelegate {
         self.delegate = self
     }
     
-    override func tabBar(tabBar: UITabBar, didSelectItem item: UITabBarItem) {
-
-    }
-    
     func tabBarController(tabBarController: UITabBarController, didSelectViewController viewController: UIViewController) {
         
         if tabBarController.viewControllers![0] == viewController {

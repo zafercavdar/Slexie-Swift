@@ -64,14 +64,13 @@ class SearchPageTableViewController: UITableViewController, UISearchResultsUpdat
     private var model = SearchPostViewModel()
     private var presentation = SearchPostViewPresentation()
 
-
     var searchController = UISearchController(searchResultsController: nil)
     
     func configureSearchController() {
         searchController.searchResultsUpdater = self
         searchController.hidesNavigationBarDuringPresentation = true
         searchController.dimsBackgroundDuringPresentation = false
-        searchController.searchBar.placeholder = "Search ..."
+        searchController.searchBar.placeholder = "\(localized("TabBarSearch")) ..."
         
         searchController.searchBar.setValue(localized("Cancel"), forKey: "_cancelButtonText")
         searchController.searchBar.sizeToFit()
