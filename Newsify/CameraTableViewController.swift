@@ -114,6 +114,11 @@ class CameraTableViewController: UITableViewController, UINavigationControllerDe
             presentViewController(imagePickerController, animated: true, completion: nil)
             
         } else {
+            imagePickerController.sourceType = .PhotoLibrary
+            imagePickerController.allowsEditing = true
+            imagePickerController.delegate = self
+            presentViewController(imagePickerController, animated: true, completion: nil)
+        }/*else {
             let alertController = UIAlertController(title: "Error", message: "Camera is not avaiable in this device.", preferredStyle: .Alert)
             let okAction = UIAlertAction(title: "OK", style: .Cancel, handler: { (UIAlertAction) in
                 self.router.routeTo(RouteID.toFeed, VC: self)
@@ -121,7 +126,7 @@ class CameraTableViewController: UITableViewController, UINavigationControllerDe
             
             alertController.addAction(okAction)
             self.presentViewController(alertController, animated: true, completion: nil)
-        }
+        } */
 
     }
     
@@ -244,7 +249,7 @@ extension CameraTableViewController : UIImagePickerControllerDelegate {
         if picker.sourceType == .Camera {
             takenPhoto = info[UIImagePickerControllerEditedImage] as! UIImage
         } else if picker.sourceType == .PhotoLibrary {
-            takenPhoto = info[UIImagePickerControllerOriginalImage] as! UIImage
+            takenPhoto = info[UIImagePickerControllerEditedImage] as! UIImage
         }
         
         self.router.routeTo(RouteID.Dismiss, VC: self)

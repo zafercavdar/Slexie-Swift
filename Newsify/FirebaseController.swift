@@ -503,11 +503,11 @@ class FirebaseController: DatabaseController, AuthenticationController {
                                 return
                             }
                             
-                            guard let diccc = ((photos[postID] as? [String: AnyObject])), let tags = (diccc[ReferenceLabels.PostTags]) as? [String] else {
+                            guard let diccc = ((photos[postID] as? [String: AnyObject])), let tags = (
+                                diccc[ReferenceLabels.PostTags]) as? [String] else {
                                 print("error: " + postID)
                                 continue
                             }
-                            
                             
                             var likeCount: Int
                             var liked: Bool
