@@ -17,7 +17,7 @@ class LoadingView: UIView {
     func addToView(view: UIView, text: String){
         
         UIApplication.sharedApplication().networkActivityIndicatorVisible = true
-        loadingView = UIView(frame: CGRect(x: view.frame.midX - 110, y: view.frame.midY - 25, width: 220, height: 50))
+        loadingView = UIView(frame: CGRect(x: view.frame.midX - 110, y: view.frame.midY - 25, width: 200, height: 50))
         loadingView.backgroundColor = UIColor.midnightBlue()
         loadingView.alpha = 1
         loadingView.layer.cornerRadius = 10
@@ -26,9 +26,9 @@ class LoadingView: UIView {
         activityIndicator.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
         activityIndicator.startAnimating()
         
-        textLabel = UILabel(frame: CGRect(x: 60, y: 0, width: 200, height: 50))
+        textLabel = UILabel(frame: CGRect(x: 50, y: 0, width: 150, height: 50))
         textLabel.textColor = UIColor.whiteColor()
-        textLabel.center.x = loadingView.center.x
+        textLabel.textAlignment = .Center
         textLabel.text = text
         
         loadingView.addSubview(activityIndicator)

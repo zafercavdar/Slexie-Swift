@@ -42,11 +42,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Newsify/CameraTableViewController.swift"
-            timestampString = "494925298.77349"
+            timestampString = "495030207.75798"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "137"
-            endingLineNumber = "137"
+            startingLineNumber = "142"
+            endingLineNumber = "142"
             landmarkName = "uploadPressed(_:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -346,11 +346,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Newsify/FirebaseController.swift"
-            timestampString = "495028160.361043"
+            timestampString = "495028943.089761"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "491"
-            endingLineNumber = "491"
+            startingLineNumber = "434"
+            endingLineNumber = "434"
             landmarkName = "getPhotosRelatedWith(_:count:completion:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -362,11 +362,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Newsify/FirebaseController.swift"
-            timestampString = "495028160.361043"
+            timestampString = "495028943.089761"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "497"
-            endingLineNumber = "497"
+            startingLineNumber = "440"
+            endingLineNumber = "440"
             landmarkName = "getPhotosRelatedWith(_:count:completion:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -378,11 +378,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Newsify/FirebaseController.swift"
-            timestampString = "495028160.361043"
+            timestampString = "495028943.089761"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "499"
-            endingLineNumber = "499"
+            startingLineNumber = "442"
+            endingLineNumber = "442"
             landmarkName = "getPhotosRelatedWith(_:count:completion:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -394,11 +394,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Newsify/FirebaseController.swift"
-            timestampString = "495028160.361043"
+            timestampString = "495028943.089761"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "532"
-            endingLineNumber = "532"
+            startingLineNumber = "475"
+            endingLineNumber = "475"
             landmarkName = "getPhotosRelatedWith(_:count:completion:)"
             landmarkType = "5">
          </BreakpointContent>
