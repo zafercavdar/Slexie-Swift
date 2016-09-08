@@ -76,10 +76,14 @@ class ProfilePageViewController: UITableViewController {
             default:
                 break
             }
-        case .loadingView(let text):
-            loadingView.addToView(self.view, text: text)
-        case .removeView:
-            loadingView.removeFromView(self.view)
+        case .loading(let loadingState):
+            if loadingState.needsUpdate {
+                if loadingState.isActive {
+                    self.loadingView.addToView(self.view, text: localized("RefreshingInfo"))
+                } else {
+                    self.loadingView.removeFromView(self.view)
+                }
+            }
         case .none:
             break
         }
@@ -112,10 +116,6 @@ class ProfilePageViewController: UITableViewController {
     
     @IBAction func unwindToProfile(sender: UIStoryboardSegue) {
         reload()
-        print("unwind")
-        /*let firstVC = (self.tabBarController?.viewControllers![0] as! UINavigationController).viewControllers[0] as! NewsFeedTableViewController
-        firstVC.applyStateChange(FeedPostViewModel.State.Change.profilePostDeleted)*/
-
     }
 
     @IBAction func settingsPressed(sender: UIBarButtonItem) {
@@ -192,9 +192,6 @@ class ProfilePageViewController: UITableViewController {
             let yesAction = UIAlertAction(title: localized("Delete"), style: .Destructive, handler: { (action: UIAlertAction!) in
                 
                 self.model.deletePost(id, index: index)
-                /*let firstVC = (self.tabBarController?.viewControllers![0] as! UINavigationController).viewControllers[0] as! NewsFeedTableViewController
-                firstVC.applyStateChange(FeedPostViewModel.State.Change.profilePostDeleted)*/
-                
             })
             
             alertController.addAction(noAction)

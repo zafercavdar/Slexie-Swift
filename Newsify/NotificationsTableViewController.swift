@@ -108,10 +108,15 @@ class NotificationsTableViewController: UITableViewController {
             default:
                 break
             }
-        case .loadingView(let text):
-            loadingView.addToView(self.view, text: text)
-        case .removeView:
-            loadingView.removeFromView(self.view)
+        case .loading(let loadingState):
+            if loadingState.needsUpdate {
+                if loadingState.isActive {
+                    self.loadingView.addToView(self.view, text: localized("RefreshingInfo"))
+                } else {
+                    self.loadingView.removeFromView(self.view)
+                }
+            }
+
         case .postProduced(let post):
             selectedPost = post
             router.routeTo(RouteID.DetailedSinglePost, VC: self)

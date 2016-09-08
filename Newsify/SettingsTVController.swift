@@ -171,11 +171,8 @@ class SettingsTVController: UITableViewController {
         let section = indexPath.section
         let row = indexPath.row
         
-        
-        // Temporaryly postview controller
-        
         if (section == 0 && row == 0){
-            
+            // not completed
         }
         
         // Change password

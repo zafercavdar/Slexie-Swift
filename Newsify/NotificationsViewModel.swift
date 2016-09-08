@@ -12,12 +12,12 @@ class NotificationsViewModel {
     
     struct State{
         var notifs: [Notification] = []
+        var loadingState = LoadingState()
         
         enum Change: Equatable{
             case none
             case notifications(CollectionChange)
-            case loadingView(String)
-            case removeView
+            case loading(LoadingState)
             case postProduced(FeedPost)
         }
         
@@ -26,9 +26,18 @@ class NotificationsViewModel {
             return Change.notifications(.reload)
         }
         
-        func callLoadingView(text: String) -> Change{
-            return Change.loadingView(text)
+        mutating func addActivity() -> Change {
+            
+            loadingState.addActivity()
+            return Change.loading(loadingState)
         }
+        
+        mutating func removeActivity() -> Change {
+            
+            loadingState.removeActivity()
+            return .loading(loadingState)
+        }
+        
     }
     
     var networkingController = FirebaseController()
@@ -38,12 +47,14 @@ class NotificationsViewModel {
     func fetchNotifications(showView: Bool, completion callback: () -> Void){
         
         if showView {
-            self.emit(state.callLoadingView(localized("RefreshingInfo")))
+            self.emit(state.addActivity())
         }
         
         networkingController.fetchNotifications { [weak self] (notifications) in
             
             guard let strongSelf = self else { return }
+            
+            strongSelf.emit(strongSelf.state.removeActivity())
             
             if !notifications.isEmpty {
                 strongSelf.emit(strongSelf.state.reloadNotifications(notifications))
@@ -54,14 +65,12 @@ class NotificationsViewModel {
                     strongSelf.networkingController.downloadPhoto(with: id, completion: { (image, error) in
                         if error == nil {
                             notifications[i].targetImage = UIImage.resizeImage(image!, newWidth: CGFloat(49))
-                            strongSelf.emit(State.Change.removeView)
                             strongSelf.emit(strongSelf.state.reloadNotifications(notifications))
                             callback()
                         }
                     })
                 }
             } else {
-                strongSelf.emit(State.Change.removeView)
                 let notification = Notification(ownerID: "", targetID: "", doneByUserID: "", doneByUsername: "", type: .Null)
                 notification.targetImage = UIImage(named: "greyDefault")!
                 strongSelf.emit(strongSelf.state.reloadNotifications([notification]))
@@ -70,20 +79,20 @@ class NotificationsViewModel {
         }
     }
     
-    func startListeningNotifications(){
-        
-    }
-    
     func detailedInfoAboutPost(postID: String){
         networkingController.getPost(with: postID) { (singlePost) in
             
-            self.networkingController.downloadPhoto(with: postID, completion: { (image, error) in
+            self.emit(self.state.addActivity())
+            
+            self.networkingController.downloadPhoto(with: postID, completion: { [weak self] (image, error) in
                 if error == nil {
                     singlePost.photo = image!
                 }
                 
-                self.emit(State.Change.postProduced(singlePost))
-
+                guard let strongSelf = self else { return }
+                
+                strongSelf.emit(strongSelf.state.removeActivity())
+                strongSelf.emit(State.Change.postProduced(singlePost))
             })
             
         }
@@ -113,10 +122,8 @@ func ==(lhs: NotificationsViewModel.State.Change, rhs: NotificationsViewModel.St
         default:
             return false
         }
-    case (.loadingView(let text1) ,.loadingView(let text2)):
-        return text1 == text2
-    case (.removeView, .removeView):
-        return true
+    case (.loading(let loadingState1), .loading(let loadingState2)):
+        return loadingState1.activityCount == loadingState2.activityCount
     case (.postProduced(let post1), .postProduced(let post2)):
         return post1 == post2
     default:

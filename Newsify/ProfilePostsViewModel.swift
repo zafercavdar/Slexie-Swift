@@ -12,12 +12,12 @@ class ProfilePostViewModel: PostViewModel {
     
     struct State{
         var profilePosts: [FeedPost] = []
+        var loadingState = LoadingState()
         
         enum Change: Equatable{
             case none
             case posts(CollectionChange)
-            case loadingView(String)
-            case removeView
+            case loading(LoadingState)
         }
         
         mutating func reloadPosts(profilePosts: [FeedPost]) -> Change{
@@ -30,8 +30,16 @@ class ProfilePostViewModel: PostViewModel {
             return Change.posts(.deletion(index))
         }
         
-        func showView(text: String) -> Change {
-            return Change.loadingView(text)
+        mutating func addActivity() -> Change {
+            
+            loadingState.addActivity()
+            return Change.loading(loadingState)
+        }
+        
+        mutating func removeActivity() -> Change {
+            
+            loadingState.removeActivity()
+            return .loading(loadingState)
         }
     }
 
@@ -42,7 +50,7 @@ class ProfilePostViewModel: PostViewModel {
     func fetchProfilePosts(showView: Bool, completion callback: () -> Void) {
         
         if showView {
-            self.emit(state.showView(localized("RefreshingInfo")))
+            self.emit(state.addActivity())
         }
         
         networkingController.getProfilePosts { [weak self] (fetchedPosts) in
@@ -50,7 +58,7 @@ class ProfilePostViewModel: PostViewModel {
             guard let strongSelf = self else { return }
             
             if showView{
-                strongSelf.emit(State.Change.removeView)
+                strongSelf.emit(strongSelf.state.removeActivity())
             }
             
             if fetchedPosts.isEmpty {
@@ -64,7 +72,6 @@ class ProfilePostViewModel: PostViewModel {
                         
                         if error == nil {
                             post.setPhoto(image!)
-                            strongSelf.emit(State.Change.removeView)
                             strongSelf.emit(State.Change.posts(.reload))
                             callback()
                         }
@@ -123,10 +130,8 @@ func ==(lhs: ProfilePostViewModel.State.Change, rhs: ProfilePostViewModel.State.
         default:
             return false
         }
-    case (.loadingView(let text1) ,.loadingView(let text2)):
-        return text1 == text2
-    case (.removeView, .removeView):
-        return true
+    case (.loading(let loadingState1), .loading(let loadingState2)):
+        return loadingState1.activityCount == loadingState2.activityCount
     default:
         return false
     }

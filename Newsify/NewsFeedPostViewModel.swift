@@ -8,23 +8,16 @@
 
 import UIKit
 
-
-enum CollectionChange {
-    case reload
-    case insertion(Int)
-    case deletion(Int)
-}
-
 class NewsFeedPostViewModel: PostViewModel {
     
     struct State{
         var feedPosts: [FeedPost] = []
+        var loadingState = LoadingState()
         
         enum Change: Equatable{
             case none
             case posts(CollectionChange)
-            case loadingView(String)
-            case removeView
+            case loading(LoadingState)
             case emptyFeed
         }
         
@@ -43,14 +36,23 @@ class NewsFeedPostViewModel: PostViewModel {
             return Change.posts(.deletion(index))
         }
         
+        mutating func addActivity() -> Change {
+            
+            loadingState.addActivity()
+            return Change.loading(loadingState)
+        }
+        
+        mutating func removeActivity() -> Change {
+            
+            loadingState.removeActivity()
+            return .loading(loadingState)
+        }
+        
         mutating func clearPosts() -> Change{
             self.feedPosts = []
             return Change.posts(.reload)
         }
         
-        func showLoadingView(text: String) -> Change {
-            return Change.loadingView(text)
-        }
     }
     
     private(set) var state = State()
@@ -69,7 +71,7 @@ class NewsFeedPostViewModel: PostViewModel {
                     strongSelf.emit(State.Change.emptyFeed)
                     callback()
                 } else {
- 
+                    
                     let reversed = posts.reverse() as [FeedPost]
                     
                     strongSelf.emit(strongSelf.state.reloadPosts(reversed))
@@ -91,11 +93,8 @@ class NewsFeedPostViewModel: PostViewModel {
     
     func fetchFeedPosts(count count: Int, showView: Bool, completion callback: () -> Void) {
         
-        //print("fetching: " + String(count))
-
-        
         if showView {
-            self.emit(self.state.showLoadingView(localized("RefreshingInfo")))
+            self.emit(self.state.addActivity())
         }
         
         networkingController.getAccountTags { (tags) in
@@ -104,15 +103,14 @@ class NewsFeedPostViewModel: PostViewModel {
                 
                 guard let strongSelf = self else { return }
                 
-                strongSelf.emit(State.Change.removeView)
+                if showView{
+                    strongSelf.emit(strongSelf.state.removeActivity())
+                }
                 
                 if posts.isEmpty {
                     strongSelf.emit(State.Change.emptyFeed)
-                    //strongSelf.emit(strongSelf.state.reloadPosts(strongSelf.defaultPosts()))
                     callback()
                 } else {
-                    //strongSelf.emit(strongSelf.state.reloadPosts(posts.reverse()))
-                    
                     for post in posts.reverse() {
                         if !strongSelf.checkContains(post){
                             strongSelf.networkingController.downloadPhoto(with: post.id, completion: { (image, error) in
@@ -171,10 +169,8 @@ func ==(lhs: NewsFeedPostViewModel.State.Change, rhs: NewsFeedPostViewModel.Stat
         default:
             return false
         }
-    case (.loadingView(let text1) ,.loadingView(let text2)):
-        return text1 == text2
-    case (.removeView, .removeView):
-        return true
+    case (.loading(let loadingState1), .loading(let loadingState2)):
+        return loadingState1.activityCount == loadingState2.activityCount
     case (.emptyFeed, .emptyFeed):
         return true
     default:
