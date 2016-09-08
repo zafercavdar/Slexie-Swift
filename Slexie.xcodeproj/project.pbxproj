@@ -15,6 +15,7 @@
 		B33E936A1D664EB30011019B /* DebugOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B33E93691D664EB30011019B /* DebugOptions.swift */; };
 		B33E936C1D665C570011019B /* Global Functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B33E936B1D665C570011019B /* Global Functions.swift */; };
 		B35487891D6AD42F00F84C2D /* Requesters.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35487881D6AD42F00F84C2D /* Requesters.swift */; };
+		B35876B51D818801006BAF64 /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35876B41D818801006BAF64 /* Protocols.swift */; };
 		B361FCCB1D63234800B4F8AA /* NewsFeedPostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B361FCCA1D63234800B4F8AA /* NewsFeedPostViewModel.swift */; };
 		B361FCCD1D63295800B4F8AA /* FeedPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = B361FCCC1D63295800B4F8AA /* FeedPost.swift */; };
 		B36AF2051D671D8A00F2B87E /* Requests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36AF2041D671D8A00F2B87E /* Requests.swift */; };
@@ -82,7 +83,6 @@
 		B3FCACB91D78459700577D0F /* SettingsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3FCACB81D78459700577D0F /* SettingsCell.swift */; };
 		B3FCACBB1D784AEA00577D0F /* SettingsTVHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3FCACBA1D784AEA00577D0F /* SettingsTVHeaderCell.swift */; };
 		B3FCACBD1D7855B500577D0F /* SettingsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3FCACBC1D7855B500577D0F /* SettingsRouter.swift */; };
-		B3FCACBF1D786A6600577D0F /* FirebaseController2.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3FCACBE1D786A6600577D0F /* FirebaseController2.swift */; };
 		B3FCACC11D7872D100577D0F /* ChangePasswordTVController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3FCACC01D7872D100577D0F /* ChangePasswordTVController.swift */; };
 		B3FCACC31D7875B700577D0F /* ChangePasswordTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3FCACC21D7875B700577D0F /* ChangePasswordTVCell.swift */; };
 		B3FCACC71D799CC700577D0F /* ChangePasswordRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3FCACC61D799CC700577D0F /* ChangePasswordRouter.swift */; };
@@ -127,6 +127,7 @@
 		B33E93691D664EB30011019B /* DebugOptions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DebugOptions.swift; sourceTree = "<group>"; };
 		B33E936B1D665C570011019B /* Global Functions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Global Functions.swift"; sourceTree = "<group>"; };
 		B35487881D6AD42F00F84C2D /* Requesters.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Requesters.swift; sourceTree = "<group>"; };
+		B35876B41D818801006BAF64 /* Protocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
 		B361FCCA1D63234800B4F8AA /* NewsFeedPostViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsFeedPostViewModel.swift; sourceTree = "<group>"; };
 		B361FCCC1D63295800B4F8AA /* FeedPost.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedPost.swift; sourceTree = "<group>"; };
 		B36AF2041D671D8A00F2B87E /* Requests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Requests.swift; sourceTree = "<group>"; };
@@ -200,7 +201,6 @@
 		B3FCACB81D78459700577D0F /* SettingsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsCell.swift; sourceTree = "<group>"; };
 		B3FCACBA1D784AEA00577D0F /* SettingsTVHeaderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTVHeaderCell.swift; sourceTree = "<group>"; };
 		B3FCACBC1D7855B500577D0F /* SettingsRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsRouter.swift; sourceTree = "<group>"; };
-		B3FCACBE1D786A6600577D0F /* FirebaseController2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseController2.swift; sourceTree = "<group>"; };
 		B3FCACC01D7872D100577D0F /* ChangePasswordTVController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangePasswordTVController.swift; sourceTree = "<group>"; };
 		B3FCACC21D7875B700577D0F /* ChangePasswordTVCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangePasswordTVCell.swift; sourceTree = "<group>"; };
 		B3FCACC61D799CC700577D0F /* ChangePasswordRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangePasswordRouter.swift; sourceTree = "<group>"; };
@@ -267,8 +267,8 @@
 		B36AF20D1D6739E000F2B87E /* Networking */ = {
 			isa = PBXGroup;
 			children = (
+				B35876B41D818801006BAF64 /* Protocols.swift */,
 				B3ED70FC1D5CB3C6001159A6 /* FirebaseController.swift */,
-				B3FCACBE1D786A6600577D0F /* FirebaseController2.swift */,
 				B37DB5C71D66F94A00ADB79B /* ImaggaService.swift */,
 			);
 			name = Networking;
@@ -665,7 +665,6 @@
 				B361FCCD1D63295800B4F8AA /* FeedPost.swift in Sources */,
 				B3ED70F91D5C8AC6001159A6 /* NewsFeedItemCell.swift in Sources */,
 				B39BBA961D67179300A2C9E4 /* TagResponse.swift in Sources */,
-				B3FCACBF1D786A6600577D0F /* FirebaseController2.swift in Sources */,
 				B38623571D6C6E48007B8A5E /* CameraViewModel.swift in Sources */,
 				B386235B1D6C8DDC007B8A5E /* SearchFeedItemCell.swift in Sources */,
 				B33E936C1D665C570011019B /* Global Functions.swift in Sources */,
@@ -709,6 +708,7 @@
 				B3F455AE1D54A1BD005EA708 /* AppDelegate.swift in Sources */,
 				B316429C1D7434F900F9EDB5 /* Notification.swift in Sources */,
 				B3B527C11D65AF2100E31C37 /* ProfilePostsViewModel.swift in Sources */,
+				B35876B51D818801006BAF64 /* Protocols.swift in Sources */,
 				B3FCACBD1D7855B500577D0F /* SettingsRouter.swift in Sources */,
 				B38E85C01D59C28C00CAE73B /* TagsTableViewCell.swift in Sources */,
 				B3C0F7DF1D7EA82C00E41C96 /* SinglePostViewModel.swift in Sources */,

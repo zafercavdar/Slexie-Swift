@@ -16,42 +16,7 @@ enum CallbackResult {
     case Failed
 }
 
-protocol NetworkingController {
-    
-    func uploadPhoto(image: NSData, tags: [String], callback: (error: NSError?, photoID: String, url: String) -> Void)
-    func downloadPhoto(with photoID: String, completion callback: (UIImage?, NSError?) -> Void)
-    func getAccountTags(completion: [String] -> Void)
-    func getPhotosRelatedWith(tags: [String], count: Int, completion: [FeedPost] -> Void)
-    func getProfilePosts(completion callback: [FeedPost] -> Void)
-    func fetchUserLanguage(completion callback: (identifier: String) -> Void)
-    func photoLiked(imageid: String, callback: (CallbackResult) -> Void)
-    func photoUnliked(imageid: String, callback: (CallbackResult) -> Void)
-    
-    func pushNotification(notification: Notification, completion callback: () -> Void)
-    func removeNotification(notification: Notification, completion callback: () -> Void)
-    func fetchNotifications(completion callback: [Notification] -> Void)
-    func getUsername(with uid: String, completion callback: (username: String) -> Void)
-    
-}
-
-protocol LoginController {
-    func signInWith(username username: String, password: String, enableNotification: Bool, completionHandler: (error: NSError?) -> Void)
-    func signInWith(email email: String, password: String, enableNotification: Bool, completionHandler: (error: NSError?) -> Void)
-}
-
-protocol LogOutController {
-    func signOut(callback: Void->Void)
-}
-
-protocol SignUpController {
-    func signUp(email: String, username: String, password: String, profileType: String, language: String, completionHandler: (error: NSError?) -> Void)
-}
-
-protocol AuthenticationController: SignUpController, LogOutController, LoginController {
-    func getUID() -> String?
-}
-
-class FirebaseController: NetworkingController, AuthenticationController {
+class FirebaseController: DatabaseController, AuthenticationController {
     
     let appURL = "hackify-a48e3.firebaseio.com"
     
@@ -155,7 +120,7 @@ class FirebaseController: NetworkingController, AuthenticationController {
     }
 
 
-    // MARK: NetworkingController Methods
+    // MARK: Notification Methods
     
     func fetchNotifications(completion callback: [Notification] -> Void){
         
@@ -297,25 +262,7 @@ class FirebaseController: NetworkingController, AuthenticationController {
         
     }
     
-    func fetchUserLanguage(completion callback: (identifier: String) -> Void) {
-        
-        guard let uid = getUID() else {
-            callback(identifier: "nil")
-            return
-        }
-        
-        let languageRef = References.UserRef.child(uid).child(ReferenceLabels.Language)
-        
-        languageRef.observeSingleEventOfType(.Value, withBlock:  { (snapshot) in
-            
-            guard let identifier = snapshot.value as? String else {
-                callback(identifier: "nil")
-                return
-            }
-            
-            callback(identifier: identifier)
-        })
-    }
+    // MARK: Upload/Download
     
     func uploadPhoto(image: NSData, tags: [String], callback: (error: NSError?, photoID: String, url: String) -> Void){
         let storageRef = FIRStorage.storage().reference()
@@ -343,6 +290,40 @@ class FirebaseController: NetworkingController, AuthenticationController {
         }
     }
     
+    func downloadPhoto(with photoID: String, completion callback: (UIImage?, NSError?) -> Void){
+        let photoRef = References.PhotoStorageRef.child("\(photoID).png")
+        
+        let fileManager = NSFileManager.defaultManager()
+        let localMainURL = fileManager.URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).last
+        let localURLString = (localMainURL?.absoluteString)! + "images/\(photoID).png"
+        let localURL = NSURL(string: localURLString)
+        
+        let path = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as String
+        let pURL = NSURL(fileURLWithPath: path)
+        let filePath = pURL.URLByAppendingPathComponent("images/\(photoID).png").path!
+        
+        
+        if fileManager.fileExistsAtPath(filePath){
+            guard let data = NSData(contentsOfURL: localURL!), let image = UIImage(data: data) else { return }
+            callback(image, nil)
+            
+        } else {
+            _ = photoRef.writeToFile(localURL!) { (URL, error) -> Void in
+                if (error != nil) {
+                    callback(nil, error)
+                } else {
+                    guard let data = NSData(contentsOfURL: URL!), let image = UIImage(data: data) else {
+                        return
+                    }
+                    
+                    callback(image, error)
+                }
+            }
+        }
+    }
+    
+    // MARK: Get user details
+    
     func getAccountTags(completion: [String] -> Void) {
         
         guard let uid = getUID() else {
@@ -359,6 +340,82 @@ class FirebaseController: NetworkingController, AuthenticationController {
             }
         })
     }
+    
+    func getUsername(with uid: String, completion callback: (username: String) -> Void){
+        
+        let ref = References.UserRef.child(uid).child(ReferenceLabels.Username)
+        ref.observeSingleEventOfType(.Value,  withBlock: { (snapshot) in
+            let username = snapshot.value as! String
+            callback(username: username)
+        })
+    }
+
+    
+    func fetchUserLanguage(completion callback: (identifier: String) -> Void) {
+        
+        guard let uid = getUID() else {
+            callback(identifier: "nil")
+            return
+        }
+        
+        let languageRef = References.UserRef.child(uid).child(ReferenceLabels.Language)
+        
+        languageRef.observeSingleEventOfType(.Value, withBlock:  { (snapshot) in
+            
+            guard let identifier = snapshot.value as? String else {
+                callback(identifier: "nil")
+                return
+            }
+            
+            callback(identifier: identifier)
+        })
+    }
+    
+    // MARK: Like actions
+    
+    func photoLiked(imageid: String, callback: (CallbackResult) -> Void){
+        
+        let uidNo = getUID()
+        
+        if let uid = uidNo as String!{
+            let photoRef = References.PhotoRef.child(imageid)
+            
+            getLikers(photo: imageid, completion: { (likerList) in
+                let array = likerList + [uid]
+                let uniqueList = Array(Set(array))
+                let dic = [ReferenceLabels.Likers : uniqueList]
+                print(uniqueList)
+                photoRef.updateChildValues(dic)
+                callback(.Success)
+            })
+        } else {
+            callback(.Failed)
+        }
+        
+    }
+    
+    func photoUnliked(imageid: String, callback: (CallbackResult) -> Void){
+        
+        let uidNo = getUID()
+        
+        if let uid = uidNo as String!{
+            let photoRef = References.PhotoRef.child(imageid)
+            
+            getLikers(photo: imageid, completion: { (likerList) in
+                var likers = likerList
+                likers.removeObject(uid)
+                let uniqueList = Array(Set(likers))
+                let dic = [ReferenceLabels.Likers : uniqueList]
+                print(uniqueList)
+                photoRef.updateChildValues(dic)
+                callback(.Success)
+            })
+        } else {
+            callback(.Failed)
+        }
+    }
+    
+    // Post Methods
     
     func getPhotosRelatedWith(tags: [String], count: Int, completion: [FeedPost] -> Void){
         
@@ -480,89 +537,180 @@ class FirebaseController: NetworkingController, AuthenticationController {
         
     }
     
-    func downloadPhoto(with photoID: String, completion callback: (UIImage?, NSError?) -> Void){
-        let photoRef = References.PhotoStorageRef.child("\(photoID).png")
+    func reportPost(id: String){
         
-        let fileManager = NSFileManager.defaultManager()
-        let localMainURL = fileManager.URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).last
-        let localURLString = (localMainURL?.absoluteString)! + "images/\(photoID).png"
-        let localURL = NSURL(string: localURLString)
+        let ugen = UniqueIDGenerator()
+        let uniqueReportID = ugen.generateReportID(id)
+        let time = NSDate().uniqueTime()
+        let uid = getUID()!
+        let ref = References.ReportRef.child(uniqueReportID)
         
-        let path = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as String
-        let pURL = NSURL(fileURLWithPath: path)
-        let filePath = pURL.URLByAppendingPathComponent("images/\(photoID).png").path!
+        let batchUpdate = ["Time" : time,
+                           "WhoReported" : uid,
+                           "Reported": id]
         
+        ref.updateChildValues(batchUpdate)
+    }
+    
+    func deletePost(with id: String){
+        let postRef = References.PhotoRef.child(id)
+        postRef.setValue(nil)
         
-        if fileManager.fileExistsAtPath(filePath){
-            guard let data = NSData(contentsOfURL: localURL!), let image = UIImage(data: data) else { return }
-            callback(image, nil)
+        let uid = getUID()!
+        
+        let userRef = References.UserRef.child(uid).child(ReferenceLabels.UserPosts)
+        userRef.observeSingleEventOfType(.Value, withBlock:  { (snapshot) in
+            guard var posts = snapshot.value as? [String] else {
+                return
+            }
+            posts.removeObject(id)
+            userRef.setValue(posts)
+        })
+        
+        let storageRef = References.PhotoStorageRef.child("\(id).png")
+        storageRef.deleteWithCompletion { (error) in
+        }
+        
+        let notifRef = References.UserRef.child(uid).child(ReferenceLabels.Notifications)
+        notifRef.observeSingleEventOfType(.Value, withBlock: { (snapshot) in
+            guard let notifs = snapshot.value as? [String: AnyObject] else { return }
             
-        } else {
-            _ = photoRef.writeToFile(localURL!) { (URL, error) -> Void in
-                if (error != nil) {
-                    callback(nil, error)
-                } else {
-                    guard let data = NSData(contentsOfURL: URL!), let image = UIImage(data: data) else {
-                        return
-                    }
-                    
-                    callback(image, error)
+            for (notifID, propDic) in notifs{
+                guard let props = propDic as? [String: String] else {
+                    continue
+                }
+                
+                if props[ReferenceLabels.NotificationLabels.Target] == id {
+                    notifRef.child(notifID).setValue(nil)
                 }
             }
-        }
+        })
+        
     }
     
-    func photoLiked(imageid: String, callback: (CallbackResult) -> Void){
-
-        let uidNo = getUID()
+    func getPost(with id: String, completion callback: (FeedPost) -> Void){
         
-        if let uid = uidNo as String!{
-            let photoRef = References.PhotoRef.child(imageid)
+        let selfid = getUID()!
+        let ref = References.PhotoRef.child(id)
+        ref.observeSingleEventOfType(.Value, withBlock: { (snapshot) in
+            guard let post = snapshot.value as? [String: AnyObject] else { return }
             
-            getLikers(photo: imageid, completion: { (likerList) in
-                let array = likerList + [uid]
-                let uniqueList = Array(Set(array))
-                let dic = [ReferenceLabels.Likers : uniqueList]
-                print(uniqueList)
-                photoRef.updateChildValues(dic)
-                callback(.Success)
-            })
-        } else {
-            callback(.Failed)
-        }
-        
-    }
-    
-    func photoUnliked(imageid: String, callback: (CallbackResult) -> Void){
-        
-        let uidNo = getUID()
-        
-        if let uid = uidNo as String!{
-            let photoRef = References.PhotoRef.child(imageid)
+            guard let ownerID = post[ReferenceLabels.PostOwner] as? String else { return }
             
-            getLikers(photo: imageid, completion: { (likerList) in
-                var likers = likerList
-                likers.removeObject(uid)
-                let uniqueList = Array(Set(likers))
-                let dic = [ReferenceLabels.Likers : uniqueList]
-                print(uniqueList)
-                photoRef.updateChildValues(dic)
-                callback(.Success)
+            var likers: [String] = []
+            var likerCount = 0
+            var ownerName: String?
+            var liked = false
+            var tags: [String] = []
+            self.getUsername(with: ownerID, completion: { (username) in
+                ownerName = username
+                
+                if let likerPeople = post[ReferenceLabels.Likers] as? [String]{
+                    likers = likerPeople
+                    likerCount = likers.count
+                }
+                
+                if let photoTags = post[ReferenceLabels.PostTags] as? [String]{
+                    tags = photoTags
+                }
+                
+                liked = likers.contains(selfid)
+                
+                let singlePost = FeedPost(ownerUsername: ownerName!, ownerID: ownerID, id: id, tags: tags, likers: likers, likeCount: likerCount, isAlreadyLiked: liked)
+                
+                callback(singlePost)
             })
-        } else {
-            callback(.Failed)
-        }
-    }
-
-    
-    func getUsername(with uid: String, completion callback: (username: String) -> Void){
-        
-        let ref = References.UserRef.child(uid).child(ReferenceLabels.Username)
-        ref.observeSingleEventOfType(.Value,  withBlock: { (snapshot) in
-            let username = snapshot.value as! String
-            callback(username: username)
         })
     }
+    
+    // MARK: Settings Methods
+    
+    func setAccountPrivacy(privacy: Privacy){
+        
+        var privacyString: String
+        switch privacy {
+        case .Private:
+            privacyString = "Private"
+        case .Public:
+            privacyString = "Public"
+        }
+        
+        guard let uid = getUID() else { return }
+        
+        let userRef = References.UserRef.child(uid)
+        let update = [ReferenceLabels.ProfileType : privacyString]
+        userRef.updateChildValues(update)
+        
+        let photoRef = References.PhotoRef
+        
+        photoRef.observeSingleEventOfType(.Value, withBlock: { (snapshot) in
+            guard let dic = snapshot.value as? [String: AnyObject] else { return }
+            
+            var updateDic: [String: String] = [:]
+            
+            let keys = dic.keys
+            for key in keys {
+                if key.hasSuffix(uid){
+                    updateDic["\(key)/\(ReferenceLabels.PostPrivacy)"] = privacyString
+                }
+            }
+            
+            photoRef.updateChildValues(updateDic)
+        })
+    }
+    
+    
+    func changeLanguage(identifier: LanguageIdentifier, completion callback: () -> Void){
+        let language = identifier.rawValue
+        guard let uid = getUID() else { return }
+        
+        let langRef = References.UserRef.child(uid).child(ReferenceLabels.Language)
+        langRef.setValue(language)
+        lang = identifier.rawValue
+        callback()
+    }
+    
+    func changePassword(oldPassword: String, newPassword: String, completion callback: (NSError?) -> Void){
+        
+        guard let uid = self.getUID() else { return }
+        
+        let usernameRef = References.UserRef.child(uid).child(ReferenceLabels.Username)
+        
+        usernameRef.observeSingleEventOfType(.Value, withBlock: { (snapshot) in
+            let username = snapshot.value as! String
+            self.signInWith(username: username, password: oldPassword, enableNotification: false, completionHandler: { (error) in
+                if (error == nil){
+                    
+                    self.getCurrentUser()?.updatePassword(newPassword, completion: { (error) in
+                        
+                        if (error == nil){
+                            let userRef = References.UserRef.child(uid)
+                            let update = [ReferenceLabels.Password : newPassword]
+                            userRef.updateChildValues(update)
+                        }
+                        
+                        callback(error)
+                    })
+                    
+                } else {
+                    callback(error)
+                }
+            })
+        })
+    }
+    
+    func isPasswordCorrect(oldPassword: String, completion callback: (isCorrect: Bool) -> Void) {
+        
+        guard let uid = self.getUID() else { return }
+        
+        let passwordRef = References.UserRef.child(uid).child(ReferenceLabels.Password)
+        passwordRef.observeSingleEventOfType(.Value, withBlock:  { (snapshot) in
+            guard let password = snapshot.value as? String else { return }
+            
+            callback(isCorrect: password == oldPassword)
+        })
+    }
+
 
 
     // MARK: Private methods
