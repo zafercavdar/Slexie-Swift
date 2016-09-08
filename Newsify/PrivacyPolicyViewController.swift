@@ -14,7 +14,6 @@ class PrivacyPolicyViewModel{
         let localFilePath = NSBundle.mainBundle().URLForResource("Policy", withExtension: "html")
         callback(url: localFilePath!)
     }
-    
 }
 
 class PrivacyPolicyViewController: UIViewController {

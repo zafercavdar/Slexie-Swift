@@ -27,6 +27,10 @@ class SlexieUnitTests: XCTestCase {
         let p2 = FeedPost(ownerUsername: "irencini", ownerID: "jasouu93", id: "20160903SS161543UUjasouu93", tags: ["man","cup"], likers: ["a38km3pf","a1b2c3"], likeCount: 2, isAlreadyLiked: false)
         let p3 = FeedPost(ownerUsername: "zctr", ownerID: "a1b2c3", id: "20160903SS161569UUa1b2c3", tags: ["breakfast","meal"], likers: ["a38km3pf","a1b2c3"], likeCount: 2, isAlreadyLiked: true)
         
+        let noneChange = state.reloadPosts([])
+        XCTAssertTrue(noneChange == .none)
+        XCTAssertTrue(state.feedPosts == [])
+        
         let reloadChange = state.reloadPosts([p1,p2])
         XCTAssertTrue(reloadChange == .posts(.reload))
         XCTAssertTrue(state.feedPosts == [p1, p2])
@@ -42,6 +46,8 @@ class SlexieUnitTests: XCTestCase {
         let clearChange = state.clearPosts()
         XCTAssertTrue(clearChange == .posts(.reload))
         XCTAssertTrue(state.feedPosts == [])
+        
+        
     }
     
     func testSearchPostOperations(){
@@ -105,6 +111,90 @@ class SlexieUnitTests: XCTestCase {
         XCTAssertTrue(reloadChange == .post(.reload))
         XCTAssertTrue(state.post == p1)
         
+    }
+    
+    func testNewsFeedLoading() {
+        
+        var state = NewsFeedPostViewModel.State()
+        
+        state.addActivity()
+        XCTAssertTrue(state.loadingState.activityCount == 1)
+        XCTAssertTrue(state.loadingState.needsUpdate)
+        
+        state.addActivity()
+        XCTAssertTrue(state.loadingState.activityCount == 2)
+        XCTAssertFalse(state.loadingState.needsUpdate)
+        
+        state.removeActivity()
+        XCTAssertTrue(state.loadingState.activityCount == 1)
+        XCTAssertFalse(state.loadingState.needsUpdate)
+        
+        state.removeActivity()
+        XCTAssertTrue(state.loadingState.activityCount == 0)
+        XCTAssertTrue(state.loadingState.needsUpdate)
+    }
+    
+    func testNotificationLoading() {
+        
+        var state = NotificationsViewModel.State()
+        
+        state.addActivity()
+        XCTAssertTrue(state.loadingState.activityCount == 1)
+        XCTAssertTrue(state.loadingState.needsUpdate)
+        
+        state.addActivity()
+        XCTAssertTrue(state.loadingState.activityCount == 2)
+        XCTAssertFalse(state.loadingState.needsUpdate)
+        
+        state.removeActivity()
+        XCTAssertTrue(state.loadingState.activityCount == 1)
+        XCTAssertFalse(state.loadingState.needsUpdate)
+        
+        state.removeActivity()
+        XCTAssertTrue(state.loadingState.activityCount == 0)
+        XCTAssertTrue(state.loadingState.needsUpdate)
+    }
+
+    func testProfilePageLoading() {
+        
+        var state = ProfilePostViewModel.State()
+        
+        state.addActivity()
+        XCTAssertTrue(state.loadingState.activityCount == 1)
+        XCTAssertTrue(state.loadingState.needsUpdate)
+        
+        state.addActivity()
+        XCTAssertTrue(state.loadingState.activityCount == 2)
+        XCTAssertFalse(state.loadingState.needsUpdate)
+        
+        state.removeActivity()
+        XCTAssertTrue(state.loadingState.activityCount == 1)
+        XCTAssertFalse(state.loadingState.needsUpdate)
+        
+        state.removeActivity()
+        XCTAssertTrue(state.loadingState.activityCount == 0)
+        XCTAssertTrue(state.loadingState.needsUpdate)
+    }
+    
+    func testChangePasswordLoading() {
+        
+        var state = ChangePasswordViewModel.State()
+        
+        state.addActivity()
+        XCTAssertTrue(state.loadingState.activityCount == 1)
+        XCTAssertTrue(state.loadingState.needsUpdate)
+        
+        state.addActivity()
+        XCTAssertTrue(state.loadingState.activityCount == 2)
+        XCTAssertFalse(state.loadingState.needsUpdate)
+        
+        state.removeActivity()
+        XCTAssertTrue(state.loadingState.activityCount == 1)
+        XCTAssertFalse(state.loadingState.needsUpdate)
+        
+        state.removeActivity()
+        XCTAssertTrue(state.loadingState.activityCount == 0)
+        XCTAssertTrue(state.loadingState.needsUpdate)
     }
     
 }

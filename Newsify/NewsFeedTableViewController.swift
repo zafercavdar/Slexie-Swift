@@ -77,11 +77,6 @@ class NewsFeedTableViewController: UITableViewController{
                 let indexSet = NSIndexSet(index: index)
                 tableView.deleteSections(indexSet, withRowAnimation: .Fade)
             }
-        case .emptyFeed:
-            if postCount < 20 {
-                postCount += postIncrease
-                model.fetchFeedPosts(count: postCount, showView: true, completion: {})
-            }
         case .loading(let loadingState):
             if loadingState.needsUpdate {
                 if loadingState.isActive {
@@ -91,7 +86,10 @@ class NewsFeedTableViewController: UITableViewController{
                 }
             }
         case .none:
-            break
+            if postCount < 20 {
+                postCount += postIncrease
+                model.fetchFeedPosts(count: postCount, showView: true, completion: {})
+            }
         }
     }
     

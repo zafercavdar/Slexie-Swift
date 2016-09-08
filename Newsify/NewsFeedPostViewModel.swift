@@ -18,12 +18,16 @@ class NewsFeedPostViewModel: PostViewModel {
             case none
             case posts(CollectionChange)
             case loading(LoadingState)
-            case emptyFeed
         }
         
         mutating func reloadPosts(feedPosts: [FeedPost]) -> Change{
-            self.feedPosts = feedPosts
-            return Change.posts(.reload)
+            if !feedPosts.isEmpty{
+                self.feedPosts = feedPosts
+                return Change.posts(.reload)
+            } else {
+                return Change.none
+            }
+            
         }
         
         mutating func insertPost(feedPost: FeedPost) -> Change{
@@ -68,7 +72,7 @@ class NewsFeedPostViewModel: PostViewModel {
                 guard let strongSelf = self else { return }
                 
                 if posts.isEmpty {
-                    strongSelf.emit(State.Change.emptyFeed)
+                    strongSelf.emit(strongSelf.state.reloadPosts([]))
                     callback()
                 } else {
                     
@@ -108,7 +112,7 @@ class NewsFeedPostViewModel: PostViewModel {
                 }
                 
                 if posts.isEmpty {
-                    strongSelf.emit(State.Change.emptyFeed)
+                    strongSelf.emit(strongSelf.state.reloadPosts([]))
                     callback()
                 } else {
                     for post in posts.reverse() {
@@ -171,8 +175,6 @@ func ==(lhs: NewsFeedPostViewModel.State.Change, rhs: NewsFeedPostViewModel.Stat
         }
     case (.loading(let loadingState1), .loading(let loadingState2)):
         return loadingState1.activityCount == loadingState2.activityCount
-    case (.emptyFeed, .emptyFeed):
-        return true
     default:
         return false
     }

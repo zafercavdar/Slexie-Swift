@@ -26,7 +26,6 @@ extension FirebaseController {
         ref.updateChildValues(batchUpdate)
     }
 
-    
     func deletePost(with id: String){
         let postRef = References.PhotoRef.child(id)
         postRef.setValue(nil)

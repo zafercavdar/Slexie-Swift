@@ -129,10 +129,6 @@ func ==(lhs: CameraViewModel.State.Change, rhs: CameraViewModel.State.Change) ->
         switch (update1, update2) {
         case (.reload, .reload):
             return true
-        case (.insertion(let index1), .insertion(let index2)):
-            return index1 == index2
-        case (.deletion(let index1), .deletion(let index2)):
-            return index1 == index2
         default:
             return false
         }

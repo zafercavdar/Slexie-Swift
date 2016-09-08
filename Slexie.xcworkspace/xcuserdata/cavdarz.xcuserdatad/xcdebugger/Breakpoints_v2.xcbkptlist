@@ -218,11 +218,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Newsify/NewsFeedTableViewController.swift"
-            timestampString = "495019812.400686"
+            timestampString = "495022488.646227"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "117"
-            endingLineNumber = "117"
+            startingLineNumber = "115"
+            endingLineNumber = "115"
             landmarkName = "numberOfSectionsInTableView(_:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -234,11 +234,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Newsify/NewsFeedTableViewController.swift"
-            timestampString = "495019812.400686"
+            timestampString = "495022488.646227"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "121"
-            endingLineNumber = "121"
+            startingLineNumber = "119"
+            endingLineNumber = "119"
             landmarkName = "tableView(_:numberOfRowsInSection:)"
             landmarkType = "5">
          </BreakpointContent>

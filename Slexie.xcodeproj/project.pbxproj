@@ -76,7 +76,7 @@
 		B3F455B81D54A1BD005EA708 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B3F455B61D54A1BD005EA708 /* LaunchScreen.storyboard */; };
 		B3FCACAF1D78109E00577D0F /* ArrayExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3FCACAE1D78109E00577D0F /* ArrayExtensions.swift */; };
 		B3FCACB11D782DD000577D0F /* MainTabbarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3FCACB01D782DD000577D0F /* MainTabbarController.swift */; };
-		B3FCACB31D78301100577D0F /* TV Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3FCACB21D78301100577D0F /* TV Extensions.swift */; };
+		B3FCACB31D78301100577D0F /* TableView Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3FCACB21D78301100577D0F /* TableView Extensions.swift */; };
 		B3FCACB51D783E7800577D0F /* SettingsTVController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3FCACB41D783E7800577D0F /* SettingsTVController.swift */; };
 		B3FCACB71D78404D00577D0F /* SetttingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3FCACB61D78404D00577D0F /* SetttingsViewModel.swift */; };
 		B3FCACB91D78459700577D0F /* SettingsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3FCACB81D78459700577D0F /* SettingsCell.swift */; };
@@ -194,7 +194,7 @@
 		B3F455B91D54A1BD005EA708 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B3FCACAE1D78109E00577D0F /* ArrayExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArrayExtensions.swift; sourceTree = "<group>"; };
 		B3FCACB01D782DD000577D0F /* MainTabbarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabbarController.swift; sourceTree = "<group>"; };
-		B3FCACB21D78301100577D0F /* TV Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TV Extensions.swift"; sourceTree = "<group>"; };
+		B3FCACB21D78301100577D0F /* TableView Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TableView Extensions.swift"; sourceTree = "<group>"; };
 		B3FCACB41D783E7800577D0F /* SettingsTVController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTVController.swift; sourceTree = "<group>"; };
 		B3FCACB61D78404D00577D0F /* SetttingsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetttingsViewModel.swift; sourceTree = "<group>"; };
 		B3FCACB81D78459700577D0F /* SettingsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsCell.swift; sourceTree = "<group>"; };
@@ -376,10 +376,10 @@
 				B3BA49B91D65EE2B00106930 /* DateExtension.swift */,
 				B3BA49C51D65FAEE00106930 /* ColorExtension.swift */,
 				B3BA49C91D66003500106930 /* ImageExtension.swift */,
+				B3FCACAE1D78109E00577D0F /* ArrayExtensions.swift */,
+				B3FCACB21D78301100577D0F /* TableView Extensions.swift */,
 				B33E93691D664EB30011019B /* DebugOptions.swift */,
 				B33E936B1D665C570011019B /* Global Functions.swift */,
-				B3FCACAE1D78109E00577D0F /* ArrayExtensions.swift */,
-				B3FCACB21D78301100577D0F /* TV Extensions.swift */,
 				B335520E1D77012C006D56AE /* Localizable.strings */,
 			);
 			name = Extensions;
@@ -652,7 +652,7 @@
 				B38623591D6C89F7007B8A5E /* SearchPostViewModel.swift in Sources */,
 				B39AA30C1D7D68A30018F7DE /* PostView.swift in Sources */,
 				B36F50C41D7472D10037CCB0 /* NotificationsViewModel.swift in Sources */,
-				B3FCACB31D78301100577D0F /* TV Extensions.swift in Sources */,
+				B3FCACB31D78301100577D0F /* TableView Extensions.swift in Sources */,
 				B386234E1D6B27D0007B8A5E /* Post.swift in Sources */,
 				B3BA49BD1D65F35700106930 /* LoginRouter.swift in Sources */,
 				B3BA49C21D65F97200106930 /* Router.swift in Sources */,

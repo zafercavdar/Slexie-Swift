@@ -13,21 +13,51 @@ class ChangePasswordViewModel{
     let placeholders = [[localized("CurrentPassword")],
                         [localized("NewPassword"), localized("NewPasswordAgain")]]
     
+    struct State {
+        
+        var loadingState = LoadingState()
+        
+        enum Change: Equatable{
+            case loading(LoadingState)
+        }
+        
+        mutating func addActivity() -> Change {
+            
+            loadingState.addActivity()
+            return Change.loading(loadingState)
+        }
+        
+        mutating func removeActivity() -> Change {
+            
+            loadingState.removeActivity()
+            return .loading(loadingState)
+        }
+    }
+    
     private var controller = FirebaseController()
+    private(set) var state = State()
+    var stateChangeHandler: ((State.Change) -> Void)?
     
     func isPasswordCorrect(oldPassword: String, completion callback: (Bool) -> Void){
+        self.emit(self.state.addActivity())
         controller.isPasswordCorrect(oldPassword) { (isCorrect) in
+            self.emit(self.state.removeActivity())
             callback(isCorrect)
         }
     }
     
     func changePassword(oldPassword: String, newPassword: String, completion callback: (NSError?) -> Void){
+        self.emit(self.state.addActivity())
         controller.changePassword(oldPassword, newPassword: newPassword) { (error) in
+            self.emit(self.state.removeActivity())
             callback(error)
         }
     }
+    
+    private func emit(change: State.Change){
+        stateChangeHandler?(change)
+    }
 }
-
 
 class ChangePasswordTVController: UITableViewController{
 
@@ -45,6 +75,7 @@ class ChangePasswordTVController: UITableViewController{
     
     private var cancelButton = UIBarButtonItem()
     private var doneButton = UIBarButtonItem()
+    private let loadingView = LoadingView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,6 +88,10 @@ class ChangePasswordTVController: UITableViewController{
         
         self.navigationItem.leftBarButtonItem = cancelButton
         self.navigationItem.rightBarButtonItem = doneButton
+        
+        model.stateChangeHandler = { [weak self] change in
+            self?.applyStateChange(change)
+        }
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -64,6 +99,20 @@ class ChangePasswordTVController: UITableViewController{
         setUIColors()
         setUITitles()
     }
+    
+    func applyStateChange(change: ChangePasswordViewModel.State.Change) {
+        switch change {
+        case .loading(let loadingState):
+            if loadingState.needsUpdate {
+                if loadingState.isActive {
+                    self.loadingView.addToView(self.view, text: localized("RefreshingInfo"))
+                } else {
+                    self.loadingView.removeFromView(self.view)
+                }
+            }
+        }
+    }
+
     
     // MARK: Button functions
     
@@ -231,7 +280,13 @@ class ChangePasswordTVController: UITableViewController{
         
         return cell
     }
-
-
-
 }
+
+func ==(lhs: ChangePasswordViewModel.State.Change, rhs: ChangePasswordViewModel.State.Change) -> Bool {
+    
+    switch (lhs, rhs) {
+    case (.loading(let loadingState1), .loading(let loadingState2)):
+        return loadingState1.activityCount == loadingState2.activityCount
+    }
+}
+
