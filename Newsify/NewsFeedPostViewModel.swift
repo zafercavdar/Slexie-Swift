@@ -20,7 +20,7 @@ class NewsFeedPostViewModel: PostViewModel {
     struct State{
         var feedPosts: [FeedPost] = []
         
-        enum Change{
+        enum Change: Equatable{
             case none
             case posts(CollectionChange)
             case loadingView(String)
@@ -58,7 +58,7 @@ class NewsFeedPostViewModel: PostViewModel {
     
     
     func reloadFeedPosts(count count: Int, completion callback: () -> Void) {
-        print("reloading: " + String(count))
+        //print("reloading: " + String(count))
         networkingController.getAccountTags { (tags) in
             
             self.networkingController.getPhotosRelatedWith(tags, count: count, completion: { [weak self] (posts) in
@@ -78,7 +78,6 @@ class NewsFeedPostViewModel: PostViewModel {
                             strongSelf.networkingController.downloadPhoto(with: post.id, completion: { (image, error) in
                                 if error == nil {
                                     post.setPhoto(image!)
-                                    print(post.id)
                                     strongSelf.emit(strongSelf.state.reloadPosts(reversed))
                                     callback()
                                 }
@@ -92,7 +91,7 @@ class NewsFeedPostViewModel: PostViewModel {
     
     func fetchFeedPosts(count count: Int, showView: Bool, completion callback: () -> Void) {
         
-        print("fetching: " + String(count))
+        //print("fetching: " + String(count))
 
         
         if showView {
@@ -119,7 +118,6 @@ class NewsFeedPostViewModel: PostViewModel {
                             strongSelf.networkingController.downloadPhoto(with: post.id, completion: { (image, error) in
                                 if error == nil {
                                     post.setPhoto(image!)
-                                    print(post.id)
                                     strongSelf.emit(strongSelf.state.insertPost(post))
                                     callback()
                                 }
@@ -153,5 +151,33 @@ private extension NewsFeedPostViewModel {
     private func emit(change: State.Change){
         stateChangeHandler?(change)
     }
+}
+
+// MARK: Equatable
+
+func ==(lhs: NewsFeedPostViewModel.State.Change, rhs: NewsFeedPostViewModel.State.Change) -> Bool {
     
+    switch (lhs, rhs) {
+    case (.none, .none):
+        return true
+    case (.posts(let update1), .posts(let update2)):
+        switch (update1, update2) {
+        case (.reload, .reload):
+            return true
+        case (.insertion(let index1), .insertion(let index2)):
+            return index1 == index2
+        case (.deletion(let index1), .deletion(let index2)):
+            return index1 == index2
+        default:
+            return false
+        }
+    case (.loadingView(let text1) ,.loadingView(let text2)):
+        return text1 == text2
+    case (.removeView, .removeView):
+        return true
+    case (.emptyFeed, .emptyFeed):
+        return true
+    default:
+        return false
+    }
 }

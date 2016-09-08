@@ -13,13 +13,18 @@ class SearchPostViewModel: PostViewModel {
     struct State{
         var searchPosts: [FeedPost] = []
         
-        enum Change{
+        enum Change: Equatable{
             case none
             case posts(CollectionChange)
         }
         
         mutating func reloadPosts(searchPosts: [FeedPost]) -> Change{
             self.searchPosts = searchPosts.reverse()
+            return Change.posts(.reload)
+        }
+        
+        mutating func cleanPosts() -> Change{
+            self.searchPosts = []
             return Change.posts(.reload)
         }
     }
@@ -55,7 +60,7 @@ class SearchPostViewModel: PostViewModel {
     }
     
     func cleanSearchPosts(){
-        self.emit(self.state.reloadPosts([]))
+        self.emit(self.state.cleanPosts())
     }
     
     func reportPost(id: String){
@@ -71,3 +76,25 @@ private extension SearchPostViewModel {
     }
     
 }
+
+func ==(lhs: SearchPostViewModel.State.Change, rhs: SearchPostViewModel.State.Change) -> Bool {
+    
+    switch (lhs, rhs) {
+    case (.none, .none):
+        return true
+    case (.posts(let update1), .posts(let update2)):
+        switch (update1, update2) {
+        case (.reload, .reload):
+            return true
+        case (.insertion(let index1), .insertion(let index2)):
+            return index1 == index2
+        case (.deletion(let index1), .deletion(let index2)):
+            return index1 == index2
+        default:
+            return false
+        }
+    default:
+        return false
+    }
+}
+

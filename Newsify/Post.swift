@@ -8,7 +8,7 @@
 
 import UIKit
 
-class Post {
+class Post: Equatable {
 
     var id: String
     var tags: [String] = []
@@ -28,5 +28,8 @@ class Post {
     func setPhoto(photo: UIImage) {
         self.photo = photo
     }
-    
+}
+
+func ==(lhs: Post, rhs: Post) -> Bool {
+    return lhs.id == rhs.id
 }

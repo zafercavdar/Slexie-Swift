@@ -13,7 +13,7 @@ class ProfilePostViewModel: PostViewModel {
     struct State{
         var profilePosts: [FeedPost] = []
         
-        enum Change{
+        enum Change: Equatable{
             case none
             case posts(CollectionChange)
             case loadingView(String)
@@ -106,3 +106,29 @@ private extension ProfilePostViewModel {
         stateChangeHandler?(change)
     }
 }
+
+func ==(lhs: ProfilePostViewModel.State.Change, rhs: ProfilePostViewModel.State.Change) -> Bool {
+    
+    switch (lhs, rhs) {
+    case (.none, .none):
+        return true
+    case (.posts(let update1), .posts(let update2)):
+        switch (update1, update2) {
+        case (.reload, .reload):
+            return true
+        case (.insertion(let index1), .insertion(let index2)):
+            return index1 == index2
+        case (.deletion(let index1), .deletion(let index2)):
+            return index1 == index2
+        default:
+            return false
+        }
+    case (.loadingView(let text1) ,.loadingView(let text2)):
+        return text1 == text2
+    case (.removeView, .removeView):
+        return true
+    default:
+        return false
+    }
+}
+

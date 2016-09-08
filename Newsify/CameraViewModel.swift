@@ -21,7 +21,7 @@ class CameraViewModel {
     struct State {
         var post = Image()
         
-        enum Change{
+        enum Change: Equatable{
             case none
             case tags(CollectionChange)
             case photo
@@ -119,3 +119,33 @@ private extension CameraViewModel{
         stateChangeHandler?(change)
     }
 }
+
+func ==(lhs: CameraViewModel.State.Change, rhs: CameraViewModel.State.Change) -> Bool {
+    
+    switch (lhs, rhs) {
+    case (.none, .none):
+        return true
+    case (.tags(let update1), .tags(let update2)):
+        switch (update1, update2) {
+        case (.reload, .reload):
+            return true
+        case (.insertion(let index1), .insertion(let index2)):
+            return index1 == index2
+        case (.deletion(let index1), .deletion(let index2)):
+            return index1 == index2
+        default:
+            return false
+        }
+    case (.photo, .photo):
+        return true
+    case (.loadingView(let text1) ,.loadingView(let text2)):
+        return text1 == text2
+    case (.removeView, .removeView):
+        return true
+    case (.upload(let error1), .upload(let error2)):
+        return error1 == error2
+    default:
+        return false
+    }
+}
+

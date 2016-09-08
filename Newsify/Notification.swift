@@ -26,7 +26,7 @@ enum NotificationType {
     }
 }
 
-class Notification {
+class Notification: Equatable {
     var notificationOwnerID: String
     var notificationTargetID: String
     var notificationDoneByUserID: String
@@ -41,4 +41,8 @@ class Notification {
         notificationDoneByUsername = doneByUsername
         notificationType = type
     }
+}
+
+func ==(lhs: Notification, rhs: Notification) -> Bool {
+    return lhs.notificationDoneByUserID == rhs.notificationDoneByUserID && lhs.notificationTargetID == rhs.notificationTargetID && lhs.notificationType == rhs.notificationType && lhs.notificationOwnerID == rhs.notificationOwnerID
 }
