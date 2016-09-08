@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5BCF6FCAA453CC4F39EA819A /* Pods_SlexieTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F53886D474BB28C9050FB897 /* Pods_SlexieTests.framework */; };
-		AF4864961ED9390D82C2D5EB /* Pods_SlexieUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5898AC7FC31D89A1646EB192 /* Pods_SlexieUITests.framework */; };
 		B316429C1D7434F900F9EDB5 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = B316429B1D7434F900F9EDB5 /* Notification.swift */; };
 		B32828AA1D5DAFAD0022F85E /* AlertExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32828A91D5DAFAD0022F85E /* AlertExtension.swift */; };
 		B32828B41D5DE2660022F85E /* UniqueIDGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32828B31D5DE2660022F85E /* UniqueIDGenerator.swift */; };
@@ -25,6 +23,7 @@
 		B36E72171D5B846700F626D0 /* RandomBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36E72161D5B846700F626D0 /* RandomBase.swift */; };
 		B36F50C21D74714D0037CCB0 /* NotificationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36F50C11D74714D0037CCB0 /* NotificationTableViewCell.swift */; };
 		B36F50C41D7472D10037CCB0 /* NotificationsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36F50C31D7472D10037CCB0 /* NotificationsViewModel.swift */; };
+		B37533281D814EAC007BF5A3 /* SlexieUnitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E2F32A1D80C70E00D4AC93 /* SlexieUnitTests.swift */; };
 		B37DB5C81D66F94A00ADB79B /* ImaggaService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B37DB5C71D66F94A00ADB79B /* ImaggaService.swift */; };
 		B386234E1D6B27D0007B8A5E /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = B386234D1D6B27D0007B8A5E /* Post.swift */; };
 		B38623511D6C332B007B8A5E /* NotificationsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B38623501D6C332B007B8A5E /* NotificationsTableViewController.swift */; };
@@ -74,8 +73,6 @@
 		B3F455B01D54A1BD005EA708 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F455AF1D54A1BD005EA708 /* LoginViewController.swift */; };
 		B3F455B51D54A1BD005EA708 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B3F455B41D54A1BD005EA708 /* Assets.xcassets */; };
 		B3F455B81D54A1BD005EA708 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B3F455B61D54A1BD005EA708 /* LaunchScreen.storyboard */; };
-		B3F455C31D54A1BD005EA708 /* NewsifyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F455C21D54A1BD005EA708 /* NewsifyTests.swift */; };
-		B3F455CE1D54A1BD005EA708 /* NewsifyUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F455CD1D54A1BD005EA708 /* NewsifyUITests.swift */; };
 		B3FCACAF1D78109E00577D0F /* ArrayExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3FCACAE1D78109E00577D0F /* ArrayExtensions.swift */; };
 		B3FCACB11D782DD000577D0F /* MainTabbarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3FCACB01D782DD000577D0F /* MainTabbarController.swift */; };
 		B3FCACB31D78301100577D0F /* TV Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3FCACB21D78301100577D0F /* TV Extensions.swift */; };
@@ -92,19 +89,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		B3F455BF1D54A1BD005EA708 /* PBXContainerItemProxy */ = {
+		B3E2F32D1D80C70E00D4AC93 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = B3F455A21D54A1BD005EA708 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = B3F455A91D54A1BD005EA708;
-			remoteInfo = Newsify;
-		};
-		B3F455CA1D54A1BD005EA708 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = B3F455A21D54A1BD005EA708 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = B3F455A91D54A1BD005EA708;
-			remoteInfo = Newsify;
+			remoteInfo = Slexie;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -183,6 +173,11 @@
 		B3C0F7E21D7EB51D00E41C96 /* CreateAccountViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateAccountViewModel.swift; sourceTree = "<group>"; };
 		B3C0F7E51D7F250F00E41C96 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B3CDADBE1D800C940023457A /* NotificationsRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationsRouter.swift; sourceTree = "<group>"; };
+		B3E2F3281D80C70E00D4AC93 /* SlexieUnitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SlexieUnitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3E2F32A1D80C70E00D4AC93 /* SlexieUnitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlexieUnitTests.swift; sourceTree = "<group>"; };
+		B3E2F32C1D80C70E00D4AC93 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B3EC8A351D8143930091B865 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = "../../Library/Developer/Xcode/DerivedData/Slexie-czxwrabcdvipmxdzicbqhesaotfa/Build/Products/Debug-iphonesimulator/Alamofire/Alamofire.framework"; sourceTree = "<group>"; };
+		B3EC8A361D8143930091B865 /* AlamofireObjectMapper.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AlamofireObjectMapper.framework; path = "../../Library/Developer/Xcode/DerivedData/Slexie-czxwrabcdvipmxdzicbqhesaotfa/Build/Products/Debug-iphonesimulator/AlamofireObjectMapper/AlamofireObjectMapper.framework"; sourceTree = "<group>"; };
 		B3ED70F01D5C6ADF001159A6 /* ProfilePageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfilePageViewController.swift; sourceTree = "<group>"; };
 		B3ED70F21D5C87E9001159A6 /* NewsFeedTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsFeedTableViewController.swift; sourceTree = "<group>"; };
 		B3ED70F41D5C87FD001159A6 /* SearchPageTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchPageTableViewController.swift; sourceTree = "<group>"; };
@@ -195,12 +190,6 @@
 		B3F455B41D54A1BD005EA708 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B3F455B71D54A1BD005EA708 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B3F455B91D54A1BD005EA708 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B3F455BE1D54A1BD005EA708 /* Slexie.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Slexie.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		B3F455C21D54A1BD005EA708 /* NewsifyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsifyTests.swift; sourceTree = "<group>"; };
-		B3F455C41D54A1BD005EA708 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B3F455C91D54A1BD005EA708 /* Slexie.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Slexie.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		B3F455CD1D54A1BD005EA708 /* NewsifyUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsifyUITests.swift; sourceTree = "<group>"; };
-		B3F455CF1D54A1BD005EA708 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B3FCACAE1D78109E00577D0F /* ArrayExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArrayExtensions.swift; sourceTree = "<group>"; };
 		B3FCACB01D782DD000577D0F /* MainTabbarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabbarController.swift; sourceTree = "<group>"; };
 		B3FCACB21D78301100577D0F /* TV Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TV Extensions.swift"; sourceTree = "<group>"; };
@@ -221,27 +210,18 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		B3E2F3251D80C70E00D4AC93 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B3F455A71D54A1BD005EA708 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				B98D52ABE6D122B358F4D2A4 /* Pods_Slexie.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		B3F455BB1D54A1BD005EA708 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				5BCF6FCAA453CC4F39EA819A /* Pods_SlexieTests.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		B3F455C61D54A1BD005EA708 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				AF4864961ED9390D82C2D5EB /* Pods_SlexieUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -251,6 +231,8 @@
 		32B89FDB28A096D0DCDA562A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B3EC8A351D8143930091B865 /* Alamofire.framework */,
+				B3EC8A361D8143930091B865 /* AlamofireObjectMapper.framework */,
 				9ED37C1860EE525B7CBE41CE /* Pods_Slexie.framework */,
 				F53886D474BB28C9050FB897 /* Pods_SlexieTests.framework */,
 				5898AC7FC31D89A1646EB192 /* Pods_SlexieUITests.framework */,
@@ -436,12 +418,20 @@
 			name = Routers;
 			sourceTree = "<group>";
 		};
+		B3E2F3291D80C70E00D4AC93 /* SlexieUnitTests */ = {
+			isa = PBXGroup;
+			children = (
+				B3E2F32A1D80C70E00D4AC93 /* SlexieUnitTests.swift */,
+				B3E2F32C1D80C70E00D4AC93 /* Info.plist */,
+			);
+			path = SlexieUnitTests;
+			sourceTree = "<group>";
+		};
 		B3F455A11D54A1BD005EA708 = {
 			isa = PBXGroup;
 			children = (
 				B3F455AC1D54A1BD005EA708 /* Newsify */,
-				B3F455C11D54A1BD005EA708 /* NewsifyTests */,
-				B3F455CC1D54A1BD005EA708 /* NewsifyUITests */,
+				B3E2F3291D80C70E00D4AC93 /* SlexieUnitTests */,
 				B3F455AB1D54A1BD005EA708 /* Products */,
 				9C85EB3DE6D5D67454BE222A /* Pods */,
 				32B89FDB28A096D0DCDA562A /* Frameworks */,
@@ -452,8 +442,7 @@
 			isa = PBXGroup;
 			children = (
 				B3F455AA1D54A1BD005EA708 /* Slexie.app */,
-				B3F455BE1D54A1BD005EA708 /* Slexie.xctest */,
-				B3F455C91D54A1BD005EA708 /* Slexie.xctest */,
+				B3E2F3281D80C70E00D4AC93 /* SlexieUnitTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -482,27 +471,27 @@
 			path = Newsify;
 			sourceTree = "<group>";
 		};
-		B3F455C11D54A1BD005EA708 /* NewsifyTests */ = {
-			isa = PBXGroup;
-			children = (
-				B3F455C21D54A1BD005EA708 /* NewsifyTests.swift */,
-				B3F455C41D54A1BD005EA708 /* Info.plist */,
-			);
-			path = NewsifyTests;
-			sourceTree = "<group>";
-		};
-		B3F455CC1D54A1BD005EA708 /* NewsifyUITests */ = {
-			isa = PBXGroup;
-			children = (
-				B3F455CD1D54A1BD005EA708 /* NewsifyUITests.swift */,
-				B3F455CF1D54A1BD005EA708 /* Info.plist */,
-			);
-			path = NewsifyUITests;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		B3E2F3271D80C70E00D4AC93 /* SlexieUnitTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B3E2F3311D80C70E00D4AC93 /* Build configuration list for PBXNativeTarget "SlexieUnitTests" */;
+			buildPhases = (
+				B3E2F3241D80C70E00D4AC93 /* Sources */,
+				B3E2F3251D80C70E00D4AC93 /* Frameworks */,
+				B3E2F3261D80C70E00D4AC93 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B3E2F32E1D80C70E00D4AC93 /* PBXTargetDependency */,
+			);
+			name = SlexieUnitTests;
+			productName = SlexieUnitTests;
+			productReference = B3E2F3281D80C70E00D4AC93 /* SlexieUnitTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		B3F455A91D54A1BD005EA708 /* Slexie */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = B3F455D21D54A1BD005EA708 /* Build configuration list for PBXNativeTarget "Slexie" */;
@@ -524,47 +513,6 @@
 			productReference = B3F455AA1D54A1BD005EA708 /* Slexie.app */;
 			productType = "com.apple.product-type.application";
 		};
-		B3F455BD1D54A1BD005EA708 /* SlexieTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = B3F455D51D54A1BD005EA708 /* Build configuration list for PBXNativeTarget "SlexieTests" */;
-			buildPhases = (
-				4BF9403163439710E49DFB69 /* [CP] Check Pods Manifest.lock */,
-				B3F455BA1D54A1BD005EA708 /* Sources */,
-				B3F455BB1D54A1BD005EA708 /* Frameworks */,
-				B3F455BC1D54A1BD005EA708 /* Resources */,
-				108E3F813F1124414E2195EB /* [CP] Embed Pods Frameworks */,
-				1AB86ABFA42B12916F0AEB30 /* [CP] Copy Pods Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				B3F455C01D54A1BD005EA708 /* PBXTargetDependency */,
-			);
-			name = SlexieTests;
-			productName = NewsifyTests;
-			productReference = B3F455BE1D54A1BD005EA708 /* Slexie.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		B3F455C81D54A1BD005EA708 /* SlexieUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = B3F455D81D54A1BD005EA708 /* Build configuration list for PBXNativeTarget "SlexieUITests" */;
-			buildPhases = (
-				48666079924AA6CADA21FCB7 /* [CP] Check Pods Manifest.lock */,
-				B3F455C51D54A1BD005EA708 /* Sources */,
-				B3F455C61D54A1BD005EA708 /* Frameworks */,
-				B3F455C71D54A1BD005EA708 /* Resources */,
-				F30252E3B816B16051644749 /* [CP] Copy Pods Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				B3F455CB1D54A1BD005EA708 /* PBXTargetDependency */,
-			);
-			name = SlexieUITests;
-			productName = NewsifyUITests;
-			productReference = B3F455C91D54A1BD005EA708 /* Slexie.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -575,17 +523,13 @@
 				LastUpgradeCheck = 0730;
 				ORGANIZATIONNAME = "Zafer Cavdar";
 				TargetAttributes = {
+					B3E2F3271D80C70E00D4AC93 = {
+						CreatedOnToolsVersion = 7.3.1;
+						TestTargetID = B3F455A91D54A1BD005EA708;
+					};
 					B3F455A91D54A1BD005EA708 = {
 						CreatedOnToolsVersion = 7.3.1;
 						DevelopmentTeam = TAN6K2W5F9;
-					};
-					B3F455BD1D54A1BD005EA708 = {
-						CreatedOnToolsVersion = 7.3.1;
-						TestTargetID = B3F455A91D54A1BD005EA708;
-					};
-					B3F455C81D54A1BD005EA708 = {
-						CreatedOnToolsVersion = 7.3.1;
-						TestTargetID = B3F455A91D54A1BD005EA708;
 					};
 				};
 			};
@@ -605,13 +549,19 @@
 			projectRoot = "";
 			targets = (
 				B3F455A91D54A1BD005EA708 /* Slexie */,
-				B3F455BD1D54A1BD005EA708 /* SlexieTests */,
-				B3F455C81D54A1BD005EA708 /* SlexieUITests */,
+				B3E2F3271D80C70E00D4AC93 /* SlexieUnitTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		B3E2F3261D80C70E00D4AC93 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B3F455A81D54A1BD005EA708 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -624,20 +574,6 @@
 				B3F455B51D54A1BD005EA708 /* Assets.xcassets in Resources */,
 				B3B518901D79C61500F44B26 /* Policy.html in Resources */,
 				B3B518951D79C7AF00F44B26 /* privacy-policy-updates.xml in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		B3F455BC1D54A1BD005EA708 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		B3F455C71D54A1BD005EA708 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -657,66 +593,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Slexie/Pods-Slexie-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		108E3F813F1124414E2195EB /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SlexieTests/Pods-SlexieTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		1AB86ABFA42B12916F0AEB30 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SlexieTests/Pods-SlexieTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		48666079924AA6CADA21FCB7 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		4BF9403163439710E49DFB69 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		54CB595C0CA640A0720CD8AA /* [CP] Check Pods Manifest.lock */ = {
@@ -749,24 +625,17 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Slexie/Pods-Slexie-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		F30252E3B816B16051644749 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SlexieUITests/Pods-SlexieUITests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		B3E2F3241D80C70E00D4AC93 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B37533281D814EAC007BF5A3 /* SlexieUnitTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B3F455A61D54A1BD005EA708 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -843,34 +712,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		B3F455BA1D54A1BD005EA708 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				B3F455C31D54A1BD005EA708 /* NewsifyTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		B3F455C51D54A1BD005EA708 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				B3F455CE1D54A1BD005EA708 /* NewsifyUITests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		B3F455C01D54A1BD005EA708 /* PBXTargetDependency */ = {
+		B3E2F32E1D80C70E00D4AC93 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = B3F455A91D54A1BD005EA708 /* Slexie */;
-			targetProxy = B3F455BF1D54A1BD005EA708 /* PBXContainerItemProxy */;
-		};
-		B3F455CB1D54A1BD005EA708 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = B3F455A91D54A1BD005EA708 /* Slexie */;
-			targetProxy = B3F455CA1D54A1BD005EA708 /* PBXContainerItemProxy */;
+			targetProxy = B3E2F32D1D80C70E00D4AC93 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -904,6 +752,32 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		B3E2F32F1D80C70E00D4AC93 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				HEADER_SEARCH_PATHS = "$(SRCROOT)/Pods/**";
+				INFOPLIST_FILE = SlexieUnitTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = slexie.SlexieUnitTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Slexie.app/Slexie";
+			};
+			name = Debug;
+		};
+		B3E2F3301D80C70E00D4AC93 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				HEADER_SEARCH_PATHS = "$(SRCROOT)/Pods/**";
+				INFOPLIST_FILE = SlexieUnitTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = slexie.SlexieUnitTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Slexie.app/Slexie";
+			};
+			name = Release;
+		};
 		B3F455D01D54A1BD005EA708 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1018,59 +892,18 @@
 			};
 			name = Release;
 		};
-		B3F455D61D54A1BD005EA708 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = EE6E3D8F2033463AE4A868C8 /* Pods-SlexieTests.debug.xcconfig */;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				INFOPLIST_FILE = NewsifyTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = monitise.NewsifyTests;
-				PRODUCT_NAME = Slexie;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Slexie.app/Slexie";
-			};
-			name = Debug;
-		};
-		B3F455D71D54A1BD005EA708 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5D9BFA48A5833B74F901FA1F /* Pods-SlexieTests.release.xcconfig */;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				INFOPLIST_FILE = NewsifyTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = monitise.NewsifyTests;
-				PRODUCT_NAME = Slexie;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Slexie.app/Slexie";
-			};
-			name = Release;
-		};
-		B3F455D91D54A1BD005EA708 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = DD1A85313045A74F6765499B /* Pods-SlexieUITests.debug.xcconfig */;
-			buildSettings = {
-				INFOPLIST_FILE = NewsifyUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = monitise.NewsifyUITests;
-				PRODUCT_NAME = Slexie;
-				TEST_TARGET_NAME = Newsify;
-			};
-			name = Debug;
-		};
-		B3F455DA1D54A1BD005EA708 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3189ABA8E996EF790E4B17E0 /* Pods-SlexieUITests.release.xcconfig */;
-			buildSettings = {
-				INFOPLIST_FILE = NewsifyUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = monitise.NewsifyUITests;
-				PRODUCT_NAME = Slexie;
-				TEST_TARGET_NAME = Newsify;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		B3E2F3311D80C70E00D4AC93 /* Build configuration list for PBXNativeTarget "SlexieUnitTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B3E2F32F1D80C70E00D4AC93 /* Debug */,
+				B3E2F3301D80C70E00D4AC93 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
 		B3F455A51D54A1BD005EA708 /* Build configuration list for PBXProject "Slexie" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -1085,24 +918,6 @@
 			buildConfigurations = (
 				B3F455D31D54A1BD005EA708 /* Debug */,
 				B3F455D41D54A1BD005EA708 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Debug;
-		};
-		B3F455D51D54A1BD005EA708 /* Build configuration list for PBXNativeTarget "SlexieTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				B3F455D61D54A1BD005EA708 /* Debug */,
-				B3F455D71D54A1BD005EA708 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Debug;
-		};
-		B3F455D81D54A1BD005EA708 /* Build configuration list for PBXNativeTarget "SlexieUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				B3F455D91D54A1BD005EA708 /* Debug */,
-				B3F455DA1D54A1BD005EA708 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
