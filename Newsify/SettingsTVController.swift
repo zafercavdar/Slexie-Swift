@@ -171,8 +171,16 @@ class SettingsTVController: UITableViewController {
         let section = indexPath.section
         let row = indexPath.row
         
+        let selectedCell = tableView.cellForRowAtIndexPath(indexPath)
+        
         if (section == 0 && row == 0){
             // not completed
+            let alert = UIAlertController(title: "Not yet, but", message: "Coming soon", preferredStyle: .Alert)
+            let okAction = UIAlertAction(title: localized("OK"), style: .Cancel, handler: nil)
+            alert.addAction(okAction)
+            self.presentViewController(alert, animated: true, completion: nil)
+            alert.view.tintColor = UIColor.reddishColor()
+            selectedCell?.setSelected(false, animated: true)
         }
         
         // Change password
