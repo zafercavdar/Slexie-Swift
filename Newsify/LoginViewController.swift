@@ -51,10 +51,14 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     func applyStateChange(change: LoginViewModel.State.Change) {
         switch change {
-        case .loadingView:
-            loadingView.addToView(self.view, text: localized("SigningInInfo"))
-        case .removeView:
-            loadingView.removeFromView(self.view)
+        case .loading(let loadingState):
+            if loadingState.needsUpdate {
+                if loadingState.isActive {
+                    self.loadingView.addToView(self.view, text: localized("SigningInInfo"))
+                } else {
+                    self.loadingView.removeFromView(self.view)
+                }
+            }
         case .loggedIn(CallbackResult.Success):
             router.routeTo(RouteID.NewsFeed, VC: self)
         case .loginAttemp(CallbackResult.Success):

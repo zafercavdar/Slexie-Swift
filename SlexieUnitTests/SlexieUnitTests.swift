@@ -100,6 +100,11 @@ class SlexieUnitTests: XCTestCase {
         let reloadChange = state.reloadPosts([p1,p2])
         XCTAssertTrue(reloadChange == .posts(.reload))
         XCTAssertTrue(state.profilePosts == [p2, p1])
+        
+        let deletionChange = state.deletePost(0)
+        XCTAssertTrue(deletionChange == .posts(.deletion(0)))
+        XCTAssertTrue(state.profilePosts == [p1])
+        
     }
     
     func testSinglePostViewModel(){
@@ -196,5 +201,49 @@ class SlexieUnitTests: XCTestCase {
         XCTAssertTrue(state.loadingState.activityCount == 0)
         XCTAssertTrue(state.loadingState.needsUpdate)
     }
+    
+    func testLoginViewLoading() {
+        
+        var state = LoginViewModel.State()
+        
+        state.addActivity()
+        XCTAssertTrue(state.loadingState.activityCount == 1)
+        XCTAssertTrue(state.loadingState.needsUpdate)
+        
+        state.addActivity()
+        XCTAssertTrue(state.loadingState.activityCount == 2)
+        XCTAssertFalse(state.loadingState.needsUpdate)
+        
+        state.removeActivity()
+        XCTAssertTrue(state.loadingState.activityCount == 1)
+        XCTAssertFalse(state.loadingState.needsUpdate)
+        
+        state.removeActivity()
+        XCTAssertTrue(state.loadingState.activityCount == 0)
+        XCTAssertTrue(state.loadingState.needsUpdate)
+    }
+    
+    func testCreateAccountViewLoading() {
+        
+        var state = CreateAccountViewModel.State()
+        
+        state.addActivity()
+        XCTAssertTrue(state.loadingState.activityCount == 1)
+        XCTAssertTrue(state.loadingState.needsUpdate)
+        
+        state.addActivity()
+        XCTAssertTrue(state.loadingState.activityCount == 2)
+        XCTAssertFalse(state.loadingState.needsUpdate)
+        
+        state.removeActivity()
+        XCTAssertTrue(state.loadingState.activityCount == 1)
+        XCTAssertFalse(state.loadingState.needsUpdate)
+        
+        state.removeActivity()
+        XCTAssertTrue(state.loadingState.activityCount == 0)
+        XCTAssertTrue(state.loadingState.needsUpdate)
+    }
+
+
     
 }

@@ -57,10 +57,14 @@ class CreateAccountViewController: UIViewController, UITextFieldDelegate{
     
     func applyStateChange(change: CreateAccountViewModel.State.Change) {
         switch change {
-        case .loadingView:
-            loadingView.addToView(self.view, text: localized("SigningUpInfo"))
-        case .removeView:
-            loadingView.removeFromView(self.view)
+        case .loading(let loadingState):
+            if loadingState.needsUpdate {
+                if loadingState.isActive {
+                    self.loadingView.addToView(self.view, text: localized("SigningUpInfo"))
+                } else {
+                    self.loadingView.removeFromView(self.view)
+                }
+            }
         case .signUpAttemp(CallbackResult.Success):
             self.router.routeTo(RouteID.LoggedIn, VC: self)
         case .cancel:

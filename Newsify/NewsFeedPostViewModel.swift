@@ -27,7 +27,6 @@ class NewsFeedPostViewModel: PostViewModel {
             } else {
                 return Change.none
             }
-            
         }
         
         mutating func insertPost(feedPost: FeedPost) -> Change{
