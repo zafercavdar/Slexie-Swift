@@ -10,14 +10,18 @@ import UIKit
 
 struct ProfilePostViewPresentation {
     
-    var postViews: [PostView] = []
+    var posts: [FeedPost] = []
     
-    mutating func update(withState state: ProfilePostViewModel.State){
+    /*mutating func update(withState state: ProfilePostViewModel.State){
         postViews = state.profilePosts.map({ (profilePost) -> PostView in
             return PostView(post: profilePost)
         })
+    }*/
+    
+    mutating func update(withState state: ProfilePostViewModel.State){
+        posts = state.profilePosts
     }
-
+    
 }
 
 class ProfilePageViewController: UITableViewController {
@@ -125,7 +129,7 @@ class ProfilePageViewController: UITableViewController {
     // MARK: TableVC Methods
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return presentation.postViews.count
+        return presentation.posts.count
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -136,33 +140,39 @@ class ProfilePageViewController: UITableViewController {
         
         let cell = tableView.dequeueReusableCellWithIdentifier(Identifier.ProfilePostCell, forIndexPath: indexPath) as! ProfilePostTableViewCell
         
-        let postView = presentation.postViews[indexPath.section]
+        let post = presentation.posts[indexPath.section]
+        cell .customizeCell(post)
         
-        cell.selectionStyle = UITableViewCellSelectionStyle.None
-        for subview in cell.contentView.subviews {
-            subview.removeFromSuperview()
-        }
-        cell.contentView.addSubview(postView.cellView)
         
-        cell.tapRecognizer.tappedCell = cell
-        cell.tapRecognizer.addTarget(self, action: #selector(photoTapped(_:)))
-        cell.tapRecognizer.numberOfTapsRequired = 2
-        cell.tapRecognizer.numberOfTouchesRequired = 1
-        postView.imageView.gestureRecognizers = []
-        postView.imageView.addGestureRecognizer(cell.tapRecognizer)
+//        let postView = presentation.postViews[indexPath.section]
+//        
+//        cell.selectionStyle = UITableViewCellSelectionStyle.None
+//        for subview in cell.contentView.subviews {
+//            subview.removeFromSuperview()
+//        }
+//        cell.contentView.addSubview(postView.cellView)
+//        
+//        cell.tapRecognizer.tappedCell = cell
+//        cell.tapRecognizer.addTarget(self, action: #selector(photoTapped(_:)))
+//        cell.tapRecognizer.numberOfTapsRequired = 2
+//        cell.tapRecognizer.numberOfTouchesRequired = 1
+//        postView.imageView.gestureRecognizers = []
+//        postView.imageView.addGestureRecognizer(cell.tapRecognizer)
+//        
+//        cell.indexPath = indexPath
+//        cell.heartTapRecognizer.tappedCell = cell
+//        cell.heartTapRecognizer.addTarget(self, action: #selector(heartTapped(_:)))
+//        cell.heartTapRecognizer.numberOfTapsRequired = 1
+//        cell.heartTapRecognizer.numberOfTouchesRequired = 1
+//        postView.likedView.gestureRecognizers = []
+//        postView.likedView.addGestureRecognizer(cell.heartTapRecognizer)
         
-        cell.indexPath = indexPath
-        cell.heartTapRecognizer.tappedCell = cell
-        cell.heartTapRecognizer.addTarget(self, action: #selector(heartTapped(_:)))
-        cell.heartTapRecognizer.numberOfTapsRequired = 1
-        cell.heartTapRecognizer.numberOfTouchesRequired = 1
-        postView.likedView.gestureRecognizers = []
-        postView.likedView.addGestureRecognizer(cell.heartTapRecognizer)
+        
         return cell
 
     }
     
-    override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    /*override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let postView = presentation.postViews[section]
         postView.moreButton.index = section
         postView.moreButton.addTarget(self, action: #selector(moreButtonClicked), forControlEvents: .TouchDown)
@@ -176,9 +186,9 @@ class ProfilePageViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return presentation.postViews[indexPath.section].cellView.frame.height
-    }
+    }*/
     
-    func moreButtonClicked(sender: ButtonWithIndex){
+    /*func moreButtonClicked(sender: ButtonWithIndex){
         let index = sender.index!
         let id = presentation.postViews[index].post!.id
         
@@ -202,11 +212,11 @@ class ProfilePageViewController: UITableViewController {
         }))
         alert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil))
         self.presentViewController(alert, animated: true, completion: nil)
-    }
+    }*/
 
 
     
-    func heartTapped(sender: AdvancedGestureRecognizer) {
+    /*func heartTapped(sender: AdvancedGestureRecognizer) {
         let cell = (sender.tappedCell as! ProfilePostTableViewCell)
         let postView = presentation.postViews[cell.indexPath.section]
         let post = postView.post!
@@ -283,6 +293,6 @@ class ProfilePageViewController: UITableViewController {
         })
     }
 
-    
+    */
     
 }

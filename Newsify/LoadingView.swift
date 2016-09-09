@@ -17,7 +17,8 @@ class LoadingView: UIView {
     func addToView(view: UIView, text: String){
         
         UIApplication.sharedApplication().networkActivityIndicatorVisible = true
-        loadingView = UIView(frame: CGRect(x: view.frame.midX - 110, y: view.frame.midY - 25, width: 200, height: 50))
+        let width: CGFloat = 200.00
+        loadingView = UIView(frame: CGRect(x: view.frame.midX - CGFloat(width/2), y: view.frame.midY - 25, width: width, height: 50.00))
         loadingView.backgroundColor = UIColor.midnightBlue()
         loadingView.alpha = 1
         loadingView.layer.cornerRadius = 10

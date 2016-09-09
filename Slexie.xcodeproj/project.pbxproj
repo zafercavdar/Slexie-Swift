@@ -16,6 +16,9 @@
 		B33E936C1D665C570011019B /* Global Functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B33E936B1D665C570011019B /* Global Functions.swift */; };
 		B35487891D6AD42F00F84C2D /* Requesters.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35487881D6AD42F00F84C2D /* Requesters.swift */; };
 		B35876B51D818801006BAF64 /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35876B41D818801006BAF64 /* Protocols.swift */; };
+		B35876B71D81B68C006BAF64 /* PostContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35876B61D81B68C006BAF64 /* PostContentView.swift */; };
+		B35876B91D81B6A5006BAF64 /* PostContentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B35876B81D81B6A5006BAF64 /* PostContentView.xib */; };
+		B35876BB1D81BD77006BAF64 /* NibView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35876BA1D81BD77006BAF64 /* NibView.swift */; };
 		B361FCCB1D63234800B4F8AA /* NewsFeedPostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B361FCCA1D63234800B4F8AA /* NewsFeedPostViewModel.swift */; };
 		B361FCCD1D63295800B4F8AA /* FeedPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = B361FCCC1D63295800B4F8AA /* FeedPost.swift */; };
 		B36AF2051D671D8A00F2B87E /* Requests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36AF2041D671D8A00F2B87E /* Requests.swift */; };
@@ -128,6 +131,9 @@
 		B33E936B1D665C570011019B /* Global Functions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Global Functions.swift"; sourceTree = "<group>"; };
 		B35487881D6AD42F00F84C2D /* Requesters.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Requesters.swift; sourceTree = "<group>"; };
 		B35876B41D818801006BAF64 /* Protocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
+		B35876B61D81B68C006BAF64 /* PostContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostContentView.swift; sourceTree = "<group>"; };
+		B35876B81D81B6A5006BAF64 /* PostContentView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PostContentView.xib; sourceTree = "<group>"; };
+		B35876BA1D81BD77006BAF64 /* NibView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NibView.swift; sourceTree = "<group>"; };
 		B361FCCA1D63234800B4F8AA /* NewsFeedPostViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsFeedPostViewModel.swift; sourceTree = "<group>"; };
 		B361FCCC1D63295800B4F8AA /* FeedPost.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedPost.swift; sourceTree = "<group>"; };
 		B36AF2041D671D8A00F2B87E /* Requests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Requests.swift; sourceTree = "<group>"; };
@@ -329,6 +335,9 @@
 				B36E72141D5B78A700F626D0 /* LoadingView.swift */,
 				B3B5189E1D79E56D00F44B26 /* CustomViews.swift */,
 				B39AA30B1D7D68A30018F7DE /* PostView.swift */,
+				B35876B61D81B68C006BAF64 /* PostContentView.swift */,
+				B35876B81D81B6A5006BAF64 /* PostContentView.xib */,
+				B35876BA1D81BD77006BAF64 /* NibView.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -569,6 +578,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B35876B91D81B6A5006BAF64 /* PostContentView.xib in Resources */,
 				B335520C1D77012C006D56AE /* Localizable.strings in Resources */,
 				B3C0F7E61D7F250F00E41C96 /* GoogleService-Info.plist in Resources */,
 				B3F455B81D54A1BD005EA708 /* LaunchScreen.storyboard in Resources */,
@@ -681,6 +691,7 @@
 				B36E72171D5B846700F626D0 /* RandomBase.swift in Sources */,
 				B38623511D6C332B007B8A5E /* NotificationsTableViewController.swift in Sources */,
 				B3FCACAF1D78109E00577D0F /* ArrayExtensions.swift in Sources */,
+				B35876B71D81B68C006BAF64 /* PostContentView.swift in Sources */,
 				B36E72151D5B78A700F626D0 /* LoadingView.swift in Sources */,
 				B3B5188B1D79C19D00F44B26 /* PrivacyPolicyViewController.swift in Sources */,
 				B3ED70F11D5C6ADF001159A6 /* ProfilePageViewController.swift in Sources */,
@@ -710,6 +721,7 @@
 				B3B527C11D65AF2100E31C37 /* ProfilePostsViewModel.swift in Sources */,
 				B35876B51D818801006BAF64 /* Protocols.swift in Sources */,
 				B3FCACBD1D7855B500577D0F /* SettingsRouter.swift in Sources */,
+				B35876BB1D81BD77006BAF64 /* NibView.swift in Sources */,
 				B38E85C01D59C28C00CAE73B /* TagsTableViewCell.swift in Sources */,
 				B3C0F7DF1D7EA82C00E41C96 /* SinglePostViewModel.swift in Sources */,
 				B38623551D6C6634007B8A5E /* CameraRouter.swift in Sources */,

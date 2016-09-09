@@ -13,6 +13,8 @@ class ProfilePostTableViewCell: UITableViewCell {
     var tapRecognizer: AdvancedGestureRecognizer = AdvancedGestureRecognizer()
     var heartTapRecognizer = AdvancedGestureRecognizer()
     
+    @IBOutlet weak var postContentView: PostContentView!
+    
     var indexPath = NSIndexPath()
 
     override func awakeFromNib() {
@@ -24,5 +26,11 @@ class ProfilePostTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
 
     }
+    
+    func customizeCell(post: FeedPost){
+        self.postContentView.customizeView(post)
+    }
+    
+    
 
 }
